@@ -141,9 +141,8 @@ body {
 }
 
 .profile-image {
-  width: 150px;
-  border-radius: 50%;
-  animation: bounce 1s infinite alternate;
+  width: 300px;
+  animation: bounce 3s infinite alternate;
 }
 
 @keyframes bounce {
@@ -162,6 +161,7 @@ body {
   background-color: var(--card-background);
   margin: 5.5rem 0;
 }
+
 /* Projects */
 #projects {
   display: flex;
@@ -256,8 +256,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-}
+@media (max-width: 768px) {}
 
 @media (max-width: 670px) {
   .navbar .nav-menu {
@@ -331,4 +330,7 @@ body {
     border-radius: 5px;
     width: 80%;
   }
+}
+.header-container {
+  text-align: left;
 }

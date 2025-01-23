@@ -74,31 +74,38 @@ body {
 
 /* Navbar */
 .navbar {
+   color:black;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 20;
+  z-index: 0;
   background: var(--bg-primary);
 }
 
 .navbar .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   z-index: 20;
-  height: 80px;
-  width: 100%;
+  height: auto;
+  width: 50%;
+  gap: 2rem;
 }
 
 .navbar .nav-menu {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Distribute items evenly */
   background: var(--bg-primary);
+}
+.nav-menu-item {
+  list-style: none; /* Remove default bullet points */
+  margin: 0 1rem; /* Add some spacing between items */
 }
 
 .navbar .nav-link {
-  margin: 0 1rem;
+  margin: 0 0rem;
   font-size: 0.8rem;
   font-weight: var(--weight-semibold);
 }
@@ -109,7 +116,7 @@ body {
 }
 
 .navbar .btn {
-  margin-right: 1.5rem;
+  margin-right: 0 2rem;
 }
 
 .fas.fa-arrow-right {
@@ -134,19 +141,17 @@ body {
 }
 
 /* Hero section */
-#hero {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+
 
 .profile-image {
   width: 300px;
   animation: bounce 3s infinite alternate;
+  max-width: 100%;
+  border-radius: 10px;
 }
 
 @keyframes bounce {
-  from {
+  from 
     transform: translateY(0px);
   }
 
@@ -261,7 +266,6 @@ body {
 @media (max-width: 670px) {
   .navbar .nav-menu {
     position: fixed;
-    right: -100vw;
     top: 4.5rem;
     flex-direction: column;
     width: calc(80% - 10px);
@@ -287,7 +291,7 @@ body {
   }
 
   .nav-menu li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
     width: 100%;
   }
 
@@ -326,11 +330,22 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .header-container .btn {
-    border-radius: 5px;
-    width: 80%;
-  }
+
 }
-.header-container {
-  text-align: left;
+
+
+.text-decoration-none{
+  font-size: 2rem; /* Aumenta el tamaño de los iconos. Puedes ajustar este valor */
+}
+.header-split {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem; /* Espacio entre columnas */
+}
+.header-image {
+  flex: 0 0 auto;
+}
+.header-info {
+  text-align: center;
 }

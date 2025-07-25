@@ -29,6 +29,8 @@ Portfolio profesional de Mauricio Cristian Cárcamo Díaz, especializado en Cien
   - Creado sistema de páginas individuales para cada proyecto (/proyecto/:slug)
   - Implementada navegación entre proyectos y portfolio principal
   - Agregada funcionalidad de rutas dinámicas para contenido detallado de proyectos
+  - Creada nueva sección "Tecnologías y Herramientas" con todas las tecnologías de proyectos
+  - Eliminados efectos hover en badges de tecnologías para mantenerlos estáticos
 
 - **2025-01-25**: Reestructurado proyecto para GitHub Pages deployment
   - Movido index.html a la raíz del proyecto

@@ -205,6 +205,7 @@ export const SERVICES = [
 export const NAV_ITEMS = [
   { name: "Inicio", href: "#home", icon: "home" },
   { name: "Proyectos", href: "#projects", icon: "folder" },
+  { name: "Tecnologías", href: "#technologies", icon: "cpu" },
   { name: "Educación", href: "#education", icon: "graduation-cap" },
   { name: "Experiencia", href: "#experience", icon: "briefcase" },
   { name: "Contacto", href: "#contact", icon: "mail" }

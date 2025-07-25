@@ -3,6 +3,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
+import TechnologiesSection from "@/components/sections/TechnologiesSection";
 import EducationSection from "@/components/sections/EducationSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -44,7 +45,7 @@ export default function Home() {
       
       document.querySelectorAll("section[id]").forEach((section) => {
         const sectionTop = section.getBoundingClientRect().top + window.scrollY - 100;
-        const sectionBottom = sectionTop + section.offsetHeight;
+        const sectionBottom = sectionTop + (section as HTMLElement).offsetHeight;
         
         if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
           const id = section.getAttribute("id");
@@ -70,6 +71,7 @@ export default function Home() {
       <main className="flex-grow">
         <HeroSection />
         <ProjectsSection />
+        <TechnologiesSection />
         <EducationSection />
         <ExperienceSection />
         <ContactSection />

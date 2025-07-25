@@ -72,7 +72,7 @@ export default function ProjectsSection() {
                 <p className="text-gray-600 mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, techIndex) => (
-                    <Badge key={techIndex} variant="secondary" className="bg-secondary bg-opacity-10 text-secondary hover:bg-secondary hover:text-white">
+                    <Badge key={techIndex} variant="secondary" className="bg-secondary/10 text-secondary border border-secondary/20">
                       {tech}
                     </Badge>
                   ))}

@@ -76,11 +76,58 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Modern data science background */
 .bg-data-pattern {
-  background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%);
+  position: relative;
+}
+
+.bg-data-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 1px, transparent 1px),
+    radial-gradient(circle at 80% 50%, rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+  animation: dataFlow 20s linear infinite;
+}
+
+@keyframes dataFlow {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(50px) translateY(50px); }
+}
+
+/* Modern section backgrounds */
+.section-bg-light {
+  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.9) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.section-bg-muted {
+  background: linear-gradient(135deg, rgba(248,250,252,0.9) 0%, rgba(241,245,249,0.9) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Data visualization accent */
+.data-viz-bg {
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(52,152,219,0.1) 50%, transparent 100%),
+    linear-gradient(0deg, transparent 0%, rgba(26,188,156,0.1) 50%, transparent 100%);
+  background-size: 100px 100px, 150px 150px;
+  animation: dataVisualization 15s ease-in-out infinite;
+}
+
+@keyframes dataVisualization {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
 }
 
 .project-card {

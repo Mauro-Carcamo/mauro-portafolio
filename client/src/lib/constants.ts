@@ -111,59 +111,64 @@ export const EDUCATION = {
     {
       degree: "Diplomado en Inteligencia Artificial",
       institution: "Universidad Autónoma (en curso)",
-      year: "2025"
+      year: "2025",
+      certificate: null
     },
     {
       degree: "Bootcamp de Especialización en Ciencia de Datos",
       institution: "Beca Corfo Talento Digital",
-      year: "2024"
+      year: "2024",
+      certificate: "@assets/Legal Ciencia de Datos_1753415856033.pdf"
     },
     {
       degree: "Bootcamp de Desarrollo Full Stack Python",
-      institution: "Beca Corfo Talento Digital",
-      year: "2023"
+      institution: "Beca Corfo Talento Digital", 
+      year: "2023",
+      certificate: "@assets/DescargarCertificado_1753415856032.pdf"
     },
     {
       degree: "Diplomado en Data Science",
       institution: "Universidad Católica de Chile",
-      year: "2022"
+      year: "2022",
+      certificate: "@assets/Certificado Diplomado_1753415856029.pdf"
     },
     {
       degree: "Título de Sociólogo",
       institution: "Facultad de Ciencias Sociales, Universidad Central de Chile",
-      year: "2015"
+      year: "2015",
+      certificate: "@assets/Certificado Profesion_1753415856031.pdf"
     }
   ],
   courses: [
     {
-      name: "SQL Interactivo",
-      institution: "Desafío LATAM",
-      year: "2024"
-    },
-    {
       name: "Introducción a la Minería de Datos",
       institution: "Pontificia Universidad Católica de Chile",
-      year: "2024"
+      year: "2024",
+      certificate: "@assets/Coursera HNZW5WGNP9LR_1753415856032.pdf"
     },
     {
       name: "Green Digital Skills Certificate",
       institution: "INCO Academy",
-      year: "2024"
+      year: "2024",
+      certificate: "@assets/Green digital Skills Mauricio Carcamo_1753415856033.pdf"
     },
     {
-      name: "Shiny R Studio & Herramientas de Reproducibilidad",
-      institution: "Instituto Nacional de Estadísticas (INE)",
-      year: "2023"
+      name: "Curso Introductorio Data Science",
+      institution: "Nuclio School",
+      year: "2023",
+      certificate: "@assets/Nuclio Data science certificado_1753415856033.pdf"
     },
     {
-      name: "Procesamiento del Lenguaje Natural en R Studio",
-      institution: "Instituto Nacional de Estadísticas (INE)",
-      year: "2023"
-    },
-    {
-      name: "ChatGPT Prompt Engineering for Developers",
+      name: "Metodologías Ágiles y Lean",
       institution: "Universidad Católica de Chile, Teleduc",
-      year: "2022"
+      year: "2022",
+      certificate: "@assets/Certificado Metodologia Agil_1753415856030.pdf"
+    },
+    {
+      name: "Gestión del Proceso de Capacitación",
+      institution: "Universidad Católica de Chile, Teleduc",
+      year: "2021",
+      certificate: "@assets/Certificado Capacitacion_1753415856029.pdf"
     }
   ]
 };
@@ -187,11 +192,9 @@ export const SERVICES = [
 ];
 
 export const NAV_ITEMS = [
-  { name: "Inicio", href: "#home" },
-  { name: "Sobre Mí", href: "#about" },
-  { name: "Habilidades", href: "#skills" },
-  { name: "Proyectos", href: "#projects" },
-  { name: "Experiencia", href: "#experience" },
-  { name: "Educación", href: "#education" },
-  { name: "Contacto", href: "#contact" }
+  { name: "Inicio", href: "#home", icon: "home" },
+  { name: "Proyectos", href: "#projects", icon: "folder" },
+  { name: "Educación", href: "#education", icon: "graduation-cap" },
+  { name: "Experiencia", href: "#experience", icon: "briefcase" },
+  { name: "Contacto", href: "#contact", icon: "mail" }
 ];

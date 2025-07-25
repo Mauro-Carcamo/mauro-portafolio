@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NAV_ITEMS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home, FolderOpen, GraduationCap, Briefcase, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
@@ -78,19 +78,33 @@ export default function Header() {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex md:items-center space-x-8">
-          {NAV_ITEMS.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="hover:text-accent transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick(item.href);
-              }}
-            >
-              {item.name}
-            </a>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const getIcon = () => {
+              switch (item.icon) {
+                case "home": return <Home className="h-4 w-4 mr-2" />;
+                case "folder": return <FolderOpen className="h-4 w-4 mr-2" />;
+                case "graduation-cap": return <GraduationCap className="h-4 w-4 mr-2" />;
+                case "briefcase": return <Briefcase className="h-4 w-4 mr-2" />;
+                case "mail": return <Mail className="h-4 w-4 mr-2" />;
+                default: return null;
+              }
+            };
+            
+            return (
+              <a
+                key={item.name}
+                href={item.href}
+                className="flex items-center hover:text-accent transition-colors"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(item.href);
+                }}
+              >
+                {getIcon()}
+                {item.name}
+              </a>
+            );
+          })}
         </div>
         
         {/* Mobile Navigation */}
@@ -104,20 +118,34 @@ export default function Header() {
               transition={{ duration: 0.3 }}
             >
               <ul className="flex flex-col space-y-2">
-                {NAV_ITEMS.map((item) => (
-                  <li key={item.name}>
-                    <a
-                      href={item.href}
-                      className="block py-2 hover:text-accent transition-colors"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item.href);
-                      }}
-                    >
-                      {item.name}
-                    </a>
-                  </li>
-                ))}
+                {NAV_ITEMS.map((item) => {
+                  const getIcon = () => {
+                    switch (item.icon) {
+                      case "home": return <Home className="h-4 w-4 mr-2" />;
+                      case "folder": return <FolderOpen className="h-4 w-4 mr-2" />;
+                      case "graduation-cap": return <GraduationCap className="h-4 w-4 mr-2" />;
+                      case "briefcase": return <Briefcase className="h-4 w-4 mr-2" />;
+                      case "mail": return <Mail className="h-4 w-4 mr-2" />;
+                      default: return null;
+                    }
+                  };
+                  
+                  return (
+                    <li key={item.name}>
+                      <a
+                        href={item.href}
+                        className="flex items-center py-2 hover:text-accent transition-colors"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavClick(item.href);
+                        }}
+                      >
+                        {getIcon()}
+                        {item.name}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </motion.div>
           )}

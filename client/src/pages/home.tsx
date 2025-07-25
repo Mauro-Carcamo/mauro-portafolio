@@ -2,14 +2,24 @@ import { useEffect } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
-import AboutSection from "@/components/sections/AboutSection";
-import SkillsSection from "@/components/sections/SkillsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
-import ExperienceSection from "@/components/sections/ExperienceSection";
 import EducationSection from "@/components/sections/EducationSection";
+import ExperienceSection from "@/components/sections/ExperienceSection";
 import ContactSection from "@/components/sections/ContactSection";
+import { WelcomePopup } from "@/components/ui/welcome-popup";
+import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 
 export default function Home() {
+  const handleNavigate = (section: string) => {
+    const element = document.querySelector(section);
+    if (element) {
+      window.scrollTo({
+        top: element.getBoundingClientRect().top + window.scrollY - 80,
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
     // Scroll to top on mount
     window.scrollTo(0, 0);
@@ -59,14 +69,14 @@ export default function Home() {
       <Header />
       <main className="flex-grow">
         <HeroSection />
-        <AboutSection />
-        <SkillsSection />
         <ProjectsSection />
-        <ExperienceSection />
         <EducationSection />
+        <ExperienceSection />
         <ContactSection />
       </main>
       <Footer />
+      <WelcomePopup onNavigate={handleNavigate} />
+      <WhatsAppButton />
     </div>
   );
 }

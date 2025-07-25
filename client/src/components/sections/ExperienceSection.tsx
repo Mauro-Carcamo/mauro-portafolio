@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="py-16 bg-muted">
-      <div className="container mx-auto px-4">
+    <section id="experience" className="py-16 section-bg-muted data-viz-bg relative">
+      <div className="container mx-auto px-4 relative z-10">
         <SectionTitle>Experiencia Profesional</SectionTitle>
         
         <motion.div 

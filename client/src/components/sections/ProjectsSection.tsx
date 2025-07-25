@@ -39,8 +39,8 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-16 bg-white">
-      <div className="container mx-auto px-4">
+    <section id="projects" className="py-16 section-bg-light data-viz-bg relative">
+      <div className="container mx-auto px-4 relative z-10">
         <SectionTitle>Proyectos</SectionTitle>
         
         <motion.div 
@@ -53,15 +53,18 @@ export default function ProjectsSection() {
           {PROJECTS.map((project, index) => (
             <motion.div 
               key={index}
-              className="project-card bg-white rounded-lg overflow-hidden shadow-lg border border-gray-200"
+              className="project-card section-bg-light rounded-lg overflow-hidden shadow-lg border border-gray-200"
               variants={item}
               whileHover={{ 
                 y: -5,
                 boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
               }}
             >
-              <div className="h-48 bg-secondary bg-opacity-10 flex items-center justify-center">
-                {getIcon(project.icon)}
+              <div className="h-48 bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
+                <div className="text-secondary relative z-10">
+                  {getIcon(project.icon)}
+                </div>
               </div>
               <div className="p-6">
                 <h3 className="font-semibold text-xl mb-2 text-primary">{project.title}</h3>

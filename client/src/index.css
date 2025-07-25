@@ -17,7 +17,7 @@
   --primary-foreground: 0 0% 100%;
   --secondary: 200 60% 35%; /* #34495E - Steel blue */
   --secondary-foreground: 0 0% 100%;
-  --accent: 14 90% 55%; /* #E74C3C - Strong red */
+  --accent: 174 72% 56%; /* #27AE60 - Tech green */
   --accent-foreground: 0 0% 100%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 60 9.1% 97.8%;
@@ -55,7 +55,7 @@
   --primary-foreground: 0 0% 100%;
   --secondary: 200 60% 35%;
   --secondary-foreground: 0 0% 100%;
-  --accent: 14 90% 55%;
+  --accent: 174 72% 56%;
   --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;

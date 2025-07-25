@@ -23,7 +23,7 @@ Portfolio profesional de Mauricio Cristian Cárcamo Díaz, especializado en Cien
 
 ## Recent Changes
 - **2025-01-25**: Actualización de diseño masculino y sistema de proyectos individuales
-  - Cambiada paleta de colores a esquema masculino: azul oscuro (#2C3E50), azul acero (#34495E) y rojo fuerte (#E74C3C)
+  - Cambiada paleta de colores a esquema masculino: azul oscuro (#2C3E50), azul acero (#34495E) y verde tecnológico (#27AE60)
   - Agregado proyecto "Kittypaw!" como nuevo proyecto destacado
   - Reorganizada sección de contacto con iconos sociales integrados en lista
   - Creado sistema de páginas individuales para cada proyecto (/proyecto/:slug)
@@ -47,7 +47,7 @@ Portfolio profesional de Mauricio Cristian Cárcamo Díaz, especializado en Cien
 - Idioma: Español
 - Deployment: GitHub Pages
 - Diseño: Portfolio masculino profesional con estética moderna
-- Colores: Esquema masculino azul/rojo (#2C3E50, #34495E, #E74C3C)
+- Colores: Esquema masculino azul/verde (#2C3E50, #34495E, #27AE60)
 - UI/UX: Iconos sociales integrados en contacto bajo "Sígueme en:", páginas individuales editables para proyectos
 - Documentos: Visualización online en lugar de solo descarga
 - Proyectos: Sistema de navegación individual con contenido detallado editable

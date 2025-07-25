@@ -31,6 +31,9 @@ Portfolio profesional de Mauricio Cristian Cárcamo Díaz, especializado en Cien
   - Agregada funcionalidad de rutas dinámicas para contenido detallado de proyectos
   - Creada nueva sección "Tecnologías y Herramientas" con todas las tecnologías de proyectos
   - Eliminados efectos hover en badges de tecnologías para mantenerlos estáticos
+  - Proyecto compilado y configurado correctamente para GitHub Pages deployment
+  - Archivos de producción listos en la raíz: index.html, assets/, attached_assets/
+  - Referencias de archivos corregidas para rutas relativas (./assets/ en lugar de /assets/)
 
 - **2025-01-25**: Reestructurado proyecto para GitHub Pages deployment
   - Movido index.html a la raíz del proyecto
@@ -55,11 +58,18 @@ Portfolio profesional de Mauricio Cristian Cárcamo Díaz, especializado en Cien
 - Proyectos: Sistema de navegación individual con contenido detallado editable
 
 ## Deployment Instructions
-1. Hacer commit de todos los archivos al repositorio de GitHub
+1. Hacer commit de todos los archivos al repositorio de GitHub (especialmente index.html, assets/, attached_assets/, README.md)
 2. En GitHub: Settings > Pages
 3. Seleccionar "Deploy from a branch"
 4. Elegir rama "main" y carpeta "/ (root)"
 5. El sitio estará disponible en: https://username.github.io/repository-name
+
+## Archivos de Producción Listos
+- ✅ index.html - Archivo principal con rutas relativas corregidas
+- ✅ assets/ - CSS, JS e imágenes compiladas
+- ✅ attached_assets/ - Certificados y documentos PDF para visualización online
+- ✅ README.md - Documentación actualizada del proyecto
+- ✅ .gitignore - Configurado para preservar archivos de deployment
 
 ## Data Sources
 - CV de Mauricio Cárcamo (PDF adjunto)

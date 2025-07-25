@@ -18,7 +18,9 @@ Este sitio web portfolio presenta mi experiencia profesional, proyectos, habilid
 
 - ✅ Diseño responsivo para móvil, tablet y desktop
 - ✅ Animaciones suaves y transiciones
-- ✅ Formulario de contacto con validación
+- ✅ Paleta de colores masculina (azul/verde)
+- ✅ Páginas individuales para cada proyecto
+- ✅ Sección de tecnologías organizadas por categorías
 - ✅ Navegación por secciones con scroll suave
 - ✅ Optimizado para SEO
 - ✅ Carga rápida y performance optimizada
@@ -26,15 +28,15 @@ Este sitio web portfolio presenta mi experiencia profesional, proyectos, habilid
 ## 🔗 Secciones
 
 1. **Inicio** - Presentación principal con foto y descripción
-2. **Sobre Mí** - Información detallada y servicios
-3. **Habilidades** - Competencias técnicas y profesionales
-4. **Proyectos** - Portfolio de trabajos destacados
+2. **Proyectos** - Portfolio de trabajos destacados con páginas individuales
+3. **Tecnologías** - Herramientas y lenguajes organizados por categorías
+4. **Educación** - Formación académica y certificaciones
 5. **Experiencia** - Historial profesional
-6. **Educación** - Formación académica y certificaciones
-7. **Contacto** - Información de contacto y formulario
+6. **Contacto** - Información de contacto directa
 
 ## 📊 Proyectos Destacados
 
+- **Kittypaw!**: Aplicación móvil para adopción de mascotas con sistema de matching inteligente
 - **Predicción de Mortalidad en Chile**: Análisis y predicción de patrones de mortalidad utilizando Machine Learning
 - **Textos Religiosos y Machine Learning**: Análisis de textos religiosos con NLP
 - **Web Scraping Letras de Canciones**: Extracción y análisis de letras musicales (1960-2020)

@@ -21,13 +21,13 @@ export default function EducationSection() {
   };
 
   return (
-    <section id="education" className="py-16 section-bg-light data-viz-bg relative">
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="education" className="py-16 bg-white">
+      <div className="container mx-auto px-4">
         <SectionTitle>Educación</SectionTitle>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <motion.div 
-            className="section-bg-muted p-6 rounded-lg shadow-md"
+            className="bg-muted p-6 rounded-lg shadow-md"
             variants={container}
             initial="hidden"
             whileInView="show"
@@ -71,7 +71,7 @@ export default function EducationSection() {
           </motion.div>
           
           <motion.div 
-            className="section-bg-muted p-6 rounded-lg shadow-md"
+            className="bg-muted p-6 rounded-lg shadow-md"
             variants={container}
             initial="hidden"
             whileInView="show"

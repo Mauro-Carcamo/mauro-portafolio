@@ -65,8 +65,8 @@ export default function ContactSection() {
   };
   
   return (
-    <section id="contact" className="py-16 section-bg-muted data-viz-bg relative">
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="contact" className="py-16 bg-muted">
+      <div className="container mx-auto px-4">
         <SectionTitle>Contacto</SectionTitle>
         
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -159,7 +159,7 @@ export default function ContactSection() {
           </motion.div>
           
           <motion.div 
-            className="section-bg-light p-8 rounded-lg shadow-md"
+            className="bg-white p-8 rounded-lg shadow-md"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}

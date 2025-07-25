@@ -16,7 +16,7 @@ export function WelcomePopup({ onNavigate }: WelcomePopupProps) {
       const timer = setTimeout(() => {
         setIsOpen(true);
         localStorage.setItem("portfolioVisited", "true");
-      }, 1500);
+      }, 2000);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -47,7 +47,7 @@ export function WelcomePopup({ onNavigate }: WelcomePopupProps) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 500 }}
-            className="bg-white rounded-2xl p-8 max-w-2xl w-full shadow-2xl relative"
+            className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl relative"
           >
             <Button
               variant="ghost"
@@ -77,7 +77,7 @@ export function WelcomePopup({ onNavigate }: WelcomePopupProps) {
               </motion.p>
             </div>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4">
               {menuItems.map((item, index) => (
                 <motion.button
                   key={item.name}
@@ -90,12 +90,12 @@ export function WelcomePopup({ onNavigate }: WelcomePopupProps) {
                   }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleNavigate(item.section)}
-                  className="p-6 rounded-xl border-2 border-gray-200 hover:border-secondary transition-all duration-300 group"
+                  className="p-4 rounded-xl border-2 border-gray-200 hover:border-secondary transition-all duration-300 group"
                 >
-                  <div className={`${item.color} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                    <item.icon className="h-8 w-8 text-white" />
+                  <div className={`${item.color} w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300`}>
+                    <item.icon className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className="font-semibold text-lg text-gray-800 group-hover:text-secondary transition-colors">
+                  <h3 className="font-semibold text-base text-gray-800 group-hover:text-secondary transition-colors">
                     {item.name}
                   </h3>
                 </motion.button>

@@ -103,32 +103,7 @@ html {
   100% { transform: translateX(50px) translateY(50px); }
 }
 
-/* Modern section backgrounds */
-.section-bg-light {
-  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.9) 100%);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-}
-
-.section-bg-muted {
-  background: linear-gradient(135deg, rgba(248,250,252,0.9) 0%, rgba(241,245,249,0.9) 100%);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.3);
-}
-
-/* Data visualization accent */
-.data-viz-bg {
-  background: 
-    linear-gradient(90deg, transparent 0%, rgba(52,152,219,0.1) 50%, transparent 100%),
-    linear-gradient(0deg, transparent 0%, rgba(26,188,156,0.1) 50%, transparent 100%);
-  background-size: 100px 100px, 150px 150px;
-  animation: dataVisualization 15s ease-in-out infinite;
-}
-
-@keyframes dataVisualization {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.7; }
-}
+/* Clean up - these classes are no longer used */
 
 .project-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -141,6 +116,59 @@ html {
 
 .timeline-item {
   position: relative;
+}
+
+/* Improved focus styles */
+*:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  transition: outline 0.2s ease-in-out;
+}
+
+/* Better button hover states */
+.btn-hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Smooth page transitions */
+.page-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Improved navigation hover effects */
+.nav-item {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: hsl(var(--accent));
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+  width: 100%;
+}
+
+/* Loading states */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .timeline-item:before {

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { PERSONAL_INFO } from "@/lib/constants";
 import profileImage from "@assets/1706536613867.jpg";
+import { Linkedin, Github, Mail } from "lucide-react";
 
 export default function HeroSection() {
   return (
@@ -31,6 +32,39 @@ export default function HeroSection() {
             </h1>
             <h2 className="font-medium text-2xl md:text-3xl mb-4 text-accent">{PERSONAL_INFO.title}</h2>
             <p className="text-lg mb-6 max-w-2xl">{PERSONAL_INFO.shortBio}</p>
+            
+            {/* Social Media Links */}
+            <div className="flex justify-center md:justify-start gap-4 mb-8">
+              <motion.a 
+                href="https://linkedin.com/in/mauricio-carcamo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white bg-opacity-20 p-3 rounded-full text-white hover:bg-accent hover:bg-opacity-100 transition-all duration-300 backdrop-blur-sm"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Linkedin className="h-5 w-5" />
+              </motion.a>
+              <motion.a 
+                href="https://github.com/Mauro-Carcamo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white bg-opacity-20 p-3 rounded-full text-white hover:bg-accent hover:bg-opacity-100 transition-all duration-300 backdrop-blur-sm"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Github className="h-5 w-5" />
+              </motion.a>
+              <motion.a 
+                href={`mailto:${PERSONAL_INFO.email}`}
+                className="bg-white bg-opacity-20 p-3 rounded-full text-white hover:bg-accent hover:bg-opacity-100 transition-all duration-300 backdrop-blur-sm"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Mail className="h-5 w-5" />
+              </motion.a>
+            </div>
+            
             <div className="flex flex-wrap justify-center md:justify-start gap-4">
               <motion.a 
                 href="#projects" 

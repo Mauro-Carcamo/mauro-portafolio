@@ -45,11 +45,20 @@ export const SKILLS = {
 
 export const PROJECTS = [
   {
+    title: "Kittypaw!",
+    description: "Aplicación móvil para adopción de mascotas con sistema de matching inteligente y chat en tiempo real.",
+    technologies: ["React Native", "Node.js", "MongoDB", "Socket.io"],
+    repoUrl: "https://github.com/Mauro-Carcamo/kittypaw",
+    icon: "target",
+    slug: "kittypaw"
+  },
+  {
     title: "Predicción de Mortalidad en Chile",
     description: "Análisis y predicción de patrones de mortalidad en Chile utilizando técnicas de machine learning.",
     technologies: ["Python", "Machine Learning", "Data Analysis"],
     repoUrl: "https://github.com/Mauro-Carcamo/Prediccion-Moratalidad-en-Chile",
     icon: "chart-line",
+    slug: "prediccion-mortalidad"
   },
   {
     title: "Textos Religiosos y Machine Learning",
@@ -57,6 +66,7 @@ export const PROJECTS = [
     technologies: ["NLP", "Machine Learning", "Text Analysis"],
     repoUrl: "https://github.com/Mauro-Carcamo/Textos-Religiosos-y-Machine-Learning",
     icon: "book",
+    slug: "textos-religiosos-ml"
   },
   {
     title: "Del 60 al 2020: Web Scraping Letras de Canciones",
@@ -64,6 +74,7 @@ export const PROJECTS = [
     technologies: ["Web Scraping", "Python", "Text Analysis"],
     repoUrl: "https://github.com/Mauro-Carcamo/Del-60-al-2020-Web-Scraping-Letras-Canciones",
     icon: "music",
+    slug: "web-scraping-canciones"
   },
 ];
 

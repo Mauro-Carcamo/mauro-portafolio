@@ -78,41 +78,50 @@ export default function ContactSection() {
               </div>
             </div>
             
-            <div className="mt-8">
-              <h4 className="font-medium mb-4 text-center text-lg">Sígueme en:</h4>
-              <div className="flex justify-center space-x-6">
-                <motion.a 
-                  href="https://linkedin.com/in/mauricio-carcamo" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-secondary hover:text-accent transition-colors p-3 rounded-full hover:bg-gray-100"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Linkedin className="h-8 w-8" />
-                </motion.a>
-                <motion.a 
-                  href="https://github.com/Mauro-Carcamo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-secondary hover:text-accent transition-colors p-3 rounded-full hover:bg-gray-100"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Github className="h-8 w-8" />
-                </motion.a>
-                <motion.a 
-                  href="https://twitter.com" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-secondary hover:text-accent transition-colors p-3 rounded-full hover:bg-gray-100"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Twitter className="h-8 w-8" />
-                </motion.a>
+              <div className="flex items-start space-x-4">
+                <Linkedin className="text-secondary h-6 w-6 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-medium text-lg">LinkedIn</h4>
+                  <a 
+                    href="https://linkedin.com/in/mauricio-carcamo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-secondary transition-colors"
+                  >
+                    linkedin.com/in/mauricio-carcamo
+                  </a>
+                </div>
               </div>
-            </div>
+              
+              <div className="flex items-start space-x-4">
+                <Github className="text-secondary h-6 w-6 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-medium text-lg">GitHub</h4>
+                  <a 
+                    href="https://github.com/Mauro-Carcamo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-secondary transition-colors"
+                  >
+                    github.com/Mauro-Carcamo
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <Twitter className="text-secondary h-6 w-6 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-medium text-lg">Twitter</h4>
+                  <a 
+                    href="https://twitter.com/mauricio_carcamo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-secondary transition-colors"
+                  >
+                    @mauricio_carcamo
+                  </a>
+                </div>
+              </div>
           </motion.div>
         </div>
       </div>

@@ -22,14 +22,13 @@ Portfolio profesional de Mauricio Cristian Cárcamo Díaz, especializado en Cien
 ```
 
 ## Recent Changes
-- **2025-01-25**: Actualización de diseño y UX según feedback del usuario
-  - Cambiada paleta de colores a púrpura profundo (#3B2F5F), púrpura rico (#9B59B6) y naranja cálido (#F39C12)
-  - Eliminado formulario de contacto en sección Contact por solicitud del usuario
-  - Reemplazados círculos de fondo por iconos directos más relevantes
-  - Mejorada sección de contacto con enfoque en información de contacto directa
-  - Optimizado popup de bienvenida con tamaño más pequeño y mejor centrado
-  - Agregados logos sociales (LinkedIn, GitHub, Email) en sección Hero
-  - Revertidos fondos al diseño original según preferencia del usuario
+- **2025-01-25**: Actualización de diseño masculino y sistema de proyectos individuales
+  - Cambiada paleta de colores a esquema masculino: azul oscuro (#2C3E50), azul acero (#34495E) y rojo fuerte (#E74C3C)
+  - Agregado proyecto "Kittypaw!" como nuevo proyecto destacado
+  - Reorganizada sección de contacto con iconos sociales integrados en lista
+  - Creado sistema de páginas individuales para cada proyecto (/proyecto/:slug)
+  - Implementada navegación entre proyectos y portfolio principal
+  - Agregada funcionalidad de rutas dinámicas para contenido detallado de proyectos
 
 - **2025-01-25**: Reestructurado proyecto para GitHub Pages deployment
   - Movido index.html a la raíz del proyecto
@@ -47,9 +46,11 @@ Portfolio profesional de Mauricio Cristian Cárcamo Díaz, especializado en Cien
 ## User Preferences
 - Idioma: Español
 - Deployment: GitHub Pages
-- Diseño: Profesional simplificado sin fondos complejos
-- Colores: Esquema púrpura/naranja (#3B2F5F, #9B59B6, #F39C12)
-- UI/UX: Popup pequeño y centrado, sin formularios de contacto, iconos directos en lugar de círculos
+- Diseño: Portfolio masculino profesional con estética moderna
+- Colores: Esquema masculino azul/rojo (#2C3E50, #34495E, #E74C3C)
+- UI/UX: Iconos sociales integrados en contacto bajo "Sígueme en:", páginas individuales editables para proyectos
+- Documentos: Visualización online en lugar de solo descarga
+- Proyectos: Sistema de navegación individual con contenido detallado editable
 
 ## Deployment Instructions
 1. Hacer commit de todos los archivos al repositorio de GitHub

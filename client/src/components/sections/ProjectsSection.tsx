@@ -5,7 +5,9 @@ import {
   BarChart, 
   BookOpen, 
   Music, 
-  ExternalLink 
+  ExternalLink,
+  Github,
+  Target
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
@@ -33,6 +35,8 @@ export default function ProjectsSection() {
         return <BookOpen className="h-16 w-16" />;
       case "music":
         return <Music className="h-16 w-16" />;
+      case "target":
+        return <Target className="h-16 w-16" />;
       default:
         return <BarChart className="h-16 w-16" />;
     }
@@ -73,15 +77,25 @@ export default function ProjectsSection() {
                     </Badge>
                   ))}
                 </div>
-                <a 
-                  href={project.repoUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-medium text-secondary hover:text-accent transition-colors"
-                >
-                  <ExternalLink size={16} />
-                  <span>Ver Repositorio</span>
-                </a>
+                <div className="flex gap-2">
+                  <a 
+                    href={`/proyecto/${project.slug}`} 
+                    className="inline-flex items-center gap-2 font-medium text-secondary hover:text-accent transition-colors"
+                  >
+                    <ExternalLink size={16} />
+                    <span>Ver más</span>
+                  </a>
+                  <span className="text-gray-400">|</span>
+                  <a 
+                    href={project.repoUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-medium text-gray-600 hover:text-secondary transition-colors"
+                  >
+                    <Github size={16} />
+                    <span>GitHub</span>
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}

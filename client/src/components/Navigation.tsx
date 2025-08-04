@@ -50,6 +50,7 @@ export default function Navigation() {
             {[
               { id: "inicio", label: "Inicio" },
               { id: "proyectos", label: "Proyectos" },
+              { id: "librerias", label: "Tecnologías" },
               { id: "estudios", label: "Estudios" },
               { id: "experiencia", label: "Experiencia" },
               { id: "contacto", label: "Contacto" },
@@ -82,6 +83,7 @@ export default function Navigation() {
               {[
                 { id: "inicio", label: "Inicio" },
                 { id: "proyectos", label: "Proyectos" },
+                { id: "librerias", label: "Tecnologías" },
                 { id: "estudios", label: "Estudios" },
                 { id: "experiencia", label: "Experiencia" },
                 { id: "contacto", label: "Contacto" },

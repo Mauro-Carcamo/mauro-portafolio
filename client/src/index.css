@@ -4,32 +4,34 @@
 
 :root {
   --background: hsl(0, 0%, 100%);
-  --foreground: hsl(215, 17%, 25%);
-  --muted: hsl(48, 48%, 96%);
-  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --foreground: hsl(222, 84%, 5%);
+  --muted: hsl(210, 40%, 98%);
+  --muted-foreground: hsl(215, 16%, 47%);
   --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(215, 17%, 25%);
+  --popover-foreground: hsl(222, 84%, 5%);
   --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(215, 17%, 25%);
-  --border: hsl(20, 5.9%, 90%);
-  --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(14, 69%, 62%);
-  --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(48, 48%, 96%);
-  --secondary-foreground: hsl(215, 17%, 25%);
-  --accent: hsl(48, 48%, 96%);
-  --accent-foreground: hsl(215, 17%, 25%);
-  --destructive: hsl(0, 84.2%, 60.2%);
-  --destructive-foreground: hsl(60, 9.1%, 97.8%);
-  --ring: hsl(215, 17%, 25%);
+  --card-foreground: hsl(222, 84%, 5%);
+  --border: hsl(214, 32%, 91%);
+  --input: hsl(214, 32%, 91%);
+  --primary: hsl(262, 83%, 58%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(220, 14%, 96%);
+  --secondary-foreground: hsl(220, 9%, 46%);
+  --accent: hsl(220, 14%, 96%);
+  --accent-foreground: hsl(220, 9%, 46%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(262, 83%, 58%);
   --radius: 0.5rem;
 
-  /* Custom portfolio colors */
-  --primary-color: hsl(14, 69%, 62%);
-  --secondary-color: hsl(48, 48%, 96%);
-  --accent-color: hsl(215, 17%, 25%);
-  --light-bg: hsl(210, 20%, 98%);
+  /* Custom portfolio colors - Updated Purple/Blue theme */
+  --primary-color: hsl(262, 83%, 58%);
+  --secondary-color: hsl(250, 60%, 95%);
+  --accent-color: hsl(222, 84%, 5%);
+  --light-bg: hsl(250, 50%, 98%);
   --white: hsl(0, 0%, 100%);
+  --gradient-start: hsl(262, 83%, 58%);
+  --gradient-end: hsl(230, 55%, 50%);
 }
 
 .dark {
@@ -67,62 +69,122 @@
   }
 }
 
-/* Background Animation */
-.animated-bg {
+/* New Background with movement */
+.main-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  animation: backgroundShift 15s ease-in-out infinite;
+}
+
+@keyframes backgroundShift {
+  0%, 100% {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+  }
+  25% {
+    background: linear-gradient(180deg, var(--gradient-start) 0%, hsl(240, 60%, 55%) 100%);
+  }
+  50% {
+    background: linear-gradient(225deg, hsl(270, 70%, 60%) 0%, var(--gradient-end) 100%);
+  }
+  75% {
+    background: linear-gradient(270deg, var(--gradient-start) 0%, hsl(220, 65%, 52%) 100%);
+  }
+}
+
+.floating-particles {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--light-bg) 100%);
-}
-
-.floating-shapes {
-  position: absolute;
-  width: 100%;
-  height: 100%;
   overflow: hidden;
 }
 
-.shape {
+.particle {
   position: absolute;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  background: var(--primary-color);
-  opacity: 0.1;
-  animation: float 20s infinite linear;
+  animation: floatParticle 20s infinite linear;
 }
 
-.shape:nth-child(1) {
-  width: 80px;
-  height: 80px;
+.particle:nth-child(1) {
+  width: 4px;
+  height: 4px;
   left: 10%;
   animation-duration: 25s;
 }
 
-.shape:nth-child(2) {
-  width: 120px;
-  height: 120px;
-  left: 80%;
+.particle:nth-child(2) {
+  width: 6px;
+  height: 6px;
+  left: 20%;
   animation-duration: 30s;
   animation-delay: -5s;
 }
 
-.shape:nth-child(3) {
-  width: 60px;
-  height: 60px;
-  left: 50%;
+.particle:nth-child(3) {
+  width: 3px;
+  height: 3px;
+  left: 30%;
   animation-duration: 35s;
   animation-delay: -10s;
 }
 
-@keyframes float {
+.particle:nth-child(4) {
+  width: 5px;
+  height: 5px;
+  left: 70%;
+  animation-duration: 28s;
+  animation-delay: -15s;
+}
+
+.particle:nth-child(5) {
+  width: 4px;
+  height: 4px;
+  left: 80%;
+  animation-duration: 32s;
+  animation-delay: -8s;
+}
+
+.particle:nth-child(6) {
+  width: 7px;
+  height: 7px;
+  left: 90%;
+  animation-duration: 27s;
+  animation-delay: -12s;
+}
+
+@keyframes floatParticle {
   0% {
-    transform: translateY(100vh) rotate(0deg);
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
   }
   100% {
-    transform: translateY(-100px) rotate(360deg);
+    transform: translateY(-100px) translateX(20px);
+    opacity: 0;
   }
+}
+
+/* Content container with side margins */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
 }
 
 /* Custom component styles */

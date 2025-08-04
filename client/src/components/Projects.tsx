@@ -1,62 +1,79 @@
 import { useState } from "react";
-import { BarChart3, GraduationCap, Bot, Phone, Worm, MessageSquare, ExternalLink } from "lucide-react";
+import { BarChart3, GraduationCap, Bot, Phone, Worm, MessageSquare, Eye, Heart } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 const projects = [
   {
     id: 1,
+    title: "KittyPaw",
+    description: "Aplicación web interactiva para adopción de mascotas con sistema de matching inteligente, perfiles detallados y chat en tiempo real entre adoptantes y refugios.",
+    icon: Heart,
+    categories: ["react", "typescript"],
+    tags: ["React", "TypeScript", "Socket.io", "PostgreSQL"],
+    slug: "kittypaw",
+    libraries: ["React", "TypeScript", "Node.js", "Express", "Socket.io", "PostgreSQL", "Drizzle ORM", "Tailwind CSS", "Wouter"]
+  },
+  {
+    id: 2,
     title: "Dashboard Ventas Nadar Ediciones",
     description: "Análisis integral de ventas y costos con vinculación de datos de redes sociales. Dashboard interactivo en Google Looker Studio para optimización de estrategias comerciales.",
     icon: BarChart3,
     categories: ["python", "dashboard"],
     tags: ["Python", "Google Looker", "API Social Media"],
-    link: "https://github.com/maurocarcamo"
+    slug: "dashboard-nadar",
+    libraries: ["Python", "Pandas", "Google Analytics API", "Looker Studio", "Social Media APIs", "Matplotlib", "Seaborn"]
   },
   {
-    id: 2,
+    id: 3,
     title: "Análisis Desempeño Académico",
     description: "Investigación sobre factores que inciden en el desempeño académico usando machine learning no supervisado para clustering y análisis predictivo.",
     icon: GraduationCap,
     categories: ["r", "sql"],
     tags: ["R", "Machine Learning", "Clustering", "SQL"],
-    link: "https://github.com/maurocarcamo"
+    slug: "analisis-academico",
+    libraries: ["R", "dplyr", "ggplot2", "cluster", "factoextra", "corrplot", "caret", "randomForest", "PostgreSQL"]
   },
   {
-    id: 3,
+    id: 4,
     title: "Automatización WhatsApp",
     description: "Sistema de automatización de comunicaciones para proyectos de capacitación. Envío programado de contenido y seguimiento de participación.",
     icon: Bot,
     categories: ["python"],
     tags: ["Python", "WhatsApp API", "Automatización"],
-    link: "https://github.com/maurocarcamo"
+    slug: "whatsapp-automation",
+    libraries: ["Python", "WhatsApp API", "Schedule", "SQLite", "Pandas", "Requests", "JSON", "Datetime"]
   },
   {
-    id: 4,
+    id: 5,
     title: "Dashboard Contact Center",
     description: "Dashboard de métricas clave para monitoreo de ventas, dotación y rendimiento de campañas. Implementación de estrategias basadas en datos para incremento de ventas.",
     icon: Phone,
     categories: ["python", "dashboard"],
     tags: ["Google Data Studio", "KPIs", "Análisis Ventas"],
-    link: "https://github.com/maurocarcamo"
+    slug: "dashboard-contact-center",
+    libraries: ["Google Data Studio", "Python", "Pandas", "BigQuery", "Google Sheets API", "Plotly", "Streamlit"]
   },
   {
-    id: 5,
+    id: 6,
     title: "Web Scraping Automatizado",
     description: "Automatización de descarga de documentos para procesos de acreditación universitaria. Sistema eficiente de extracción y organización de datos web.",
     icon: Worm,
     categories: ["python", "sql"],
     tags: ["Python", "Web Scraping", "Selenium", "BeautifulSoup"],
-    link: "https://github.com/maurocarcamo"
+    slug: "web-scraping",
+    libraries: ["Python", "Selenium", "BeautifulSoup", "Requests", "Pandas", "SQLite", "ChromeDriver", "lxml"]
   },
   {
-    id: 6,
+    id: 7,
     title: "Análisis de Texto NLP",
     description: "Procesamiento de lenguaje natural para análisis de sentimientos y extracción de insights de datos textuales en proyectos de investigación social.",
     icon: MessageSquare,
     categories: ["r"],
     tags: ["R", "NLP", "Text Mining", "Sentiment Analysis"],
-    link: "https://github.com/maurocarcamo"
+    slug: "nlp-analysis",
+    libraries: ["R", "tm", "wordcloud", "RColorBrewer", "SnowballC", "syuzhet", "tidytext", "dplyr", "ggplot2"]
   }
 ];
 

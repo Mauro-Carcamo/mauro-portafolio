@@ -96,12 +96,22 @@
             animation: floatParticle 25s infinite linear;
         }
 
-        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-duration: 25s; }
-        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-duration: 30s; animation-delay: -5s; }
-        .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-duration: 35s; animation-delay: -10s; }
-        .particle:nth-child(4) { width: 5px; height: 5px; left: 70%; animation-duration: 28s; animation-delay: -15s; }
-        .particle:nth-child(5) { width: 4px; height: 4px; left: 80%; animation-duration: 32s; animation-delay: -8s; }
-        .particle:nth-child(6) { width: 7px; height: 7px; left: 90%; animation-duration: 27s; animation-delay: -12s; }
+        .particle:nth-child(1) { width: 4px; height: 4px; left: 5%; animation-duration: 25s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; left: 15%; animation-duration: 30s; animation-delay: -5s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; left: 25%; animation-duration: 35s; animation-delay: -10s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; left: 35%; animation-duration: 28s; animation-delay: -15s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; left: 65%; animation-duration: 32s; animation-delay: -8s; }
+        .particle:nth-child(6) { width: 7px; height: 7px; left: 75%; animation-duration: 27s; animation-delay: -12s; }
+        .particle:nth-child(7) { width: 5px; height: 5px; left: 85%; animation-duration: 33s; animation-delay: -3s; }
+        .particle:nth-child(8) { width: 3px; height: 3px; left: 95%; animation-duration: 29s; animation-delay: -18s; }
+        .particle:nth-child(9) { width: 6px; height: 6px; left: 8%; animation-duration: 31s; animation-delay: -7s; }
+        .particle:nth-child(10) { width: 4px; height: 4px; left: 18%; animation-duration: 26s; animation-delay: -13s; }
+        .particle:nth-child(11) { width: 5px; height: 5px; left: 28%; animation-duration: 34s; animation-delay: -20s; }
+        .particle:nth-child(12) { width: 3px; height: 3px; left: 38%; animation-duration: 28s; animation-delay: -2s; }
+        .particle:nth-child(13) { width: 7px; height: 7px; left: 62%; animation-duration: 30s; animation-delay: -16s; }
+        .particle:nth-child(14) { width: 4px; height: 4px; left: 72%; animation-duration: 32s; animation-delay: -9s; }
+        .particle:nth-child(15) { width: 6px; height: 6px; left: 82%; animation-duration: 27s; animation-delay: -14s; }
+        .particle:nth-child(16) { width: 5px; height: 5px; left: 92%; animation-duration: 29s; animation-delay: -4s; }
 
         @keyframes floatParticle {
             0% { transform: translateY(100vh) translateX(0); opacity: 0; }
@@ -153,6 +163,8 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .profile-img {
@@ -354,6 +366,16 @@
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
 
     <!-- Navigation -->
@@ -369,7 +391,6 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tecnologias">Tecnologías</a></li>
                     <li class="nav-item"><a class="nav-link" href="#estudios">Estudios</a></li>
                     <li class="nav-item"><a class="nav-link" href="#experiencia">Experiencia</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
@@ -392,9 +413,12 @@
                             Combino análisis estadístico avanzado con comprensión profunda del comportamiento social
                             para generar insights accionables que impulsan la toma de decisiones estratégicas.
                         </p>
-                        <div class="d-flex flex-column flex-sm-row gap-3">
+                        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
                             <a href="https://github.com/maurocarcamo" target="_blank" class="btn btn-primary-custom">
                                 <i class="fab fa-github me-2"></i>Ver GitHub
+                            </a>
+                            <a href="./attached_assets/Mauricio Carcamo Curriculum_1754333919798.pdf" target="_blank" class="btn btn-outline-custom">
+                                <i class="fas fa-file-pdf me-2"></i>Ver Currículum
                             </a>
                             <a href="#contacto" class="btn btn-outline-custom">
                                 <i class="fas fa-envelope me-2"></i>Contactar
@@ -415,13 +439,7 @@
                     <h2 class="display-5 fw-bold section-title">Proyectos</h2>
                 </div>
                 
-                <!-- Filter buttons -->
-                <div class="text-center mb-5">
-                    <button class="btn btn-outline-secondary rounded-pill me-2 mb-2 filter-btn active" data-filter="all">Todos</button>
-                    <button class="btn btn-outline-secondary rounded-pill me-2 mb-2 filter-btn" data-filter="python">Python</button>
-                    <button class="btn btn-outline-secondary rounded-pill me-2 mb-2 filter-btn" data-filter="r">R</button>
-                    <button class="btn btn-outline-secondary rounded-pill me-2 mb-2 filter-btn" data-filter="dashboard">Dashboard</button>
-                </div>
+
 
                 <div class="row" id="projects-container">
                     <!-- KittyPaw Project -->
@@ -553,75 +571,75 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Technologies Section -->
-        <section id="tecnologias" class="py-5 bg-light">
-            <div class="container">
-                <div class="text-center mb-5">
-                    <h2 class="display-5 fw-bold section-title">Tecnologías y Librerías</h2>
-                    <p class="fs-5 text-muted">Stack tecnológico y herramientas utilizadas en mis proyectos</p>
-                </div>
                 
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card study-card h-100">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <i class="fas fa-chart-line fa-3x text-primary"></i>
-                                </div>
-                                <h5 class="card-title">Análisis de Datos</h5>
-                                <div class="d-flex flex-wrap justify-content-center gap-1">
-                                    <span class="tech-tag">Pandas</span>
-                                    <span class="tech-tag">NumPy</span>
-                                    <span class="tech-tag">Scikit-learn</span>
-                                    <span class="tech-tag">Matplotlib</span>
-                                    <span class="tech-tag">Seaborn</span>
-                                    <span class="tech-tag">Plotly</span>
-                                    <span class="tech-tag">TensorFlow</span>
-                                    <span class="tech-tag">XGBoost</span>
+                <!-- Technologies Section integrated in Projects -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="text-center mb-4">
+                            <h3 class="fw-bold text-primary">Tecnologías y Librerías</h3>
+                            <p class="text-muted">Stack tecnológico utilizado en mis proyectos</p>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card study-card h-100">
+                                    <div class="card-body text-center">
+                                        <div class="mb-3">
+                                            <i class="fas fa-chart-line fa-3x text-primary"></i>
+                                        </div>
+                                        <h5 class="card-title">Análisis de Datos</h5>
+                                        <div class="d-flex flex-wrap justify-content-center gap-1">
+                                            <span class="tech-tag">Pandas</span>
+                                            <span class="tech-tag">NumPy</span>
+                                            <span class="tech-tag">Scikit-learn</span>
+                                            <span class="tech-tag">Matplotlib</span>
+                                            <span class="tech-tag">Seaborn</span>
+                                            <span class="tech-tag">Plotly</span>
+                                            <span class="tech-tag">TensorFlow</span>
+                                            <span class="tech-tag">XGBoost</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card study-card h-100">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <i class="fas fa-globe fa-3x text-success"></i>
-                                </div>
-                                <h5 class="card-title">Desarrollo Web</h5>
-                                <div class="d-flex flex-wrap justify-content-center gap-1">
-                                    <span class="tech-tag">React</span>
-                                    <span class="tech-tag">Node.js</span>
-                                    <span class="tech-tag">Express</span>
-                                    <span class="tech-tag">FastAPI</span>
-                                    <span class="tech-tag">Bootstrap</span>
-                                    <span class="tech-tag">Tailwind</span>
-                                    <span class="tech-tag">JavaScript</span>
-                                    <span class="tech-tag">TypeScript</span>
+                            
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card study-card h-100">
+                                    <div class="card-body text-center">
+                                        <div class="mb-3">
+                                            <i class="fas fa-globe fa-3x text-success"></i>
+                                        </div>
+                                        <h5 class="card-title">Desarrollo Web</h5>
+                                        <div class="d-flex flex-wrap justify-content-center gap-1">
+                                            <span class="tech-tag">React</span>
+                                            <span class="tech-tag">Node.js</span>
+                                            <span class="tech-tag">Express</span>
+                                            <span class="tech-tag">FastAPI</span>
+                                            <span class="tech-tag">Bootstrap</span>
+                                            <span class="tech-tag">Tailwind</span>
+                                            <span class="tech-tag">JavaScript</span>
+                                            <span class="tech-tag">TypeScript</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card study-card h-100">
-                            <div class="card-body text-center">
-                                <div class="mb-3">
-                                    <i class="fas fa-database fa-3x text-info"></i>
-                                </div>
-                                <h5 class="card-title">Bases de Datos</h5>
-                                <div class="d-flex flex-wrap justify-content-center gap-1">
-                                    <span class="tech-tag">PostgreSQL</span>
-                                    <span class="tech-tag">MySQL</span>
-                                    <span class="tech-tag">SQLite</span>
-                                    <span class="tech-tag">MongoDB</span>
-                                    <span class="tech-tag">Redis</span>
-                                    <span class="tech-tag">SQLAlchemy</span>
-                                    <span class="tech-tag">Drizzle ORM</span>
+                            
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card study-card h-100">
+                                    <div class="card-body text-center">
+                                        <div class="mb-3">
+                                            <i class="fas fa-database fa-3x text-info"></i>
+                                        </div>
+                                        <h5 class="card-title">Bases de Datos</h5>
+                                        <div class="d-flex flex-wrap justify-content-center gap-1">
+                                            <span class="tech-tag">PostgreSQL</span>
+                                            <span class="tech-tag">MySQL</span>
+                                            <span class="tech-tag">SQLite</span>
+                                            <span class="tech-tag">MongoDB</span>
+                                            <span class="tech-tag">Redis</span>
+                                            <span class="tech-tag">SQLAlchemy</span>
+                                            <span class="tech-tag">Drizzle ORM</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -873,32 +891,6 @@
                         block: 'start'
                     });
                 }
-            });
-        });
-
-        // Project filtering
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remove active class from all buttons
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                const filter = this.getAttribute('data-filter');
-                const projects = document.querySelectorAll('.project-item');
-                
-                projects.forEach(project => {
-                    if (filter === 'all') {
-                        project.style.display = 'block';
-                    } else {
-                        const categories = project.getAttribute('data-category');
-                        if (categories.includes(filter)) {
-                            project.style.display = 'block';
-                        } else {
-                            project.style.display = 'none';
-                        }
-                    }
-                });
             });
         });
 

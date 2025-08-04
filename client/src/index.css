@@ -24,14 +24,14 @@
   --ring: hsl(262, 83%, 58%);
   --radius: 0.5rem;
 
-  /* Custom portfolio colors - Updated Purple/Blue theme */
-  --primary-color: hsl(262, 83%, 58%);
-  --secondary-color: hsl(250, 60%, 95%);
-  --accent-color: hsl(222, 84%, 5%);
-  --light-bg: hsl(250, 50%, 98%);
+  /* Custom portfolio colors - Masculine Professional theme */
+  --primary-color: hsl(210, 40%, 35%);
+  --secondary-color: hsl(210, 20%, 95%);
+  --accent-color: hsl(210, 25%, 15%);
+  --light-bg: hsl(210, 20%, 98%);
   --white: hsl(0, 0%, 100%);
-  --gradient-start: hsl(262, 83%, 58%);
-  --gradient-end: hsl(230, 55%, 50%);
+  --gradient-start: hsl(210, 40%, 25%);
+  --gradient-end: hsl(195, 35%, 30%);
 }
 
 .dark {

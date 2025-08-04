@@ -5,6 +5,9 @@ This is a full-stack portfolio website for Mauricio Cárcamo, a Data Scientist a
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
+Color preferences: Masculine and professional color palette (dark steel blue tones).
+Deployment: GitHub Pages compatible with static HTML structure.
+Project focus: Data science portfolio with emphasis on professional presentation.
 
 # System Architecture
 

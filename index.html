@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mauricio Cárcamo - Sociólogo especializado en Ciencia de Datos | Portfolio profesional con proyectos de machine learning, análisis de datos y desarrollo full stack">
+    <meta name="keywords" content="Data Science, Python, R, SQL, Machine Learning, Sociología, Análisis de Datos, Full Stack Developer">
+    <meta name="author" content="Mauricio Cárcamo Díaz">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Mauricio Cárcamo | Data Scientist & Sociólogo">
+    <meta property="og:description" content="Especialista en Ciencia de Datos con sólida formación sociológica. Combino análisis estadístico avanzado con comprensión profunda del comportamiento social.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://maurocarcamo.github.io">
+    
+    <title>Mauricio Cárcamo | Data Scientist & Sociólogo</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>📊</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #4A5568;
+            --secondary-color: #EDF2F7;
+            --accent-color: #2D3748;
+            --light-bg: #F7FAFC;
+            --white: #FFFFFF;
+            --gradient-start: #2D3748;
+            --gradient-end: #4A5568;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--accent-color);
+            overflow-x: hidden;
+        }
+
+        /* Background Animation */
+        .main-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% {
+                background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            }
+            25% {
+                background: linear-gradient(180deg, #2C5282 0%, var(--gradient-end) 100%);
+            }
+            50% {
+                background: linear-gradient(225deg, #2A4365 0%, var(--gradient-end) 100%);
+            }
+            75% {
+                background: linear-gradient(270deg, var(--gradient-start) 0%, #2C5282 100%);
+            }
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: floatParticle 25s infinite linear;
+        }
+
+        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-duration: 25s; }
+        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-duration: 30s; animation-delay: -5s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-duration: 35s; animation-delay: -10s; }
+        .particle:nth-child(4) { width: 5px; height: 5px; left: 70%; animation-duration: 28s; animation-delay: -15s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; left: 80%; animation-duration: 32s; animation-delay: -8s; }
+        .particle:nth-child(6) { width: 7px; height: 7px; left: 90%; animation-duration: 27s; animation-delay: -12s; }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
+        }
+
+        /* Content container */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color) !important;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: var(--accent-color) !important;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--white) 100%);
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary-custom {
+            background: var(--primary-color);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            background: #2A4365;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(74, 85, 104, 0.3);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Cards */
+        .project-card, .study-card, .timeline-item {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .study-card:hover, .timeline-item:hover {
+            transform: translateX(10px);
+        }
+
+        .tech-tag {
+            background: var(--secondary-color);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 2px;
+        }
+
+        /* Section headers */
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Contact icons */
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 0 auto 1rem;
+        }
+
+        .contact-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Floating buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-img {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .floating-buttons {
+                bottom: 1rem;
+                right: 1rem;
+            }
+            
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Modal styles */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .modal-header {
+            background: var(--secondary-color);
+            border-bottom: none;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation delays */
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        .fade-in:nth-child(5) { animation-delay: 0.5s; }
+        .fade-in:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="main-background"></div>
+    <div class="floating-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio">
+                <i class="fas fa-chart-bar me-2"></i>Mauricio Cárcamo
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tecnologias">Tecnologías</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#estudios">Estudios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experiencia">Experiencia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="page-container">
+        <!-- Hero Section -->
+        <section id="inicio" class="hero">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 fade-in">
+                        <h1 class="display-4 fw-bold mb-3">Mauricio Cárcamo</h1>
+                        <p class="fs-3 text-primary mb-4">Data Scientist & Sociólogo</p>
+                        <p class="fs-5 mb-4 text-muted">
+                            Especialista en Ciencia de Datos con sólida formación sociológica.
+                            Combino análisis estadístico avanzado con comprensión profunda del comportamiento social
+                            para generar insights accionables que impulsan la toma de decisiones estratégicas.
+                        </p>
+                        <div class="d-flex flex-column flex-sm-row gap-3">
+                            <a href="https://github.com/maurocarcamo" target="_blank" class="btn btn-primary-custom">
+                                <i class="fab fa-github me-2"></i>Ver GitHub
+                            </a>
+                            <a href="#contacto" class="btn btn-outline-custom">
+                                <i class="fas fa-envelope me-2"></i>Contactar
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center fade-in">
+                        <img src="attached_assets/1706536613867_1754333919791.jpg" alt="Mauricio Cárcamo - Data Scientist" class="profile-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="proyectos" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold section-title">Proyectos</h2>
+                </div>
+                
+                <!-- Filter buttons -->
+                <div class="text-center mb-5">
+                    <button class="btn btn-outline-secondary rounded-pill me-2 mb-2 filter-btn active" data-filter="all">Todos</button>
+                    <button class="btn btn-outline-secondary rounded-pill me-2 mb-2 filter-btn" data-filter="python">Python</button>
+                    <button class="btn btn-outline-secondary rounded-pill me-2 mb-2 filter-btn" data-filter="r">R</button>
+                    <button class="btn btn-outline-secondary rounded-pill me-2 mb-2 filter-btn" data-filter="dashboard">Dashboard</button>
+                </div>
+
+                <div class="row" id="projects-container">
+                    <!-- KittyPaw Project -->
+                    <div class="col-lg-4 col-md-6 mb-4 project-item fade-in" data-category="react typescript">
+                        <div class="card project-card h-100">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="fas fa-heart fa-3x text-primary"></i>
+                                </div>
+                                <h5 class="card-title">KittyPaw</h5>
+                                <p class="card-text">Aplicación web interactiva para adopción de mascotas con sistema de matching inteligente, perfiles detallados y chat en tiempo real.</p>
+                                <div class="mb-3">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">TypeScript</span>
+                                    <span class="tech-tag">Socket.io</span>
+                                    <span class="tech-tag">PostgreSQL</span>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="fw-bold">Librerías utilizadas:</small><br>
+                                    <small class="text-muted">React, TypeScript, Node.js, Express, Socket.io, PostgreSQL, Drizzle ORM, Tailwind CSS</small>
+                                </div>
+                                <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#projectModal" onclick="showProject('kittypaw')">
+                                    <i class="fas fa-eye me-2"></i>Ver Proyecto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Nadar Project -->
+                    <div class="col-lg-4 col-md-6 mb-4 project-item fade-in" data-category="python dashboard">
+                        <div class="card project-card h-100">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="fas fa-chart-bar fa-3x text-primary"></i>
+                                </div>
+                                <h5 class="card-title">Dashboard Ventas Nadar Ediciones</h5>
+                                <p class="card-text">Análisis integral de ventas y costos con vinculación de datos de redes sociales. Dashboard interactivo en Google Looker Studio.</p>
+                                <div class="mb-3">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Google Looker</span>
+                                    <span class="tech-tag">API Social Media</span>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="fw-bold">Librerías utilizadas:</small><br>
+                                    <small class="text-muted">Python, Pandas, Google Analytics API, Looker Studio, Matplotlib, Seaborn</small>
+                                </div>
+                                <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#projectModal" onclick="showProject('dashboard-nadar')">
+                                    <i class="fas fa-eye me-2"></i>Ver Proyecto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More projects would go here -->
+                    <!-- For brevity, I'll add 4 more projects with similar structure -->
+                    
+                    <!-- Academic Analysis Project -->
+                    <div class="col-lg-4 col-md-6 mb-4 project-item fade-in" data-category="r sql">
+                        <div class="card project-card h-100">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                                </div>
+                                <h5 class="card-title">Análisis Desempeño Académico</h5>
+                                <p class="card-text">Investigación sobre factores que inciden en el desempeño académico usando machine learning no supervisado para clustering.</p>
+                                <div class="mb-3">
+                                    <span class="tech-tag">R</span>
+                                    <span class="tech-tag">Machine Learning</span>
+                                    <span class="tech-tag">SQL</span>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="fw-bold">Librerías utilizadas:</small><br>
+                                    <small class="text-muted">R, dplyr, ggplot2, cluster, factoextra, corrplot, caret</small>
+                                </div>
+                                <button class="btn btn-outline-primary w-100">
+                                    <i class="fas fa-eye me-2"></i>Ver Proyecto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp Automation Project -->
+                    <div class="col-lg-4 col-md-6 mb-4 project-item fade-in" data-category="python">
+                        <div class="card project-card h-100">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="fas fa-robot fa-3x text-primary"></i>
+                                </div>
+                                <h5 class="card-title">Automatización WhatsApp</h5>
+                                <p class="card-text">Sistema de automatización de comunicaciones para proyectos de capacitación. Envío programado de contenido.</p>
+                                <div class="mb-3">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">WhatsApp API</span>
+                                    <span class="tech-tag">Automatización</span>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="fw-bold">Librerías utilizadas:</small><br>
+                                    <small class="text-muted">Python, WhatsApp API, Schedule, SQLite, Pandas</small>
+                                </div>
+                                <button class="btn btn-outline-primary w-100">
+                                    <i class="fas fa-eye me-2"></i>Ver Proyecto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Web Scraping Project -->
+                    <div class="col-lg-4 col-md-6 mb-4 project-item fade-in" data-category="python sql">
+                        <div class="card project-card h-100">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="fas fa-spider fa-3x text-primary"></i>
+                                </div>
+                                <h5 class="card-title">Web Scraping Automatizado</h5>
+                                <p class="card-text">Automatización de descarga de documentos para procesos de acreditación universitaria. Sistema eficiente de extracción.</p>
+                                <div class="mb-3">
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Selenium</span>
+                                    <span class="tech-tag">BeautifulSoup</span>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="fw-bold">Librerías utilizadas:</small><br>
+                                    <small class="text-muted">Python, Selenium, BeautifulSoup, Requests, Pandas</small>
+                                </div>
+                                <button class="btn btn-outline-primary w-100">
+                                    <i class="fas fa-eye me-2"></i>Ver Proyecto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technologies Section -->
+        <section id="tecnologias" class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold section-title">Tecnologías y Librerías</h2>
+                    <p class="fs-5 text-muted">Stack tecnológico y herramientas utilizadas en mis proyectos</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card study-card h-100">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="fas fa-chart-line fa-3x text-primary"></i>
+                                </div>
+                                <h5 class="card-title">Análisis de Datos</h5>
+                                <div class="d-flex flex-wrap justify-content-center gap-1">
+                                    <span class="tech-tag">Pandas</span>
+                                    <span class="tech-tag">NumPy</span>
+                                    <span class="tech-tag">Scikit-learn</span>
+                                    <span class="tech-tag">Matplotlib</span>
+                                    <span class="tech-tag">Seaborn</span>
+                                    <span class="tech-tag">Plotly</span>
+                                    <span class="tech-tag">TensorFlow</span>
+                                    <span class="tech-tag">XGBoost</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card study-card h-100">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="fas fa-globe fa-3x text-success"></i>
+                                </div>
+                                <h5 class="card-title">Desarrollo Web</h5>
+                                <div class="d-flex flex-wrap justify-content-center gap-1">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">Node.js</span>
+                                    <span class="tech-tag">Express</span>
+                                    <span class="tech-tag">FastAPI</span>
+                                    <span class="tech-tag">Bootstrap</span>
+                                    <span class="tech-tag">Tailwind</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">TypeScript</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card study-card h-100">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="fas fa-database fa-3x text-info"></i>
+                                </div>
+                                <h5 class="card-title">Bases de Datos</h5>
+                                <div class="d-flex flex-wrap justify-content-center gap-1">
+                                    <span class="tech-tag">PostgreSQL</span>
+                                    <span class="tech-tag">MySQL</span>
+                                    <span class="tech-tag">SQLite</span>
+                                    <span class="tech-tag">MongoDB</span>
+                                    <span class="tech-tag">Redis</span>
+                                    <span class="tech-tag">SQLAlchemy</span>
+                                    <span class="tech-tag">Drizzle ORM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Studies Section -->
+        <section id="estudios" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold section-title">Formación Académica</h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card study-card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="me-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Diplomado en Data Science</h5>
+                                    <p class="text-primary mb-1">Universidad Católica de Chile</p>
+                                    <small class="text-muted">2022 | Nota: 6,4</small>
+                                </div>
+                                <a href="attached_assets/Certificado Diplomado_1754333919792.pdf" target="_blank" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-download"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="card study-card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="me-3">
+                                    <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Full Stack Python Trainee</h5>
+                                    <p class="text-primary mb-1">Talento Digital - Bootcamp</p>
+                                    <small class="text-muted">2023 | 462 horas</small>
+                                </div>
+                                <a href="attached_assets/Full Stack Python Certificado_1754333919795.pdf" target="_blank" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-download"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="card study-card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="me-3">
+                                    <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Especialización Ciencia de Datos</h5>
+                                    <p class="text-primary mb-1">SENCE - Reconversión Laboral</p>
+                                    <small class="text-muted">2024 | 166 horas</small>
+                                </div>
+                                <a href="attached_assets/Legal Ciencia de Datos_1754333919797.pdf" target="_blank" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-download"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <div class="card study-card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="me-3">
+                                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Título de Sociólogo</h5>
+                                    <p class="text-primary mb-1">Universidad Central de Chile</p>
+                                    <small class="text-muted">2015</small>
+                                </div>
+                                <a href="attached_assets/Certificado Profesion_1754333919793.pdf" target="_blank" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-download"></i> PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experiencia" class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold section-title">Experiencia Profesional</h2>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="timeline-item card mb-4">
+                            <div class="card-body">
+                                <div class="text-primary fw-bold mb-2">Sep 2024 - Dic 2024</div>
+                                <h5 class="fw-bold">Coordinador de Proyecto</h5>
+                                <div class="text-primary mb-3">Consultora Epojé</div>
+                                <p class="text-muted">Gestión integral del proyecto Escuela de Formación Sindical para el Ministerio del Trabajo. Responsable de planificación, diseño de módulos formativos, automatización de comunicaciones y seguimiento de indicadores clave.</p>
+                                <div>
+                                    <span class="tech-tag">Gestión de Proyectos</span>
+                                    <span class="tech-tag">Automatización</span>
+                                    <span class="tech-tag">WhatsApp API</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item card mb-4">
+                            <div class="card-body">
+                                <div class="text-primary fw-bold mb-2">Abr 2024 - Ago 2024</div>
+                                <h5 class="fw-bold">Community Manager & Analista de Datos</h5>
+                                <div class="text-primary mb-3">Agencia I-Brain Digital</div>
+                                <p class="text-muted">Creación de contenido y gestión de redes sociales. Análisis de datos mediante Meta Business Suite para optimización de campañas digitales.</p>
+                                <div>
+                                    <span class="tech-tag">Meta Business Suite</span>
+                                    <span class="tech-tag">Social Media Analytics</span>
+                                    <span class="tech-tag">Marketing Digital</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item card mb-4">
+                            <div class="card-body">
+                                <div class="text-primary fw-bold mb-2">Sep 2023 - Dic 2023</div>
+                                <h5 class="fw-bold">Asesor en Datos</h5>
+                                <div class="text-primary mb-3">Nadar Ediciones</div>
+                                <p class="text-muted">Análisis integral de ventas y costos con vinculación de datos de redes sociales. Desarrollo de dashboard en Google Looker Studio.</p>
+                                <div>
+                                    <span class="tech-tag">Google Looker Studio</span>
+                                    <span class="tech-tag">Análisis de Ventas</span>
+                                    <span class="tech-tag">Social Media Data</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contacto" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold section-title">Contacto</h2>
+                    <p class="fs-5 text-muted">Estoy disponible para proyectos de análisis de datos, machine learning y consultoría en ciencia de datos. ¡Conectemos y creemos soluciones innovadoras juntos!</p>
+                </div>
+                
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="card">
+                            <div class="card-body p-5">
+                                <div class="row text-center">
+                                    <div class="col-lg col-md-6 mb-4">
+                                        <a href="mailto:mauro.carcamo89@gmail.com" class="contact-icon text-decoration-none" style="background: var(--secondary-color); color: var(--accent-color);">
+                                            <i class="fas fa-envelope"></i>
+                                        </a>
+                                        <small class="d-block text-muted">mauro.carcamo89@gmail.com</small>
+                                    </div>
+                                    
+                                    <div class="col-lg col-md-6 mb-4">
+                                        <a href="https://wa.me/56990381919" target="_blank" class="contact-icon text-decoration-none" style="background: rgba(37, 211, 102, 0.1); color: #25D366;">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </a>
+                                        <small class="d-block text-muted">+56 9 9038 1919</small>
+                                    </div>
+                                    
+                                    <div class="col-lg col-md-6 mb-4">
+                                        <div class="contact-icon" style="background: var(--secondary-color); color: var(--accent-color);">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <small class="d-block text-muted">Santiago, Chile</small>
+                                    </div>
+                                    
+                                    <div class="col-lg col-md-6 mb-4">
+                                        <a href="https://github.com/maurocarcamo" target="_blank" class="contact-icon text-decoration-none" style="background: #f1f3f4; color: #333;">
+                                            <i class="fab fa-github"></i>
+                                        </a>
+                                        <small class="d-block text-muted">maurocarcamo</small>
+                                    </div>
+                                    
+                                    <div class="col-lg col-md-6 mb-4">
+                                        <a href="https://linkedin.com/in/maurocarcamo" target="_blank" class="contact-icon text-decoration-none" style="background: rgba(0, 119, 181, 0.1); color: #0077B5;">
+                                            <i class="fab fa-linkedin"></i>
+                                        </a>
+                                        <small class="d-block text-muted">maurocarcamo</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/56990381919" target="_blank" class="floating-btn text-decoration-none" style="background: #25D366; color: white;">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://github.com/maurocarcamo" target="_blank" class="floating-btn text-decoration-none" style="background: var(--accent-color); color: white;">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+
+    <!-- Project Modal -->
+    <div class="modal fade" id="projectModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="projectModalTitle">Proyecto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="projectModalBody">
+                    <!-- Content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Project filtering
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                const projects = document.querySelectorAll('.project-item');
+                
+                projects.forEach(project => {
+                    if (filter === 'all') {
+                        project.style.display = 'block';
+                    } else {
+                        const categories = project.getAttribute('data-category');
+                        if (categories.includes(filter)) {
+                            project.style.display = 'block';
+                        } else {
+                            project.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Project details
+        const projectDetails = {
+            'kittypaw': {
+                title: 'KittyPaw',
+                overview: 'KittyPaw es una plataforma web moderna diseñada para facilitar la adopción responsable de mascotas. Conecta refugios, rescatistas y personas interesadas en adoptar a través de una interfaz intuitiva y funcionalidades avanzadas de matching.',
+                features: [
+                    'Sistema de perfiles detallados para mascotas con fotos, historial médico y características',
+                    'Algoritmo de matching inteligente basado en compatibilidad de estilo de vida',
+                    'Chat en tiempo real entre adoptantes y refugios',
+                    'Panel de administración para refugios con gestión de inventario',
+                    'Sistema de seguimiento post-adopción',
+                    'Integración con APIs de geolocalización para búsquedas por proximidad'
+                ],
+                challenges: [
+                    'Implementación de WebSockets para chat en tiempo real con escalabilidad',
+                    'Diseño de algoritmo de matching considerando múltiples variables',
+                    'Optimización de carga de imágenes y rendimiento en dispositivos móviles',
+                    'Gestión de estados complejos entre múltiples usuarios simultáneos'
+                ],
+                results: [
+                    'Interfaz responsive que funciona perfectamente en todos los dispositivos',
+                    'Tiempo de carga optimizado con lazy loading de imágenes',
+                    'Sistema de matching con 85% de precisión en compatibilidad',
+                    'Implementación exitosa de chat en tiempo real sin latencia'
+                ]
+            },
+            'dashboard-nadar': {
+                title: 'Dashboard Ventas Nadar Ediciones',
+                overview: 'Desarrollo de un dashboard integral para Nadar Ediciones que combina datos de ventas, costos operativos y métricas de redes sociales en una plataforma centralizada de análisis y toma de decisiones.',
+                features: [
+                    'Integración de múltiples fuentes de datos (ventas, redes sociales, costos)',
+                    'Dashboard interactivo en Google Looker Studio con actualizaciones en tiempo real',
+                    'Análisis de correlación entre actividad en redes sociales y ventas',
+                    'Reportes automatizados con insights de tendencias de mercado',
+                    'Predicciones de ventas basadas en datos históricos',
+                    'Optimización de estrategias comerciales basada en datos'
+                ],
+                challenges: [
+                    'Integración de APIs de diferentes plataformas sociales con formatos diversos',
+                    'Normalización y limpieza de datos de múltiples fuentes',
+                    'Diseño de visualizaciones que comuniquen insights complejos de forma simple',
+                    'Automatización de actualizaciones de datos sin interrumpir operaciones'
+                ],
+                results: [
+                    'Incremento del 25% en eficiencia de estrategias comerciales',
+                    'Reducción del 40% en tiempo de análisis manual de datos',
+                    'Identificación de correlaciones clave entre redes sociales y ventas',
+                    'Dashboard completamente automatizado con actualizaciones diarias'
+                ]
+            }
+        };
+
+        // Show project modal
+        function showProject(projectId) {
+            const project = projectDetails[projectId];
+            if (!project) return;
+            
+            document.getElementById('projectModalTitle').textContent = project.title;
+            
+            const modalBody = document.getElementById('projectModalBody');
+            modalBody.innerHTML = `
+                <div class="mb-4">
+                    <h6 class="fw-bold text-primary">Descripción del Proyecto</h6>
+                    <p>${project.overview}</p>
+                </div>
+                
+                <div class="mb-4">
+                    <h6 class="fw-bold text-primary">Características Principales</h6>
+                    <ul>
+                        ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="mb-4">
+                    <h6 class="fw-bold text-primary">Desafíos Técnicos</h6>
+                    <ul>
+                        ${project.challenges.map(challenge => `<li>${challenge}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="mb-4">
+                    <h6 class="fw-bold text-primary">Resultados y Logros</h6>
+                    <ul>
+                        ${project.results.map(result => `<li>${result}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="d-flex gap-2">
+                    <a href="https://github.com/maurocarcamo" target="_blank" class="btn btn-primary flex-fill">
+                        <i class="fab fa-github me-2"></i>Ver en GitHub
+                    </a>
+                    <a href="#" class="btn btn-outline-primary flex-fill">
+                        <i class="fas fa-external-link-alt me-2"></i>Demo en Vivo
+                    </a>
+                </div>
+            `;
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

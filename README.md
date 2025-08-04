@@ -4,14 +4,19 @@ Portfolio profesional de Mauricio Cárcamo, Data Scientist y Sociólogo especial
 
 ## 🚀 Despliegue en GitHub Pages
 
-### Instrucciones para subir manualmente:
+### Instrucciones para subir manualmente (debido al error de Git):
 
-1. **Descarga todos los archivos** de este proyecto de Replit
-2. **Ve a tu repositorio** en GitHub: `https://github.com/Mauro-Carcamo/mauro-portafolio`
-3. **Arrastra y suelta** o sube los siguientes archivos/carpetas:
-   - `index.html` (archivo principal)
-   - `attached_assets/` (carpeta completa con certificados e imagen)
-   - `README.md` (este archivo)
+1. **Descarga estos archivos** de Replit:
+   - `index.html` (archivo principal - LISTO ✅)
+   - `attached_assets/` (carpeta completa con certificados e imagen - LISTO ✅)
+   - `README.md` (este archivo - LISTO ✅)
+
+2. **Ve a tu repositorio** GitHub: `https://github.com/Mauro-Carcamo/mauro-portafolio`
+
+3. **Sube los archivos**:
+   - Arrastra `index.html` a la raíz del repositorio
+   - Sube la carpeta completa `attached_assets/`
+   - Incluye `README.md` para documentación
 
 ### Configurar GitHub Pages:
 

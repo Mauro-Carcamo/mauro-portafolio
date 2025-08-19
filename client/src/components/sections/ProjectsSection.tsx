@@ -27,18 +27,18 @@ export default function ProjectsSection() {
     show: { opacity: 1, y: 0 }
   };
   
-  const getIcon = (iconName: string) => {
+  const getIcon = (iconName: string, size: string = "h-16 w-16") => {
     switch (iconName) {
       case "chart-line":
-        return <BarChart className="h-16 w-16" />;
+        return <BarChart className={size} />;
       case "book":
-        return <BookOpen className="h-16 w-16" />;
+        return <BookOpen className={size} />;
       case "music":
-        return <Music className="h-16 w-16" />;
+        return <Music className={size} />;
       case "target":
-        return <Target className="h-16 w-16" />;
+        return <Target className={size} />;
       default:
-        return <BarChart className="h-16 w-16" />;
+        return <BarChart className={size} />;
     }
   };
 
@@ -48,7 +48,7 @@ export default function ProjectsSection() {
         <SectionTitle>Proyectos</SectionTitle>
         
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -57,32 +57,37 @@ export default function ProjectsSection() {
           {PROJECTS.map((project, index) => (
             <motion.div 
               key={index}
-              className="project-card bg-white rounded-lg overflow-hidden shadow-lg border border-gray-200"
+              className="project-card bg-white rounded-lg overflow-hidden shadow-md border border-gray-200"
               variants={item}
               whileHover={{ 
-                y: -5,
-                boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                y: -3,
+                boxShadow: "0 8px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 8px -5px rgba(0, 0, 0, 0.04)"
               }}
             >
-              <div className="h-48 bg-secondary bg-opacity-10 flex items-center justify-center">
-                {getIcon(project.icon)}
+              <div className="h-32 bg-secondary bg-opacity-10 flex items-center justify-center">
+                {getIcon(project.icon, "h-10 w-10")}
               </div>
-              <div className="p-6">
-                <h3 className="font-semibold text-xl mb-2 text-primary">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <Badge key={techIndex} variant="secondary" className="bg-secondary/10 text-secondary border border-secondary/20">
+              <div className="p-4">
+                <h3 className="font-semibold text-lg mb-2 text-primary">{project.title}</h3>
+                <p className="text-gray-600 text-sm mb-3 line-clamp-2">{project.description}</p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                    <Badge key={techIndex} variant="secondary" className="bg-secondary/10 text-secondary border border-secondary/20 text-xs px-2 py-1">
                       {tech}
                     </Badge>
                   ))}
+                  {project.technologies.length > 3 && (
+                    <Badge variant="secondary" className="bg-gray-100 text-gray-600 text-xs px-2 py-1">
+                      +{project.technologies.length - 3}
+                    </Badge>
+                  )}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 text-sm">
                   <a 
                     href={`/proyecto/${project.slug}`} 
-                    className="inline-flex items-center gap-2 font-medium text-secondary hover:text-accent transition-colors"
+                    className="inline-flex items-center gap-1 font-medium text-secondary hover:text-accent transition-colors"
                   >
-                    <ExternalLink size={16} />
+                    <ExternalLink size={14} />
                     <span>Ver más</span>
                   </a>
                   <span className="text-gray-400">|</span>
@@ -90,9 +95,9 @@ export default function ProjectsSection() {
                     href={project.repoUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-medium text-gray-600 hover:text-secondary transition-colors"
+                    className="inline-flex items-center gap-1 font-medium text-gray-600 hover:text-secondary transition-colors"
                   >
-                    <Github size={16} />
+                    <Github size={14} />
                     <span>GitHub</span>
                   </a>
                 </div>

@@ -27,14 +27,8 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h1 className="font-bold text-4xl md:text-5xl mb-4">
-              {PERSONAL_INFO.name.split(" ")[0]} {PERSONAL_INFO.name.split(" ")[1]}
-            </h1>
-            <h2 className="font-medium text-2xl md:text-3xl mb-4 text-accent">{PERSONAL_INFO.title}</h2>
-            <p className="text-lg mb-6 max-w-2xl">{PERSONAL_INFO.shortBio}</p>
-            
-            {/* Social Media Links */}
-            <div className="flex justify-center md:justify-start gap-4 mb-8">
+            {/* Social Media Links - moved above name */}
+            <div className="flex justify-center md:justify-start gap-4 mb-4">
               <motion.a 
                 href="https://linkedin.com/in/mauricio-carcamo"
                 target="_blank"
@@ -65,38 +59,11 @@ export default function HeroSection() {
               </motion.a>
             </div>
             
-            <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <motion.a 
-                href="#projects" 
-                className="bg-accent hover:bg-opacity-80 text-white font-medium py-2 px-6 rounded-md transition-colors shadow-md"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector('#projects')?.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                  });
-                }}
-              >
-                Ver Proyectos
-              </motion.a>
-              <motion.a 
-                href="#contact" 
-                className="bg-transparent border-2 border-white hover:border-accent hover:text-accent text-white font-medium py-2 px-6 rounded-md transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector('#contact')?.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                  });
-                }}
-              >
-                Contacto
-              </motion.a>
-            </div>
+            <h1 className="font-bold text-4xl md:text-5xl mb-4">
+              {PERSONAL_INFO.name}
+            </h1>
+            <h2 className="font-medium text-2xl md:text-3xl mb-4 text-accent">{PERSONAL_INFO.title}</h2>
+            <p className="text-lg mb-6 max-w-2xl">{PERSONAL_INFO.shortBio}</p>
           </motion.div>
         </div>
       </div>

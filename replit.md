@@ -34,6 +34,11 @@ Portfolio profesional de Mauricio Cristian Cárcamo Díaz, especializado en Cien
   - Proyecto compilado y configurado correctamente para GitHub Pages deployment
   - Archivos de producción listos en la raíz: index.html, assets/, attached_assets/
   - Referencias de archivos corregidas para rutas relativas (./assets/ en lugar de /assets/)
+  - Eliminados botones de proyectos y contacto del hero section
+  - Cambiado nombre a "Mauricio Cárcamo" (forma más corta y profesional)
+  - Movidos iconos sociales arriba del nombre en hero section
+  - Reducido tamaño de tarjetas de proyectos con grid más compacto (4 columnas en desktop)
+  - Optimizada visualización de tecnologías mostrando solo las 3 primeras + contador
 
 - **2025-01-25**: Reestructurado proyecto para GitHub Pages deployment
   - Movido index.html a la raíz del proyecto

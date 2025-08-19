@@ -1,5 +1,5 @@
 export const PERSONAL_INFO = {
-  name: "Mauricio Cristian Cárcamo Díaz",
+  name: "Mauricio Cárcamo",
   title: "Data Scientist & Full Stack Developer",
   shortBio: "Sociólogo especializado en Ciencia de Datos y Desarrollo. Combino formación académica sólida con habilidades técnicas en análisis de datos, machine learning y programación.",
   address: "Pasaje Juan Moya Morales 668C, Ñuñoa, Santiago.",

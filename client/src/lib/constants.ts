@@ -50,7 +50,7 @@ export const PROJECTS = [
     technologies: ["React Native", "Node.js", "Django Rest ", "Socket.io"],
     repoUrl: "https://github.com/Mauro-Carcamo/kittypaw",
     icon: "target",
-    image: "/attached_assets/kittypaw.svg",
+    image: "/attached_assets/1.jpg",
     slug: "kittypaw"
   },
   {

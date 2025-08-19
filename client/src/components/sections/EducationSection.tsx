@@ -1,8 +1,7 @@
 import { SectionTitle } from "@/components/ui/section-title";
 import { EDUCATION } from "@/lib/constants";
 import { motion } from "framer-motion";
-import { Download, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { PDFViewer } from "@/components/ui/pdf-viewer";
 
 export default function EducationSection() {
   const container = {
@@ -49,20 +48,10 @@ export default function EducationSection() {
                   <div className="flex items-center gap-2 ml-4">
                     <span className="text-secondary font-medium">{edu.year}</span>
                     {edu.certificate && (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="h-8 px-2"
-                        onClick={() => {
-                          const link = document.createElement('a');
-                          link.href = edu.certificate.replace('@assets/', './client/src/assets/');
-                          link.target = '_blank';
-                          link.click();
-                        }}
-                      >
-                        <Download className="h-3 w-3 mr-1" />
-                        PDF
-                      </Button>
+                      <PDFViewer 
+                        pdfUrl={edu.certificate} 
+                        title={`${edu.degree} - ${edu.institution}`}
+                      />
                     )}
                   </div>
                 </div>
@@ -93,20 +82,10 @@ export default function EducationSection() {
                   <div className="flex items-center gap-2 ml-4">
                     <span className="text-secondary font-medium">{course.year}</span>
                     {course.certificate && (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="h-8 px-2"
-                        onClick={() => {
-                          const link = document.createElement('a');
-                          link.href = course.certificate.replace('@assets/', './client/src/assets/');
-                          link.target = '_blank';
-                          link.click();
-                        }}
-                      >
-                        <Download className="h-3 w-3 mr-1" />
-                        PDF
-                      </Button>
+                      <PDFViewer 
+                        pdfUrl={course.certificate} 
+                        title={`${course.name} - ${course.institution}`}
+                      />
                     )}
                   </div>
                 </div>

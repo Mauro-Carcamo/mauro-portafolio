@@ -25,17 +25,9 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="font-semibold text-xl mb-6 text-primary text-center">¿Trabajamos juntos?</h3>
-            
+            <h3 className="font-semibold text-xl mb-6 text-primary text-center">Abierto a modalidades de trabajo freelance y contractuales</h3>
+      
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex items-start space-x-4">
-                <MapPin className="text-secondary h-6 w-6 mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-medium text-lg">Ubicación</h4>
-                  <p className="text-gray-600">{PERSONAL_INFO.address}</p>
-                </div>
-              </div>
-              
               <div className="flex items-start space-x-4">
                 <Mail className="text-secondary h-6 w-6 mt-1 flex-shrink-0" />
                 <div>
@@ -107,21 +99,7 @@ export default function ContactSection() {
                   </a>
                 </div>
               </div>
-              
-              <div className="flex items-start space-x-4">
-                <Twitter className="text-secondary h-6 w-6 mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-medium text-lg">Twitter</h4>
-                  <a 
-                    href="https://twitter.com/mauricio_carcamo"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-secondary transition-colors"
-                  >
-                    @mauricio_carcamo
-                  </a>
-                </div>
-              </div>
+        
           </motion.div>
         </div>
       </div>

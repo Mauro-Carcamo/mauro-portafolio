@@ -22,6 +22,12 @@ Portfolio profesional de Mauricio Cristian Cárcamo Díaz, especializado en Cien
 ```
 
 ## Recent Changes
+- **2025-01-25**: Implementado visor de PDFs interactivo en sección educación
+  - Creado componente PDFViewer con modal/popup para visualizar documentos
+  - Reemplazado botón de descarga por "Ver PDF" con iframe integrado
+  - Agregados controles de descarga y cierre en el visor
+  - Aplicado a todas las certificaciones educativas
+
 - **2025-01-25**: Actualización de diseño masculino y sistema de proyectos individuales
   - Cambiada paleta de colores a esquema masculino: azul oscuro (#2C3E50), azul acero (#34495E) y verde tecnológico (#27AE60)
   - Agregado proyecto "Kittypaw!" como nuevo proyecto destacado

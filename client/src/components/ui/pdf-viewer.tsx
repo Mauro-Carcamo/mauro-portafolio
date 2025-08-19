@@ -66,11 +66,29 @@ export function PDFViewer({ pdfUrl, title, trigger }: PDFViewerProps) {
           </DialogHeader>
           
           <div className="flex-1 p-4">
-            <iframe
-              src={actualPdfUrl}
+            <object
+              data={actualPdfUrl}
+              type="application/pdf"
               className="w-full h-full border-0 rounded"
               title={title}
-            />
+            >
+              <div className="flex flex-col items-center justify-center h-full text-center">
+                <p className="mb-4">No se puede mostrar el PDF en el navegador.</p>
+                <Button
+                  onClick={() => window.open(actualPdfUrl, '_blank')}
+                  className="mb-2"
+                >
+                  Abrir en nueva pestaña
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={handleDownload}
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  Descargar PDF
+                </Button>
+              </div>
+            </object>
           </div>
         </DialogContent>
       </Dialog>

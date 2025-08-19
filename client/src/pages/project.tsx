@@ -1,8 +1,56 @@
 import { useParams, Link } from "wouter";
 import { PROJECTS } from "@/lib/constants";
 import { motion } from "framer-motion";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import React from "react";
+
+// Componente reutilizable para el carrusel de Kittypaw
+const KittypawCarousel = ({ showControls = true, className = "w-full h-full" }: { showControls?: boolean, className?: string }) => {
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
+
+  // Array de imágenes para hacer más fácil agregar más fotos
+  const kittypawImages = [
+    "/attached_assets/1.jpg",
+    "/attached_assets/1706536613867.jpg"
+  ];
+
+  return (
+    <Carousel 
+      className={className} 
+      opts={{ loop: true }}
+      plugins={[plugin.current]}
+    >
+      <CarouselContent>
+        {kittypawImages.map((imageSrc, index) => (
+          <CarouselItem key={index}>
+            <img 
+              src={imageSrc} 
+              alt={`Kittypaw - Vista ${index + 1}`}
+              className="w-full h-full object-contain"
+            />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      {showControls && (
+        <>
+          <CarouselPrevious className="left-2 h-8 w-8" />
+          <CarouselNext className="right-2 h-8 w-8" />
+        </>
+      )}
+    </Carousel>
+  );
+};
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -35,7 +83,7 @@ export default function ProjectPage() {
               Volver al portfolio
             </Button>
           </Link>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,7 +126,7 @@ export default function ProjectPage() {
                     La aplicación conecta refugios de animales, organizaciones de rescate y familias adoptantes a través de una 
                     plataforma intuitiva y moderna.
                   </p>
-                  
+
                   <h3 className="text-xl font-semibold mb-3">Características principales:</h3>
                   <ul className="list-disc list-inside mb-4 space-y-2">
                     <li><strong>Sistema de matching inteligente:</strong> Algoritmo que empareja mascotas con familias basado en estilo de vida, experiencia y preferencias.</li>
@@ -93,16 +141,21 @@ export default function ProjectPage() {
                     La aplicación ha facilitado más de 500 adopciones exitosas en su primer año, reduciendo el tiempo promedio 
                     de adopción de 6 semanas a 2 semanas y aumentando la tasa de adopción exitosa en un 40%.
                   </p>
+
+                  {/* Carrusel de imágenes para Kittypaw */}
+                  <div className="mt-8">
+                    <KittypawCarousel className="h-[400px] w-full max-w-xl mx-auto" />
+                  </div>
                 </div>
               )}
-              
+
               {project.slug === 'prediccion-mortalidad' && (
                 <div>
                   <p className="text-lg mb-4">
                     Este proyecto utiliza técnicas avanzadas de machine learning para analizar y predecir patrones de mortalidad 
                     en Chile, proporcionando insights valiosos para la planificación de políticas públicas de salud.
                   </p>
-                  
+
                   <h3 className="text-xl font-semibold mb-3">Metodología:</h3>
                   <ul className="list-disc list-inside mb-4 space-y-2">
                     <li>Análisis de datos históricos de mortalidad del MINSAL</li>
@@ -126,7 +179,7 @@ export default function ProjectPage() {
                     Información detallada del proyecto {project.title}. 
                   </p>
                   <p className="mb-4">
-                    Este espacio está disponible para agregar información específica sobre el proyecto, 
+                    Este espacio está disponible para agregar información específica del proyecto, 
                     incluyendo metodología, resultados, desafíos enfrentados y lecciones aprendidas.
                   </p>
                   <p className="text-gray-600">
@@ -146,7 +199,7 @@ export default function ProjectPage() {
                   Ver código en GitHub
                 </a>
               </Button>
-              
+
               {project.slug === 'kittypaw' && (
                 <Button 
                   variant="outline"

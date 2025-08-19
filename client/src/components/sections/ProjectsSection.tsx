@@ -2,12 +2,8 @@ import { SectionTitle } from "@/components/ui/section-title";
 import { PROJECTS } from "@/lib/constants";
 import { motion } from "framer-motion";
 import { 
-  BarChart, 
-  BookOpen, 
-  Music, 
   ExternalLink,
-  Github,
-  Target
+  Github
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
@@ -27,20 +23,7 @@ export default function ProjectsSection() {
     show: { opacity: 1, y: 0 }
   };
   
-  const getIcon = (iconName: string, size: string = "h-16 w-16") => {
-    switch (iconName) {
-      case "chart-line":
-        return <BarChart className={size} />;
-      case "book":
-        return <BookOpen className={size} />;
-      case "music":
-        return <Music className={size} />;
-      case "target":
-        return <Target className={size} />;
-      default:
-        return <BarChart className={size} />;
-    }
-  };
+  
 
   return (
     <section id="projects" className="py-16 bg-white">
@@ -64,8 +47,12 @@ export default function ProjectsSection() {
                 boxShadow: "0 8px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 8px -5px rgba(0, 0, 0, 0.04)"
               }}
             >
-              <div className="h-32 bg-secondary bg-opacity-10 flex items-center justify-center">
-                {getIcon(project.icon, "h-10 w-10")}
+              <div className="h-32 bg-secondary bg-opacity-10 flex items-center justify-center overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="p-4">
                 <h3 className="font-semibold text-lg mb-2 text-primary">{project.title}</h3>

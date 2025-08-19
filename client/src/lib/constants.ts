@@ -50,6 +50,7 @@ export const PROJECTS = [
     technologies: ["React Native", "Node.js", "Django rest ", "Socket.io"],
     repoUrl: "https://github.com/Mauro-Carcamo/kittypaw",
     icon: "target",
+    image: "/assets/1706536613867-pUEkIQV_.jpg",
     slug: "kittypaw"
   },
   {
@@ -58,6 +59,7 @@ export const PROJECTS = [
     technologies: ["Python", "Machine Learning", "Data Analysis"],
     repoUrl: "https://github.com/Mauro-Carcamo/Prediccion-Moratalidad-en-Chile",
     icon: "chart-line",
+    image: "/assets/1706536613867-pUEkIQV_.jpg",
     slug: "prediccion-mortalidad"
   },
   {
@@ -66,6 +68,7 @@ export const PROJECTS = [
     technologies: ["NLP", "Machine Learning", "Text Analysis"],
     repoUrl: "https://github.com/Mauro-Carcamo/Textos-Religiosos-y-Machine-Learning",
     icon: "book",
+    image: "/assets/1706536613867-pUEkIQV_.jpg",
     slug: "textos-religiosos-ml"
   },
   {
@@ -74,6 +77,7 @@ export const PROJECTS = [
     technologies: ["Web Scraping", "Python", "Text Analysis"],
     repoUrl: "https://github.com/Mauro-Carcamo/Del-60-al-2020-Web-Scraping-Letras-Canciones",
     icon: "music",
+    image: "/assets/1706536613867-pUEkIQV_.jpg",
     slug: "web-scraping-canciones"
   },
 ];

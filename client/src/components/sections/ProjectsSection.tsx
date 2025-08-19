@@ -45,7 +45,7 @@ export default function ProjectsSection() {
   return (
     <section id="projects" className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <SectionTitle>Proyectos</SectionTitle>
+        <SectionTitle>Exploraciones</SectionTitle>
         
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"

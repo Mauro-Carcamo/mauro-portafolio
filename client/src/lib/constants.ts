@@ -1,8 +1,8 @@
 export const PERSONAL_INFO = {
   name: "Mauricio Cárcamo",
-  title: "Data Scientist & Full Stack Developer",
+  title: "",
   shortBio: "Sociólogo especializado en Ciencia de Datos y Desarrollo. Combino formación académica sólida con habilidades técnicas en análisis de datos, machine learning y programación.",
-  address: "Pasaje Juan Moya Morales 668C, Ñuñoa, Santiago.",
+  address: "Ñuñoa, Santiago de Chile.",
   birthDate: "5 de octubre de 1989.",
   nationality: "Chileno",
   phone: "+56990381919",
@@ -46,8 +46,8 @@ export const SKILLS = {
 export const PROJECTS = [
   {
     title: "Kittypaw!",
-    description: "Aplicación móvil para adopción de mascotas con sistema de matching inteligente y chat en tiempo real.",
-    technologies: ["React Native", "Node.js", "MongoDB", "Socket.io"],
+    description: "Dispositivo IoT para monitoreo de alimento y agua de mascotas.",
+    technologies: ["React Native", "Node.js", "Django rest ", "Socket.io"],
     repoUrl: "https://github.com/Mauro-Carcamo/kittypaw",
     icon: "target",
     slug: "kittypaw"

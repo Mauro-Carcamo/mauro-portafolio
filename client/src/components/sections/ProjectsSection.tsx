@@ -51,7 +51,7 @@ export default function ProjectsSection() {
                 <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full ${project.slug === 'kittypaw' ? 'object-contain p-4' : 'object-cover'}`}
                 />
               </div>
               <div className="p-4">

@@ -41,18 +41,18 @@ export default function ProjectPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col lg:flex-row lg:items-center lg:justify-center lg:gap-12 gap-8"
+            className="flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-8 gap-6"
           >
-            <div className="flex-1 text-center lg:text-left">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 mx-auto lg:mx-0 max-w-fit">{project.title}</h1>
-              <p className="text-xl text-gray-200 mx-auto lg:mx-0 max-w-3xl">{project.description}</p>
+            <div className="flex-1 text-center lg:text-left lg:pr-4">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>
+              <p className="text-xl text-gray-200 max-w-2xl lg:max-w-none">{project.description}</p>
             </div>
             
             {/* Carrusel al costado derecho para Kittypaw */}
             {project.slug === 'kittypaw' && (
-              <div className="w-full lg:w-96 h-72 flex justify-center lg:justify-end">
+              <div className="w-full lg:w-80 h-56 flex justify-center">
                 <KittypawCarousel 
-                  className="h-full w-full max-w-sm lg:max-w-none bg-white/10 backdrop-blur-sm rounded-lg shadow-lg" 
+                  className="h-full w-full bg-white/10 backdrop-blur-sm rounded-lg shadow-lg" 
                   showControls={true}
                 />
               </div>

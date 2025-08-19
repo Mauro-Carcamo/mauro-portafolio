@@ -41,20 +41,26 @@ export default function ProjectPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col lg:flex-row lg:items-center lg:gap-8 gap-6"
+            className="max-w-6xl mx-auto"
           >
-            <div className="flex-1 text-center lg:text-left lg:max-w-2xl">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>
-              <p className="text-xl text-gray-200">{project.description}</p>
-            </div>
-            
-            {/* Carrusel al costado derecho para Kittypaw */}
-            {project.slug === 'kittypaw' && (
-              <div className="w-full lg:w-64 h-40 flex justify-center lg:flex-shrink-0">
-                <KittypawCarousel 
-                  className="h-full w-full bg-white/10 backdrop-blur-sm rounded-lg shadow-lg" 
-                  showControls={true}
-                />
+            {project.slug === 'kittypaw' ? (
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center gap-8">
+                <div className="flex-1 text-center lg:text-left lg:max-w-2xl">
+                  <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>
+                  <p className="text-xl text-gray-200">{project.description}</p>
+                </div>
+                
+                <div className="w-full lg:w-80 h-48 flex justify-center">
+                  <KittypawCarousel 
+                    className="h-full w-full bg-white/10 backdrop-blur-sm rounded-lg shadow-lg" 
+                    showControls={true}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="text-center">
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>
+                <p className="text-xl text-gray-200 max-w-3xl mx-auto">{project.description}</p>
               </div>
             )}
           </motion.div>

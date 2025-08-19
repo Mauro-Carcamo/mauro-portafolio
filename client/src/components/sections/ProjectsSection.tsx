@@ -6,6 +6,13 @@ import {
   Github
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export default function ProjectsSection() {
   const container = {
@@ -48,11 +55,34 @@ export default function ProjectsSection() {
               }}
             >
               <div className="h-32 bg-secondary bg-opacity-10 flex items-center justify-center overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className={`w-full h-full ${project.slug === 'kittypaw' ? 'object-contain p-4' : 'object-cover'}`}
-                />
+                {project.slug === 'kittypaw' ? (
+                  <Carousel className="w-full h-full" opts={{ loop: true }}>
+                    <CarouselContent>
+                      <CarouselItem>
+                        <img 
+                          src="/attached_assets/1.jpg" 
+                          alt={`${project.title} - Vista 1`}
+                          className="w-full h-full object-contain p-4"
+                        />
+                      </CarouselItem>
+                      <CarouselItem>
+                        <img 
+                          src="/attached_assets/1706536613867.jpg" 
+                          alt={`${project.title} - Vista 2`}
+                          className="w-full h-full object-contain p-4"
+                        />
+                      </CarouselItem>
+                    </CarouselContent>
+                    <CarouselPrevious className="left-1 h-6 w-6" />
+                    <CarouselNext className="right-1 h-6 w-6" />
+                  </Carousel>
+                ) : (
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </div>
               <div className="p-4">
                 <h3 className="font-semibold text-lg mb-2 text-primary">{project.title}</h3>

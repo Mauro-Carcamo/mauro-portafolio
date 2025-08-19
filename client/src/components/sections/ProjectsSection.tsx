@@ -50,7 +50,9 @@ export default function ProjectsSection() {
             >
               <div className="h-32 bg-secondary bg-opacity-10 flex items-center justify-center overflow-hidden">
                 {project.slug === 'kittypaw' ? (
-                  <KittypawCarousel />
+                  <div className="w-full h-full flex items-center justify-center">
+                    <KittypawCarousel className="w-full h-full" />
+                  </div>
                 ) : (
                 <img 
                     src={project.image} 

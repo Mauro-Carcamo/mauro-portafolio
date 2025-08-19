@@ -36,11 +36,11 @@ export const KittypawCarousel = ({
     >
       <CarouselContent>
         {kittypawImages.map((imageSrc, index) => (
-          <CarouselItem key={index}>
+          <CarouselItem key={index} className="flex items-center justify-center">
             <img 
               src={imageSrc} 
               alt={`Kittypaw - Vista ${index + 1}`}
-              className="w-full h-full object-contain p-4"
+              className="w-full h-full object-contain p-2"
             />
           </CarouselItem>
         ))}

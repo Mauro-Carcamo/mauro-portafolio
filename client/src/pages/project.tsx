@@ -44,13 +44,13 @@ export default function ProjectPage() {
             className="max-w-6xl mx-auto"
           >
             {project.slug === 'kittypaw' ? (
-              <div className="flex flex-col items-center text-center space-y-6">
+              <div className="flex flex-col items-center text-center space-y-8">
                 <div className="max-w-4xl">
                   <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>
                   <p className="text-xl text-gray-200">{project.description}</p>
                 </div>
                 
-                <div className="w-80 h-44 mx-auto">
+                <div className="w-80 h-44 mx-auto mt-8">
                   <KittypawCarousel 
                     className="h-full w-full bg-white/10 backdrop-blur-sm rounded-lg shadow-lg" 
                     showControls={true}

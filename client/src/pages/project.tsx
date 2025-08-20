@@ -44,22 +44,24 @@ export default function ProjectPage() {
             className="max-w-6xl mx-auto"
           >
             {project.slug === 'kittypaw' ? (
-              <div className="flex flex-col min-h-[70vh] py-8">
-                <div className="flex-1 flex flex-col items-center justify-center text-center mb-12">
-                  <div className="max-w-4xl">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">{project.title}</h1>
-                    <p className="text-xl text-gray-200">{project.description}</p>
-                  </div>
+              <div className="flex flex-col md:flex-row min-h-[70vh] py-8 items-center gap-12">
+
+                {/* Texto */}
+                <div className="flex-1 flex flex-col justify-center text-center md:text-left">
+                  <h1 className="text-4xl md:text-5xl font-bold mb-6">{project.title}</h1>
+                  <p className="text-xl text-gray-200">{project.description}</p>
                 </div>
-                
-                <div className="flex-1 flex items-center justify-center mt-8">
-                  <div className="w-80 h-44">
+
+                {/* Carrusel */}
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="w-[28rem] max-w-full aspect-video">
                     <KittypawCarousel 
                       className="h-full w-full bg-white/10 backdrop-blur-sm rounded-lg shadow-lg" 
                       showControls={true}
                     />
                   </div>
                 </div>
+
               </div>
             ) : (
               <div className="text-center">
@@ -68,8 +70,6 @@ export default function ProjectPage() {
               </div>
             )}
           </motion.div>
-        </div>
-      </div>
 
       {/* Content */}
       <div className="container mx-auto px-4 py-16">

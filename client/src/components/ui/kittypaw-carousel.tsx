@@ -16,10 +16,10 @@ interface KittypawCarouselProps {
 
 export const KittypawCarousel = ({ 
   showControls = true, 
-  className = "w-full h-full" 
+  className = "w-full h-64" 
 }: KittypawCarouselProps) => {
   const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
+    Autoplay({ delay: 7000, stopOnInteraction: true })
   );
 
   // Array de imágenes para hacer más fácil agregar más fotos
@@ -49,7 +49,7 @@ export const KittypawCarousel = ({
             <img 
               src={imageSrc} 
               alt={`Kittypaw - Vista ${index + 1}`}
-              className="w-full h-full object-contain bg-gray-100 rounded-lg p-1"
+              className="w-full h-64 object-contain bg-gray-100 rounded-lg p-1"
             />
           </CarouselItem>
         ))}

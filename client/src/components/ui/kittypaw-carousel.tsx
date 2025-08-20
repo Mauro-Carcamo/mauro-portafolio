@@ -25,7 +25,16 @@ export const KittypawCarousel = ({
   // Array de imágenes para hacer más fácil agregar más fotos
   const kittypawImages = [
     "/attached_assets/1.jpg",
-    "/attached_assets/1706536613867.jpg"
+    "/attached_assets/2.jpg",
+    "/attached_assets/3.jpg",
+    "/attached_assets/4.jpg",
+    "/attached_assets/5.jpg",
+    "/attached_assets/6.jpg",
+    "/attached_assets/7.jpg",
+    "/attached_assets/8.jpg",
+    "/attached_assets/9.jpg",
+    "/attached_assets/10.jpg",
+
   ];
 
   return (

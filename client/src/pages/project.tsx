@@ -50,7 +50,7 @@ export default function ProjectPage() {
                   <p className="text-xl text-gray-200">{project.description}</p>
                 </div>
                 
-                <div className="w-96 h-56 mx-auto">
+                <div className="w-80 h-44 mx-auto">
                   <KittypawCarousel 
                     className="h-full w-full bg-white/10 backdrop-blur-sm rounded-lg shadow-lg" 
                     showControls={true}

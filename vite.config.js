@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/mauro-portafolio/', // IMPORTANTE: Cambiar al nombre de tu repositorio
+  base: '/mauro-portafolio/', // Cambia esto al nombre de tu repositorio
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

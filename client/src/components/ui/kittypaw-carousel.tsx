@@ -49,7 +49,7 @@ export const KittypawCarousel = ({
             <img 
               src={imageSrc} 
               alt={`Kittypaw - Vista ${index + 1}`}
-              className="w-full h-full object-contain p-2"
+              className="w-full h-full object-cover rounded-lg"
             />
           </CarouselItem>
         ))}

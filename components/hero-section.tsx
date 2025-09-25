@@ -6,7 +6,7 @@ import { ArrowDown, Download } from "lucide-react"
 export function HeroSection() {
   const handleDownloadCV = () => {
     const link = document.createElement("a")
-    link.href = "/cv-mauricio-carcamo.pdf"
+    link.href = "/documents/cv-mauricio-carcamo.pdf"
     link.download = "CV_Mauricio_Carcamo.pdf"
     link.click()
   }

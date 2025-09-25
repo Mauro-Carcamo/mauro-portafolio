@@ -1,3 +1,4 @@
+
 # Mauricio Cárcamo - Portafolio Profesional
 
 Este es el portafolio profesional de Mauricio Cárcamo, un sociólogo especializado en Ciencia de Datos y Desarrollo Full Stack. El sitio web está diseñado para mostrar su experiencia, proyectos, habilidades y formación académica, con un enfoque en la creación de soluciones innovadoras utilizando Machine Learning y tecnologías modernas.

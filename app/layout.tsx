@@ -5,9 +5,12 @@ import { WhatsAppButton } from "@/components/whatsapp-button"
 import { ThemeProvider } from "next-themes"
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
+  title: "Portafolio Mauricio Cárcamo",
+  description: "Portafolio profesional de Mauricio Cárcamo, sociólogo especializado en Ciencia de Datos y Desarrollo Full Stack.",
   generator: "v0.app",
+  icons: {
+    icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1706536613867.jpg-H1gm0kFpkJrdpxuyJIShGjRoIaEBYS.jpeg",
+  },
 }
 
 export default function RootLayout({

@@ -22,7 +22,7 @@ export function ProjectsSection() {
     {
       title: "Kittypaw!",
       description:
-        "Aplicación móvil para adopción de mascotas con sistema de matching inteligente que conecta adoptantes con refugios de animales.",
+        "Plataforma tecnológica integral para la gestión de mascotas, combinando hardware (IoT), software (app/web) e inteligencia artificial (IA) para monitorear y mejorar su bienestar.",
       image: "/pet-adoption-app.png",
       images: kittypawImages, // Added images array for KittyPaw project
       technologies: ["React Native", "Node.js", "MongoDB", "Machine Learning"],
@@ -91,7 +91,7 @@ export function ProjectsSection() {
                     <img
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-48 object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                   )}
                   {project.featured && <Badge className="absolute top-4 left-4 bg-primary z-10">Destacado</Badge>}

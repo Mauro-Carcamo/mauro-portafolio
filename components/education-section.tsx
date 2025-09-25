@@ -13,7 +13,6 @@ export function EducationSection() {
       institution: "Universidad Central de Chile",
       period: "2015",
       status: "completed",
-      description: "Licenciatura en Sociología con enfoque en investigación social y análisis cuantitativo.",
       certificate: "/documents/titulo-sociologo.pdf",
     },
   ];
@@ -24,7 +23,6 @@ export function EducationSection() {
       institution: "Universidad Autónoma",
       period: "2025",
       status: "completed",
-      description: "Especialización avanzada en técnicas de IA y machine learning aplicado.",
       certificate: "/documents/20250923151700_abd3a728-083d-4b46-9839-a19400f319ba.pdf",
     },
     {
@@ -32,7 +30,6 @@ export function EducationSection() {
       institution: "Universidad Católica de Chile",
       period: "2022",
       status: "completed",
-      description: "Fundamentos de ciencia de datos, estadística y análisis predictivo.",
       certificate: "/documents/diplomado-data-science.pdf",
     },
   ];
@@ -43,7 +40,6 @@ export function EducationSection() {
       institution: "Corfo Talento Digital",
       period: "2024",
       status: "completed",
-      description: "Programa intensivo en análisis de datos, machine learning y visualización.",
       certificate: "/documents/bootcamp-data-science.pdf",
     },
     {
@@ -51,7 +47,6 @@ export function EducationSection() {
       institution: "Corfo Talento Digital",
       period: "2023",
       status: "completed",
-      description: "Desarrollo web completo con Python, Django, React y bases de datos.",
       certificate: "/documents/bootcamp-full-stack-python.pdf",
     },
     {
@@ -59,7 +54,6 @@ export function EducationSection() {
       institution: "INCO Academy (LinkedIn)",
       period: "2024",
       status: "completed",
-      description: "Curso online de habilidades digitales verdes. 24 horas de estudio.",
       certificate: "/documents/green-digital-skills.pdf",
     },
     {
@@ -67,7 +61,6 @@ export function EducationSection() {
       institution: "Escuela Digital",
       period: "2024",
       status: "completed",
-      description: "Fundamentos de ciencia de datos y análisis estadístico.",
       certificate: "/documents/intro-data-science.pdf",
     },
     {
@@ -75,7 +68,6 @@ export function EducationSection() {
       institution: "Instituto Nacional de Estadísticas (INE)",
       period: "2023",
       status: "completed",
-      description: "Técnicas avanzadas de NLP aplicadas en R para análisis de texto.",
       certificate: null,
     },
     {
@@ -83,7 +75,6 @@ export function EducationSection() {
       institution: "Instituto Nacional de Estadísticas (INE)",
       period: "2023",
       status: "completed",
-      description: "Mejores prácticas para investigación reproducible con R.",
       certificate: null,
     },
     {
@@ -91,7 +82,6 @@ export function EducationSection() {
       institution: "Instituto Nacional de Estadísticas (INE)",
       period: "2023",
       status: "completed",
-      description: "Desarrollo de aplicaciones web interactivas con Shiny en R.",
       certificate: null,
     },
     {
@@ -99,7 +89,6 @@ export function EducationSection() {
       institution: "Pontificia Universidad Católica de Chile (Coursera)",
       period: "2022",
       status: "completed",
-      description: "Fundamentos de minería de datos y técnicas de análisis predictivo.",
       certificate: "/documents/mineria-de-datos-coursera.pdf",
     },
     {
@@ -107,7 +96,6 @@ export function EducationSection() {
       institution: "Universidad Católica de Chile",
       period: "2022",
       status: "completed",
-      description: "Metodologías ágiles y lean para gestión de proyectos. Nota: 6,2",
       certificate: "/documents/gestion-proyectos-agil.pdf",
     },
     {
@@ -115,7 +103,6 @@ export function EducationSection() {
       institution: "Universidad Católica de Chile",
       period: "2021",
       status: "completed",
-      description: "Técnicas avanzadas para gestión del proceso de capacitación. Nota: 5,7",
       certificate: "/documents/gestion-capacitacion.pdf",
     },
   ];
@@ -135,53 +122,52 @@ export function EducationSection() {
       <ul className="space-y-6">
         {items.map((edu, index) => (
           <li key={index} className="pb-6 border-b border-muted/50 last:border-b-0">
-            <div className="flex flex-col sm:flex-row justify-between">
-              <div className="flex-grow">
-                <h4 className="text-lg font-semibold text-primary">{edu.title}</h4>
-                <p className="text-sm text-muted-foreground font-medium">{edu.institution}</p>
-                <p className="text-sm text-muted-foreground mt-2 mb-3">{edu.description}</p>
-              </div>
-              <div className="flex flex-col items-start sm:items-end sm:text-right flex-shrink-0 sm:ml-4 mt-3 sm:mt-0">
-                <div className="flex items-center gap-2 mb-3">
-                  <Badge variant={edu.status === "current" ? "default" : "secondary"} className="text-xs">
-                    <Calendar className="w-3 h-3 mr-1" />
-                    {edu.period}
-                  </Badge>
-                  {edu.status === "current" && (
-                    <Badge variant="outline" className="text-xs border-primary text-primary">
-                      En Curso
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+              <div className="flex-grow mb-2 sm:mb-0">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                  <h4 className="text-lg font-semibold text-primary mb-1 sm:mb-0">{edu.title}</h4>
+                  <div className="flex items-center gap-2 flex-wrap sm:ml-4">
+                    <Badge variant={edu.status === "current" ? "default" : "secondary"} className="text-xs">
+                      <Calendar className="w-3 h-3 mr-1" />
+                      {edu.period}
                     </Badge>
-                  )}
-                </div>
-                {edu.certificate && (
-                  <div className="flex gap-2 mt-auto">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button variant="outline" size="sm" className="text-xs">
-                          <Eye className="w-3 h-3 mr-1" />
-                          Ver
+                    {edu.status === "current" && (
+                      <Badge variant="outline" className="text-xs border-primary text-primary">
+                        En Curso
+                      </Badge>
+                    )}
+                    {edu.certificate && (
+                      <>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="outline" size="sm" className="text-xs">
+                              <Eye className="w-3 h-3 mr-1" />
+                              Ver
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-4xl h-[90vh]">
+                            <DialogHeader>
+                              <DialogTitle>{edu.title}</DialogTitle>
+                            </DialogHeader>
+                            <div className="h-full">
+                              <iframe src={edu.certificate} width="100%" height="100%" />
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleDownloadCertificate(edu.certificate!, edu.title)}
+                          className="text-xs"
+                        >
+                          <Download className="w-3 h-3 mr-1" />
+                          Descargar
                         </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-4xl h-[90vh]">
-                        <DialogHeader>
-                          <DialogTitle>{edu.title}</DialogTitle>
-                        </DialogHeader>
-                        <div className="h-full">
-                          <iframe src={edu.certificate} width="100%" height="100%" />
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleDownloadCertificate(edu.certificate!, edu.title)}
-                      className="text-xs"
-                    >
-                      <Download className="w-3 h-3 mr-1" />
-                      Descargar
-                    </Button>
+                      </>
+                    )}
                   </div>
-                )}
+                </div>
+                <p className="text-sm text-muted-foreground font-medium mt-1">{edu.institution}</p>
               </div>
             </div>
           </li>

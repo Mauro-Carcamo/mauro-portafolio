@@ -34,11 +34,11 @@ export function ImageCarousel({ images, alt, autoPlay = false, autoPlayInterval 
 
   return (
     <div className="relative w-full max-w-lg mx-auto">
-      <div className="relative aspect-square overflow-hidden rounded-lg bg-muted shadow-lg">
+      <div className="relative h-full rounded-lg bg-muted shadow-lg">
         <img
           src={images[currentIndex] || "/placeholder.svg"}
           alt={`${alt} - Imagen ${currentIndex + 1}`}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
 
         {images.length > 1 && (

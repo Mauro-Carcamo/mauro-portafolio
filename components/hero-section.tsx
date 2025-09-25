@@ -69,7 +69,7 @@ export function HeroSection() {
                 </svg>
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/mauricio-carcamo-diaz/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#0077B5] hover:text-[#005885] transition-colors duration-200"

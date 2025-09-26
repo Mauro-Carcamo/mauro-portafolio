@@ -133,11 +133,40 @@ Este es el portafolio profesional de Mauricio Cárcamo, un sociólogo especializ
 
 ## Funcionamiento Verificado
 
-Para verificar el funcionamiento, se intentó iniciar el servidor de desarrollo con `pnpm dev`. Sin embargo, la ejecución fue cancelada por el usuario. Para una verificación completa, sería necesario ejecutar el comando `pnpm dev` y acceder al sitio web en el puerto indicado (generalmente `localhost:3000`) para interactuar con todas las secciones y funcionalidades.
+Se han implementado las siguientes mejoras y correcciones:
 
-**Próximos Pasos:**
+*   **Sección de Educación:**
+    *   Se reestructuró la sección para separar "Título Profesional", "Diplomados" y "Cursos y Bootcamps".
+    *   Se eliminaron las descripciones de cada entrada para una visualización más limpia y alineada.
+    *   Se actualizó el "Diplomado en Inteligencia Artificial" a estado "completado" con su certificado.
+    *   Se reordenaron los "Cursos y Bootcamps" para mostrar los bootcamps primero.
+    *   Se ajustó el diseño para alinear el título, la fecha y los botones "Ver/Descargar" en la misma línea, con la institución debajo.
 
-1.  **Verificar el funcionamiento:** Iniciar el servidor de desarrollo y navegar por el sitio para asegurar que todas las secciones y enlaces funcionan correctamente.
-2.  **Revisar el CV:** Asegurarse de que el archivo `cv-mauricio-carcamo.pdf` esté presente en la carpeta `public` y sea accesible.
-3.  **Probar el formulario de contacto:** Verificar que el formulario de contacto envíe los datos correctamente (actualmente solo los imprime en consola).
-4.  **Revisar enlaces externos:** Asegurarse de que todos los enlaces a GitHub, LinkedIn, correo electrónico y WhatsApp sean correctos y funcionen.
+*   **Sección de Proyectos:**
+    *   Se corrigió la visualización de las imágenes en las tarjetas de proyectos y en el carrusel de Kittypaw! para que se muestren completas (usando `object-contain`).
+    *   Se actualizó la descripción del proyecto "Kittypaw!" en la sección principal con un resumen conciso.
+    *   Se actualizó la página detallada del proyecto "Kittypaw!" (`/projects/kittypaw`) con la descripción completa, tecnologías y características detalladas, y se incrustó un video de YouTube.
+
+*   **Configuración General del Sitio:**
+    *   Se cambió el título de la página a "Portafolio Mauricio Cárcamo".
+    *   Se configuró el favicon utilizando la URL externa de la imagen de perfil proporcionada.
+
+*   **Iconos de Tecnologías:**
+    *   Se creó un componente `TechnologyIcon` para mostrar logos de tecnologías.
+    *   Se reemplazaron los badges de texto por iconos (imágenes JPG/PNG) en las secciones de proyectos y habilidades, utilizando los archivos proporcionados por el usuario.
+    *   Se eliminó la carpeta temporal "iconos para reemplazar".
+
+**Próximos Pasos (Según el Roadmap Mejorado):**
+
+1.  **Verificación de la Funcionalidad Principal:**
+    *   Iniciar el servidor de desarrollo (`pnpm dev`).
+    *   Navegar por todas las secciones (Inicio, Acerca de mí, Proyectos, Habilidades, Experiencia, Educación, Contacto).
+    *   Asegurar que todos los enlaces internos y la navegación funcionen correctamente.
+    *   **Acción:** Inspeccionar visualmente la sección de Educación para confirmar la categorización, el orden y la alineación correctos.
+    *   **Verificar la visualización de imágenes en proyectos:** Asegurar que las imágenes en las tarjetas de proyectos y en el carrusel de Kittypaw! se muestren completas y sin recortes.
+    *   **Confirmar el favicon y el título de la página:** Verificar que el favicon sea el deseado y que el título de la página sea "Portafolio Mauricio Cárcamo".
+2.  **Contenido Preciso y Pulido:**
+    *   **Revisar y corregir todo el texto:** Realizar una revisión exhaustiva de descripciones, títulos y declaraciones personales para detectar errores gramaticales, ortográficos y de claridad. Mantener un tono profesional y consistente.
+    *   **Validar enlaces externos:** Confirmar que todos los enlaces a GitHub, LinkedIn, correo electrónico y WhatsApp son correctos y funcionales.
+    *   **CV Download:** Verificar que el archivo `cv-mauricio-carcamo.pdf` sea accesible y se descargue correctamente.
+    *   **Contact Form Functionality:** Probar el envío del formulario. (Actualmente solo imprime en consola; considerar integrar un servicio de backend para el envío real de correos electrónicos en la Fase 3).

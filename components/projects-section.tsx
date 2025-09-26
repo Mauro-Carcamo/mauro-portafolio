@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ImageCarousel } from "@/components/image-carousel"
+import { TechnologyIcon } from "@/components/technology-icon"
 import Link from "next/link"
 
 export function ProjectsSection() {
@@ -104,11 +105,12 @@ export function ProjectsSection() {
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground">{project.description}</p>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 items-center">
                     {project.technologies.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="secondary">
-                        {tech}
-                      </Badge>
+                      <div key={techIndex} className="flex items-center gap-1 bg-secondary text-secondary-foreground rounded-md px-2 py-1 text-xs font-semibold">
+                        <TechnologyIcon techName={tech} size={16} />
+                        <span>{tech}</span>
+                      </div>
                     ))}
                   </div>
                 </CardContent>

@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { TechnologyIcon } from "@/components/technology-icon"
 
 export function SkillsSection() {
   const skillCategories = [
@@ -72,7 +73,10 @@ export function SkillsSection() {
                 {category.skills.map((skill, skillIndex) => (
                   <div key={skillIndex} className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">{skill.name}</span>
+                      <div className="flex items-center gap-2">
+                        <TechnologyIcon techName={skill.name} size={20} />
+                        <span className="text-sm font-medium">{skill.name}</span>
+                      </div>
                       <span className="text-xs text-muted-foreground">{skill.level}%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">

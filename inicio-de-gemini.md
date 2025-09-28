@@ -65,8 +65,8 @@ Este directorio contiene todos los archivos estáticos que se sirven públicamen
 ## 7. Registro de Trabajo
 
 *   **Inicio de Trabajo:** domingo, 28 de septiembre de 2025, 10:00 AM
-*   **Fin de Trabajo:** domingo, 28 de septiembre de 2025, 12:30 PM
-*   **Resumen:** Se actualizó el plan de trabajo para el dashboard de mortalidad. Se descartó el plan anterior y se adoptó un nuevo enfoque para integrar la aplicación Shiny existente.
+*   **Fin de Trabajo:** domingo, 28 de septiembre de 2025, 13:15 PM
+*   **Resumen:** Se completó la integración y limpieza del dashboard de mortalidad. Se corrigió la aplicación Shiny, se solucionó un error de compilación en Next.js, se incrustó el dashboard en la página del proyecto y se eliminaron archivos y carpetas obsoletos.
 
 ## 8. Workflow: Dashboard de Mortalidad en Chile (Nuevo Plan)
 
@@ -75,14 +75,14 @@ Este directorio contiene todos los archivos estáticos que se sirven públicamen
 2.  Identificar la aplicación principal de Shiny (`app.py`).
 3.  Confirmar las dependencias en `requirements.txt`.
 
-**Fase 2: Integración del Dashboard (En Progreso)**
-1.  Proporcionar instrucciones para ejecutar la aplicación Shiny.
+**Fase 2: Integración del Dashboard (Completada)**
+1.  Corregir y proporcionar instrucciones para ejecutar la aplicación Shiny.
 2.  Modificar la página del proyecto (`mortality-prediction/page.tsx`) para incrustar el dashboard de Shiny mediante un `iframe`.
-3.  Ajustar el botón "Ver Dashboard" para que muestre el `iframe` en una nueva pestaña o modal.
+3.  Ajustar el botón "Ver Dashboard" para mostrar y ocultar el `iframe`.
 
-**Fase 3: Limpieza y Finalización (Pendiente)**
-1.  Eliminar la carpeta anterior (`Moratalidad Chile 1997-2019`).
-2.  Eliminar el servidor de API (`dashboard_server.py`) y el componente de dashboard (`mortality-dashboard.tsx`) creados anteriormente.
+**Fase 3: Limpieza y Finalización (Completada)**
+1.  Eliminar la carpeta duplicada (`.../mortality-prediction/Moratalidad Chile 1997-2019 correcto`).
+2.  Verificar y eliminar los archivos del plan anterior que ya no eran necesarios.
 
 ## Orden de Lectura Recomendado
 

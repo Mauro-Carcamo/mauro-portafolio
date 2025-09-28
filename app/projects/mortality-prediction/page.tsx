@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ExternalLink, Github, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
-import { MortalityDashboard } from "@/components/mortality-dashboard"
 
 const PythonIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 80 80">
@@ -30,6 +29,7 @@ export default function MortalityPredictionProject() {
     "Jupyter",
     "Data Analysis",
     "Statistical Modeling",
+    "Shiny"
   ]
 
   const features = [
@@ -38,7 +38,7 @@ export default function MortalityPredictionProject() {
     "Visualizaciones interactivas de tendencias temporales",
     "Análisis de factores socioeconómicos influyentes",
     "Validación estadística de modelos predictivos",
-    "Dashboard de resultados y métricas de rendimiento",
+    "Dashboard interactivo para explorar los datos y predicciones",
   ]
 
   return (
@@ -61,26 +61,39 @@ export default function MortalityPredictionProject() {
               </p>
 
               <div className="flex gap-4 mb-8">
-                <Button asChild>
-                  <a href="#" target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Ver Demo
-                  </a>
-                </Button>
                 <Button variant="outline" asChild>
                   <a href="https://github.com/Mauro-Carcamo" target="_blank" rel="noopener noreferrer">
                     <Github className="h-4 w-4 mr-2" />
                     Ver Código
                   </a>
                 </Button>
-                <Button variant="outline" onClick={() => setShowDashboard(!showDashboard)}>
+                <Button onClick={() => setShowDashboard(!showDashboard)}>
                   <PythonIcon />
-                  Ver Dashboard
+                  {showDashboard ? "Ocultar Dashboard" : "Ver Dashboard Interactivo"}
                 </Button>
               </div>
             </div>
 
-            {showDashboard && <MortalityDashboard />}
+            {showDashboard && (
+              <Card className="w-full">
+                <CardHeader>
+                  <CardTitle>Dashboard Interactivo de Mortalidad</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    El siguiente dashboard es una aplicación Shiny ejecutándose localmente. Asegúrate de haber iniciado la aplicación para poder visualizarla.
+                  </p>
+                  <div className="aspect-video w-full bg-muted rounded-lg overflow-hidden">
+                    <iframe
+                      src="http://127.0.0.1:8001"
+                      className="w-full h-full border-0"
+                      title="Dashboard de Mortalidad en Chile"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
             <Card>
               <CardHeader>

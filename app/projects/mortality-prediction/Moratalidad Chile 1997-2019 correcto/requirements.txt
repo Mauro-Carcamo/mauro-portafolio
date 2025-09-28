@@ -1,8 +1,0 @@
-pandas
-shiny
-matplotlib
-numpy
-seaborn
-scipy
-statsmodels
-plotly

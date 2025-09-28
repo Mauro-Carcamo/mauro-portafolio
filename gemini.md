@@ -127,12 +127,18 @@ Este es el portafolio profesional de Mauricio Cárcamo, un sociólogo especializ
 *   **Estilado:** Tailwind CSS
 *   **Componentes UI:** Radix UI, Lucide React
 *   **Gestión de Estado/Formularios:** React Hook Form
-*   **Análisis y Visualización de Datos:** Recharts (mencionado en dependencias)
+*   **Análisis y Visualización de Datos:** Recharts (mencionado en dependencias), Shiny (para dashboard)
 *   **Otros:** Vercel (para despliegue), Zod (validación de esquemas)
 
 ## Funcionamiento Verificado
 
 Se han implementado las siguientes mejoras y correcciones:
+
+*   **Dashboard de Mortalidad en Chile (Integración y Limpieza Completadas):**
+    *   Se reestructuró y corrigió la aplicación Shiny (`version2.py`) para solucionar errores de ejecución.
+    *   Se solucionó un error de compilación en la aplicación Next.js (`npm run build`).
+    *   Se integró el dashboard de Shiny en la página del proyecto mediante un `iframe`.
+    *   Se eliminaron archivos y carpetas duplicados o innecesarios del plan de desarrollo anterior.
 
 *   **Sección de Educación:**
     *   Se reestructuró la sección para separar "Título Profesional", "Diplomados" y "Cursos y Bootcamps".
@@ -155,20 +161,9 @@ Se han implementado las siguientes mejoras y correcciones:
     *   Se reemplazaron los badges de texto por iconos (imágenes JPG/PNG) en las secciones de proyectos y habilidades, utilizando los archivos proporcionados por el usuario.
     *   Se eliminó la carpeta temporal "iconos para reemplazar".
 
-*   **Dashboard de Mortalidad en Chile (Nuevo Plan):**
-    *   Se identificó una aplicación de dashboard existente creada con Shiny para Python.
-    *   Se definió un nuevo plan para integrar esta aplicación en el portafolio mediante un `iframe`.
-    *   Se actualizaron los archivos de documentación (`inicio-de-gemini.md` y `gemini.md`) para reflejar el nuevo plan.
-
 **Próximos Pasos (Según el Roadmap Mejorado):**
 
-1.  **Integración del Dashboard de Mortalidad:**
-    *   Proporcionar instrucciones para ejecutar la aplicación Shiny.
-    *   Modificar la página del proyecto para incrustar el dashboard.
-    *   Ajustar el botón "Ver Dashboard" para mostrar el dashboard.
-2.  **Limpieza de Archivos:**
-    *   Eliminar la carpeta y los archivos del plan anterior.
-3.  **Contenido Preciso y Pulido:**
+1.  **Contenido Preciso y Pulido (Pendiente):**
     *   Realizar una revisión exhaustiva de todo el texto del sitio.
     *   Validar todos los enlaces externos.
     *   Verificar la funcionalidad de descarga del CV.

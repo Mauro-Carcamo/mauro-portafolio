@@ -60,6 +60,29 @@ Este directorio contiene todos los archivos estáticos que se sirven públicamen
 
 *   **Resumen Inicial**: Al comenzar una sesión, Gemini debe proporcionar un resumen conciso de las últimas acciones realizadas.
 *   **Próximos Pasos**: A continuación, Gemini debe indicar cuáles son los siguientes pasos o tareas pendientes.
+*   **Finalización de la Sesión**: Al finalizar la sesión de trabajo, Gemini debe actualizar todos los archivos `.md` con un resumen de los cambios realizados, la fecha y la hora de finalización.
+
+## 7. Registro de Trabajo
+
+*   **Inicio de Trabajo:** domingo, 28 de septiembre de 2025, 10:00 AM
+
+## 8. Workflow: Dashboard de Mortalidad en Chile
+
+**Fase 1: Análisis y Extracción**
+1.  Analizar el contenido del directorio `Moratalidad Chile 1997-2019`.
+2.  Leer y analizar el Jupyter Notebook `proyeccion_muertes.ipynb` para entender el análisis y el dashboard existente.
+3.  Extraer el código relevante para la generación de datos y visualizaciones del dashboard.
+
+**Fase 2: Creación del Backend del Dashboard**
+1.  Crear un nuevo script de Python para el backend del dashboard (e.g., `dashboard_server.py`).
+2.  Utilizar una biblioteca como FastAPI para crear un servidor web.
+3.  Crear endpoints en la API para servir los datos y las visualizaciones del dashboard.
+
+**Fase 3: Integración con el Frontend**
+1.  Crear un nuevo componente de React para el botón del dashboard en la página del proyecto.
+2.  Agregar un icono de Python al botón.
+3.  Configurar el botón para que abra el dashboard en una nueva pestaña.
+4.  Crear una nueva página o componente para mostrar el dashboard, que consumirá los datos de la API del backend.
 
 ## Orden de Lectura Recomendado
 
@@ -67,4 +90,4 @@ Este directorio contiene todos los archivos estáticos que se sirven públicamen
 2.  **`package.json`**: Para entender las dependencias y scripts.
 3.  **`app/layout.tsx` y `app/page.tsx`**: Para comprender la estructura principal de la página.
 4.  **`components/`**: Explorar los componentes de sección para ver cómo está construida cada parte de la página.
-5.  **`public/`**: Revisar los activos disponibles (imágenes, documentos).111
+5.  **`public/`**: Revisar los activos disponibles (imágenes, documentos).

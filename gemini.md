@@ -1,4 +1,3 @@
-
 # Mauricio Cárcamo - Portafolio Profesional
 
 Este es el portafolio profesional de Mauricio Cárcamo, un sociólogo especializado en Ciencia de Datos y Desarrollo Full Stack. El sitio web está diseñado para mostrar su experiencia, proyectos, habilidades y formación académica, con un enfoque en la creación de soluciones innovadoras utilizando Machine Learning y tecnologías modernas.
@@ -155,6 +154,13 @@ Se han implementado las siguientes mejoras y correcciones:
     *   Se creó un componente `TechnologyIcon` para mostrar logos de tecnologías.
     *   Se reemplazaron los badges de texto por iconos (imágenes JPG/PNG) en las secciones de proyectos y habilidades, utilizando los archivos proporcionados por el usuario.
     *   Se eliminó la carpeta temporal "iconos para reemplazar".
+
+*   **Dashboard de Mortalidad en Chile:**
+    *   Se creó un servidor de backend con FastAPI para servir los datos del proyecto de predicción de mortalidad.
+    *   Se analizó el Jupyter Notebook existente para entender el preprocesamiento de datos y las visualizaciones.
+    *   Se creó un endpoint en la API (`/api/mortality-trend`) para exponer los datos de la tendencia de mortalidad.
+    *   Se creó un componente de React (`MortalityDashboard`) para visualizar los datos en el frontend.
+    *   Se agregó un botón en la página del proyecto para mostrar y ocultar el dashboard.
 
 **Próximos Pasos (Según el Roadmap Mejorado):**
 

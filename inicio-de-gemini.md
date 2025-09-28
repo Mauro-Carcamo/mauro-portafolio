@@ -65,24 +65,24 @@ Este directorio contiene todos los archivos estáticos que se sirven públicamen
 ## 7. Registro de Trabajo
 
 *   **Inicio de Trabajo:** domingo, 28 de septiembre de 2025, 10:00 AM
+*   **Fin de Trabajo:** domingo, 28 de septiembre de 2025, 12:30 PM
+*   **Resumen:** Se actualizó el plan de trabajo para el dashboard de mortalidad. Se descartó el plan anterior y se adoptó un nuevo enfoque para integrar la aplicación Shiny existente.
 
-## 8. Workflow: Dashboard de Mortalidad en Chile
+## 8. Workflow: Dashboard de Mortalidad en Chile (Nuevo Plan)
 
-**Fase 1: Análisis y Extracción**
-1.  Analizar el contenido del directorio `Moratalidad Chile 1997-2019`.
-2.  Leer y analizar el Jupyter Notebook `proyeccion_muertes.ipynb` para entender el análisis y el dashboard existente.
-3.  Extraer el código relevante para la generación de datos y visualizaciones del dashboard.
+**Fase 1: Análisis y Preparación (Completada)**
+1.  Analizar el contenido de la nueva carpeta `Moratalidad Chile 1997-2019 correcto`.
+2.  Identificar la aplicación principal de Shiny (`app.py`).
+3.  Confirmar las dependencias en `requirements.txt`.
 
-**Fase 2: Creación del Backend del Dashboard**
-1.  Crear un nuevo script de Python para el backend del dashboard (e.g., `dashboard_server.py`).
-2.  Utilizar una biblioteca como FastAPI para crear un servidor web.
-3.  Crear endpoints en la API para servir los datos y las visualizaciones del dashboard.
+**Fase 2: Integración del Dashboard (En Progreso)**
+1.  Proporcionar instrucciones para ejecutar la aplicación Shiny.
+2.  Modificar la página del proyecto (`mortality-prediction/page.tsx`) para incrustar el dashboard de Shiny mediante un `iframe`.
+3.  Ajustar el botón "Ver Dashboard" para que muestre el `iframe` en una nueva pestaña o modal.
 
-**Fase 3: Integración con el Frontend**
-1.  Crear un nuevo componente de React para el botón del dashboard en la página del proyecto.
-2.  Agregar un icono de Python al botón.
-3.  Configurar el botón para que abra el dashboard en una nueva pestaña.
-4.  Crear una nueva página o componente para mostrar el dashboard, que consumirá los datos de la API del backend.
+**Fase 3: Limpieza y Finalización (Pendiente)**
+1.  Eliminar la carpeta anterior (`Moratalidad Chile 1997-2019`).
+2.  Eliminar el servidor de API (`dashboard_server.py`) y el componente de dashboard (`mortality-dashboard.tsx`) creados anteriormente.
 
 ## Orden de Lectura Recomendado
 

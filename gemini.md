@@ -155,24 +155,21 @@ Se han implementado las siguientes mejoras y correcciones:
     *   Se reemplazaron los badges de texto por iconos (imágenes JPG/PNG) en las secciones de proyectos y habilidades, utilizando los archivos proporcionados por el usuario.
     *   Se eliminó la carpeta temporal "iconos para reemplazar".
 
-*   **Dashboard de Mortalidad en Chile:**
-    *   Se creó un servidor de backend con FastAPI para servir los datos del proyecto de predicción de mortalidad.
-    *   Se analizó el Jupyter Notebook existente para entender el preprocesamiento de datos y las visualizaciones.
-    *   Se creó un endpoint en la API (`/api/mortality-trend`) para exponer los datos de la tendencia de mortalidad.
-    *   Se creó un componente de React (`MortalityDashboard`) para visualizar los datos en el frontend.
-    *   Se agregó un botón en la página del proyecto para mostrar y ocultar el dashboard.
+*   **Dashboard de Mortalidad en Chile (Nuevo Plan):**
+    *   Se identificó una aplicación de dashboard existente creada con Shiny para Python.
+    *   Se definió un nuevo plan para integrar esta aplicación en el portafolio mediante un `iframe`.
+    *   Se actualizaron los archivos de documentación (`inicio-de-gemini.md` y `gemini.md`) para reflejar el nuevo plan.
 
 **Próximos Pasos (Según el Roadmap Mejorado):**
 
-1.  **Verificación de la Funcionalidad Principal:**
-    *   Iniciar el servidor de desarrollo (`pnpm dev`).
-    *   Navegar por todas las secciones (Inicio, Acerca de mí, Proyectos, Habilidades, Experiencia, Educación, Contacto).
-    *   Asegurar que todos los enlaces internos y la navegación funcionen correctamente.
-    *   **Acción:** Inspeccionar visualmente la sección de Educación para confirmar la categorización, el orden y la alineación correctos.
-    *   **Verificar la visualización de imágenes en proyectos:** Asegurar que las imágenes en las tarjetas de proyectos y en el carrusel de Kittypaw! se muestren completas y sin recortes.
-    *   **Confirmar el favicon y el título de la página:** Verificar que el favicon sea el deseado y que el título de la página sea "Portafolio Mauricio Cárcamo".
-2.  **Contenido Preciso y Pulido:**
-    *   **Revisar y corregir todo el texto:** Realizar una revisión exhaustiva de descripciones, títulos y declaraciones personales para detectar errores gramaticales, ortográficos y de claridad. Mantener un tono profesional y consistente.
-    *   **Validar enlaces externos:** Confirmar que todos los enlaces a GitHub, LinkedIn, correo electrónico y WhatsApp son correctos y funcionales.
-    *   **CV Download:** Verificar que el archivo `cv-mauricio-carcamo.pdf` sea accesible y se descargue correctamente.
-    *   **Contact Form Functionality:** Probar el envío del formulario. (Actualmente solo imprime en consola; considerar integrar un servicio de backend para el envío real de correos electrónicos en la Fase 3).
+1.  **Integración del Dashboard de Mortalidad:**
+    *   Proporcionar instrucciones para ejecutar la aplicación Shiny.
+    *   Modificar la página del proyecto para incrustar el dashboard.
+    *   Ajustar el botón "Ver Dashboard" para mostrar el dashboard.
+2.  **Limpieza de Archivos:**
+    *   Eliminar la carpeta y los archivos del plan anterior.
+3.  **Contenido Preciso y Pulido:**
+    *   Realizar una revisión exhaustiva de todo el texto del sitio.
+    *   Validar todos los enlaces externos.
+    *   Verificar la funcionalidad de descarga del CV.
+    *   Probar el formulario de contacto.

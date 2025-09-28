@@ -12,10 +12,9 @@ df = pd.read_csv("036ei5wg8bzm6bfnggh2.csv")
 # Definir la interfaz de usuario
 # ========================
 app_ui = ui.page_fluid(
-    ui.panel_title("Análisis de Diagnósticos"),
-    
+    ui.h2("Análisis de Diagnósticos"),
     ui.layout_sidebar(
-        ui.panel_sidebar(
+        ui.sidebar(
             ui.input_selectize(
                 "sexo", 
                 "Sexo:", 
@@ -35,10 +34,8 @@ app_ui = ui.page_fluid(
                 selected="Todos"
             )
         ),
-        ui.panel_main(
-            ui.output_plot("grafico"),
-            ui.output_table("tabla")
-        )
+        ui.output_plot("grafico"),
+        ui.output_table("tabla")
     )
 )
 

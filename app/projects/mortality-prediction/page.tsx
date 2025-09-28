@@ -1,3 +1,5 @@
+'use client';
+
 import { ImageCarousel } from "@/components/image-carousel"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"

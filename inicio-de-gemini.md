@@ -67,4 +67,4 @@ Este directorio contiene todos los archivos estáticos que se sirven públicamen
 2.  **`package.json`**: Para entender las dependencias y scripts.
 3.  **`app/layout.tsx` y `app/page.tsx`**: Para comprender la estructura principal de la página.
 4.  **`components/`**: Explorar los componentes de sección para ver cómo está construida cada parte de la página.
-5.  **`public/`**: Revisar los activos disponibles (imágenes, documentos).
+5.  **`public/`**: Revisar los activos disponibles (imágenes, documentos).111

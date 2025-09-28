@@ -3,66 +3,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
-from shiny.express import ui, render
+from shiny.express import ui, render, input
 from shiny import reactive
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.stattools import adfuller
 
 # =============================================================================
-# Carga de Datos Reactiva y Cacheada
+# Carga de Datos y Definición de UI
 # =============================================================================
-@reactive.Calc
-def load_data():
-    """
-    Carga y pre-procesa los datos desde el archivo CSV.
-    Esta función es un cálculo reactivo, por lo que los datos se cachean.
-    Devuelve un DataFrame de pandas o None si ocurre un error.
-    """
-    try:
-        csv_path = os.path.join(os.path.dirname(__file__), "036ei5wg8bzm6bfnggh2.csv")
-        df = pd.read_csv(csv_path, encoding='utf-8')
-        df = df.drop(columns=["diagnostico1", "total"], errors='ignore')
-        return df
-    except (FileNotFoundError, Exception) as e:
-        print(f"Error crítico al cargar datos: {e}")
-        return None
+try:
+    # Carga y pre-procesamiento de datos
+    csv_path = os.path.join(os.path.dirname(__file__), "036ei5wg8bzm6bfnggh2.csv")
+    df = pd.read_csv(csv_path, encoding='utf-8')
+    df = df.drop(columns=["diagnostico1", "total"], errors='ignore')
 
-# =============================================================================
-# Lógica de Servidor: Cálculos Reactivos
-# =============================================================================
-@reactive.Calc
-def filtered_data():
-    """
-    Filtra los datos basado en los inputs del usuario en el sidebar.
-    """
-    df = load_data()
-    if df is None:
-        return pd.DataFrame()
-
-    df_f = df.copy()
-    min_year, max_year = ui.input.year_range()
-    df_f = df_f[(df_f['ano'] >= min_year) & (df_f['ano'] <= max_year)]
-    if ui.input.sexo_filter() != "Todos":
-        df_f = df_f[df_f["sexo"] == ui.input.sexo_filter()]
-    if ui.input.edad_filter() != "Todos":
-        df_f = df_f[df_f["gru_edad"] == ui.input.edad_filter()]
-    return df_f
-
-# =============================================================================
-# Definición de la Interfaz de Usuario (UI)
-# =============================================================================
-df_initial = load_data()
-
-if df_initial is None:
-    # --- UI de Error ---
-    ui.page_opts(title="Error en la Aplicación", fillable=True)
-    ui.div(
-        ui.h1("Error Crítico"),
-        ui.p("No se pudo cargar o procesar el archivo de datos. Por favor, asegúrate de que el archivo '036ei5wg8bzm6bfnggh2.csv' exista en la misma carpeta que la aplicación y revisa la consola para más detalles."),
-        style="color: red; font-size: 1.5rem; text-align: center; padding: 50px;"
-    )
-else:
     # --- UI Principal del Dashboard ---
     ui.page_opts(title="Dashboard de Análisis de Mortalidad - Chile 1997-2019", fillable=True)
 
@@ -70,7 +25,6 @@ else:
         ui.tags.style('''
             :root { --primary: #2c3e50; --secondary: #34495e; --accent1: #1abc9c; --accent2: #3498db; --accent3: #9b59b6; --accent4: #e67e22; --accent5: #e74c3c; --light: #ecf0f1; --dark: #2c3e50; --text: #2c3e50; --text-light: #7f8c8d; }
             body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: var(--text); line-height: 1.6; }
-            .main-container { max-width: 1400px; margin: 0 auto; padding: 0 15px; }
             .main-title { text-align: center; color: var(--primary); margin: 20px 0 10px; font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding: 10px; }
             .subtitle { text-align: center; color: var(--text-light); margin-bottom: 30px; font-size: 1.1rem; max-width: 900px; margin-left: auto; margin-right: auto; }
             .content-panel { padding: 25px; border-radius: 12px; background-color: white; margin: 15px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.05); border: none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -88,21 +42,21 @@ else:
             ui.input_slider(
                 "year_range",
                 "Rango de Años",
-                min=int(df_initial['ano'].min()),
-                max=int(df_initial['ano'].max()),
-                value=(int(df_initial['ano'].min()), int(df_initial['ano'].max())),
+                min=int(df['ano'].min()),
+                max=int(df['ano'].max()),
+                value=(int(df['ano'].min()), int(df['ano'].max())),
                 sep=""
             )
             ui.input_selectize(
                 "sexo_filter",
                 "Sexo",
-                choices=["Todos"] + df_initial["sexo"].unique().tolist(),
+                choices=["Todos"] + df["sexo"].unique().tolist(),
                 selected="Todos"
             )
             ui.input_selectize(
                 "edad_filter",
                 "Grupo de Edad",
-                choices=["Todos"] + sorted(df_initial["gru_edad"].unique().tolist()),
+                choices=["Todos"] + sorted(df["gru_edad"].unique().tolist()),
                 selected="Todos"
             )
 
@@ -112,10 +66,7 @@ else:
         with ui.navset_card_tab(id="nav_tabs"):
             with ui.nav_panel("🏠 Inicio"):
                 with ui.layout_columns(col_widths={"sm": 6, "md": 3, "lg": 3}):
-                    ui.output_ui("total_casos_box")
-                    ui.output_ui("total_enfermedades_box")
-                    ui.output_ui("periodo_analizado_box")
-                    ui.output_ui("enfermedad_comun_box")
+                    pass # Los value_box se renderizarán aquí automáticamente
 
                 with ui.layout_columns(col_widths={"sm": 12, "md": 6, "lg": 6}, gap="20px"):
                     with ui.div(class_="content-panel"):
@@ -130,25 +81,25 @@ else:
                         )
                     with ui.div(class_="content-panel"):
                         ui.h4("🔍 Variables en los Datos Filtrados", class_="section-header")
-                        ui.output_ui("vars_info")
+                        # vars_info se renderizará aquí
 
                 with ui.div(class_="content-panel"):
                     ui.h4("📋 Resumen por Sexo y Grupo Etario", class_="section-header")
-                    ui.output_table("resumen_inicio")
+                    # resumen_inicio se renderizará aquí
 
             with ui.nav_panel("📊 Descriptivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis Descriptivo de Variables", class_="section-header")
                     ui.input_select("variable_descriptiva", "Seleccione variable para visualizar:", ["sexo", "gru_edad", "nombre_enfermedad"])
                     with ui.div(class_="plot-container"):
-                        ui.output_plot("plot_descriptivo")
+                        pass # plot_descriptivo se renderizará aquí
 
             with ui.nav_panel("🔍 Diagnóstico"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis de Distribución (Box Plot)", class_="section-header")
                     ui.input_select("variable_diagnostico", "Seleccione variable para visualizar:", ["sexo", "gru_edad", "nombre_enfermedad"])
                     with ui.div(class_="plot-container"):
-                        ui.output_plot("plot_diagnostico")
+                        pass # plot_diagnostico se renderizará aquí
 
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis de Serie Temporal (Casos Totales)", class_="section-header")
@@ -156,50 +107,70 @@ else:
                     with ui.layout_columns():
                         with ui.div():
                             ui.h4("Test de Estacionariedad (Dickey-Fuller)", class_="section-header")
-                            ui.output_text_verbatim("adf_test_results")
+                            # adf_test_results se renderizará aquí
                         with ui.div():
                             ui.h4("Descomposición de Serie Temporal", class_="section-header")
                             with ui.div(class_="plot-container"):
-                                ui.output_plot("decomposition_plot")
+                                pass # decomposition_plot se renderizará aquí
 
             with ui.nav_panel("🔮 Predictivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Predicción con Modelo ARIMA", class_="section-header")
                     ui.p("Se realiza una predicción a 5 años para el total de casos en los datos filtrados.")
                     with ui.div(class_="plot-container"):
-                        ui.output_plot("plot_predictivo")
+                        pass # plot_predictivo se renderizará aquí
 
             with ui.nav_panel("💡 Prescriptivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis para Recomendaciones", class_="section-header")
                     ui.input_select("variable_prescriptiva", "Seleccione análisis:", ["Tendencia Anual", "Grupos de Edad en Riesgo", "Enfermedades Críticas"])
                     with ui.div(class_="plot-container"):
-                        ui.output_plot("plot_prescriptivo")
+                        pass # plot_prescriptivo se renderizará aquí
 
         ui.div(
             ui.tags.p(f"© 2024 - Dashboard de Análisis de Mortalidad Chile - Datos: 1997-2019"),
             class_="footer"
         )
 
-    # =============================================================================
-    # Lógica de Servidor: Renderizado de Outputs
-    # =============================================================================
+except (FileNotFoundError, Exception) as e:
+    # --- UI de Error ---
+    ui.page_opts(title="Error en la Aplicación", fillable=True)
+    ui.div(
+        ui.h1("Error Crítico"),
+        ui.p(f"No se pudo cargar o procesar el archivo de datos. Por favor, asegúrate de que el archivo '036ei5wg8bzm6bfnggh2.csv' exista y revisa la consola para más detalles. Error: {e}"),
+        style="color: red; font-size: 1.5rem; text-align: center; padding: 50px;"
+    )
+
+# =============================================================================
+# Lógica de Servidor (solo se define si la carga de datos fue exitosa)
+# =============================================================================
+if 'df' in locals():
+    @reactive.Calc
+    def filtered_data():
+        df_f = df.copy()
+        min_year, max_year = input.year_range()
+        df_f = df_f[(df_f['ano'] >= min_year) & (df_f['ano'] <= max_year)]
+        if input.sexo_filter() != "Todos":
+            df_f = df_f[df_f["sexo"] == input.sexo_filter()]
+        if input.edad_filter() != "Todos":
+            df_f = df_f[df_f["gru_edad"] == input.edad_filter()]
+        return df_f
 
     # --- Render UI para Value Boxes ---
     @render.ui
     def total_casos_box():
         total_casos = filtered_data()['n'].sum()
-        return ui.value_box("Total de Casos", f"{total_casos:,}".replace(",", "."), style="background-color: var(--accent1); color: white;")
+        return ui.value_box(title="Total de Casos", value=f"{total_casos:,}".replace(",", "."), style="background-color: var(--accent1); color: white;")
 
     @render.ui
     def total_enfermedades_box():
         total_enfermedades = filtered_data()['nombre_enfermedad'].nunique()
-        return ui.value_box("Enfermedades Únicas", str(total_enfermedades), style="background-color: var(--accent2); color: white;")
+        return ui.value_box(title="Enfermedades Únicas", value=str(total_enfermedades), style="background-color: var(--accent2); color: white;")
 
     @render.ui
     def periodo_analizado_box():
-        min_year, max_year = ui.input.year_range()
-        return ui.value_box("Período Analizado", f"{min_year}-{max_year}", style="background-color: var(--accent3); color: white;")
+        min_year, max_year = input.year_range()
+        return ui.value_box(title="Período Analizado", value=f"{min_year}-{max_year}", style="background-color: var(--accent3); color: white;")
 
     @render.ui
     def enfermedad_comun_box():
@@ -208,7 +179,7 @@ else:
             comun = "N/A"
         else:
             comun = data.groupby('nombre_enfermedad')['n'].sum().idxmax()
-        return ui.value_box("Enfermedad Más Común", comun, style="background-color: var(--accent4); color: white;")
+        return ui.value_box(title="Enfermedad Más Común", value=comun, style="background-color: var(--accent4); color: white;")
 
     @render.ui
     def vars_info():
@@ -235,7 +206,7 @@ else:
         data = filtered_data()
         if data.empty: return
         fig, ax = plt.subplots(figsize=(12, 7))
-        variable = ui.input.variable_descriptiva()
+        variable = input.variable_descriptiva()
         if variable == "sexo":
             sns.countplot(data=data, x="sexo", ax=ax, palette='Set2', order=data['sexo'].value_counts().index)
             ax.set_title("Distribución de Casos por Sexo", fontsize=16)
@@ -255,7 +226,7 @@ else:
         data = filtered_data()
         if data.empty: return
         fig, ax = plt.subplots(figsize=(12, 7))
-        variable = ui.input.variable_diagnostico()
+        variable = input.variable_diagnostico()
         if variable == "sexo":
             sns.boxplot(data=data, x="sexo", y="n", ax=ax, palette='pastel')
         elif variable == "gru_edad":
@@ -317,7 +288,7 @@ else:
         data = filtered_data()
         if data.empty: return
         fig, ax = plt.subplots(figsize=(12, 7))
-        variable = ui.input.variable_prescriptiva()
+        variable = input.variable_prescriptiva()
         if variable == "Tendencia Anual":
             tendencias = data.groupby("ano")["n"].sum()
             ax.plot(tendencias.index, tendencias.values, color='#e67e22', marker='o')

@@ -5,6 +5,7 @@ import seaborn as sns
 import os
 from shiny.express import ui, render, input
 from shiny import reactive
+from shiny.ui import output_ui, output_table, output_plot, output_text_verbatim
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.stattools import adfuller
@@ -66,7 +67,10 @@ try:
         with ui.navset_card_tab(id="nav_tabs"):
             with ui.nav_panel("🏠 Inicio"):
                 with ui.layout_columns(col_widths={"sm": 6, "md": 3, "lg": 3}):
-                    pass # Los value_box se renderizarán aquí automáticamente
+                    output_ui("total_casos_box")
+                    output_ui("total_enfermedades_box")
+                    output_ui("periodo_analizado_box")
+                    output_ui("enfermedad_comun_box")
 
                 with ui.layout_columns(col_widths={"sm": 12, "md": 6, "lg": 6}, gap="20px"):
                     with ui.div(class_="content-panel"):
@@ -81,25 +85,25 @@ try:
                         )
                     with ui.div(class_="content-panel"):
                         ui.h4("🔍 Variables en los Datos Filtrados", class_="section-header")
-                        # vars_info se renderizará aquí
+                        output_ui("vars_info")
 
                 with ui.div(class_="content-panel"):
                     ui.h4("📋 Resumen por Sexo y Grupo Etario", class_="section-header")
-                    # resumen_inicio se renderizará aquí
+                    output_table("resumen_inicio")
 
             with ui.nav_panel("📊 Descriptivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis Descriptivo de Variables", class_="section-header")
                     ui.input_select("variable_descriptiva", "Seleccione variable para visualizar:", ["sexo", "gru_edad", "nombre_enfermedad"])
                     with ui.div(class_="plot-container"):
-                        pass # plot_descriptivo se renderizará aquí
+                        output_plot("plot_descriptivo")
 
             with ui.nav_panel("🔍 Diagnóstico"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis de Distribución (Box Plot)", class_="section-header")
                     ui.input_select("variable_diagnostico", "Seleccione variable para visualizar:", ["sexo", "gru_edad", "nombre_enfermedad"])
                     with ui.div(class_="plot-container"):
-                        pass # plot_diagnostico se renderizará aquí
+                        output_plot("plot_diagnostico")
 
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis de Serie Temporal (Casos Totales)", class_="section-header")
@@ -107,25 +111,25 @@ try:
                     with ui.layout_columns():
                         with ui.div():
                             ui.h4("Test de Estacionariedad (Dickey-Fuller)", class_="section-header")
-                            # adf_test_results se renderizará aquí
+                            output_text_verbatim("adf_test_results")
                         with ui.div():
                             ui.h4("Descomposición de Serie Temporal", class_="section-header")
                             with ui.div(class_="plot-container"):
-                                pass # decomposition_plot se renderizará aquí
+                                output_plot("decomposition_plot")
 
             with ui.nav_panel("🔮 Predictivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Predicción con Modelo ARIMA", class_="section-header")
                     ui.p("Se realiza una predicción a 5 años para el total de casos en los datos filtrados.")
                     with ui.div(class_="plot-container"):
-                        pass # plot_predictivo se renderizará aquí
+                        output_plot("plot_predictivo")
 
             with ui.nav_panel("💡 Prescriptivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis para Recomendaciones", class_="section-header")
                     ui.input_select("variable_prescriptiva", "Seleccione análisis:", ["Tendencia Anual", "Grupos de Edad en Riesgo", "Enfermedades Críticas"])
                     with ui.div(class_="plot-container"):
-                        pass # plot_prescriptivo se renderizará aquí
+                        output_plot("plot_prescriptivo")
 
         ui.div(
             ui.tags.p(f"© 2024 - Dashboard de Análisis de Mortalidad Chile - Datos: 1997-2019"),

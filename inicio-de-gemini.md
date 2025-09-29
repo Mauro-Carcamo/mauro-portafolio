@@ -4,90 +4,69 @@ Este documento sirve como punto de partida para analizar y comprender la estruct
 
 **Nota Importante:** La configuración inicial, el contenido y el código de este proyecto están completamente en español.
 
-## 1. Configuración y Dependencias
+## 1. Flujo de Trabajo con Gemini (Instrucciones para el Inicio de Sesión)
 
-Estos archivos definen la estructura del proyecto, sus dependencias y cómo se ejecuta.
+Al comenzar una nueva sesión, es crucial seguir estos pasos para asegurar la continuidad y el contexto:
 
-*   **`package.json`**: Define los scripts de `npm` (como `dev`, `build`, `start`), las dependencias del proyecto (React, Next.js, Tailwind CSS, etc.) y otra metainformación. Es el punto de partida para entender qué tecnologías se utilizan.
-*   **`next.config.mjs`**: Contiene la configuración específica de Next.js. Aquí se pueden definir reglas de redireccionamiento, optimización de imágenes y otras configuraciones avanzadas del framework.
-*   **`tsconfig.json`**: Especifica las opciones del compilador de TypeScript. Es fundamental para entender cómo se transpila el código y qué reglas de tipado se aplican.
-*   **`tailwind.config.js` / `postcss.config.mjs`**: Definen la configuración de Tailwind CSS, incluyendo la personalización de temas, colores, fuentes y plugins.
+1.  **Leer `gemini.md` y `inicio-de-gemini.md`**: Antes de realizar cualquier acción, lee ambos documentos en su totalidad para comprender el estado actual del proyecto, las tareas pendientes y las lecciones aprendidas.
+2.  **Proporcionar Resumen Inicial**: Como Gemini, debes proporcionar un resumen conciso de las últimas acciones realizadas en la sesión anterior.
+3.  **Indicar Próximos Pasos**: A continuación, debes indicar cuáles son los siguientes pasos o tareas pendientes según el roadmap del proyecto.
+4.  **Finalización de la Sesión**: Al finalizar la sesión de trabajo, actualiza ambos archivos `.md` con un resumen de los cambios realizados, la fecha y la hora de finalización.
 
-## 2. Estructura de la Aplicación (Directorio `app`)
+## 2. Análisis Post-Mortem: Depuración de Shiny Express (Sesión del 28/09/2025)
 
-Next.js utiliza un sistema de enrutamiento basado en el sistema de archivos. El directorio `app` es el corazón de la aplicación.
+Durante la integración del dashboard de mortalidad, nos encontramos con una serie de errores persistentes que dificultaron el desarrollo. Esta sección documenta la causa raíz y la solución final para referencia futura.
 
-*   **`app/layout.tsx`**: Es el layout principal que envuelve a toda la aplicación. Aquí se definen elementos comunes como el `<html>`, `<body>`, y componentes persistentes como el `Header` y el `Footer`.
-*   **`app/page.tsx`**: Corresponde a la página de inicio (`/`). Contiene la estructura principal de la página, ensamblando las diferentes secciones del portafolio.
-*   **`app/globals.css`**: Archivo de estilos globales que se aplican a toda la aplicación.
+*   **El Problema Central**: La versión de `shiny` para Python utilizada en este proyecto (`1.4.0`) tiene una API para `shiny.express` que difiere sutilmente de la documentación más reciente y de otras versiones. La principal fuente de confusión fue cómo renderizar UI dinámica (plots, tablas, value boxes) en la interfaz.
 
-### Páginas de Proyectos
+*   **La Serie de Errores y Lecciones:**
+    1.  `AttributeError: module 'shiny.express.ui' has no attribute 'output_*'`: Descubrimos que las funciones `output_ui`, `output_plot`, etc., no están disponibles directamente en el objeto `ui` de `shiny.express`.
+    2.  `NameError: name 'mi_funcion' is not defined`: Ocurrió cuando intentamos llamar a una función de renderizado en la UI antes de que fuera definida en el script.
+    3.  `TypeError: Renderer.__call__() missing ... argument: '_fn'`: Ocurrió cuando definimos las funciones de renderizado primero y luego las llamamos con paréntesis `()` en la UI. Esto se debe a que el decorador `@render` convierte la función en un objeto `Renderer` que no se puede llamar directamente.
+    4.  `Duplicate output IDs were found`: Ocurrió cuando colocamos solo el nombre de la función (sin paréntesis) en la UI. Esto indica que Shiny intentaba renderizar el output dos veces: una automáticamente y otra por nuestra referencia explícita.
 
-*   **`app/projects/`**: Este directorio contiene las subpáginas para cada proyecto individual.
-    *   `kittypaw/page.tsx`
-    *   `mortality-prediction/page.tsx`
-    *   `music-lyrics/page.tsx`
-    *   `religious-texts/page.tsx`
+*   **La Solución Definitiva y Correcta:**
+    La solución que finalmente funcionó fue una combinación precisa de los siguientes pasos:
+    1.  **Importar desde `shiny.ui`**: Las funciones `output_*` (placeholders) deben importarse explícitamente desde el módulo `shiny.ui`.
+        ```python
+        from shiny.ui import output_ui, output_table, output_plot, output_text_verbatim
+        ```
+    2.  **Definir la UI con Placeholders**: En la sección de la UI, se debe usar la función `output_*` correspondiente, pasando como un string el **nombre** de la función de renderizado que se definirá más adelante.
+        ```python
+        output_plot("plot_descriptivo")
+        ```
+    3.  **Definir el Servidor y las Funciones `@render`**: Después de la UI, en la lógica del servidor, se definen las funciones de renderizado con el decorador `@render` y el nombre que coincide con el string usado en el placeholder.
+        ```python
+        @render.plot
+        def plot_descriptivo():
+            # ... lógica del gráfico ...
+        ```
+    Este patrón (UI con placeholders de string -> Servidor con funciones @render coincidentes) es el correcto para esta versión de Shiny.
 
-## 3. Componentes Reutilizables (Directorio `components`)
+## 3. Configuración y Dependencias
 
-Este es uno de los directorios más importantes para entender la arquitectura del frontend.
+*   `package.json`, `next.config.mjs`, `tsconfig.json`, `tailwind.config.js`
 
-*   **`components/*.tsx`**: Contiene los componentes de alto nivel que representan las secciones principales de la página.
-    *   `hero-section.tsx`
-    *   `about-section.tsx`
-    *   `projects-section.tsx`
-    *   `skills-section.tsx`
-    *   `experience-section.tsx`
-    *   `education-section.tsx`
-    *   `contact-section.tsx`
-*   **`components/ui/*.tsx`**: Componentes de interfaz de usuario genéricos y reutilizables, muchos de ellos provenientes de `shadcn/ui` (ej. `Button`, `Card`, `Dialog`). Son los bloques de construcción básicos de la interfaz.
-*   **`components/technology-icon.tsx`**: Un componente personalizado para mostrar los iconos de las tecnologías, importante para las secciones de habilidades y proyectos.
+## 4. Estructura de la Aplicación (`app`)
 
-## 4. Activos Públicos (Directorio `public`)
+*   `app/layout.tsx`, `app/page.tsx`, `app/globals.css`
+*   `app/projects/`: Contiene las subpáginas de cada proyecto.
 
-Este directorio contiene todos los archivos estáticos que se sirven públicamente.
+## 5. Componentes Reutilizables (`components`)
 
-*   **`public/documents/*.pdf`**: Aquí se almacenan los certificados y el CV para su descarga.
-*   **`public/icons/technologies/*.svg` / `*.png`**: Iconos de las tecnologías utilizadas en el portafolio.
-*   **`public/*.png` / `*.jpg`**: Imágenes utilizadas en las diferentes secciones del sitio, como la foto de perfil y las imágenes de los proyectos.
+*   `components/*.tsx`: Secciones principales de la página.
+*   `components/ui/*.tsx`: Bloques de construcción básicos de la interfaz.
 
-## 5. Resumen del Proyecto
+## 6. Activos Públicos (`public`)
 
-*   **`gemini.md`**: Este archivo proporciona un resumen completo del estado actual del proyecto, las funcionalidades implementadas, las tecnologías utilizadas y los próximos pasos. Es una lectura obligatoria para tener un contexto general antes de cualquier intervención.
+*   `public/documents/`, `public/icons/technologies/`, `public/*.png`
 
-## 6. Flujo de Trabajo con Gemini
+## 7. Resumen del Proyecto
 
-*   **Resumen Inicial**: Al comenzar una sesión, Gemini debe proporcionar un resumen conciso de las últimas acciones realizadas.
-*   **Próximos Pasos**: A continuación, Gemini debe indicar cuáles son los siguientes pasos o tareas pendientes.
-*   **Finalización de la Sesión**: Al finalizar la sesión de trabajo, Gemini debe actualizar todos los archivos `.md` con un resumen de los cambios realizados, la fecha y la hora de finalización.
+*   **`gemini.md`**: Proporciona un resumen completo del estado actual del proyecto. Es de lectura obligatoria.
 
-## 7. Registro de Trabajo
+## 8. Registro de Trabajo
 
 *   **Inicio de Trabajo:** domingo, 28 de septiembre de 2025, 10:00 AM
-*   **Fin de Trabajo:** domingo, 28 de septiembre de 2025, 13:15 PM
-*   **Resumen:** Se completó la integración y limpieza del dashboard de mortalidad. Se corrigió la aplicación Shiny, se solucionó un error de compilación en Next.js, se incrustó el dashboard en la página del proyecto y se eliminaron archivos y carpetas obsoletos.
-
-## 8. Workflow: Dashboard de Mortalidad en Chile (Nuevo Plan)
-
-**Fase 1: Análisis y Preparación (Completada)**
-1.  Analizar el contenido de la nueva carpeta `Moratalidad Chile 1997-2019 correcto`.
-2.  Identificar la aplicación principal de Shiny (`app.py`).
-3.  Confirmar las dependencias en `requirements.txt`.
-
-**Fase 2: Integración del Dashboard (Completada)**
-1.  Corregir y proporcionar instrucciones para ejecutar la aplicación Shiny.
-2.  Modificar la página del proyecto (`mortality-prediction/page.tsx`) para incrustar el dashboard de Shiny mediante un `iframe`.
-3.  Ajustar el botón "Ver Dashboard" para mostrar y ocultar el `iframe`.
-
-**Fase 3: Limpieza y Finalización (Completada)**
-1.  Eliminar la carpeta duplicada (`.../mortality-prediction/Moratalidad Chile 1997-2019 correcto`).
-2.  Verificar y eliminar los archivos del plan anterior que ya no eran necesarios.
-
-## Orden de Lectura Recomendado
-
-1.  **`gemini.md`**: Para obtener una visión general y el estado actual del proyecto.
-2.  **`package.json`**: Para entender las dependencias y scripts.
-3.  **`app/layout.tsx` y `app/page.tsx`**: Para comprender la estructura principal de la página.
-4.  **`components/`**: Explorar los componentes de sección para ver cómo está construida cada parte de la página.
-5.  **`public/`**: Revisar los activos disponibles (imágenes, documentos).
+*   **Fin de Trabajo:** domingo, 28 de septiembre de 2025, 14:00 PM
+*   **Resumen:** Se integró el dashboard de mortalidad en el portafolio. El proceso implicó una depuración exhaustiva de la aplicación Shiny Express para hacerla compatible con el entorno del proyecto. Se corrigieron errores de compilación en Next.js y se limpiaron archivos obsoletos. La sesión concluyó con la documentación detallada del proceso de depuración para referencia futura.

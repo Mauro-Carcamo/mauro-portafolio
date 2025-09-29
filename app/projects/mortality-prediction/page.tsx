@@ -1,10 +1,9 @@
 'use client';
 
-import { ImageCarousel } from "@/components/image-carousel"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ExternalLink, Github, ArrowLeft } from "lucide-react"
+import { ExternalLink, Github, ArrowLeft, BarChart, LayoutDashboard } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -16,8 +15,7 @@ const PythonIcon = () => (
 );
 
 export default function MortalityPredictionProject() {
-  const [showDashboard, setShowDashboard] = useState(false);
-  const projectImages = ["/mortality-prediction-visualizations.png"]
+  const [activeDashboard, setActiveDashboard] = useState<'shiny' | 'looker' | 'powerbi' | null>(null);
 
   const technologies = [
     "Python",
@@ -25,11 +23,9 @@ export default function MortalityPredictionProject() {
     "Pandas",
     "Matplotlib",
     "Seaborn",
-    "NumPy",
-    "Jupyter",
-    "Data Analysis",
-    "Statistical Modeling",
-    "Shiny"
+    "Shiny",
+    "Looker Studio",
+    "Power BI",
   ]
 
   const features = [
@@ -37,9 +33,16 @@ export default function MortalityPredictionProject() {
     "Modelos predictivos de mortalidad por región y edad",
     "Visualizaciones interactivas de tendencias temporales",
     "Análisis de factores socioeconómicos influyentes",
-    "Validación estadística de modelos predictivos",
     "Dashboard interactivo para explorar los datos y predicciones",
   ]
+
+  const handleDashboardToggle = (dashboard: 'shiny' | 'looker' | 'powerbi') => {
+    if (activeDashboard === dashboard) {
+      setActiveDashboard(null); // Oculta si se vuelve a hacer clic en el mismo botón
+    } else {
+      setActiveDashboard(dashboard);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -51,50 +54,76 @@ export default function MortalityPredictionProject() {
           </Button>
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <div className="space-y-8">
-            <div>
-              <h1 className="text-4xl font-bold mb-4">Predicción de Mortalidad en Chile</h1>
-              <p className="text-xl text-muted-foreground mb-6">
-                Análisis y predicción de patrones de mortalidad utilizando Machine Learning y técnicas avanzadas de
-                ciencia de datos aplicadas a datos demográficos chilenos.
-              </p>
+        <div className="space-y-8">
+          <div>
+            <h1 className="text-4xl font-bold mb-4">Predicción de Mortalidad en Chile</h1>
+            <p className="text-xl text-muted-foreground mb-6">
+              Análisis y predicción de patrones de mortalidad utilizando Machine Learning y técnicas avanzadas de
+              ciencia de datos aplicadas a datos demográficos chilenos.
+            </p>
 
-              <div className="flex gap-4 mb-8">
-                <Button variant="outline" asChild>
+            <div className="flex flex-wrap gap-4 mb-8 border-t pt-6">
+                <Button onClick={() => handleDashboardToggle('shiny')} variant={activeDashboard === 'shiny' ? 'default' : 'outline'}>
+                  <PythonIcon />
+                  Python (Shiny)
+                </Button>
+                <Button onClick={() => handleDashboardToggle('looker')} variant={activeDashboard === 'looker' ? 'default' : 'outline'}>
+                  <BarChart className="h-4 w-4 mr-2" />
+                  Looker Studio
+                </Button>
+                <Button onClick={() => handleDashboardToggle('powerbi')} variant={activeDashboard === 'powerbi' ? 'default' : 'outline'}>
+                  <LayoutDashboard className="h-4 w-4 mr-2" />
+                  Power BI
+                </Button>
+                 <Button variant="outline" asChild>
                   <a href="https://github.com/Mauro-Carcamo" target="_blank" rel="noopener noreferrer">
                     <Github className="h-4 w-4 mr-2" />
                     Ver Código
                   </a>
                 </Button>
-                <Button onClick={() => setShowDashboard(!showDashboard)}>
-                  <PythonIcon />
-                  {showDashboard ? "Ocultar Dashboard" : "Ver Dashboard Interactivo"}
-                </Button>
-              </div>
             </div>
+          </div>
 
-            {showDashboard && (
-              <Card className="w-full">
-                <CardHeader>
-                  <CardTitle>Dashboard Interactivo de Mortalidad</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    El siguiente dashboard es una aplicación Shiny ejecutándose localmente. Asegúrate de haber iniciado la aplicación para poder visualizarla.
-                  </p>
-                  <div className="aspect-video w-full bg-muted rounded-lg overflow-hidden">
-                    <iframe
-                      src="http://127.0.0.1:8001"
-                      className="w-full h-full border-0"
-                      title="Dashboard de Mortalidad en Chile"
-                      allowFullScreen
-                    ></iframe>
+          {activeDashboard && (
+            <Card className="w-full">
+              <CardHeader>
+                <CardTitle>
+                  {activeDashboard === 'shiny' && "Dashboard Interactivo (Shiny)"}
+                  {activeDashboard === 'looker' && "Dashboard Interactivo (Looker Studio)"}
+                  {activeDashboard === 'powerbi' && "Dashboard Interactivo (Power BI)"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {activeDashboard === 'shiny' && (
+                  <>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      El siguiente dashboard es una aplicación Shiny ejecutándose localmente. Asegúrate de haber iniciado la aplicación para poder visualizarla.
+                    </p>
+                    <div className="aspect-video w-full bg-muted rounded-lg overflow-hidden border">
+                      <iframe
+                        src="http://127.0.0.1:8001"
+                        className="w-full h-full border-0"
+                        title="Dashboard de Mortalidad en Chile"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </>
+                )}
+                {activeDashboard === 'looker' && (
+                  <div className="aspect-video w-full bg-muted rounded-lg flex items-center justify-center">
+                    <p className="text-muted-foreground">Aquí se mostraría el dashboard de Looker Studio.</p>
                   </div>
-                </CardContent>
-              </Card>
-            )}
+                )}
+                {activeDashboard === 'powerbi' && (
+                  <div className="aspect-video w-full bg-muted rounded-lg flex items-center justify-center">
+                    <p className="text-muted-foreground">Aquí se mostraría el dashboard de Power BI.</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
 
+          <div className="grid md:grid-cols-2 gap-8">
             <Card>
               <CardHeader>
                 <CardTitle>Características del Análisis</CardTitle>
@@ -125,10 +154,6 @@ export default function MortalityPredictionProject() {
                 </div>
               </CardContent>
             </Card>
-          </div>
-
-          <div className="lg:sticky lg:top-8">
-            <ImageCarousel images={projectImages} alt="Predicción de Mortalidad" />
           </div>
         </div>
       </div>

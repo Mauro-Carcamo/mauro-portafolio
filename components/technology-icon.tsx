@@ -19,6 +19,7 @@ const technologyMap: { [key: string]: string } = {
   "TensorFlow": "/icons/technologies/tensorflow.svg",
   "BeautifulSoup": "/icons/technologies/beautifulsoup.svg",
   "Selenium": "/icons/technologies/selenium.svg",
+  "Shiny": "/icons/technologies/shiny_python.png",
   "Data Analysis": "/icons/technologies/data-analysis.svg",
   "React": "/icons/technologies/react.png",
   "Next.js": "/icons/technologies/nextjs.png",
@@ -52,6 +53,8 @@ const technologyMap: { [key: string]: string } = {
   "MQTT": "/icons/technologies/mqtt.svg",
   "3D Printing": "/icons/technologies/3d-printing.svg",
   "Grafana": "/icons/technologies/grafana.svg",
+  "Looker Studio": "/icons/technologies/looker+studio+(2)(2)-1-1168756057.png",
+  "Power BI": "/icons/technologies/Microsoft-Power-BI-Symbol-2863570908.png",
 };
 
 export function TechnologyIcon({ techName, size = 24 }: TechnologyIconProps) {

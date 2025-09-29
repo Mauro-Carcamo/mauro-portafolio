@@ -3,16 +3,10 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ExternalLink, Github, ArrowLeft, BarChart, LayoutDashboard } from "lucide-react"
+import { TechnologyIcon } from "@/components/technology-icon"
+import { ExternalLink, Github, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
-
-const PythonIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 80 80">
-    <path d="M40.1 0C23.6 0 10.3 13.4 10.3 29.9v5.3h19.8V29.9c0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8v19.8H29.9c-5.4 0-9.8 4.4-9.8 9.8s4.4 9.8 9.8 9.8h5.3c16.5 0 29.9-13.4 29.9-29.9V29.9C65.1 13.4 51.8 0 40.1 0zM25.2 15.1c-2.7 0-4.9 2.2-4.9 4.9s2.2 4.9 4.9 4.9 4.9-2.2 4.9-4.9-2.2-4.9-4.9-4.9z" fill="#306998"/>
-    <path d="M39.9 80c16.5 0 29.9-13.4 29.9-29.9v-5.3H50v5.3c0 5.4-4.4 9.8-9.8 9.8s-9.8-4.4-9.8-9.8V39.9h19.8c5.4 0 9.8-4.4 9.8-9.8s-4.4-9.8-9.8-9.8h-5.3C23.6 20.3 10.3 33.7 10.3 50.2v9.8C10.3 71.6 23.6 80 39.9 80zM54.8 65.1c2.7 0 4.9-2.2 4.9-4.9s-2.2-4.9-4.9-4.9-4.9 2.2-4.9 4.9 2.2 4.9 4.9 4.9z" fill="#FFD43B"/>
-  </svg>
-);
 
 export default function MortalityPredictionProject() {
   const [activeDashboard, setActiveDashboard] = useState<'shiny' | 'looker' | 'powerbi' | null>(null);
@@ -38,7 +32,7 @@ export default function MortalityPredictionProject() {
 
   const handleDashboardToggle = (dashboard: 'shiny' | 'looker' | 'powerbi') => {
     if (activeDashboard === dashboard) {
-      setActiveDashboard(null); // Oculta si se vuelve a hacer clic en el mismo botón
+      setActiveDashboard(null);
     } else {
       setActiveDashboard(dashboard);
     }
@@ -62,22 +56,22 @@ export default function MortalityPredictionProject() {
               ciencia de datos aplicadas a datos demográficos chilenos.
             </p>
 
-            <div className="flex flex-wrap gap-4 mb-8 border-t pt-6">
-                <Button onClick={() => handleDashboardToggle('shiny')} variant={activeDashboard === 'shiny' ? 'default' : 'outline'}>
-                  <PythonIcon />
+            <div className="flex flex-wrap items-center gap-4 mb-8 border-t pt-6">
+                <Button onClick={() => handleDashboardToggle('shiny')} variant={activeDashboard === 'shiny' ? 'default' : 'outline'} className="gap-2">
+                  <TechnologyIcon techName="Shiny" size={16} />
                   Python (Shiny)
                 </Button>
-                <Button onClick={() => handleDashboardToggle('looker')} variant={activeDashboard === 'looker' ? 'default' : 'outline'}>
-                  <BarChart className="h-4 w-4 mr-2" />
+                <Button onClick={() => handleDashboardToggle('looker')} variant={activeDashboard === 'looker' ? 'default' : 'outline'} className="gap-2">
+                  <TechnologyIcon techName="Looker Studio" size={16} />
                   Looker Studio
                 </Button>
-                <Button onClick={() => handleDashboardToggle('powerbi')} variant={activeDashboard === 'powerbi' ? 'default' : 'outline'}>
-                  <LayoutDashboard className="h-4 w-4 mr-2" />
+                <Button onClick={() => handleDashboardToggle('powerbi')} variant={activeDashboard === 'powerbi' ? 'default' : 'outline'} className="gap-2">
+                  <TechnologyIcon techName="Power BI" size={16} />
                   Power BI
                 </Button>
-                 <Button variant="outline" asChild>
+                 <Button variant="outline" asChild className="gap-2">
                   <a href="https://github.com/Mauro-Carcamo" target="_blank" rel="noopener noreferrer">
-                    <Github className="h-4 w-4 mr-2" />
+                    <Github className="h-4 w-4" />
                     Ver Código
                   </a>
                 </Button>

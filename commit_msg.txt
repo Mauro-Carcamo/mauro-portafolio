@@ -1,0 +1,8 @@
+feat(project-page): Rediseña la página de proyecto de mortalidad
+
+Se rediseña la página del proyecto de predicción de mortalidad para que funcione como un escaparate de dashboards, permitiendo mostrar visualizaciones de la misma data a través de diferentes herramientas.
+
+- Se implementa un layout de una sola columna, eliminando la sección de imágenes para dar más espacio a los dashboards.
+- Se añade una botonera con estado para seleccionar dinámicamente entre dashboards de Shiny, Looker Studio y Power BI.
+- Se integran los nuevos iconos para las tecnologías de visualización (Shiny, Looker Studio, Power BI) en el componente 'TechnologyIcon' y en los botones correspondientes.
+- Se actualiza la documentación del proyecto para reflejar los cambios.

@@ -95,7 +95,7 @@ export default function MortalityPredictionProject() {
                     </p>
                     <div className="aspect-video w-full bg-muted rounded-lg overflow-hidden border">
                       <iframe
-                        src="http://127.0.0.1:8001"
+                        src="http://127.0.0.1:8000"
                         className="w-full h-full border-0"
                         title="Dashboard de Mortalidad en Chile"
                         allowFullScreen

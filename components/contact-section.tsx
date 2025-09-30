@@ -167,7 +167,7 @@ export function ContactSection() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full">
+                <Button type="button" onClick={handleSubmit} className="w-full">
                   <Send className="h-4 w-4 mr-2" />
                   Enviar Mensaje
                 </Button>

@@ -120,15 +120,11 @@ export function ProjectsSection() {
         </div>
 
         <div className="text-center mt-12">
-          <Button
-            variant="outline"
-            size="lg"
-            href="https://github.com/Mauro-Carcamo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ver todos los proyectos en GitHub
-          </Button>
+          <Link href="https://github.com/Mauro-Carcamo" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="lg">
+              Ver todos los proyectos en GitHub
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

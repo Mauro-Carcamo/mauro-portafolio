@@ -5,13 +5,12 @@ import seaborn as sns
 import os
 from shiny.express import ui, render, input
 from shiny import reactive
-from shiny.ui import output_ui, output_table, output_plot, output_text_verbatim
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.stattools import adfuller
 
 # =============================================================================
-# Carga de Datos y Definición de UI
+# Carga de Datos y Lógica Reactiva
 # =============================================================================
 try:
     # Carga y pre-procesamiento de datos
@@ -19,6 +18,30 @@ try:
     df = pd.read_csv(csv_path, encoding='utf-8')
     df = df.drop(columns=["diagnostico1", "total"], errors='ignore')
 
+    @reactive.Calc
+    def filtered_data():
+        df_f = df.copy()
+        min_year, max_year = input.year_range()
+        df_f = df_f[(df_f['ano'] >= min_year) & (df_f['ano'] <= max_year)]
+        if input.sexo_filter() != "Todos":
+            df_f = df_f[df_f["sexo"] == input.sexo_filter()]
+        if input.edad_filter() != "Todos":
+            df_f = df_f[df_f["gru_edad"] == input.edad_filter()]
+        return df_f
+
+except (FileNotFoundError, Exception) as e:
+    df = pd.DataFrame() # Create an empty df on error
+    ui.page_opts(title="Error en la Aplicación", fillable=True)
+    ui.div(
+        ui.h1("Error Crítico"),
+        ui.p(f"No se pudo cargar o procesar el archivo de datos. Por favor, asegúrate de que el archivo '036ei5wg8bzm6bfnggh2.csv' exista y revisa la consola para más detalles. Error: {e}"),
+        style="color: red; font-size: 1.5rem; text-align: center; padding: 50px;"
+    )
+
+# =============================================================================
+# Definición de UI
+# =============================================================================
+if not df.empty:
     # --- UI Principal del Dashboard ---
     ui.page_opts(title="Dashboard de Análisis de Mortalidad - Chile 1997-2019", fillable=True)
 
@@ -67,10 +90,24 @@ try:
         with ui.navset_card_tab(id="nav_tabs"):
             with ui.nav_panel("🏠 Inicio"):
                 with ui.layout_columns(col_widths={"sm": 6, "md": 3, "lg": 3}):
-                    output_ui("total_casos_box")
-                    output_ui("total_enfermedades_box")
-                    output_ui("periodo_analizado_box")
-                    output_ui("enfermedad_comun_box")
+                    @render.ui
+                    def total_casos_box():
+                        return ui.value_box(title="Total de Casos", value=f"{filtered_data()['n'].sum():,}".replace(",", "."), style="background-color: var(--accent1); color: white;")
+
+                    @render.ui
+                    def total_enfermedades_box():
+                        return ui.value_box(title="Enfermedades Únicas", value=str(filtered_data()['nombre_enfermedad'].nunique()), style="background-color: var(--accent2); color: white;")
+
+                    @render.ui
+                    def periodo_analizado_box():
+                        min_year, max_year = input.year_range()
+                        return ui.value_box(title="Período Analizado", value=f"{min_year}-{max_year}", style="background-color: var(--accent3); color: white;")
+
+                    @render.ui
+                    def enfermedad_comun_box():
+                        data = filtered_data()
+                        comun = "N/A" if data.empty else data.groupby('nombre_enfermedad')['n'].sum().idxmax()
+                        return ui.value_box(title="Enfermedad Más Común", value=comun, style="background-color: var(--accent4); color: white;")
 
                 with ui.layout_columns(col_widths={"sm": 12, "md": 6, "lg": 6}, gap="20px"):
                     with ui.div(class_="content-panel"):
@@ -85,25 +122,76 @@ try:
                         )
                     with ui.div(class_="content-panel"):
                         ui.h4("🔍 Variables en los Datos Filtrados", class_="section-header")
-                        output_ui("vars_info")
+                        @render.ui
+                        def vars_info():
+                            data = filtered_data()
+                            return ui.tags.ul(
+                                ui.tags.li(f"Variables categóricas: gru_edad ({data['gru_edad'].nunique()} grupos), sexo ({data['sexo'].nunique()}), nombre_enfermedad ({data['nombre_enfermedad'].nunique()})."),
+                                ui.tags.li(f"Variables numéricas: ano ({data['ano'].nunique()} años), n (casos)."),
+                                class_="info-list"
+                            )
 
                 with ui.div(class_="content-panel"):
                     ui.h4("📋 Resumen por Sexo y Grupo Etario", class_="section-header")
-                    output_table("resumen_inicio")
+                    @render.table
+                    def resumen_inicio():
+                        data = filtered_data()
+                        if data.empty: return pd.DataFrame()
+                        tabla = data.groupby(["gru_edad", "sexo"]).size().reset_index(name="Cantidad").pivot(index="gru_edad", columns="sexo", values="Cantidad").fillna(0).reset_index()
+                        for col in tabla.columns:
+                            if col != "gru_edad":
+                                tabla[col] = tabla[col].apply(lambda x: f"{int(x):,}".replace(",", "."))
+                        return tabla
 
             with ui.nav_panel("📊 Descriptivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis Descriptivo de Variables", class_="section-header")
                     ui.input_select("variable_descriptiva", "Seleccione variable para visualizar:", ["sexo", "gru_edad", "nombre_enfermedad"])
                     with ui.div(class_="plot-container"):
-                        output_plot("plot_descriptivo")
+                        @render.plot
+                        def plot_descriptivo():
+                            data = filtered_data()
+                            if data.empty: return
+                            fig, ax = plt.subplots(figsize=(12, 7))
+                            variable = input.variable_descriptiva()
+                            if variable == "sexo":
+                                sns.countplot(data=data, x="sexo", ax=ax, palette='Set2', order=data['sexo'].value_counts().index)
+                                ax.set_title("Distribución de Casos por Sexo", fontsize=16)
+                            elif variable == "gru_edad":
+                                sns.countplot(data=data, x="gru_edad", ax=ax, palette='viridis', order=sorted(data['gru_edad'].unique()))
+                                ax.set_title("Distribución de Casos por Grupo de Edad", fontsize=16)
+                                plt.xticks(rotation=45)
+                            else:
+                                top_10 = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10)
+                                sns.barplot(x=top_10.values, y=top_10.index, ax=ax, palette='cubehelix')
+                                ax.set_title("Top 10 Enfermedades más Comunes", fontsize=16)
+                            plt.tight_layout()
+                            return fig
 
             with ui.nav_panel("🔍 Diagnóstico"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis de Distribución (Box Plot)", class_="section-header")
                     ui.input_select("variable_diagnostico", "Seleccione variable para visualizar:", ["sexo", "gru_edad", "nombre_enfermedad"])
                     with ui.div(class_="plot-container"):
-                        output_plot("plot_diagnostico")
+                        @render.plot
+                        def plot_diagnostico():
+                            data = filtered_data()
+                            if data.empty: return
+                            fig, ax = plt.subplots(figsize=(12, 7))
+                            variable = input.variable_diagnostico()
+                            if variable == "sexo":
+                                sns.boxplot(data=data, x="sexo", y="n", ax=ax, palette='pastel')
+                            elif variable == "gru_edad":
+                                sns.boxplot(data=data, x="gru_edad", y="n", ax=ax, palette='YlOrBr', order=sorted(data['gru_edad'].unique()))
+                                plt.xticks(rotation=45)
+                            else:
+                                top_10_enf = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10).index
+                                data_plot = data[data["nombre_enfermedad"].isin(top_10_enf)]
+                                sns.boxplot(data=data_plot, x="nombre_enfermedad", y="n", ax=ax, palette='Blues')
+                                plt.xticks(rotation=90)
+                            ax.set_title(f"Distribución de Casos (n) por {variable}", fontsize=16)
+                            plt.tight_layout()
+                            return fig
 
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis de Serie Temporal (Casos Totales)", class_="section-header")
@@ -111,199 +199,84 @@ try:
                     with ui.layout_columns():
                         with ui.div():
                             ui.h4("Test de Estacionariedad (Dickey-Fuller)", class_="section-header")
-                            output_text_verbatim("adf_test_results")
+                            @render.text
+                            def adf_test_results():
+                                data_ts = filtered_data().groupby("ano")["n"].sum()
+                                if len(data_ts) < 4: return "No hay suficientes datos para el test."
+                                adf_result = adfuller(data_ts)
+                                p_value = adf_result[1]
+                                conclusion = "Estacionaria (p < 0.05)" if p_value < 0.05 else "No Estacionaria (p >= 0.05)"
+                                return f"Estadístico ADF: {adf_result[0]:.2f}\
+p-valor: {p_value:.3f}\
+Conclusión: {conclusion}"
                         with ui.div():
                             ui.h4("Descomposición de Serie Temporal", class_="section-header")
                             with ui.div(class_="plot-container"):
-                                output_plot("decomposition_plot")
+                                @render.plot
+                                def decomposition_plot():
+                                    data_ts = filtered_data().groupby("ano")["n"].sum()
+                                    if len(data_ts) < 4: return
+                                    period = 2 if len(data_ts) >= 4 else 1
+                                    decomposition = seasonal_decompose(data_ts, model='additive', period=period)
+                                    fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1, figsize=(10, 8), sharex=True)
+                                    decomposition.observed.plot(ax=ax1, ylabel='Observado')
+                                    decomposition.trend.plot(ax=ax2, ylabel='Tendencia')
+                                    decomposition.seasonal.plot(ax=ax3, ylabel='Estacionalidad')
+                                    decomposition.resid.plot(ax=ax4, ylabel='Residual')
+                                    fig.suptitle('Descomposición de la Serie Temporal', fontsize=16)
+                                    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+                                    return fig
 
             with ui.nav_panel("🔮 Predictivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Predicción con Modelo ARIMA", class_="section-header")
                     ui.p("Se realiza una predicción a 5 años para el total de casos en los datos filtrados.")
                     with ui.div(class_="plot-container"):
-                        output_plot("plot_predictivo")
+                        @render.plot
+                        def plot_predictivo():
+                            data_ts = filtered_data().groupby("ano")["n"].sum()
+                            if len(data_ts) < 4: return
+                            fig, ax = plt.subplots(figsize=(12, 7))
+                            try:
+                                model = ARIMA(data_ts, order=(1,1,1))
+                                results = model.fit()
+                                forecast = results.forecast(steps=5)
+                                ax.plot(data_ts.index, data_ts.values, label='Histórico', color='blue', marker='o')
+                                ax.plot(range(int(data_ts.index[-1])+1, int(data_ts.index[-1])+6), forecast, label='Predicción', linestyle='--', color='red', marker='x')
+                                ax.set_title("Predicción de Casos Totales (Próximos 5 años)", fontsize=16)
+                                ax.legend()
+                            except Exception as e:
+                                ax.text(0.5, 0.5, f"No se pudo generar el modelo ARIMA:\n{e}", ha='center', va='center', color='red')
+                            plt.tight_layout()
+                            return fig
 
             with ui.nav_panel("💡 Prescriptivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis para Recomendaciones", class_="section-header")
                     ui.input_select("variable_prescriptiva", "Seleccione análisis:", ["Tendencia Anual", "Grupos de Edad en Riesgo", "Enfermedades Críticas"])
                     with ui.div(class_="plot-container"):
-                        output_plot("plot_prescriptivo")
+                        @render.plot
+                        def plot_prescriptivo():
+                            data = filtered_data()
+                            if data.empty: return
+                            fig, ax = plt.subplots(figsize=(12, 7))
+                            variable = input.variable_prescriptiva()
+                            if variable == "Tendencia Anual":
+                                tendencias = data.groupby("ano")["n"].sum()
+                                ax.plot(tendencias.index, tendencias.values, color='#e67e22', marker='o')
+                                ax.set_title("Tendencia Anual de Casos Totales", fontsize=16)
+                            elif variable == "Grupos de Edad en Riesgo":
+                                grupos_riesgo = data.groupby("gru_edad")["n"].sum().sort_values(ascending=False).nlargest(10)
+                                sns.barplot(x=grupos_riesgo.values, y=grupos_riesgo.index, ax=ax, palette='Purples_r')
+                                ax.set_title("Top 10 Grupos de Edad en Riesgo", fontsize=16)
+                            else: # Enfermedades Críticas
+                                enfermedades_criticas = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10)
+                                sns.barplot(x=enfermedades_criticas.values, y=enfermedades_criticas.index, ax=ax, palette='Reds_r')
+                                ax.set_title("Top 10 Enfermedades Críticas para Intervención", fontsize=16)
+                            plt.tight_layout()
+                            return fig
 
         ui.div(
             ui.tags.p(f"© 2024 - Dashboard de Análisis de Mortalidad Chile - Datos: 1997-2019"),
             class_="footer"
         )
-
-except (FileNotFoundError, Exception) as e:
-    # --- UI de Error ---
-    ui.page_opts(title="Error en la Aplicación", fillable=True)
-    ui.div(
-        ui.h1("Error Crítico"),
-        ui.p(f"No se pudo cargar o procesar el archivo de datos. Por favor, asegúrate de que el archivo '036ei5wg8bzm6bfnggh2.csv' exista y revisa la consola para más detalles. Error: {e}"),
-        style="color: red; font-size: 1.5rem; text-align: center; padding: 50px;"
-    )
-
-# =============================================================================
-# Lógica de Servidor (solo se define si la carga de datos fue exitosa)
-# =============================================================================
-if 'df' in locals():
-    @reactive.Calc
-    def filtered_data():
-        df_f = df.copy()
-        min_year, max_year = input.year_range()
-        df_f = df_f[(df_f['ano'] >= min_year) & (df_f['ano'] <= max_year)]
-        if input.sexo_filter() != "Todos":
-            df_f = df_f[df_f["sexo"] == input.sexo_filter()]
-        if input.edad_filter() != "Todos":
-            df_f = df_f[df_f["gru_edad"] == input.edad_filter()]
-        return df_f
-
-    # --- Render UI para Value Boxes ---
-    @render.ui
-    def total_casos_box():
-        total_casos = filtered_data()['n'].sum()
-        return ui.value_box(title="Total de Casos", value=f"{total_casos:,}".replace(",", "."), style="background-color: var(--accent1); color: white;")
-
-    @render.ui
-    def total_enfermedades_box():
-        total_enfermedades = filtered_data()['nombre_enfermedad'].nunique()
-        return ui.value_box(title="Enfermedades Únicas", value=str(total_enfermedades), style="background-color: var(--accent2); color: white;")
-
-    @render.ui
-    def periodo_analizado_box():
-        min_year, max_year = input.year_range()
-        return ui.value_box(title="Período Analizado", value=f"{min_year}-{max_year}", style="background-color: var(--accent3); color: white;")
-
-    @render.ui
-    def enfermedad_comun_box():
-        data = filtered_data()
-        if data.empty:
-            comun = "N/A"
-        else:
-            comun = data.groupby('nombre_enfermedad')['n'].sum().idxmax()
-        return ui.value_box(title="Enfermedad Más Común", value=comun, style="background-color: var(--accent4); color: white;")
-
-    @render.ui
-    def vars_info():
-        data = filtered_data()
-        return ui.tags.ul(
-            ui.tags.li(f"Variables categóricas: gru_edad ({data['gru_edad'].nunique()} grupos), sexo ({data['sexo'].nunique()}), nombre_enfermedad ({data['nombre_enfermedad'].nunique()})."),
-            ui.tags.li(f"Variables numéricas: ano ({data['ano'].nunique()} años), n (casos)."),
-            class_="info-list"
-        )
-
-    # --- Render Tablas y Gráficos ---
-    @render.table
-    def resumen_inicio():
-        data = filtered_data()
-        if data.empty: return pd.DataFrame()
-        tabla = data.groupby(["gru_edad", "sexo"]).size().reset_index(name="Cantidad").pivot(index="gru_edad", columns="sexo", values="Cantidad").fillna(0).reset_index()
-        for col in tabla.columns:
-            if col != "gru_edad":
-                tabla[col] = tabla[col].apply(lambda x: f"{int(x):,}".replace(",", "."))
-        return tabla
-
-    @render.plot
-    def plot_descriptivo():
-        data = filtered_data()
-        if data.empty: return
-        fig, ax = plt.subplots(figsize=(12, 7))
-        variable = input.variable_descriptiva()
-        if variable == "sexo":
-            sns.countplot(data=data, x="sexo", ax=ax, palette='Set2', order=data['sexo'].value_counts().index)
-            ax.set_title("Distribución de Casos por Sexo", fontsize=16)
-        elif variable == "gru_edad":
-            sns.countplot(data=data, x="gru_edad", ax=ax, palette='viridis', order=sorted(data['gru_edad'].unique()))
-            ax.set_title("Distribución de Casos por Grupo de Edad", fontsize=16)
-            plt.xticks(rotation=45)
-        else:
-            top_10 = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10)
-            sns.barplot(x=top_10.values, y=top_10.index, ax=ax, palette='cubehelix')
-            ax.set_title("Top 10 Enfermedades más Comunes", fontsize=16)
-        plt.tight_layout()
-        return fig
-
-    @render.plot
-    def plot_diagnostico():
-        data = filtered_data()
-        if data.empty: return
-        fig, ax = plt.subplots(figsize=(12, 7))
-        variable = input.variable_diagnostico()
-        if variable == "sexo":
-            sns.boxplot(data=data, x="sexo", y="n", ax=ax, palette='pastel')
-        elif variable == "gru_edad":
-            sns.boxplot(data=data, x="gru_edad", y="n", ax=ax, palette='YlOrBr', order=sorted(data['gru_edad'].unique()))
-            plt.xticks(rotation=45)
-        else:
-            top_10_enf = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10).index
-            data_plot = data[data["nombre_enfermedad"].isin(top_10_enf)]
-            sns.boxplot(data=data_plot, x="nombre_enfermedad", y="n", ax=ax, palette='Blues')
-            plt.xticks(rotation=90)
-        ax.set_title(f"Distribución de Casos (n) por {variable}", fontsize=16)
-        plt.tight_layout()
-        return fig
-
-    @render.text
-    def adf_test_results():
-        data_ts = filtered_data().groupby("ano")["n"].sum()
-        if len(data_ts) < 4: return "No hay suficientes datos para el test."
-        adf_result = adfuller(data_ts)
-        p_value = adf_result[1]
-        conclusion = "Estacionaria (p < 0.05)" if p_value < 0.05 else "No Estacionaria (p >= 0.05)"
-        return f"Estadístico ADF: {adf_result[0]:.2f}\np-valor: {p_value:.3f}\nConclusión: {conclusion}"
-
-    @render.plot
-    def decomposition_plot():
-        data_ts = filtered_data().groupby("ano")["n"].sum()
-        if len(data_ts) < 4: return
-        period = 2 if len(data_ts) >= 4 else 1
-        decomposition = seasonal_decompose(data_ts, model='additive', period=period)
-        fig, (ax1, ax2, ax3, ax4) = plt.subplots(4, 1, figsize=(10, 8), sharex=True)
-        decomposition.observed.plot(ax=ax1, ylabel='Observado')
-        decomposition.trend.plot(ax=ax2, ylabel='Tendencia')
-        decomposition.seasonal.plot(ax=ax3, ylabel='Estacionalidad')
-        decomposition.resid.plot(ax=ax4, ylabel='Residual')
-        fig.suptitle('Descomposición de la Serie Temporal', fontsize=16)
-        plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-        return fig
-
-    @render.plot
-    def plot_predictivo():
-        data_ts = filtered_data().groupby("ano")["n"].sum()
-        if len(data_ts) < 4: return
-        fig, ax = plt.subplots(figsize=(12, 7))
-        try:
-            model = ARIMA(data_ts, order=(1,1,1))
-            results = model.fit()
-            forecast = results.forecast(steps=5)
-            ax.plot(data_ts.index, data_ts.values, label='Histórico', color='blue', marker='o')
-            ax.plot(range(int(data_ts.index[-1])+1, int(data_ts.index[-1])+6), forecast, label='Predicción', linestyle='--', color='red', marker='x')
-            ax.set_title("Predicción de Casos Totales (Próximos 5 años)", fontsize=16)
-            ax.legend()
-        except Exception as e:
-            ax.text(0.5, 0.5, f"No se pudo generar el modelo ARIMA:\n{e}", ha='center', va='center', color='red')
-        plt.tight_layout()
-        return fig
-
-    @render.plot
-    def plot_prescriptivo():
-        data = filtered_data()
-        if data.empty: return
-        fig, ax = plt.subplots(figsize=(12, 7))
-        variable = input.variable_prescriptiva()
-        if variable == "Tendencia Anual":
-            tendencias = data.groupby("ano")["n"].sum()
-            ax.plot(tendencias.index, tendencias.values, color='#e67e22', marker='o')
-            ax.set_title("Tendencia Anual de Casos Totales", fontsize=16)
-        elif variable == "Grupos de Edad en Riesgo":
-            grupos_riesgo = data.groupby("gru_edad")["n"].sum().sort_values(ascending=False).nlargest(10)
-            sns.barplot(x=grupos_riesgo.values, y=grupos_riesgo.index, ax=ax, palette='Purples_r')
-            ax.set_title("Top 10 Grupos de Edad en Riesgo", fontsize=16)
-        else: # Enfermedades Críticas
-            enfermedades_criticas = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10)
-            sns.barplot(x=enfermedades_criticas.values, y=enfermedades_criticas.index, ax=ax, palette='Reds_r')
-            ax.set_title("Top 10 Enfermedades Críticas para Intervención", fontsize=16)
-        plt.tight_layout()
-        return fig

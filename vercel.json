@@ -1,0 +1,14 @@
+{
+  "functions": {
+    "app/projects/Moratalidad Chile 1997-2019/app.py": {
+      "runtime": "python3.9",
+      "memory": 1024
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/shiny-app",
+      "destination": "/app/projects/Moratalidad Chile 1997-2019/app.py"
+    }
+  ]
+}

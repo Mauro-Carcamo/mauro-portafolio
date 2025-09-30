@@ -89,19 +89,14 @@ export default function MortalityPredictionProject() {
               </CardHeader>
               <CardContent>
                 {activeDashboard === 'shiny' && (
-                  <>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      El siguiente dashboard es una aplicación Shiny ejecutándose localmente. Asegúrate de haber iniciado la aplicación para poder visualizarla.
-                    </p>
-                    <div className="aspect-video w-full bg-muted rounded-lg overflow-hidden border">
-                      <iframe
-                        src="http://127.0.0.1:8000"
-                        className="w-full h-full border-0"
-                        title="Dashboard de Mortalidad en Chile"
-                        allowFullScreen
-                      ></iframe>
-                    </div>
-                  </>
+                  <div className="aspect-video w-full bg-muted rounded-lg overflow-hidden border">
+                    <iframe
+                      src="/shiny-app"
+                      className="w-full h-full border-0"
+                      title="Dashboard de Mortalidad en Chile"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
                 )}
                 {activeDashboard === 'looker' && (
                   <div className="aspect-video w-full bg-muted rounded-lg flex items-center justify-center">

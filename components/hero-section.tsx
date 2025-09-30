@@ -48,6 +48,7 @@ export function HeroSection() {
               <Button
                 variant="secondary"
                 size="lg"
+                onClick={handleDownloadCV}
                 className="min-w-[180px] bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20"
               >
                 <Download className="w-4 h-4 mr-2" />

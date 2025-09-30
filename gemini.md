@@ -16,7 +16,29 @@
 
 1.  **Formulario de Contacto:** El botón "Enviar Mensaje" en el formulario de contacto sigue provocando una descarga no deseada del CV, a pesar de que la función de envío del formulario se ejecuta. La causa raíz de este comportamiento aún no se ha determinado.
 
-## Próximos Pasos
+## Próximos Pasos (Para la próxima sesión)
 
-1.  **Resolver Bug del Formulario de Contacto:** Investigar y solucionar el problema que causa la descarga del CV al enviar el formulario de contacto.
-2.  **Commit de los Cambios:** Una vez solucionado el bug del formulario, crear un commit con todos los arreglos y mejoras realizadas.
+**1. Resolver Bug del Formulario de Contacto:**
+   - Investigar y solucionar el problema que causa la descarga del CV al enviar el formulario de contacto.
+
+**2. Desplegar el Proyecto en Vercel:**
+   - Una vez solucionado el bug, proceder con el despliegue del sitio en Vercel.
+
+   **Guía de Despliegue en Vercel:**
+
+   **a. Crear una Cuenta en Vercel:**
+      - Ir a [vercel.com](https://vercel.com) y registrarse.
+
+   **b. Instalar la CLI de Vercel:**
+      - Abrir la terminal y ejecutar: `npm install -g vercel`
+
+   **c. Iniciar Sesión en Vercel:**
+      - En la terminal, ejecutar: `vercel login`
+
+   **d. Desplegar el Proyecto:**
+      - Navegar a la raíz del proyecto (`D:\Escritorio\Proyectos Portafolio\Porfatolio`).
+      - Ejecutar: `vercel`
+      - Seguir las instrucciones de la CLI, aceptando los valores por defecto en la mayoría de los casos.
+
+**3. Commit de los Cambios:**
+   - Crear un commit con todos los arreglos y mejoras realizadas.

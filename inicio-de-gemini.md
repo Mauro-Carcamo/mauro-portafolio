@@ -10,12 +10,20 @@
 
 ## Estado Actual del Proyecto
 
-- **Botón de Descarga de CV (Sección Hero):** El botón en la sección "Hero" para descargar el CV funciona correctamente.
-- **Formulario de Contacto Eliminado:** Se ha eliminado el formulario de contacto.
-- **Dashboard de Mortalidad Mejorado:** La aplicación Shiny ha sido refactorizada y mejorada con nuevas funcionalidades y gráficos interactivos.
+- **Dashboard de Mortalidad Mejorado:** La aplicación Shiny ha sido completamente refactorizada, mejorada con gráficos interactivos y nuevas funcionalidades.
 - **Repositorio Reestructurado:** El proyecto de mortalidad ha sido reorganizado siguiendo las mejores prácticas de la industria.
+- **Notebooks Limpios:** Se ha consolidado y limpiado el notebook de análisis.
+- **Animación Creada:** Se ha generado un script para crear una animación HTML interactiva.
 
 ## 8. Registro de Trabajo
+
+*   **Inicio de Trabajo:** martes, 30 de septiembre de 2025, 13:30 PM
+*   **Fin de Trabajo:** martes, 30 de septiembre de 2025, 14:30 PM
+*   **Resumen:** Se ha continuado con la mejora del proyecto de mortalidad. Se limpió y consolidó el notebook de análisis. Se creó un script para generar una animación HTML profesional. Se actualizaron todos los documentos del proyecto para reflejar los cambios.
+
+*   **Inicio de Trabajo:** martes, 30 de septiembre de 2025, 13:00 PM
+*   **Fin de Trabajo:** martes, 30 de septiembre de 2025, 13:30 PM
+*   **Resumen:** Se ha solucionado un error en la aplicación Shiny que impedía el renderizado de los gráficos de `plotly`. Se ha implementado el uso de `shinywidgets` para la correcta visualización de los gráficos interactivos.
 
 *   **Inicio de Trabajo:** martes, 30 de septiembre de 2025, 12:00 PM
 *   **Fin de Trabajo:** martes, 30 de septiembre de 2025, 13:00 PM

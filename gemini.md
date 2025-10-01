@@ -14,28 +14,22 @@
 
 ## Tareas Completadas
 
-- **Eliminación del Formulario de Contacto:** Se ha eliminado completamente el formulario de contacto de la sección "Contacto".
+- **Reestructuración del Repositorio del Proyecto de Mortalidad:** Se ha reorganizado la estructura de archivos del proyecto de mortalidad para seguir las mejores prácticas de la industria (`data`, `notebooks`, `src`, `web_app`).
 - **Mejoras en el Dashboard de Mortalidad:**
-    - **Refactorización del Código:** Se ha refactorizado la aplicación Shiny `version2.py` para mejorar su estructura y legibilidad.
-    - **Externalización de CSS:** El código de estilos se ha movido a un archivo `styles.css` externo.
-    - **Código Comentado:** Se han añadido comentarios al código para facilitar su mantenimiento.
-    - **Modularización:** La lógica de carga de datos se ha movido a un archivo `helpers.py`.
-    - **Gráficos Interactivos:** Se han reemplazado los gráficos estáticos de `matplotlib` por gráficos interactivos de `plotly`.
-    - **Nuevo Filtro:** Se ha añadido un filtro para analizar los datos por enfermedad.
-    - **Métricas de Modelo:** Se ha añadido el cálculo y visualización del Error Absoluto Medio (MAE) para el modelo ARIMA.
-    - **Limpieza de Archivos:** Se han eliminado los archivos de dashboard antiguos y no utilizados.
-- **Reestructuración del Repositorio del Proyecto de Mortalidad:** Se ha reorganizado la estructura de archivos del proyecto de mortalidad para seguir las mejores prácticas de la industria.
+    - Se ha refactorizado y mejorado la aplicación Shiny, incluyendo la modularización del código, la externalización de CSS y la adición de comentarios.
+    - Se han reemplazado los gráficos estáticos por versiones interactivas con `plotly`.
+    - Se ha solucionado un error de renderizado implementando `shinywidgets`.
+    - Se han añadido nuevas funcionalidades, como un filtro por enfermedad y la métrica MAE para el modelo ARIMA.
+- **Limpieza de Notebooks:** Se ha consolidado y reorganizado el notebook de análisis exploratorio y modelado.
+- **Creación de Animación:** Se ha creado un script que genera una animación interactiva en formato HTML.
 
-## Próximos Pasos
+## Próximos Pasos (Para la próxima sesión)
 
-**1. Mejorar el README del Proyecto de Mortalidad:**
-   - Incluir: resumen del proyecto, problema, dataset, metodología, resultados clave, cómo replicar, capturas/demos.
+**1. Crear un pipeline reproducible:**
+   - Convertir el código del notebook en scripts de Python (`01_data_preprocessing.py`, `02_feature_engineering.py`, etc.) para automatizar el flujo de trabajo.
 
-**2. Limpieza de los Notebooks:**
-   - Dividir en notebooks bien organizados: exploración, preprocesamiento, modelado, evaluación.
+**2. Mejorar el README del Proyecto de Mortalidad:**
+   - Completar las secciones pendientes del archivo README.md con la descripción del proyecto, metodología y resultados.
 
 **3. Desplegar el Proyecto en Vercel:**
    - Una vez completadas las mejoras, proceder con el despliegue del sitio en Vercel.
-
-**4. Commit de los Cambios:**
-   - Crear un commit con todos los arreglos y mejoras realizadas.

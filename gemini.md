@@ -24,27 +24,18 @@
     - **Nuevo Filtro:** Se ha añadido un filtro para analizar los datos por enfermedad.
     - **Métricas de Modelo:** Se ha añadido el cálculo y visualización del Error Absoluto Medio (MAE) para el modelo ARIMA.
     - **Limpieza de Archivos:** Se han eliminado los archivos de dashboard antiguos y no utilizados.
+- **Reestructuración del Repositorio del Proyecto de Mortalidad:** Se ha reorganizado la estructura de archivos del proyecto de mortalidad para seguir las mejores prácticas de la industria.
 
 ## Próximos Pasos
 
-**1. Desplegar el Proyecto en Vercel:**
+**1. Mejorar el README del Proyecto de Mortalidad:**
+   - Incluir: resumen del proyecto, problema, dataset, metodología, resultados clave, cómo replicar, capturas/demos.
+
+**2. Limpieza de los Notebooks:**
+   - Dividir en notebooks bien organizados: exploración, preprocesamiento, modelado, evaluación.
+
+**3. Desplegar el Proyecto en Vercel:**
    - Una vez completadas las mejoras, proceder con el despliegue del sitio en Vercel.
 
-   **Guía de Despliegue en Vercel:**
-
-   **a. Crear una Cuenta en Vercel:**
-      - Ir a [vercel.com](https://vercel.com) y registrarse.
-
-   **b. Instalar la CLI de Vercel:**
-      - Abrir la terminal y ejecutar: `npm install -g vercel`
-
-   **c. Iniciar Sesión en Vercel:**
-      - En la terminal, ejecutar: `vercel login`
-
-   **d. Desplegar el Proyecto:**
-      - Navegar a la raíz del proyecto (`D:\Escritorio\Proyectos Portafolio\Porfatolio`).
-      - Ejecutar: `vercel`
-      - Seguir las instrucciones de la CLI, aceptando los valores por defecto en la mayoría de los casos.
-
-**2. Commit de los Cambios:**
+**4. Commit de los Cambios:**
    - Crear un commit con todos los arreglos y mejoras realizadas.

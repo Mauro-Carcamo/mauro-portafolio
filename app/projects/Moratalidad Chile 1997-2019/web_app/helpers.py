@@ -5,7 +5,7 @@ from shiny import reactive
 def load_data():
     """Loads and preprocesses the data."""
     try:
-        csv_path = os.path.join(os.path.dirname(__file__), "036ei5wg8bzm6bfnggh2.csv")
+        csv_path = os.path.join(os.path.dirname(__file__), "..", "data", "raw", "036ei5wg8bzm6bfnggh2.csv")
         df = pd.read_csv(csv_path, encoding='utf-8')
         df = df.drop(columns=["diagnostico1", "total"], errors='ignore')
         return df

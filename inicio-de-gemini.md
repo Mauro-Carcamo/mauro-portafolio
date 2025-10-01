@@ -12,9 +12,14 @@
 
 - **Botón de Descarga de CV (Sección Hero):** El botón en la sección "Hero" para descargar el CV funciona correctamente.
 - **Formulario de Contacto Eliminado:** Se ha eliminado el formulario de contacto.
-- **Dashboard de Mortalidad Mejorado:** La aplicación Shiny `version2.py` ha sido refactorizada y mejorada con nuevas funcionalidades y gráficos interactivos.
+- **Dashboard de Mortalidad Mejorado:** La aplicación Shiny ha sido refactorizada y mejorada con nuevas funcionalidades y gráficos interactivos.
+- **Repositorio Reestructurado:** El proyecto de mortalidad ha sido reorganizado siguiendo las mejores prácticas de la industria.
 
 ## 8. Registro de Trabajo
+
+*   **Inicio de Trabajo:** martes, 30 de septiembre de 2025, 12:00 PM
+*   **Fin de Trabajo:** martes, 30 de septiembre de 2025, 13:00 PM
+*   **Resumen:** Se ha reestructurado completamente el repositorio del proyecto de mortalidad, organizando los archivos en carpetas (`data`, `notebooks`, `src`, `web_app`) y actualizando las rutas en el código para asegurar la funcionalidad.
 
 *   **Inicio de Trabajo:** martes, 30 de septiembre de 2025, 10:00 AM
 *   **Fin de Trabajo:** martes, 30 de septiembre de 2025, 12:00 PM

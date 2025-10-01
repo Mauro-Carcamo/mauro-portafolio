@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { TechnologyIcon } from "@/components/technology-icon"
 
 export function SkillsSection() {
@@ -46,12 +45,6 @@ export function SkillsSection() {
     },
   ]
 
-  const certifications = [
-    "AWS Certified Developer",
-    "Google Cloud Professional",
-    "Meta Frontend Developer",
-    "MongoDB Certified Developer",
-  ]
 
   return (
     <section id="skills" className="py-20 bg-muted/30">
@@ -69,39 +62,20 @@ export function SkillsSection() {
               <CardHeader>
                 <CardTitle className="text-lg text-center">{category.title}</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-2">
-                        <TechnologyIcon techName={skill.name} size={20} />
-                        <span className="text-sm font-medium">{skill.name}</span>
-                      </div>
-                      <span className="text-xs text-muted-foreground">{skill.level}%</span>
+              <CardContent>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div key={skillIndex}>
+                      <TechnologyIcon techName={skill.name} size={32} />
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div
-                        className="bg-gradient-to-r from-primary to-accent h-2 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${skill.level}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="text-center">
-          <h3 className="text-2xl font-semibold mb-6">Certificaciones</h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {certifications.map((cert, index) => (
-              <Badge key={index} variant="outline" className="text-sm py-2 px-4">
-                {cert}
-              </Badge>
-            ))}
-          </div>
-        </div>
+
       </div>
     </section>
   )

@@ -30,8 +30,7 @@ export function HeroSection() {
               </h1>
 
               <p className="text-xl sm:text-2xl text-muted-foreground mb-6">
-                Sociólogo especializado en Ciencia de Datos y Desarrollo Full Stack, creando soluciones innovadoras con
-                Machine Learning y tecnologías modernas
+                Sociólogo con estudios en Ciencia de Datos,Inteligencia Artificial y Full Stack en Python.
               </p>
             </div>
 

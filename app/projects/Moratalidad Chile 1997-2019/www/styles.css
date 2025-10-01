@@ -1,0 +1,11 @@
+:root { --primary: #2c3e50; --secondary: #34495e; --accent1: #1abc9c; --accent2: #3498db; --accent3: #9b59b6; --accent4: #e67e22; --accent5: #e74c3c; --light: #ecf0f1; --dark: #2c3e50; --text: #2c3e50; --text-light: #7f8c8d; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: var(--text); line-height: 1.6; }
+.main-title { text-align: center; color: var(--primary); margin: 20px 0 10px; font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding: 10px; }
+.subtitle { text-align: center; color: var(--text-light); margin-bottom: 30px; font-size: 1.1rem; max-width: 900px; margin-left: auto; margin-right: auto; }
+.content-panel { padding: 25px; border-radius: 12px; background-color: white; margin: 15px 0; box-shadow: 0 4px 8px rgba(0,0,0,0.05); border: none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.content-panel:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+.section-header { color: var(--secondary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 3px solid var(--accent2); font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; }
+.info-list { list-style-type: none; padding-left: 0; }
+.info-list li { padding: 12px 18px; margin-bottom: 12px; background-color: var(--light); border-radius: 8px; border-left: 4px solid var(--accent1); font-size: 1.05rem; }
+.plot-container { min-height: 400px; display: flex; align-items: center; justify-content: center; }
+.footer { text-align: center; margin-top: 40px; padding: 25px; color: var(--text-light); font-size: 0.95rem; border-top: 1px solid #ddd; background-color: var(--light); border-radius: 8px; }

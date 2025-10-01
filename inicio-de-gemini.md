@@ -8,6 +8,11 @@
 
 (Contenido anterior omitido por brevedad)
 
+## Estado Actual del Proyecto
+
+- **Botón de Descarga de CV (Sección Hero):** El botón en la sección "Hero" para descargar el CV funciona correctamente, iniciando la descarga del archivo `CV_Mauricio_Carcamo.pdf`.
+- **Formulario de Contacto Eliminado:** Se ha eliminado el formulario de contacto para resolver un bug persistente.
+
 ## 8. Registro de Trabajo
 
 *   **Inicio de Trabajo:** domingo, 28 de septiembre de 2025, 10:00 AM

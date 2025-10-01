@@ -10,18 +10,15 @@
     - Todos los enlaces a las páginas de los proyectos funcionan correctamente.
     - Todos los enlaces a redes sociales (GitHub, LinkedIn, WhatsApp, Email) funcionan correctamente.
     - El botón "Ver todos los proyectos en GitHub" ahora enlaza correctamente al perfil del usuario.
-    - El botón "Descargar CV" ahora funciona y descarga el archivo `CV_Mauricio_Carcamo.pdf`.
+    - **Botón de Descarga de CV (Sección Hero):** El botón en la sección "Hero" para descargar el CV funciona correctamente, iniciando la descarga del archivo `CV_Mauricio_Carcamo.pdf`.
 
-## Errores Pendientes
+## Tareas Completadas
 
-1.  **Formulario de Contacto:** El botón "Enviar Mensaje" en el formulario de contacto sigue provocando una descarga no deseada del CV, a pesar de que la función de envío del formulario se ejecuta. La causa raíz de este comportamiento aún no se ha determinado.
+- **Eliminación del Formulario de Contacto:** Se ha eliminado completamente el formulario de contacto de la sección "Contacto". Esta acción resuelve el bug que provocaba una descarga no deseada del CV.
 
-## Próximos Pasos (Para la próxima sesión)
+## Próximos Pasos
 
-**1. Resolver Bug del Formulario de Contacto:**
-   - Investigar y solucionar el problema que causa la descarga del CV al enviar el formulario de contacto.
-
-**2. Desplegar el Proyecto en Vercel:**
+**1. Desplegar el Proyecto en Vercel:**
    - Una vez solucionado el bug, proceder con el despliegue del sitio en Vercel.
 
    **Guía de Despliegue en Vercel:**
@@ -40,5 +37,5 @@
       - Ejecutar: `vercel`
       - Seguir las instrucciones de la CLI, aceptando los valores por defecto en la mayoría de los casos.
 
-**3. Commit de los Cambios:**
+**2. Commit de los Cambios:**
    - Crear un commit con todos los arreglos y mejoras realizadas.

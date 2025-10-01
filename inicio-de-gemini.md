@@ -10,10 +10,15 @@
 
 ## Estado Actual del Proyecto
 
-- **Botón de Descarga de CV (Sección Hero):** El botón en la sección "Hero" para descargar el CV funciona correctamente, iniciando la descarga del archivo `CV_Mauricio_Carcamo.pdf`.
-- **Formulario de Contacto Eliminado:** Se ha eliminado el formulario de contacto para resolver un bug persistente.
+- **Botón de Descarga de CV (Sección Hero):** El botón en la sección "Hero" para descargar el CV funciona correctamente.
+- **Formulario de Contacto Eliminado:** Se ha eliminado el formulario de contacto.
+- **Dashboard de Mortalidad Mejorado:** La aplicación Shiny `version2.py` ha sido refactorizada y mejorada con nuevas funcionalidades y gráficos interactivos.
 
 ## 8. Registro de Trabajo
+
+*   **Inicio de Trabajo:** martes, 30 de septiembre de 2025, 10:00 AM
+*   **Fin de Trabajo:** martes, 30 de septiembre de 2025, 12:00 PM
+*   **Resumen:** Se realizaron mejoras significativas en el dashboard de mortalidad (`version2.py`), incluyendo la refactorización del código, la externalización de CSS, la adición de comentarios, la modularización del código, la conversión de gráficos a `plotly`, la adición de un filtro por enfermedad y la visualización de métricas de evaluación del modelo. También se eliminaron los archivos de dashboard antiguos.
 
 *   **Inicio de Trabajo:** domingo, 28 de septiembre de 2025, 10:00 AM
 *   **Fin de Trabajo:** domingo, 28 de septiembre de 2025, 15:00 PM

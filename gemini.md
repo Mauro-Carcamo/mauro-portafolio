@@ -14,12 +14,21 @@
 
 ## Tareas Completadas
 
-- **Eliminación del Formulario de Contacto:** Se ha eliminado completamente el formulario de contacto de la sección "Contacto". Esta acción resuelve el bug que provocaba una descarga no deseada del CV.
+- **Eliminación del Formulario de Contacto:** Se ha eliminado completamente el formulario de contacto de la sección "Contacto".
+- **Mejoras en el Dashboard de Mortalidad:**
+    - **Refactorización del Código:** Se ha refactorizado la aplicación Shiny `version2.py` para mejorar su estructura y legibilidad.
+    - **Externalización de CSS:** El código de estilos se ha movido a un archivo `styles.css` externo.
+    - **Código Comentado:** Se han añadido comentarios al código para facilitar su mantenimiento.
+    - **Modularización:** La lógica de carga de datos se ha movido a un archivo `helpers.py`.
+    - **Gráficos Interactivos:** Se han reemplazado los gráficos estáticos de `matplotlib` por gráficos interactivos de `plotly`.
+    - **Nuevo Filtro:** Se ha añadido un filtro para analizar los datos por enfermedad.
+    - **Métricas de Modelo:** Se ha añadido el cálculo y visualización del Error Absoluto Medio (MAE) para el modelo ARIMA.
+    - **Limpieza de Archivos:** Se han eliminado los archivos de dashboard antiguos y no utilizados.
 
 ## Próximos Pasos
 
 **1. Desplegar el Proyecto en Vercel:**
-   - Una vez solucionado el bug, proceder con el despliegue del sitio en Vercel.
+   - Una vez completadas las mejoras, proceder con el despliegue del sitio en Vercel.
 
    **Guía de Despliegue en Vercel:**
 

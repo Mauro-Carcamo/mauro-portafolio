@@ -1,3 +1,8 @@
+from shinywidgets import render_widget, output_widget
+
+# =============================================================================
+# LIBRERÍAS Y CONFIGURACIÓN INICIAL
+# =============================================================================
 import pandas as pd
 import numpy as np
 import os
@@ -10,6 +15,7 @@ from helpers import load_data, create_filtered_data_calc
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+from sklearn.metrics import mean_absolute_error
 
 # =============================================================================
 # CARGA Y PROCESAMIENTO DE DATOS
@@ -33,6 +39,8 @@ if not df.empty:
     ui.tags.head(
         ui.tags.link(rel="stylesheet", href="styles.css")
     )
+
+    mae = reactive.Value(0)
 
     # --- Layout Principal con Sidebar ---
     with ui.layout_sidebar():
@@ -102,41 +110,43 @@ if not df.empty:
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis Descriptivo de Variables", class_="section-header")
                     ui.input_select("variable_descriptiva", "Seleccione variable para visualizar:", ["sexo", "gru_edad", "nombre_enfermedad"])
-                    with ui.div(class_="plot-container"):
-                        @render.plotly
-                        def plot_descriptivo():
-                            data = filtered_data()
-                            if data.empty: return
-                            variable = input.variable_descriptiva()
-                            if variable == "sexo":
-                                fig = px.bar(data, x="sexo", title="Distribución de Casos por Sexo")
-                            elif variable == "gru_edad":
-                                fig = px.bar(data, x="gru_edad", title="Distribución de Casos por Grupo de Edad")
-                            else:
-                                top_10 = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10).reset_index()
-                                fig = px.bar(top_10, x="n", y="nombre_enfermedad", orientation='h', title="Top 10 Enfermedades más Comunes")
-                            return fig
+                    output_widget("plot_descriptivo")
+
+                    @render_widget
+                    def plot_descriptivo():
+                        data = filtered_data()
+                        if data.empty: return
+                        variable = input.variable_descriptiva()
+                        if variable == "sexo":
+                            fig = px.bar(data, x="sexo", title="Distribución de Casos por Sexo")
+                        elif variable == "gru_edad":
+                            fig = px.bar(data, x="gru_edad", title="Distribución de Casos por Grupo de Edad")
+                        else:
+                            top_10 = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10).reset_index()
+                            fig = px.bar(top_10, x="n", y="nombre_enfermedad", orientation='h', title="Top 10 Enfermedades más Comunes")
+                        return fig
 
             # --- Pestaña: Diagnóstico ---
             with ui.nav_panel("🔍 Diagnóstico"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis de Distribución (Box Plot)", class_="section-header")
                     ui.input_select("variable_diagnostico", "Seleccione variable para visualizar:", ["sexo", "gru_edad", "nombre_enfermedad"])
-                    with ui.div(class_="plot-container"):
-                        @render.plotly
-                        def plot_diagnostico():
-                            data = filtered_data()
-                            if data.empty: return
-                            variable = input.variable_diagnostico()
-                            if variable == "sexo":
-                                fig = px.box(data, x="sexo", y="n", title="Distribución de Casos por Sexo")
-                            elif variable == "gru_edad":
-                                fig = px.box(data, x="gru_edad", y="n", title="Distribución de Casos por Grupo de Edad")
-                            else:
-                                top_10_enf = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10).index
-                                data_plot = data[data["nombre_enfermedad"].isin(top_10_enf)]
-                                fig = px.box(data_plot, x="nombre_enfermedad", y="n", title="Distribución de Casos para Top 10 Enfermedades")
-                            return fig
+                    output_widget("plot_diagnostico")
+
+                    @render_widget
+                    def plot_diagnostico():
+                        data = filtered_data()
+                        if data.empty: return
+                        variable = input.variable_diagnostico()
+                        if variable == "sexo":
+                            fig = px.box(data, x="sexo", y="n", title="Distribución de Casos por Sexo")
+                        elif variable == "gru_edad":
+                            fig = px.box(data, x="gru_edad", y="n", title="Distribución de Casos por Grupo de Edad")
+                        else:
+                            top_10_enf = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10).index
+                            data_plot = data[data["nombre_enfermedad"].isin(top_10_enf)]
+                            fig = px.box(data_plot, x="nombre_enfermedad", y="n", title="Distribución de Casos para Top 10 Enfermedades")
+                        return fig
 
                 # --- Análisis de Series Temporales ---
                 with ui.div(class_="content-panel"):
@@ -157,86 +167,95 @@ p-valor: {p_value:.3f}\
 Conclusión: {conclusion}"
                         with ui.div():
                             ui.h4("Descomposición de Serie Temporal", class_="section-header")
-                            with ui.div(class_="plot-container"):
-                                @render.plotly
-                                def decomposition_plot():
-                                    data_ts = filtered_data().groupby("ano")["n"].sum()
-                                    if len(data_ts) < 4: return
-                                    period = 2 if len(data_ts) >= 4 else 1
-                                    decomposition = seasonal_decompose(data_ts, model='additive', period=period)
-                                    
-                                    fig = make_subplots(rows=4, cols=1, shared_xaxes=True, subplot_titles=("Observado", "Tendencia", "Estacionalidad", "Residual"))
-                                    fig.add_trace(go.Scatter(x=decomposition.observed.index, y=decomposition.observed, mode='lines', name='Observado'), row=1, col=1)
-                                    fig.add_trace(go.Scatter(x=decomposition.trend.index, y=decomposition.trend, mode='lines', name='Tendencia'), row=2, col=1)
-                                    fig.add_trace(go.Scatter(x=decomposition.seasonal.index, y=decomposition.seasonal, mode='lines', name='Estacionalidad'), row=3, col=1)
-                                    fig.add_trace(go.Scatter(x=decomposition.resid.index, y=decomposition.resid, mode='lines', name='Residual'), row=4, col=1)
-                                    
-                                    fig.update_layout(title_text='Descomposición de la Serie Temporal', height=600)
-                                    return fig
+                            output_widget("decomposition_plot")
+
+                            @render_widget
+                            def decomposition_plot():
+                                data_ts = filtered_data().groupby("ano")["n"].sum()
+                                if len(data_ts) < 4: return
+                                period = 2 if len(data_ts) >= 4 else 1
+                                decomposition = seasonal_decompose(data_ts, model='additive', period=period)
+                                
+                                fig = make_subplots(rows=4, cols=1, shared_xaxes=True, subplot_titles=("Observado", "Tendencia", "Estacionalidad", "Residual"))
+                                fig.add_trace(go.Scatter(x=decomposition.observed.index, y=decomposition.observed, mode='lines', name='Observado'), row=1, col=1)
+                                fig.add_trace(go.Scatter(x=decomposition.trend.index, y=decomposition.trend, mode='lines', name='Tendencia'), row=2, col=1)
+                                fig.add_trace(go.Scatter(x=decomposition.seasonal.index, y=decomposition.seasonal, mode='lines', name='Estacionalidad'), row=3, col=1)
+                                fig.add_trace(go.Scatter(x=decomposition.resid.index, y=decomposition.resid, mode='lines', name='Residual'), row=4, col=1)
+                                
+                                fig.update_layout(title_text='Descomposición de la Serie Temporal', height=600)
+                                return fig
 
             # --- Pestaña: Predictivo ---
             with ui.nav_panel("🔮 Predictivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Predicción con Modelo ARIMA", class_="section-header")
                     ui.p("Se realiza una predicción a 5 años para el total de casos en los datos filtrados.")
-                    with ui.div(class_="plot-container"):
-                        @render.plotly
-                        def plot_predictivo():
-                            data_ts = filtered_data().groupby("ano")["n"].sum()
-                            if len(data_ts) < 4: return
+                    output_widget("plot_predictivo")
+
+                    @render_widget
+                    def plot_predictivo():
+                        data_ts = filtered_data().groupby("ano")["n"].sum()
+                        if len(data_ts) < 4: return
+                        
+                        try:
+                            model = ARIMA(data_ts, order=(1,1,1))
+                            results = model.fit()
+                            forecast = results.forecast(steps=5)
+                            mae.set(mean_absolute_error(data_ts, results.fittedvalues))
                             
-                            try:
-                                model = ARIMA(data_ts, order=(1,1,1))
-                                results = model.fit()
-                                forecast = results.forecast(steps=5)
-                                
-                                fig = go.Figure()
-                                fig.add_trace(go.Scatter(x=data_ts.index, y=data_ts.values, mode='lines+markers', name='Histórico'))
-                                fig.add_trace(go.Scatter(x=list(range(int(data_ts.index[-1])+1, int(data_ts.index[-1])+6)), y=forecast, mode='lines+markers', name='Predicción', line=dict(dash='dash')))
-                                fig.update_layout(title_text='Predicción de Casos Totales (Próximos 5 años)')
-                                return fig
-                            except Exception as e:
-                                # Create an empty plot with error message
-                                fig = go.Figure()
-                                fig.update_layout(
-                                    xaxis_visible=False,
-                                    yaxis_visible=False,
-                                    annotations=[
-                                        dict(
-                                            text=f"No se pudo generar el modelo ARIMA:<br>{e}",
-                                            xref="paper",
-                                            yref="paper",
-                                            showarrow=False,
-                                            font=dict(
-                                                size=16,
-                                                color="red"
-                                            )
+                            fig = go.Figure()
+                            fig.add_trace(go.Scatter(x=data_ts.index, y=data_ts.values, mode='lines+markers', name='Histórico'))
+                            fig.add_trace(go.Scatter(x=list(range(int(data_ts.index[-1])+1, int(data_ts.index[-1])+6)), y=forecast, mode='lines+markers', name='Predicción', line=dict(dash='dash')))
+                            fig.update_layout(title_text='Predicción de Casos Totales (Próximos 5 años)')
+                            return fig
+                        except Exception as e:
+                            mae.set(0)
+                            # Create an empty plot with error message
+                            fig = go.Figure()
+                            fig.update_layout(
+                                xaxis_visible=False,
+                                yaxis_visible=False,
+                                annotations=[
+                                    dict(
+                                        text=f"No se pudo generar el modelo ARIMA:<br>{e}",
+                                        xref="paper",
+                                        yref="paper",
+                                        showarrow=False,
+                                        font=dict(
+                                            size=16,
+                                            color="red"
                                         )
-                                    ]
-                                )
-                                return fig
+                                    )
+                                ]
+                            )
+                            return fig
+                    ui.h4("Evaluación del Modelo")
+                    @render.text
+                    def mae_text():
+                        return f"Error Absoluto Medio (MAE): {mae.get():.2f}"
 
             # --- Pestaña: Prescriptivo ---
             with ui.nav_panel("💡 Prescriptivo"):
                 with ui.div(class_="content-panel"):
                     ui.h3("🔹 Análisis para Recomendaciones", class_="section-header")
                     ui.input_select("variable_prescriptiva", "Seleccione análisis:", ["Tendencia Anual", "Grupos de Edad en Riesgo", "Enfermedades Críticas"])
-                    with ui.div(class_="plot-container"):
-                        @render.plotly
-                        def plot_prescriptivo():
-                            data = filtered_data()
-                            if data.empty: return
-                            variable = input.variable_prescriptiva()
-                            if variable == "Tendencia Anual":
-                                tendencias = data.groupby("ano")["n"].sum().reset_index()
-                                fig = px.line(tendencias, x="ano", y="n", title="Tendencia Anual de Casos Totales", markers=True)
-                            elif variable == "Grupos de Edad en Riesgo":
-                                grupos_riesgo = data.groupby("gru_edad")["n"].sum().sort_values(ascending=False).nlargest(10).reset_index()
-                                fig = px.bar(grupos_riesgo, x="n", y="gru_edad", orientation='h', title="Top 10 Grupos de Edad en Riesgo")
-                            else: # Enfermedades Críticas
-                                enfermedades_criticas = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10).reset_index()
-                                fig = px.bar(enfermedades_criticas, x="n", y="nombre_enfermedad", orientation='h', title="Top 10 Enfermedades Críticas para Intervención")
-                            return fig
+                    output_widget("plot_prescriptivo")
+
+                    @render_widget
+                    def plot_prescriptivo():
+                        data = filtered_data()
+                        if data.empty: return
+                        variable = input.variable_prescriptiva()
+                        if variable == "Tendencia Anual":
+                            tendencias = data.groupby("ano")["n"].sum().reset_index()
+                            fig = px.line(tendencias, x="ano", y="n", title="Tendencia Anual de Casos Totales", markers=True)
+                        elif variable == "Grupos de Edad en Riesgo":
+                            grupos_riesgo = data.groupby("gru_edad")["n"].sum().sort_values(ascending=False).nlargest(10).reset_index()
+                            fig = px.bar(grupos_riesgo, x="n", y="gru_edad", orientation='h', title="Top 10 Grupos de Edad en Riesgo")
+                        else: # Enfermedades Críticas
+                            enfermedades_criticas = data.groupby("nombre_enfermedad")["n"].sum().nlargest(10).reset_index()
+                            fig = px.bar(enfermedades_criticas, x="n", y="nombre_enfermedad", orientation='h', title="Top 10 Enfermedades Críticas para Intervención")
+                        return fig
 
         # --- Footer ---
         ui.div(

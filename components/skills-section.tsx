@@ -47,35 +47,41 @@ export function SkillsSection() {
 
 
   return (
-    <section id="skills" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Habilidades Técnicas</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Tecnologías y herramientas que domino para crear soluciones robustas y escalables
-          </p>
+    <section
+      id="skills"
+      className="parallax-section py-14 sm:py-20 bg-muted/30"
+      style={{ ["--parallax-speed" as any]: "-0.035" }}
+    >
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Habilidades Técnicas</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Tecnologías y herramientas que domino para crear soluciones robustas y escalables
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {skillCategories.map((category, index) => (
+              <Card key={index} className="h-full">
+                <CardHeader>
+                  <CardTitle className="text-lg text-center">{category.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap justify-center gap-4">
+                    {category.skills.map((skill, skillIndex) => (
+                      <div key={skillIndex}>
+                        <TechnologyIcon techName={skill.name} size={32} />
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+
         </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {skillCategories.map((category, index) => (
-            <Card key={index} className="h-full">
-              <CardHeader>
-                <CardTitle className="text-lg text-center">{category.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap justify-center gap-4">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex}>
-                      <TechnologyIcon techName={skill.name} size={32} />
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-
       </div>
     </section>
   )

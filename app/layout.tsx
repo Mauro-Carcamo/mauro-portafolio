@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { ThemeProvider } from "next-themes"
+import { ParallaxScroll } from "@/components/parallax-scroll"
 
 export const metadata: Metadata = {
   title: "Portafolio Mauricio Cárcamo",
@@ -20,8 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="scroll-smooth">
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased overflow-x-hidden">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <ParallaxScroll />
           {children}
           <WhatsAppButton />
         </ThemeProvider>

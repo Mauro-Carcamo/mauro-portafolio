@@ -10,6 +10,7 @@ const nextConfig = {
     unoptimized: true,
   },
   async rewrites() {
+    if (process.env.VERCEL) return []
     return [
       {
         source: '/shiny-app',

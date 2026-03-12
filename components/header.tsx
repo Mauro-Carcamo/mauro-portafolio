@@ -17,10 +17,11 @@ export function Header() {
   }, [])
 
   const navItems = [
-    { href: "#about", label: "Acerca de" },
     { href: "#projects", label: "Proyectos" },
     { href: "#skills", label: "Habilidades" },
+    { href: "#experience", label: "Experiencia" },
     { href: "#education", label: "Educación" },
+    { href: "#about", label: "Acerca de" },
     { href: "#contact", label: "Contacto" },
   ]
 
@@ -30,10 +31,12 @@ export function Header() {
         isScrolled ? "bg-background/95 backdrop-blur-sm border-b" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <h1 className="text-xl font-bold text-primary">Mauricio Cárcamo</h1>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 gap-3">
+          <div className="min-w-0">
+            <h1 className="text-base sm:text-xl font-bold text-primary truncate">
+              Mauricio Cárcamo
+            </h1>
           </div>
 
           {/* Desktop Navigation */}
@@ -53,7 +56,7 @@ export function Header() {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <Button variant="ghost" size="sm" className="shrink-0" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>

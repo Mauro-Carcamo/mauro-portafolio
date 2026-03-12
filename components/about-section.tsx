@@ -21,9 +21,13 @@ export function AboutSection() {
   ]
 
   return (
-    <section id="about" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+    <section
+      id="about"
+      className="parallax-section py-14 sm:py-20 bg-muted/30"
+      style={{ ["--parallax-speed" as any]: "-0.04" }}
+    >
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Acerca de mí</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -32,22 +36,22 @@ export function AboutSection() {
             </p>
           </div>
 
-          <div className="space-y-6 mb-16">
-            <p className="text-lg leading-relaxed">
+          <div className="max-w-4xl mx-auto space-y-6 mb-16">
+            <p className="text-base sm:text-lg leading-relaxed">
               Sociólogo con experiencia profesional especializado en Ciencia de Datos. Combino formación académica
               sólida con habilidades técnicas en análisis de datos, machine learning y programación (R, Python, SQL).
               Experiencia demostrada en gestión de proyectos sociales, coordinación de equipos y análisis de datos para
               la toma de decisiones.
             </p>
 
-            <p className="text-lg leading-relaxed">
+            <p className="text-base sm:text-lg leading-relaxed">
               He liderado iniciativas de formación y capacitación, implementado soluciones de automatización y
               desarrollado dashboards para optimización de procesos en diversos sectores. Destaco por mi capacidad para
               traducir datos en insights accionables y por implementar mejoras operativas que impactan positivamente en
               los resultados organizacionales.
             </p>
 
-            <p className="text-lg leading-relaxed">
+            <p className="text-base sm:text-lg leading-relaxed">
               Actualmente cursando un Diplomado en Inteligencia Artificial en la Universidad Autónoma, con experiencia
               reciente como Coordinador de Proyectos en Consultora Epojé y Community Manager en Agencia I-Brain Digital,
               siempre aplicando tecnologías modernas para resolver problemas complejos.

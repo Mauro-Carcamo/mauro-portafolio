@@ -73,3 +73,4 @@ replit.nix
 
 # vercel
 .vercel
+.env*.local

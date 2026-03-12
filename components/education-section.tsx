@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { PdfDialog } from "@/components/pdf-dialog"
 import { GraduationCap, Calendar, Download, Eye } from "lucide-react"
 
 export function EducationSection() {
@@ -107,14 +107,8 @@ export function EducationSection() {
     },
   ];
 
-  const handleDownloadCertificate = (certificatePath: string, title: string) => {
-    const link = document.createElement("a")
-    link.href = certificatePath
-    link.download = `${title.replace(/\s+/g, "-").toLowerCase()}-certificado.pdf`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+  const downloadNameForTitle = (title: string) =>
+    `${title.replace(/\s+/g, "-").toLowerCase()}-certificado.pdf`
 
   const EducationCategory = ({ title, items }: { title: string; items: any[] }) => (
     <div className="mb-8 last:mb-0">
@@ -138,30 +132,22 @@ export function EducationSection() {
                     )}
                     {edu.certificate && (
                       <>
-                        <Dialog>
-                          <DialogTrigger asChild>
+                        <PdfDialog
+                          title={edu.title}
+                          src={edu.certificate}
+                          downloadName={downloadNameForTitle(edu.title)}
+                          trigger={
                             <Button variant="outline" size="sm" className="text-xs">
                               <Eye className="w-3 h-3 mr-1" />
                               Ver
                             </Button>
-                          </DialogTrigger>
-                          <DialogContent className="max-w-4xl h-[90vh]">
-                            <DialogHeader>
-                              <DialogTitle>{edu.title}</DialogTitle>
-                            </DialogHeader>
-                            <div className="h-full">
-                              <iframe src={edu.certificate} width="100%" height="100%" />
-                            </div>
-                          </DialogContent>
-                        </Dialog>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleDownloadCertificate(edu.certificate!, edu.title)}
-                          className="text-xs"
-                        >
-                          <Download className="w-3 h-3 mr-1" />
-                          Descargar
+                          }
+                        />
+                        <Button variant="outline" size="sm" className="text-xs" asChild>
+                          <a href={edu.certificate} download={downloadNameForTitle(edu.title)}>
+                            <Download className="w-3 h-3 mr-1" />
+                            Descargar
+                          </a>
                         </Button>
                       </>
                     )}
@@ -177,8 +163,12 @@ export function EducationSection() {
   );
 
   return (
-    <section id="education" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section
+      id="education"
+      className="parallax-section py-14 sm:py-20 bg-muted/30"
+      style={{ ["--parallax-speed" as any]: "-0.03" }}
+    >
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
             <GraduationCap className="w-4 h-4" />
@@ -193,7 +183,7 @@ export function EducationSection() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto bg-background rounded-lg p-8 shadow-sm">
+        <div className="max-w-6xl mx-auto bg-background rounded-lg p-5 sm:p-8 shadow-sm">
           <EducationCategory title="Título Profesional" items={titulo} />
           <EducationCategory title="Diplomados" items={diplomados} />
           <EducationCategory title="Cursos y Bootcamps" items={cursos} />

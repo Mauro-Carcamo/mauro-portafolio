@@ -77,9 +77,13 @@ export function ExperienceSection() {
   ]
 
   return (
-    <section id="experience" className="py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+    <section
+      id="experience"
+      className="parallax-section py-14 sm:py-20"
+      style={{ ["--parallax-speed" as any]: "-0.045" }}
+    >
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Experiencia Profesional</h2>
             <p className="text-lg text-muted-foreground">

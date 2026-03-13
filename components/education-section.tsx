@@ -5,6 +5,9 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { PdfDialog } from "@/components/pdf-dialog"
 import { GraduationCap, Calendar, Download, Eye } from "lucide-react"
+import { SectionHeader } from "@/components/section-header"
+import { SectionParallax } from "@/components/section-parallax"
+import { ScrollReveal } from "@/components/scroll-reveal"
 
 export function EducationSection() {
   const titulo = [
@@ -165,29 +168,35 @@ export function EducationSection() {
   return (
     <section
       id="education"
-      className="parallax-section py-14 sm:py-20 bg-muted/30"
-      style={{ ["--parallax-speed" as any]: "-0.03" }}
+      className="relative py-14 sm:py-20 bg-muted/30"
     >
+      <SectionParallax variant="muted" />
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
-            <GraduationCap className="w-4 h-4" />
-            Formación Académica
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Educación y <span className="text-primary">Certificaciones</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Mi trayectoria académica combina ciencias sociales con tecnología, especializándome en ciencia de datos e
-            inteligencia artificial.
-          </p>
-        </div>
+        <ScrollReveal>
+          <SectionHeader
+            className="mb-12 sm:mb-16"
+            eyebrow={
+              <span className="inline-flex items-center gap-2">
+                <GraduationCap className="w-4 h-4" />
+                Formación Académica
+              </span>
+            }
+            title={
+              <>
+                Educación y <span className="text-primary">Certificaciones</span>
+              </>
+            }
+            description="Mi trayectoria académica combina ciencias sociales con tecnología, especializándome en ciencia de datos e inteligencia artificial."
+          />
+        </ScrollReveal>
 
-        <div className="max-w-6xl mx-auto bg-background rounded-lg p-5 sm:p-8 shadow-sm">
-          <EducationCategory title="Título Profesional" items={titulo} />
-          <EducationCategory title="Diplomados" items={diplomados} />
-          <EducationCategory title="Cursos y Bootcamps" items={cursos} />
-        </div>
+        <ScrollReveal delayMs={80}>
+          <div className="max-w-6xl mx-auto rounded-2xl border border-border/60 bg-background/80 p-5 sm:p-8 shadow-sm">
+            <EducationCategory title="Título Profesional" items={titulo} />
+            <EducationCategory title="Diplomados" items={diplomados} />
+            <EducationCategory title="Cursos y Bootcamps" items={cursos} />
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   )

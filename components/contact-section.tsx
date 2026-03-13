@@ -4,6 +4,9 @@ import type React from "react"
 
 import { Mail, Phone } from "lucide-react"
 import { SocialLinks } from "@/components/social-links"
+import { SectionHeader } from "@/components/section-header"
+import { SectionParallax } from "@/components/section-parallax"
+import { ScrollReveal } from "@/components/scroll-reveal"
 
 export function ContactSection() {
   const contactInfo = [
@@ -25,24 +28,33 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="parallax-section py-14 sm:py-20"
-      style={{ ["--parallax-speed" as any]: "-0.05" }}
+      className="relative py-14 sm:py-20"
     >
+      <SectionParallax />
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Contacto</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            ¿Tienes un proyecto de ciencia de datos o desarrollo? Me encantaría colaborar contigo y aplicar machine
-            learning para resolver desafíos reales.
-          </p>
-          <SocialLinks className="flex flex-wrap justify-center gap-5 mt-8" size="md" />
-        </div>
+        <ScrollReveal>
+          <SectionHeader
+            className="mb-10 sm:mb-14"
+            eyebrow="Hablemos"
+            title={
+              <>
+                <span className="text-primary">Contacto</span>
+              </>
+            }
+            description="¿Tienes un proyecto de ciencia de datos o desarrollo? Me encantaría colaborar contigo y aplicar machine learning para resolver desafíos reales."
+          />
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 gap-12 max-w-6xl mx-auto">
+        <ScrollReveal delayMs={80}>
+          <SocialLinks className="flex flex-wrap justify-center gap-5 mb-10 sm:mb-14" size="md" />
+        </ScrollReveal>
+
+        <ScrollReveal delayMs={120}>
+          <div className="grid grid-cols-1 gap-12 max-w-6xl mx-auto">
           {/* Contact Information */}
           <div className="space-y-8 text-center">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Información de Contacto</h3>
+            <div className="rounded-2xl border border-border/60 bg-muted/20 p-6 sm:p-8 shadow-sm">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-6 tracking-tight">Información de Contacto</h3>
               <div className="space-y-4">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex flex-col items-center space-y-2">
@@ -53,7 +65,7 @@ export function ContactSection() {
                       <p className="font-medium">{info.title}</p>
                       <a
                         href={info.href}
-                        className="text-muted-foreground hover:text-primary transition-colors duration-200"
+                        className="text-muted-foreground hover:text-primary transition-colors duration-200 underline-offset-4 hover:underline"
                       >
                         {info.value}
                       </a>
@@ -63,7 +75,8 @@ export function ContactSection() {
               </div>
             </div>
           </div>
-        </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   )

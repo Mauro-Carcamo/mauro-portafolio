@@ -38,7 +38,6 @@
   --sidebar-accent-foreground: oklch(1 0 0);
   --sidebar-border: oklch(0.922 0.006 258.338);
   --sidebar-ring: oklch(0.506 0.162 162.581 / 0.4);
-  --scroll-y: 0px;
 }
 
 .dark {
@@ -129,39 +128,43 @@
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
   }
-}
 
-@layer utilities {
-  .parallax-section {
-    position: relative;
-    overflow: clip;
-  }
-
-  .parallax-section::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -30%;
-    bottom: -30%;
-    pointer-events: none;
-    opacity: 0.35;
-    background:
-      radial-gradient(60rem 40rem at 15% 15%, color-mix(in oklch, var(--primary) 14%, transparent) 0%, transparent 60%),
-      radial-gradient(50rem 35rem at 85% 35%, color-mix(in oklch, var(--accent) 12%, transparent) 0%, transparent 62%),
-      radial-gradient(40rem 30rem at 60% 85%, color-mix(in oklch, var(--primary) 10%, transparent) 0%, transparent 60%);
-    transform: translate3d(0, calc(var(--scroll-y) * var(--parallax-speed, -0.04)), 0);
-    will-change: transform;
-  }
-
-  .parallax-section > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .parallax-section::before {
-      transform: none !important;
+  @media (max-width: 767px) {
+    html {
+      scroll-padding-top: 7.5rem;
     }
   }
 }
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+    transition:
+      opacity 700ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0ms),
+      transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .reveal[data-variant="left"] {
+    transform: translate3d(-14px, 0, 0);
+  }
+
+  .reveal[data-variant="right"] {
+    transform: translate3d(14px, 0, 0);
+  }
+
+  .reveal[data-inview="true"] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+}
+

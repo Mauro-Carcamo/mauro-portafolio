@@ -9,6 +9,13 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  outputFileTracing: false,
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.cache = { type: "memory" }
+    }
+    return config
+  },
   async rewrites() {
     if (process.env.VERCEL) return []
     return [

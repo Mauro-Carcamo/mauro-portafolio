@@ -80,36 +80,36 @@ export default function MortalityPredictionProject() {
 
           {activeDashboard && (
             <Card className="w-full">
-              <CardHeader>
-                <CardTitle>
-                  {activeDashboard === 'shiny' && "Dashboard Interactivo (Shiny)"}
-                  {activeDashboard === 'looker' && "Dashboard Interactivo (Looker Studio)"}
-                  {activeDashboard === 'powerbi' && "Dashboard Interactivo (Power BI)"}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {activeDashboard === 'shiny' && (
-                  <div className="aspect-video w-full bg-muted rounded-lg overflow-hidden border">
-                    <iframe
-                      src="/shiny-app"
-                      className="w-full h-full border-0"
-                      title="Dashboard de Mortalidad en Chile"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                )}
-                {activeDashboard === 'looker' && (
-                  <div className="aspect-video w-full bg-muted rounded-lg flex items-center justify-center">
-                    <p className="text-muted-foreground">Aquí se mostraría el dashboard de Looker Studio.</p>
-                  </div>
-                )}
-                {activeDashboard === 'powerbi' && (
-                  <div className="aspect-video w-full bg-muted rounded-lg flex items-center justify-center">
-                    <p className="text-muted-foreground">Aquí se mostraría el dashboard de Power BI.</p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+                <CardHeader>
+                  <CardTitle>
+                    {activeDashboard === 'shiny' && "Dashboard Interactivo (Shiny)"}
+                    {activeDashboard === 'looker' && "Dashboard Interactivo (Looker Studio)"}
+                    {activeDashboard === 'powerbi' && "Dashboard Interactivo (Power BI)"}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {activeDashboard === 'shiny' && (
+                    <div className="aspect-video w-full bg-muted rounded-lg overflow-hidden border">
+                      <iframe
+                        src="/shiny-app"
+                        className="w-full h-full border-0"
+                        title="Dashboard de Mortalidad en Chile"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  )}
+                  {activeDashboard === 'looker' && (
+                    <div className="aspect-video w-full bg-muted rounded-lg flex items-center justify-center">
+                      <p className="text-muted-foreground">Aquí se mostraría el dashboard de Looker Studio.</p>
+                    </div>
+                  )}
+                  {activeDashboard === 'powerbi' && (
+                    <div className="aspect-video w-full bg-muted rounded-lg flex items-center justify-center">
+                      <p className="text-muted-foreground">Aquí se mostraría el dashboard de Power BI.</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
           )}
 
           <div className="grid md:grid-cols-2 gap-8">

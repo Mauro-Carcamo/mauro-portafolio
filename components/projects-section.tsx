@@ -5,12 +5,18 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ImageCarousel } from "@/components/image-carousel"
 import { TechnologyIcon } from "@/components/technology-icon"
+import { SectionHeader } from "@/components/section-header"
+import { SectionParallax } from "@/components/section-parallax"
+import { ScrollReveal } from "@/components/scroll-reveal"
 import Link from "next/link"
-import { ArrowUpRight, ChevronLeft, ChevronRight, Github } from "lucide-react"
+import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import { useCallback, useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 
 export function ProjectsSection() {
+  const router = useRouter()
+
   const kittypawImages = [
     "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1.jpg-TfWbRHXGAdMVjCdnJ3UuoMPSKWYUuG.jpeg", // Logo
     "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2.jpg-Gi4mtVmyUmtW3r3FtcPgcBlzWKT8bi.jpeg", // Diseño 3D
@@ -26,20 +32,21 @@ export function ProjectsSection() {
 
   const projects = [
     {
-      title: "Kittypaw!",
+      title: "Kittypau",
       description:
-        "Plataforma tecnológica integral para la gestión de mascotas, combinando hardware (IoT), software (app/web) e inteligencia artificial (IA) para monitorear y mejorar su bienestar.",
+        "Plataforma integral para gestión de mascotas que combina IoT, app/web e IA para monitorear y mejorar el bienestar.",
       image: "/pet-adoption-app.png",
       images: kittypawImages, // Added images array for KittyPaw project
       technologies: ["React Native", "Node.js", "MongoDB", "Machine Learning"],
       liveUrl: "/projects/kittypaw",
+      appUrl: "https://kittypau-app.vercel.app",
       githubUrl: "https://github.com/Mauro-Carcamo",
       featured: true,
     },
     {
       title: "Predicción de Mortalidad en Chile",
       description:
-        "Análisis y predicción de patrones de mortalidad utilizando Machine Learning y técnicas avanzadas de ciencia de datos.",
+        "Análisis y predicción de mortalidad con técnicas de ciencia de datos y Machine Learning.",
       image: "/mortality-prediction-visualizations.png",
       technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
       liveUrl: "/projects/mortality-prediction",
@@ -49,7 +56,7 @@ export function ProjectsSection() {
     {
       title: "Textos Religiosos y Machine Learning",
       description:
-        "Análisis de textos religiosos utilizando técnicas de NLP y procesamiento de lenguaje natural para extraer insights.",
+        "Análisis de textos religiosos con técnicas de NLP para extraer insights.",
       image: "/nlp-religious-text-analysis.png",
       technologies: ["Python", "NLTK", "spaCy", "TensorFlow"],
       liveUrl: "/projects/religious-texts",
@@ -59,7 +66,7 @@ export function ProjectsSection() {
     {
       title: "Web Scraping Letras de Canciones",
       description:
-        "Extracción y análisis de letras musicales (1960-2020) para identificar tendencias y patrones en la música popular.",
+        "Extracción y análisis de letras (1960–2020) para encontrar tendencias en música popular.",
       image: "/music-lyrics-analysis.png",
       technologies: ["Python", "BeautifulSoup", "Selenium", "Data Analysis"],
       liveUrl: "/projects/music-lyrics",
@@ -120,17 +127,24 @@ export function ProjectsSection() {
   }, [emblaApi, isHovered, isFocusWithin])
 
   return (
-    <section id="projects" className="parallax-section py-14 sm:py-20" style={{ ["--parallax-speed" as any]: "-0.05" }}>
+    <section id="projects" className="relative py-14 sm:py-20">
+      <SectionParallax />
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Mis Proyectos</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Una selección de proyectos que combinan ciencia de datos, machine learning y desarrollo de software para
-            resolver problemas reales
-          </p>
-        </div>
+        <ScrollReveal>
+          <SectionHeader
+            className="mb-12 sm:mb-16"
+            eyebrow="Portafolio"
+            title={
+              <>
+                Mis <span className="text-primary">Proyectos</span>
+              </>
+            }
+            description="Una selección de proyectos que combinan ciencia de datos, machine learning y desarrollo de software para resolver problemas reales."
+          />
+        </ScrollReveal>
 
-        <div
+        <ScrollReveal delayMs={80}>
+          <div
           className="relative"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -155,10 +169,24 @@ export function ProjectsSection() {
                 >
                   <Card
                     className={[
-                      "group overflow-hidden p-0 py-0 gap-0 h-full",
-                      "shadow-md transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5",
+                      "group overflow-hidden p-0 py-0 gap-0 h-full rounded-2xl border border-border/60 bg-background/80 shadow-sm",
+                      "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                      "transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl",
                       project.featured ? "ring-1 ring-primary/20" : "",
                     ].join(" ")}
+                    role="link"
+                    tabIndex={0}
+                    aria-label={`Abrir ${project.title}`}
+                    onClick={(event) => {
+                      const target = event.target as HTMLElement
+                      if (target.closest("a,button")) return
+                      router.push(project.liveUrl)
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key !== "Enter" && event.key !== " ") return
+                      event.preventDefault()
+                      router.push(project.liveUrl)
+                    }}
                   >
                     <div className="relative overflow-hidden bg-muted aspect-video">
                       {project.images ? (
@@ -172,22 +200,22 @@ export function ProjectsSection() {
                         <img
                           src={project.image || "/placeholder.svg"}
                           alt={project.title}
-                          className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                           loading="lazy"
                         />
                       )}
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/55 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       {project.featured && (
                         <Badge className="absolute top-3 left-3 bg-primary z-10 shadow-sm">Destacado</Badge>
                       )}
                     </div>
 
                     <CardHeader className="px-4 sm:px-5 py-3">
-                      <CardTitle className="text-base sm:text-lg leading-tight">{project.title}</CardTitle>
+                      <CardTitle className="text-base sm:text-lg leading-tight tracking-tight">{project.title}</CardTitle>
                     </CardHeader>
 
                     <CardContent className="px-4 sm:px-5 pb-4 pt-0 flex-1 space-y-3">
-                      <p className="text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-3">
+                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-3">
                         {project.description}
                       </p>
 
@@ -195,7 +223,7 @@ export function ProjectsSection() {
                         {project.technologies.map((tech, techIndex) => (
                           <div
                             key={techIndex}
-                            className="flex items-center gap-1.5 bg-secondary/70 text-secondary-foreground rounded-full px-2.5 py-1 text-[11px] font-semibold min-w-0 max-w-full"
+                            className="flex items-center gap-1.5 bg-secondary/60 text-secondary-foreground rounded-full px-2.5 py-1 text-[11px] font-semibold min-w-0 max-w-full"
                           >
                             <TechnologyIcon techName={tech} size={16} />
                             <span className="min-w-0 truncate" title={tech}>
@@ -207,13 +235,21 @@ export function ProjectsSection() {
                     </CardContent>
 
                     <CardFooter className="px-4 sm:px-5 pb-4 sm:pb-5 pt-0 gap-2.5 justify-between flex-wrap">
-                      <Button variant="default" size="sm" className="flex-1 sm:flex-none" asChild>
-                        <Link href={project.liveUrl}>
-                          Ver proyecto <ArrowUpRight className="ml-1 h-4 w-4" />
-                        </Link>
-                      </Button>
+                      {project.appUrl && (
+                        <Button size="sm" className="flex-1 sm:flex-none rounded-full" asChild>
+                          <a
+                            href={project.appUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                            Ir a app
+                          </a>
+                        </Button>
+                      )}
 
-                      <Button variant="outline" size="sm" className="flex-1 sm:flex-none" asChild>
+                      <Button variant="outline" size="sm" className="flex-1 sm:flex-none rounded-full" asChild>
                         <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                           <Github className="h-4 w-4" />
                           Código
@@ -234,15 +270,18 @@ export function ProjectsSection() {
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
-        </div>
+          </div>
+        </ScrollReveal>
 
-        <div className="text-center mt-12">
-          <Link href="https://github.com/Mauro-Carcamo" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="lg">
-              Ver todos los proyectos en GitHub
-            </Button>
-          </Link>
-        </div>
+        <ScrollReveal delayMs={120}>
+          <div className="text-center mt-12">
+            <Link href="https://github.com/Mauro-Carcamo" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="lg" className="rounded-full">
+                Ver todos los proyectos en GitHub
+              </Button>
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   )

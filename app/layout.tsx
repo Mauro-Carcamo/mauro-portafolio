@@ -1,9 +1,10 @@
 import type React from "react"
 import type { Metadata } from "next"
+import type { Viewport } from "next"
 import "./globals.css"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { ThemeProvider } from "next-themes"
-import { ParallaxScroll } from "@/components/parallax-scroll"
+import { ScrollParallaxProvider } from "@/components/scroll-parallax-provider"
 
 export const metadata: Metadata = {
   title: "Portafolio Mauricio Cárcamo",
@@ -12,6 +13,11 @@ export const metadata: Metadata = {
   icons: {
     icon: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1706536613867.jpg-H1gm0kFpkJrdpxuyJIShGjRoIaEBYS.jpeg",
   },
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -23,9 +29,10 @@ export default function RootLayout({
     <html lang="es" className="scroll-smooth">
       <body className="font-sans antialiased overflow-x-hidden">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <ParallaxScroll />
-          {children}
-          <WhatsAppButton />
+          <ScrollParallaxProvider>
+            {children}
+            <WhatsAppButton />
+          </ScrollParallaxProvider>
         </ThemeProvider>
       </body>
     </html>

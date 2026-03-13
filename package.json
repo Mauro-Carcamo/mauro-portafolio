@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "clean:next": "node scripts/clean-next.js",
+    "dev": "node scripts/dev.js",
     "lint": "next lint",
+    "prebuild": "npm run clean:next",
     "start": "next start"
   },
   "dependencies": {
@@ -54,6 +56,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.60.0",
     "react-resizable-panels": "^2.1.7",
+    "react-scroll-parallax": "^3.5.0",
     "recharts": "2.15.4",
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.5.5",

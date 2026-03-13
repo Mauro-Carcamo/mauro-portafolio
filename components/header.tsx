@@ -1,11 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { useEffect, useState } from "react"
+import { cn } from "@/lib/utils"
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -27,58 +25,33 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-sm border-b" : "bg-transparent"
-      }`}
+      className={cn(
+        "fixed top-0 w-full z-50 bg-background/85 backdrop-blur-md border-b border-border/60 md:bg-transparent md:backdrop-blur-none md:border-b-0 transition-colors duration-300",
+        isScrolled && "bg-background/95 shadow-sm md:bg-background/95 md:backdrop-blur-sm md:border-b md:border-border md:shadow-sm"
+      )}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 gap-3">
-          <div className="min-w-0">
-            <h1 className="text-base sm:text-xl font-bold text-primary truncate">
+        <div className="flex flex-col items-center py-3 md:flex-row md:justify-between md:py-0 md:h-16 gap-2 md:gap-3">
+          <div className="w-full md:w-auto">
+            <h1 className="text-base sm:text-xl font-bold text-primary text-center md:text-left whitespace-nowrap">
               Mauricio Cárcamo
             </h1>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block">
-            <div className="flex items-center space-x-8">
+          <nav className="w-full md:w-auto">
+            <div className="grid grid-cols-3 justify-items-center gap-x-4 gap-y-2 text-sm sm:text-base md:flex md:flex-wrap md:items-center md:justify-end md:gap-x-8 md:gap-y-0 md:text-base">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
-                  className="text-foreground hover:text-primary transition-colors duration-200"
+                  className="px-2 py-1.5 rounded-md text-foreground hover:text-primary hover:bg-muted/60 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 >
                   {item.label}
                 </a>
               ))}
             </div>
           </nav>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="sm" className="shrink-0" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="block px-3 py-2 text-foreground hover:text-primary transition-colors duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </header>
   )

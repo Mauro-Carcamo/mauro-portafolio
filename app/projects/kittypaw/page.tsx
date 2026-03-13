@@ -70,16 +70,16 @@ export default function KittypawProject() {
           {/* Información del proyecto */}
           <div className="space-y-8">
             <div>
-              <h1 className="text-4xl font-bold mb-4">Kittypaw!</h1>
+              <h1 className="text-4xl font-bold mb-4">Kittypau</h1>
               <p className="text-xl text-muted-foreground mb-6">
-                KittyPaw es una plataforma tecnológica para la gestión de mascotas, que combina hardware (sensores y dispensadores inteligentes), software (app/web) e inteligencia artificial (IA). El objetivo es ayudar a los dueños de mascotas a monitorear, automatizar y mejorar la alimentación y el bienestar de sus animales.
+                Kittypau es una plataforma tecnológica para la gestión de mascotas, que combina hardware (sensores y dispensadores inteligentes), software (app/web) e inteligencia artificial (IA). El objetivo es ayudar a los dueños de mascotas a monitorear, automatizar y mejorar la alimentación y el bienestar de sus animales.
               </p>
 
               <div className="flex gap-4 mb-8">
                 <Button asChild>
-                  <a href="#" target="_blank" rel="noopener noreferrer">
+                  <a href="https://kittypau-app.vercel.app" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-4 w-4 mr-2" />
-                    Ver Demo
+                    Ir a app
                   </a>
                 </Button>
                 <Button variant="outline" asChild>
@@ -128,7 +128,7 @@ export default function KittypawProject() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-muted-foreground whitespace-pre-line">
-                  KittyPaw es una plataforma tecnológica integral para la gestión de mascotas, que combina hardware (sensores y dispensadores inteligentes), software (app/web) e inteligencia artificial (IA). Su objetivo es monitorear, automatizar y mejorar la alimentación y el bienestar de los animales.
+                  Kittypau es una plataforma tecnológica integral para la gestión de mascotas, que combina hardware (sensores y dispensadores inteligentes), software (app/web) e inteligencia artificial (IA). Su objetivo es monitorear, automatizar y mejorar la alimentación y el bienestar de los animales.
 
                   Componentes Principales:
                   - Hardware (IoT): Dispositivos inteligentes con sensores (temperatura, humedad, luz, peso) conectados vía MQTT con AWS IoT Core, recolectando datos en tiempo real.
@@ -150,7 +150,7 @@ export default function KittypawProject() {
                   Estado Actual:
                   - Desarrollo en Django con API y dashboard en marcha. Conexión IoT probada con ESP32/ESP8266. Prototipo de envío de datos JSON vía MQTT a AWS. CSVs con data de prueba. Diseño del dashboard inicial en proceso.
 
-                  En resumen: KittyPaw busca ser el ecosistema inteligente para mascotas, integrando sensores + datos + IA en una app sencilla, con un modelo de negocio escalable y foco en la salud preventiva animal.
+                  En resumen: Kittypau busca ser el ecosistema inteligente para mascotas, integrando sensores + datos + IA en una app sencilla, con un modelo de negocio escalable y foco en la salud preventiva animal.
                 </p>
               </CardContent>
             </Card>
@@ -171,7 +171,7 @@ export default function KittypawProject() {
                 className="absolute top-0 left-0 w-full h-full"
               ></iframe>
             </div>
-            <ImageCarousel images={kittypawImages} alt="Proyecto Kittypaw" autoPlay={true} autoPlayInterval={4000} />
+            <ImageCarousel images={kittypawImages} alt="Proyecto Kittypau" autoPlay={true} autoPlayInterval={4000} />
           </div>
         </div>
       </div>

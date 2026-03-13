@@ -1,6 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, Building } from "lucide-react"
+import { SectionHeader } from "@/components/section-header"
+import { SectionParallax } from "@/components/section-parallax"
+import { ScrollReveal } from "@/components/scroll-reveal"
 
 export function ExperienceSection() {
   const experiences = [
@@ -79,63 +82,75 @@ export function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="parallax-section py-14 sm:py-20"
-      style={{ ["--parallax-speed" as any]: "-0.045" }}
+      className="relative py-14 sm:py-20"
     >
+      <SectionParallax />
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Experiencia Profesional</h2>
-            <p className="text-lg text-muted-foreground">
-              Más de 6 años de experiencia en análisis de datos, gestión de proyectos y liderazgo de equipos
-            </p>
-          </div>
+          <ScrollReveal>
+            <SectionHeader
+              className="mb-12 sm:mb-16"
+              eyebrow="Trayectoria"
+              title={
+                <>
+                  Experiencia <span className="text-primary">Profesional</span>
+                </>
+              }
+              description="Más de 6 años de experiencia en análisis de datos, gestión de proyectos y liderazgo de equipos."
+            />
+          </ScrollReveal>
 
           <div className="space-y-8">
             {experiences.map((exp, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <div>
-                      <CardTitle className="text-xl mb-2">{exp.position}</CardTitle>
-                      <div className="flex items-center gap-2 text-muted-foreground mb-2">
-                        <Building className="h-4 w-4" />
-                        <span className="font-medium">{exp.company}</span>
-                      </div>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="h-4 w-4" />
-                          <span>{exp.period}</span>
+              <ScrollReveal
+                key={index}
+                delayMs={Math.min(index * 60, 240)}
+                variant={index % 2 === 0 ? "left" : "right"}
+              >
+                <Card className="rounded-2xl border border-border/60 bg-background/80 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+                  <CardHeader className="pb-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                      <div>
+                        <CardTitle className="text-lg sm:text-xl tracking-tight mb-2">{exp.position}</CardTitle>
+                        <div className="flex items-center gap-2 text-muted-foreground mb-2">
+                          <Building className="h-4 w-4" />
+                          <span className="font-medium">{exp.company}</span>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <MapPin className="h-4 w-4" />
-                          <span>{exp.location}</span>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-4 w-4" />
+                            <span>{exp.period}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <MapPin className="h-4 w-4" />
+                            <span>{exp.location}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{exp.description}</p>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4 leading-relaxed">{exp.description}</p>
 
-                  <div className="mb-4">
-                    <h4 className="font-semibold mb-2">Logros principales:</h4>
-                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                      {exp.achievements.map((achievement, i) => (
-                        <li key={i}>{achievement}</li>
+                    <div className="mb-4">
+                      <h4 className="font-semibold mb-2">Logros principales:</h4>
+                      <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                        {exp.achievements.map((achievement, i) => (
+                          <li key={i}>{achievement}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      {exp.technologies.map((tech, i) => (
+                        <Badge key={i} variant="secondary">
+                          {tech}
+                        </Badge>
                       ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech, i) => (
-                      <Badge key={i} variant="secondary">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                    </div>
+                  </CardContent>
+                </Card>
+              </ScrollReveal>
             ))}
           </div>
         </div>

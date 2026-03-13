@@ -49,5 +49,5 @@ if (!okNext || !okTurbo) {
       "Si sigue pasando, revisa antivirus/OneDrive/Indexing bloqueando la carpeta del proyecto.",
     ].join(" ")
   )
-  process.exitCode = 1
+  console.error("[clean-next] Continuando de todas formas (best-effort).")
 }

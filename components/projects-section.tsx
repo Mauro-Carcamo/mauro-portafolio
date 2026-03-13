@@ -38,7 +38,7 @@ export function ProjectsSection() {
       image: "/pet-adoption-app.png",
       images: kittypawImages, // Added images array for KittyPaw project
       technologies: ["React Native", "Node.js", "MongoDB", "Machine Learning"],
-      liveUrl: "/projects/kittypaw",
+      liveUrl: "/projects/kittypau",
       appUrl: "https://kittypau-app.vercel.app",
       githubUrl: "https://github.com/Mauro-Carcamo",
       featured: true,

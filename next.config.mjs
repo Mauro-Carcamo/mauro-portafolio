@@ -16,6 +16,15 @@ const nextConfig = {
     }
     return config
   },
+  async redirects() {
+    return [
+      {
+        source: "/projects/kittypaw",
+        destination: "/projects/kittypau",
+        permanent: true,
+      },
+    ]
+  },
   async rewrites() {
     if (process.env.VERCEL) return []
     return [

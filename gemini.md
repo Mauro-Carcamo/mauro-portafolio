@@ -1,6 +1,13 @@
 # Mauricio Cárcamo - Portafolio Profesional
 
-(Contenido anterior omitido por brevedad)
+	(Actualización 2026-03-13 20:46 - America/Santiago)
+	
+	- Se actualizó el proyecto **Kittypau**: ruta `/projects/kittypau`, nuevo contenido, video demo y enlaces con iconos (LinkedIn, Instagram, YouTube y acceso a la app).
+	- Se corrigió el build: `app/projects/kittypau/page.tsx` ahora es client component para compatibilidad con `react-scroll-parallax`.
+	- Se ajustó `scripts/clean-next.js` para que el limpiado sea best-effort y no bloquee `npm run build` en Windows cuando `.next/trace` está bloqueado.
+	- Deploy a producción en Vercel y push a Git (commit `b4ffbc2`).
+	
+	(Contenido anterior omitido por brevedad)
 
 ## Funcionamiento Verificado
 

@@ -1,3 +1,7 @@
+## Actualización (2026-03-13 20:46 - America/Santiago)
+
+- Se registró sesión de cambios del portafolio (Kittypau + deploy) para mantener trazabilidad de actualizaciones.
+
 ## Objetivos de un portafolio profesional de ML
 
 Antes de entrar en los detalles, recordemos lo que debe lograr:

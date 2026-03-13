@@ -15,8 +15,12 @@
 - **Notebooks Limpios:** Se ha consolidado y limpiado el notebook de análisis.
 - **Animación Creada:** Se ha generado un script para crear una animación HTML interactiva.
 
-## 8. Registro de Trabajo
-
+	## 8. Registro de Trabajo
+	
+	*   **Inicio de Trabajo:** viernes, 13 de marzo de 2026, 20:00 PM
+	*   **Fin de Trabajo:** viernes, 13 de marzo de 2026, 20:46 PM
+	*   **Resumen:** Se actualizó el proyecto Kittypau: nueva ruta `/projects/kittypau`, contenido y video demo actualizado, y enlaces con iconos (LinkedIn, Instagram, YouTube y acceso a la app). Se corrigió el build para compatibilidad con `react-scroll-parallax` y se ajustó el script `clean-next` para que no bloquee el build en Windows. Se publicaron cambios en Git (commit `b4ffbc2`) y se desplegó a producción en Vercel.
+	
 *   **Inicio de Trabajo:** martes, 30 de septiembre de 2025, 13:30 PM
 *   **Fin de Trabajo:** martes, 30 de septiembre de 2025, 14:30 PM
 *   **Resumen:** Se ha continuado con la mejora del proyecto de mortalidad. Se limpió y consolidó el notebook de análisis. Se creó un script para generar una animación HTML profesional. Se actualizaron todos los documentos del proyecto para reflejar los cambios.

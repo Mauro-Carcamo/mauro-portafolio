@@ -9,6 +9,7 @@
     "lint": "next lint",
     "prebuild": "npm run clean:next",
     "supabase": "npx --yes supabase@latest",
+    "supabase:login": "node scripts/supabase-login.js",
     "supabase:link": "node scripts/supabase-link.js",
     "supabase:db:push": "node scripts/supabase-db-push.js",
     "db:migrate": "node scripts/supabase-migrate.js",

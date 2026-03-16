@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef } from "react"
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 import posthog from "posthog-js"
 
 type TrackPayload = {
@@ -48,12 +48,11 @@ function safeText(value: string | null | undefined, max = 120) {
 
 export function AnalyticsAgent() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   const pageKey = useMemo(() => {
     if (!pathname) return ""
-    return searchParams?.size ? `${pathname}?${searchParams.toString()}` : pathname
-  }, [pathname, searchParams])
+    return pathname
+  }, [pathname])
 
   const sessionIdRef = useRef<string | null>(null)
   const pageStartRef = useRef<number>(Date.now())
@@ -212,4 +211,3 @@ export function AnalyticsAgent() {
 
   return null
 }
-

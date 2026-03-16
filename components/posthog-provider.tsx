@@ -3,17 +3,16 @@
 import { useEffect } from "react"
 import posthog from "posthog-js"
 import { PostHogProvider as Provider } from "posthog-js/react"
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 function PostHogPageview() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   useEffect(() => {
     if (!pathname) return
-    const url = searchParams?.size ? `${pathname}?${searchParams.toString()}` : pathname
+    const url = typeof window !== "undefined" ? window.location.href : pathname
     posthog.capture("$pageview", { $current_url: url })
-  }, [pathname, searchParams])
+  }, [pathname])
 
   return null
 }
@@ -43,4 +42,3 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
     </Provider>
   )
 }
-

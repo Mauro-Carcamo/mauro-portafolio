@@ -77,3 +77,6 @@ replit.nix
 
 # Keep example env files
 !.env.example
+
+.vercel
+.env*.local

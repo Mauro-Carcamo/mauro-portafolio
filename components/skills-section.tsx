@@ -83,7 +83,7 @@ export function SkillsSection() {
                   Habilidades <span className="text-primary">Técnicas</span>
                 </>
               }
-              description="Tecnologías y herramientas que uso para crear soluciones robustas y escalables."
+              description="Estas son las herramientas que uso para construir aplicaciones y trabajar con datos: lo que se ve (pantallas) y lo que funciona por dentro (servidor y base de datos)."
             />
           </ScrollReveal>
 

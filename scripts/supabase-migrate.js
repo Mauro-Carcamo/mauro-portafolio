@@ -56,6 +56,8 @@ async function main() {
 
   const databaseUrl =
     process.env.DATABASE_URL ||
+    process.env.POSTGRES_URL_NON_POOLING ||
+    process.env.POSTGRES_URL ||
     (ref && dbPassword
       ? `postgresql://${encodeURIComponent(process.env.SUPABASE_DB_USER || "postgres")}:${encodeURIComponent(
           dbPassword
@@ -67,6 +69,7 @@ async function main() {
   if (!databaseUrl) {
     console.error("[db:migrate] Missing env DATABASE_URL")
     console.error("[db:migrate] Alternatively set SUPABASE_PROJECT_REF + SUPABASE_DB_PASSWORD")
+    console.error("[db:migrate] Or, if using the Vercel Supabase integration, use POSTGRES_URL_NON_POOLING/POSTGRES_URL")
     console.error("[db:migrate] Example:")
     console.error('  SUPABASE_PROJECT_REF="cudarempmhzytuivpemw"')
     console.error('  SUPABASE_DB_PASSWORD="YOUR_PASSWORD"')

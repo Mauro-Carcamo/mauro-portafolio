@@ -25,6 +25,13 @@ Opción B (CLI, recomendado):
 2. `pnpm supabase link --project-ref cudarempmhzytuivpemw`
 3. `pnpm supabase db push`
 
+## Verificar que las credenciales están bien en Vercel
+
+Este proyecto expone un health-check **sin secretos**:
+- `/api/analytics/health`
+
+Debe retornar `posthog.enabled: true` si `NEXT_PUBLIC_POSTHOG_KEY` está configurada en Vercel **antes** del build.
+
 ## Convención de eventos sugerida
 
 - `page_view`
@@ -32,4 +39,3 @@ Opción B (CLI, recomendado):
 - `scroll_depth` (usar `scroll_depth` 0–100)
 - `time_on_page` (usar `duration_ms`)
 - `conversion`
-

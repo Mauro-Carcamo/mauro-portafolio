@@ -1,49 +1,72 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { TechnologyIcon } from "@/components/technology-icon"
 import { SectionHeader } from "@/components/section-header"
 import { SectionParallax } from "@/components/section-parallax"
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { SkillTooltipIcon } from "@/components/skill-tooltip-icon"
 
 export function SkillsSection() {
+  const descriptions: Record<string, string> = {
+    React: "LibrerÃ­a para crear interfaces con componentes.",
+    "Next.js": "Framework de React para apps rÃ¡pidas con rutas y buen SEO.",
+    TypeScript: "JavaScript con tipos para evitar errores.",
+    "Tailwind CSS": "CSS por clases para diseÃ±ar rÃ¡pido y consistente.",
+    "Vue.js": "Framework para interfaces web reactivas.",
+    "Node.js": "JavaScript en el servidor.",
+    Express: "Framework minimalista para APIs en Node.js.",
+    Python: "Lenguaje versÃ¡til para datos y backend.",
+    FastAPI: "Framework Python para APIs rÃ¡pidas y modernas.",
+    GraphQL: "API donde pides exactamente los datos que necesitas.",
+    PostgreSQL: "Base de datos relacional robusta.",
+    MongoDB: "Base de datos NoSQL basada en documentos.",
+    Redis: "Base en memoria para cachÃ© y colas.",
+    Prisma: "ORM para trabajar con BD desde TypeScript.",
+    Supabase: "Backend listo: Postgres + Auth + Storage.",
+    Git: "Control de versiones para tu cÃ³digo.",
+    Docker: "Contenedores para correr apps igual en cualquier entorno.",
+    AWS: "Servicios cloud para infraestructura.",
+    Vercel: "Hosting y despliegue (ideal para Next.js).",
+    Figma: "DiseÃ±o y prototipado de interfaces.",
+  }
+
   const skillCategories = [
     {
       title: "Frontend",
       skills: [
-        { name: "React", level: 90 },
-        { name: "Next.js", level: 85 },
-        { name: "TypeScript", level: 88 },
-        { name: "Tailwind CSS", level: 92 },
-        { name: "Vue.js", level: 75 },
+        { name: "React" },
+        { name: "Next.js" },
+        { name: "TypeScript" },
+        { name: "Tailwind CSS" },
+        { name: "Vue.js" },
       ],
     },
     {
       title: "Backend",
       skills: [
-        { name: "Node.js", level: 87 },
-        { name: "Express", level: 85 },
-        { name: "Python", level: 80 },
-        { name: "FastAPI", level: 78 },
-        { name: "GraphQL", level: 72 },
+        { name: "Node.js" },
+        { name: "Express" },
+        { name: "Python" },
+        { name: "FastAPI" },
+        { name: "GraphQL" },
       ],
     },
     {
       title: "Base de Datos",
       skills: [
-        { name: "PostgreSQL", level: 85 },
-        { name: "MongoDB", level: 82 },
-        { name: "Redis", level: 75 },
-        { name: "Prisma", level: 88 },
-        { name: "Supabase", level: 80 },
+        { name: "PostgreSQL" },
+        { name: "MongoDB" },
+        { name: "Redis" },
+        { name: "Prisma" },
+        { name: "Supabase" },
       ],
     },
     {
       title: "Herramientas",
       skills: [
-        { name: "Git", level: 90 },
-        { name: "Docker", level: 78 },
-        { name: "AWS", level: 75 },
-        { name: "Vercel", level: 92 },
-        { name: "Figma", level: 85 },
+        { name: "Git" },
+        { name: "Docker" },
+        { name: "AWS" },
+        { name: "Vercel" },
+        { name: "Figma" },
       ],
     },
   ]
@@ -81,11 +104,13 @@ export function SkillsSection() {
                   <CardTitle className="text-base text-center tracking-tight">{category.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-wrap justify-center gap-4">
+                  <div className="flex flex-wrap justify-center gap-3">
                     {category.skills.map((skill, skillIndex) => (
-                      <div key={skillIndex} className="rounded-xl border border-border/50 bg-muted/30 p-2.5 shadow-sm">
-                        <TechnologyIcon techName={skill.name} size={32} />
-                      </div>
+                      <SkillTooltipIcon
+                        key={skillIndex}
+                        techName={skill.name}
+                        description={descriptions[skill.name] ?? "TecnologÃ­a usada en mis proyectos."}
+                      />
                     ))}
                   </div>
                 </CardContent>

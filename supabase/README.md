@@ -25,6 +25,14 @@ Opción B (CLI, recomendado):
 2. `pnpm supabase link --project-ref cudarempmhzytuivpemw`
 3. `pnpm supabase db push`
 
+OpciÃ³n C (sin login / sin TTY): migraciÃ³n directa con `DATABASE_URL`
+1. Configura `DATABASE_URL` (Direct connection) en `/.env.local`
+2. Ejecuta: `pnpm db:migrate`
+
+Tip: si no quieres guardar el `DATABASE_URL`, puedes usar:
+1. `SUPABASE_PROJECT_REF` + `SUPABASE_DB_PASSWORD` en `/.env.local`
+2. Ejecuta: `pnpm db:migrate`
+
 ## Verificar que las credenciales están bien en Vercel
 
 Este proyecto expone un health-check **sin secretos**:

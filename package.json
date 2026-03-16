@@ -8,6 +8,7 @@
     "dev": "node scripts/dev.js",
     "lint": "next lint",
     "prebuild": "npm run clean:next",
+    "supabase": "npx --yes supabase@latest",
     "start": "next start"
   },
   "dependencies": {

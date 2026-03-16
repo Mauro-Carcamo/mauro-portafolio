@@ -22,7 +22,7 @@ en el **SQL Editor** de tu proyecto Supabase.
 
 Opción B (CLI, recomendado):
 1. `pnpm supabase login`
-2. `pnpm supabase link --project-ref cudarempmhzytuivpemw`
+2. `pnpm supabase link --project-ref <TU_PROJECT_REF>`
 3. `pnpm supabase db push`
 
 OpciÃ³n C (sin login / sin TTY): migraciÃ³n directa con `DATABASE_URL`

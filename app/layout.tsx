@@ -5,6 +5,7 @@ import "./globals.css"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { ThemeProvider } from "next-themes"
 import { ScrollParallaxProvider } from "@/components/scroll-parallax-provider"
+import { PostHogProvider } from "@/components/posthog-provider"
 
 export const metadata: Metadata = {
   title: "Portafolio Mauricio Cárcamo",
@@ -29,10 +30,12 @@ export default function RootLayout({
     <html lang="es" className="scroll-smooth">
       <body className="font-sans antialiased overflow-x-hidden">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <ScrollParallaxProvider>
-            {children}
-            <WhatsAppButton />
-          </ScrollParallaxProvider>
+          <PostHogProvider>
+            <ScrollParallaxProvider>
+              {children}
+              <WhatsAppButton />
+            </ScrollParallaxProvider>
+          </PostHogProvider>
         </ThemeProvider>
       </body>
     </html>

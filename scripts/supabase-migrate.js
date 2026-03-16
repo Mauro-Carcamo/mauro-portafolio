@@ -1,8 +1,22 @@
 /* eslint-disable no-console */
 
+require("dotenv").config({ path: ".env.local" })
+
 const fs = require("node:fs")
 const path = require("node:path")
 const { Client } = require("pg")
+
+function withSslNoVerify(url) {
+  if (!url) return url
+  const hasQuery = url.includes("?")
+  const hasSslmode = /[?&]sslmode=/.test(url)
+
+  if (hasSslmode) {
+    return url.replace(/([?&]sslmode=)([^&]+)/, "$1no-verify")
+  }
+
+  return `${url}${hasQuery ? "&" : "?"}sslmode=no-verify`
+}
 
 function listSqlMigrations(migrationsDir) {
   if (!fs.existsSync(migrationsDir)) return []
@@ -53,11 +67,20 @@ async function applyMigration(client, migration) {
 async function main() {
   const ref = process.env.SUPABASE_PROJECT_REF
   const dbPassword = process.env.SUPABASE_DB_PASSWORD
+  const pgHost = process.env.POSTGRES_HOST
+  const pgPassword = process.env.POSTGRES_PASSWORD
+  const pgUser = process.env.POSTGRES_USER
+  const pgDatabase = process.env.POSTGRES_DATABASE
 
   const databaseUrl =
     process.env.DATABASE_URL ||
     process.env.POSTGRES_URL_NON_POOLING ||
     process.env.POSTGRES_URL ||
+    (pgHost && pgPassword
+      ? `postgresql://${encodeURIComponent(pgUser || "postgres")}:${encodeURIComponent(pgPassword)}@${pgHost}:5432/${
+          pgDatabase || "postgres"
+        }`
+      : "") ||
     (ref && dbPassword
       ? `postgresql://${encodeURIComponent(process.env.SUPABASE_DB_USER || "postgres")}:${encodeURIComponent(
           dbPassword
@@ -70,12 +93,15 @@ async function main() {
     console.error("[db:migrate] Missing env DATABASE_URL")
     console.error("[db:migrate] Alternatively set SUPABASE_PROJECT_REF + SUPABASE_DB_PASSWORD")
     console.error("[db:migrate] Or, if using the Vercel Supabase integration, use POSTGRES_URL_NON_POOLING/POSTGRES_URL")
+    console.error("[db:migrate] Or POSTGRES_HOST + POSTGRES_PASSWORD (+ POSTGRES_USER/POSTGRES_DATABASE)")
     console.error("[db:migrate] Example:")
     console.error('  SUPABASE_PROJECT_REF="cudarempmhzytuivpemw"')
     console.error('  SUPABASE_DB_PASSWORD="YOUR_PASSWORD"')
     console.error('  pnpm db:migrate')
     process.exit(1)
   }
+
+  const safeDatabaseUrl = withSslNoVerify(databaseUrl)
 
   const migrationsDir = path.join(process.cwd(), "supabase", "migrations")
   const migrations = listSqlMigrations(migrationsDir)
@@ -85,7 +111,7 @@ async function main() {
   }
 
   const client = new Client({
-    connectionString: databaseUrl,
+    connectionString: safeDatabaseUrl,
     ssl: { rejectUnauthorized: false },
   })
 
@@ -110,4 +136,8 @@ async function main() {
   }
 }
 
-main().catch(() => process.exit(1))
+main().catch((error) => {
+  console.error("[db:migrate] Fatal:", error?.message ?? error)
+  if (error?.stack) console.error(error.stack)
+  process.exit(1)
+})

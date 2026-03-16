@@ -199,12 +199,12 @@ with base as (
 select
   day_utc,
   count(*)::bigint as total_events,
-  count(*) filter (where event_name = 'page_view')::bigint as page_views,
-  count(distinct session_id) filter (where session_id is not null)::bigint as sessions,
-  count(distinct user_id) filter (where user_id is not null)::bigint as users,
-  avg(duration_ms)::double precision filter (where event_name = 'time_on_page' and duration_ms is not null) as avg_time_on_page_ms,
-  avg(scroll_depth)::double precision filter (where event_name = 'scroll_depth' and scroll_depth is not null) as avg_scroll_depth_pct,
-  count(*) filter (where event_name = 'conversion')::bigint as conversions
+  (count(*) filter (where event_name = 'page_view'))::bigint as page_views,
+  (count(distinct session_id) filter (where session_id is not null))::bigint as sessions,
+  (count(distinct user_id) filter (where user_id is not null))::bigint as users,
+  (avg(duration_ms) filter (where event_name = 'time_on_page' and duration_ms is not null))::double precision as avg_time_on_page_ms,
+  (avg(scroll_depth) filter (where event_name = 'scroll_depth' and scroll_depth is not null))::double precision as avg_scroll_depth_pct,
+  (count(*) filter (where event_name = 'conversion'))::bigint as conversions
 from base
 group by 1
 order by 1 desc;
@@ -218,4 +218,3 @@ from analytics.events
 where event_name = 'page_view'
 group by 1, 2
 order by 1 desc, 3 desc, 2 asc;
-

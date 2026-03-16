@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 
+require("dotenv").config({ path: ".env.local" })
+
 const { spawnSync } = require("node:child_process")
 
 function main() {
@@ -11,4 +13,3 @@ function main() {
 }
 
 main()
-

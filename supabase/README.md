@@ -20,6 +20,8 @@ Opción A (sin CLI): copia y ejecuta el SQL de:
 - `supabase/migrations/20260316000000_analytics_event_tracking.sql`
 en el **SQL Editor** de tu proyecto Supabase.
 
+Nota: el SQL tambiÃ©n crea `public.schema_migrations` (tabla simple para registrar migraciones si usas `pnpm db:migrate`).
+
 Opción B (CLI, recomendado):
 1. `pnpm supabase login`
 2. `pnpm supabase link --project-ref <TU_PROJECT_REF>`

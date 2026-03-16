@@ -4,6 +4,12 @@
 -- - Adds views for common KPIs (page views, sessions, engagement, conversions).
 -- - Adds an RPC (`analytics.track_event`) you can call from the client/server.
 
+-- Optional migration tracking table (used by local `pnpm db:migrate`)
+create table if not exists public.schema_migrations (
+  id text primary key,
+  applied_at timestamptz not null default now()
+);
+
 -- Extensions
 create extension if not exists pgcrypto;
 

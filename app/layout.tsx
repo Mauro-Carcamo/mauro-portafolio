@@ -6,6 +6,7 @@ import { WhatsAppButton } from "@/components/whatsapp-button"
 import { ThemeProvider } from "next-themes"
 import { ScrollParallaxProvider } from "@/components/scroll-parallax-provider"
 import { PostHogProvider } from "@/components/posthog-provider"
+import { AnalyticsAgent } from "@/components/analytics-agent"
 
 export const metadata: Metadata = {
   title: "Portafolio Mauricio Cárcamo",
@@ -32,6 +33,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <PostHogProvider>
             <ScrollParallaxProvider>
+              <AnalyticsAgent />
               {children}
               <WhatsAppButton />
             </ScrollParallaxProvider>

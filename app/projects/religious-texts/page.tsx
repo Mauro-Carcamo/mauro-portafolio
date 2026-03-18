@@ -335,6 +335,100 @@ export default function ReligiousTextsProject() {
           </header>
 
           <div className="mt-8 grid gap-6">
+                        <Card
+              id="top-corpus"
+              className="scroll-mt-24 border bg-card/70 shadow-sm backdrop-blur"
+            >
+              <CardHeader>
+                <CardTitle className="text-xl">Top por corpus (top 10)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {topWords ? (
+                  <div className="grid auto-rows-fr items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
+                    {corpusOrder.map((name) => {
+                      const words = topWords[name] ?? [];
+                      const key = corpusKeyByName[name];
+                      const meta = corpusMetaByName[name];
+                      const corpusTotal = metrics?.totals?.[key] ?? null;
+
+                      return (
+                        <div
+                          key={name}
+                          className="rounded-2xl border bg-background/60 p-4 shadow-sm h-full flex flex-col"
+                        >
+                          <div className="text-center">
+                            <div className="flex items-center justify-center gap-2">
+                              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border bg-muted">
+                                <img
+                                  src={meta.iconSrc}
+                                  alt=""
+                                  aria-hidden={true}
+                                  className="h-5 w-5 text-slate-700"
+                                />
+                              </span>
+                              <p className="text-sm font-semibold">{name}</p>
+                            </div>
+                            <p className="mt-2 text-[11px] font-semibold text-muted-foreground">
+                              {meta.religion}
+                            </p>
+                            <p className="mt-1 text-[11px] text-muted-foreground">
+                              Total palabras:{" "}
+                              {corpusTotal === null
+                                ? "..."
+                                : formatCompactInteger(corpusTotal)}
+                            </p>
+                          </div>
+
+                          <div className="mt-3 rounded-xl border bg-muted/30 px-3 py-2">
+                            <div className="grid grid-cols-[1fr_70px_56px] gap-3 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                              <span>Palabra</span>
+                              <span className="text-right">Veces</span>
+                              <span className="text-right">%</span>
+                            </div>
+                          </div>
+
+                          <div className="mt-2 flex-1">
+                            {words.length ? (
+                              <ul className="space-y-1.5 text-xs text-muted-foreground">
+                                {words.slice(0, 10).map((w) => {
+                                  const pct =
+                                    corpusTotal && corpusTotal > 0
+                                      ? (w.count / corpusTotal) * 100
+                                      : 0;
+                                  return (
+                                    <li
+                                      key={`${name}-${w.word}`}
+                                      className="grid grid-cols-[1fr_70px_56px] items-baseline gap-3 rounded-lg px-2 py-1 hover:bg-muted/40"
+                                    >
+                                      <span
+                                        className="truncate whitespace-nowrap"
+                                        title={w.word}
+                                      >
+                                        {w.word}
+                                      </span>
+                                      <span className="tabular-nums whitespace-nowrap text-right text-slate-800">
+                                        {formatCompactInteger(w.count)}
+                                      </span>
+                                      <span className="tabular-nums whitespace-nowrap text-right text-[11px] text-emerald-700">
+                                        {formatPercent(pct)}
+                                      </span>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            ) : (
+                              <p className="mt-1 text-xs text-muted-foreground">Sin datos.</p>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">Cargando...</p>
+                )}
+              </CardContent>
+            </Card>
             <Card
               id="pipeline"
               className="scroll-mt-24 border bg-card/70 shadow-sm backdrop-blur"
@@ -888,116 +982,6 @@ export default function ReligiousTextsProject() {
                     </p>
                   )}
                 </div>
-
-                <div className="rounded-xl border bg-background/60 p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div>
-                      <p className="text-xs uppercase tracking-wider text-muted-foreground">
-                        Top por corpus (top 10)
-                      </p>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {corpusOrder.length} textos analizados
-                      </p>
-                    </div>
-                    <div className="hidden sm:flex items-center gap-2 text-xs text-muted-foreground">
-                      <span className="inline-flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-slate-500" />
-                        Conteo
-                      </span>
-                      <span className="inline-flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                        % del corpus
-                      </span>
-                    </div>
-                  </div>
-
-                  {topWords ? (
-                    <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                      {corpusOrder.map((name) => {
-                        const words = topWords[name] ?? [];
-                        const key = corpusKeyByName[name];
-                        const meta = corpusMetaByName[name];
-                        const corpusTotal = metrics?.totals?.[key] ?? null;
-
-                        return (
-                          <div
-                            key={name}
-                            className="rounded-2xl border bg-background p-4 shadow-sm"
-                          >
-                            <div className="text-center">
-                              <div className="flex items-center justify-center gap-2">
-                                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border bg-muted">
-                                  <img
-                                    src={meta.iconSrc}
-                                    alt=""
-                                    aria-hidden={true}
-                                    className="h-5 w-5 text-slate-700"
-                                  />
-                                </span>
-                                <p className="text-sm font-semibold">{name}</p>
-                              </div>
-                              <p className="mt-2 text-[11px] font-semibold text-muted-foreground">
-                                {meta.religion}
-                              </p>
-                              <p className="mt-1 text-[11px] text-muted-foreground">
-                                Total palabras:{" "}
-                                {corpusTotal === null
-                                  ? "..."
-                                  : formatCompactInteger(corpusTotal)}
-                              </p>
-                            </div>
-
-                            <div className="mt-3 rounded-xl border bg-muted/30 px-3 py-2">
-                              <div className="grid grid-cols-[1fr_70px_56px] gap-3 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                                <span>Palabra</span>
-                                <span className="text-right">Conteo</span>
-                                <span className="text-right">%</span>
-                              </div>
-                            </div>
-
-                            {words.length ? (
-                              <ul className="mt-2 space-y-1.5 text-xs text-muted-foreground">
-                                {words.slice(0, 10).map((w) => {
-                                  const pct =
-                                    corpusTotal && corpusTotal > 0
-                                      ? (w.count / corpusTotal) * 100
-                                      : 0;
-                                  return (
-                                    <li
-                                      key={`${name}-${w.word}`}
-                                      className="grid grid-cols-[1fr_70px_56px] items-baseline gap-3 rounded-lg px-2 py-1 hover:bg-muted/40"
-                                    >
-                                      <span
-                                        className="truncate whitespace-nowrap"
-                                        title={w.word}
-                                      >
-                                        {w.word}
-                                      </span>
-                                      <span className="tabular-nums whitespace-nowrap text-right text-slate-800">
-                                        {formatCompactInteger(w.count)}
-                                      </span>
-                                      <span className="tabular-nums whitespace-nowrap text-right text-[11px] text-emerald-700">
-                                        {formatPercent(pct)}
-                                      </span>
-                                    </li>
-                                  );
-                                })}
-                              </ul>
-                            ) : (
-                              <p className="mt-3 text-xs text-muted-foreground">
-                                Sin datos.
-                              </p>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <p className="mt-3 text-sm text-muted-foreground">
-                      Cargando...
-                    </p>
-                  )}
-                </div>
               </CardContent>
             </Card>
 
@@ -1043,6 +1027,8 @@ export default function ReligiousTextsProject() {
     </div>
   );
 }
+
+
 
 
 

@@ -209,28 +209,33 @@ export default function ReligiousTextsProject() {
 
   const corpusMetaByName: Record<
     CorpusName,
-    { religion: string; iconSrc: string }
+    { religion: string; iconSrc: string; accent: string }
   > = useMemo(
     () => ({
       "Antiguo Test": {
         religion: "Cristianismo",
         iconSrc: "/projects/religious-texts/icons/christianity.svg",
+        accent: "#4f46e5",
       },
       "Nuevo Test": {
         religion: "Cristianismo",
         iconSrc: "/projects/religious-texts/icons/christianity.svg",
+        accent: "#4f46e5",
       },
       Coran: {
         religion: "Islam",
         iconSrc: "/projects/religious-texts/icons/islam.svg",
+        accent: "#10b981",
       },
       Tora: {
         religion: "Judaismo",
         iconSrc: "/projects/religious-texts/icons/judaism.svg",
+        accent: "#f59e0b",
       },
       Upanishads: {
         religion: "Hinduismo",
         iconSrc: "/projects/religious-texts/icons/hinduism.svg",
+        accent: "#8b5cf6",
       },
     }),
     [],
@@ -354,42 +359,52 @@ export default function ReligiousTextsProject() {
                       return (
                         <div
                           key={name}
-                          className="rounded-2xl border bg-background/60 p-4 shadow-sm h-full flex flex-col"
+                          className="relative flex h-full flex-col overflow-hidden rounded-2xl border bg-background/60 p-4 shadow-sm"
                         >
+                          <div
+                            className="absolute inset-x-0 top-0 h-1"
+                            style={{ backgroundColor: meta.accent }}
+                            aria-hidden={true}
+                          />
+
                           <div className="text-center">
                             <div className="flex items-center justify-center gap-2">
-                              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border bg-muted">
+                              <span
+                                className="inline-flex h-7 w-7 items-center justify-center rounded-full border bg-muted/60"
+                                style={{ borderColor: `${meta.accent}55` }}
+                              >
                                 <img
                                   src={meta.iconSrc}
                                   alt=""
                                   aria-hidden={true}
-                                  className="h-5 w-5 text-slate-700"
+                                  className="h-6 w-6 object-contain"
                                 />
                               </span>
-                              <p className="text-sm font-semibold">{name}</p>
+                              <p className="text-sm font-semibold tracking-tight">{name}</p>
                             </div>
-                            <p className="mt-2 text-[11px] font-semibold text-muted-foreground">
-                              {meta.religion}
-                            </p>
-                            <p className="mt-1 text-[11px] text-muted-foreground">
-                              Total palabras:{" "}
-                              {corpusTotal === null
-                                ? "..."
-                                : formatCompactInteger(corpusTotal)}
-                            </p>
+
+                            <div className="mt-2 text-[11px] text-muted-foreground">
+                              <p className="font-semibold">{meta.religion}</p>
+                              <p className="mt-0.5">
+                                Total palabras:{" "}
+                                <span className="font-semibold text-foreground">
+                                  {corpusTotal === null
+                                    ? "..."
+                                    : formatCompactInteger(corpusTotal)}
+                                </span>
+                              </p>
+                            </div>
                           </div>
 
-                          <div className="mt-3 rounded-xl border bg-muted/30 px-3 py-2">
-                            <div className="grid grid-cols-[1fr_70px_56px] gap-3 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                          <div className="mt-3 flex-1 overflow-hidden rounded-xl border bg-muted/20">
+                            <div className="grid grid-cols-[minmax(0,1fr)_72px_56px] gap-3 px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
                               <span>Palabra</span>
                               <span className="text-right">Veces</span>
                               <span className="text-right">%</span>
                             </div>
-                          </div>
 
-                          <div className="mt-2 flex-1">
                             {words.length ? (
-                              <ul className="space-y-1.5 text-xs text-muted-foreground">
+                              <ul className="divide-y divide-border/60 text-xs">
                                 {words.slice(0, 10).map((w) => {
                                   const pct =
                                     corpusTotal && corpusTotal > 0
@@ -398,18 +413,18 @@ export default function ReligiousTextsProject() {
                                   return (
                                     <li
                                       key={`${name}-${w.word}`}
-                                      className="grid grid-cols-[1fr_70px_56px] items-baseline gap-3 rounded-lg px-2 py-1 hover:bg-muted/40"
+                                      className="grid grid-cols-[minmax(0,1fr)_72px_56px] items-baseline gap-3 px-3 py-2 text-muted-foreground hover:bg-muted/35"
                                     >
                                       <span
-                                        className="truncate whitespace-nowrap"
+                                        className="truncate whitespace-nowrap text-foreground"
                                         title={w.word}
                                       >
                                         {w.word}
                                       </span>
-                                      <span className="tabular-nums whitespace-nowrap text-right text-slate-800">
+                                      <span className="tabular-nums whitespace-nowrap text-right font-medium text-foreground">
                                         {formatCompactInteger(w.count)}
                                       </span>
-                                      <span className="tabular-nums whitespace-nowrap text-right text-[11px] text-emerald-700">
+                                      <span className="tabular-nums whitespace-nowrap text-right text-[11px] font-semibold text-emerald-700">
                                         {formatPercent(pct)}
                                       </span>
                                     </li>
@@ -417,7 +432,7 @@ export default function ReligiousTextsProject() {
                                 })}
                               </ul>
                             ) : (
-                              <p className="mt-1 text-xs text-muted-foreground">Sin datos.</p>
+                              <p className="px-3 py-2 text-xs text-muted-foreground">Sin datos.</p>
                             )}
                           </div>
                         </div>
@@ -1027,6 +1042,8 @@ export default function ReligiousTextsProject() {
     </div>
   );
 }
+
+
 
 
 

@@ -397,7 +397,7 @@ export default function ReligiousTextsProject() {
                           </div>
 
                           <div className="mt-3 flex-1 overflow-hidden rounded-xl border bg-muted/20">
-                            <div className="grid grid-cols-[minmax(8.5rem,1fr)_64px_52px] sm:grid-cols-[minmax(10rem,1fr)_72px_56px] gap-3 px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                            <div className="grid grid-cols-[minmax(0,1fr)_52px_48px] sm:grid-cols-[minmax(0,1fr)_72px_56px] gap-2 sm:gap-3 px-2.5 sm:px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
                               <span>Palabra</span>
                               <span className="text-right">Veces</span>
                               <span className="text-right">%</span>
@@ -413,10 +413,10 @@ export default function ReligiousTextsProject() {
                                   return (
                                     <li
                                       key={`${name}-${w.word}`}
-                                      className="grid grid-cols-[minmax(8.5rem,1fr)_64px_52px] sm:grid-cols-[minmax(10rem,1fr)_72px_56px] items-baseline gap-3 px-3 py-2 text-muted-foreground hover:bg-muted/35"
+                                      className="grid grid-cols-[minmax(0,1fr)_52px_48px] sm:grid-cols-[minmax(0,1fr)_72px_56px] items-baseline gap-2 sm:gap-3 px-2.5 sm:px-3 py-2 text-muted-foreground hover:bg-muted/35"
                                     >
                                       <span
-                                        className="min-w-[6ch] truncate whitespace-nowrap text-[13px] font-medium text-foreground"
+                                        className="min-w-[4ch] truncate whitespace-nowrap text-[13px] font-medium text-foreground"
                                         title={w.word}
                                       >
                                         {w.word}

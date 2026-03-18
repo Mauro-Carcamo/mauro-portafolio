@@ -1,0 +1,512 @@
+{
+  "Antiguo Test": [
+    {
+      "word": "jehova",
+      "count": 6926
+    },
+    {
+      "word": "dios",
+      "count": 2876
+    },
+    {
+      "word": "hijos",
+      "count": 2693
+    },
+    {
+      "word": "tierra",
+      "count": 2654
+    },
+    {
+      "word": "israel",
+      "count": 2560
+    },
+    {
+      "word": "rey",
+      "count": 2423
+    },
+    {
+      "word": "hijo",
+      "count": 1999
+    },
+    {
+      "word": "dijo",
+      "count": 1995
+    },
+    {
+      "word": "mas",
+      "count": 1809
+    },
+    {
+      "word": "casa",
+      "count": 1746
+    },
+    {
+      "word": "pueblo",
+      "count": 1650
+    },
+    {
+      "word": "delante",
+      "count": 1401
+    },
+    {
+      "word": "entonces",
+      "count": 1316
+    },
+    {
+      "word": "asi",
+      "count": 1300
+    },
+    {
+      "word": "si",
+      "count": 1283
+    },
+    {
+      "word": "habia",
+      "count": 1230
+    },
+    {
+      "word": "sera",
+      "count": 1216
+    },
+    {
+      "word": "pues",
+      "count": 1153
+    },
+    {
+      "word": "aqui",
+      "count": 1142
+    },
+    {
+      "word": "dia",
+      "count": 1136
+    },
+    {
+      "word": "david",
+      "count": 1092
+    },
+    {
+      "word": "mano",
+      "count": 1051
+    },
+    {
+      "word": "tambien",
+      "count": 973
+    },
+    {
+      "word": "diciendo",
+      "count": 914
+    },
+    {
+      "word": "toda",
+      "count": 897
+    }
+  ],
+  "Nuevo Test": [
+    {
+      "word": "dios",
+      "count": 1399
+    },
+    {
+      "word": "jesus",
+      "count": 1028
+    },
+    {
+      "word": "dijo",
+      "count": 959
+    },
+    {
+      "word": "si",
+      "count": 884
+    },
+    {
+      "word": "señor",
+      "count": 740
+    },
+    {
+      "word": "mas",
+      "count": 717
+    },
+    {
+      "word": "tambien",
+      "count": 672
+    },
+    {
+      "word": "entonces",
+      "count": 562
+    },
+    {
+      "word": "pues",
+      "count": 541
+    },
+    {
+      "word": "sino",
+      "count": 517
+    },
+    {
+      "word": "hijo",
+      "count": 444
+    },
+    {
+      "word": "cosas",
+      "count": 409
+    },
+    {
+      "word": "cristo",
+      "count": 399
+    },
+    {
+      "word": "hombre",
+      "count": 392
+    },
+    {
+      "word": "padre",
+      "count": 383
+    },
+    {
+      "word": "asi",
+      "count": 368
+    },
+    {
+      "word": "espiritu",
+      "count": 368
+    },
+    {
+      "word": "habia",
+      "count": 352
+    },
+    {
+      "word": "diciendo",
+      "count": 337
+    },
+    {
+      "word": "dia",
+      "count": 329
+    },
+    {
+      "word": "tierra",
+      "count": 283
+    },
+    {
+      "word": "fe",
+      "count": 261
+    },
+    {
+      "word": "toda",
+      "count": 258
+    },
+    {
+      "word": "hombres",
+      "count": 254
+    },
+    {
+      "word": "discipulos",
+      "count": 250
+    }
+  ],
+  "Coran": [
+    {
+      "word": "dios",
+      "count": 3065
+    },
+    {
+      "word": "si",
+      "count": 1239
+    },
+    {
+      "word": "señor",
+      "count": 973
+    },
+    {
+      "word": "bien",
+      "count": 483
+    },
+    {
+      "word": "dia",
+      "count": 459
+    },
+    {
+      "word": "tierra",
+      "count": 459
+    },
+    {
+      "word": "dijo",
+      "count": 443
+    },
+    {
+      "word": "mas",
+      "count": 413
+    },
+    {
+      "word": "asi",
+      "count": 397
+    },
+    {
+      "word": "castigo",
+      "count": 347
+    },
+    {
+      "word": "di",
+      "count": 328
+    },
+    {
+      "word": "sino",
+      "count": 327
+    },
+    {
+      "word": "pues",
+      "count": 324
+    },
+    {
+      "word": "creyentes",
+      "count": 308
+    },
+    {
+      "word": "coran",
+      "count": 290
+    },
+    {
+      "word": "verdad",
+      "count": 287
+    },
+    {
+      "word": "enviado",
+      "count": 270
+    },
+    {
+      "word": "vida",
+      "count": 256
+    },
+    {
+      "word": "hombres",
+      "count": 255
+    },
+    {
+      "word": "luego",
+      "count": 249
+    },
+    {
+      "word": "escritura",
+      "count": 247
+    },
+    {
+      "word": "pueblo",
+      "count": 244
+    },
+    {
+      "word": "sagrado",
+      "count": 240
+    },
+    {
+      "word": "misericordioso",
+      "count": 228
+    },
+    {
+      "word": "mico",
+      "count": 227
+    }
+  ],
+  "Tora": [
+    {
+      "word": "יהוה",
+      "count": 8613
+    },
+    {
+      "word": "yahweh",
+      "count": 4919
+    },
+    {
+      "word": "elohim",
+      "count": 2988
+    },
+    {
+      "word": "yisrael",
+      "count": 2895
+    },
+    {
+      "word": "ustedes",
+      "count": 2834
+    },
+    {
+      "word": "si",
+      "count": 2661
+    },
+    {
+      "word": "melej",
+      "count": 2526
+    },
+    {
+      "word": "hijo",
+      "count": 2108
+    },
+    {
+      "word": "tierra",
+      "count": 2031
+    },
+    {
+      "word": "asi",
+      "count": 1994
+    },
+    {
+      "word": "entonces",
+      "count": 1948
+    },
+    {
+      "word": "יהושע",
+      "count": 1929
+    },
+    {
+      "word": "dijo",
+      "count": 1872
+    },
+    {
+      "word": "hijos",
+      "count": 1827
+    },
+    {
+      "word": "nombre",
+      "count": 1580
+    },
+    {
+      "word": "habia",
+      "count": 1579
+    },
+    {
+      "word": "hombre",
+      "count": 1550
+    },
+    {
+      "word": "pueblo",
+      "count": 1545
+    },
+    {
+      "word": "asher",
+      "count": 1501
+    },
+    {
+      "word": "dia",
+      "count": 1423
+    },
+    {
+      "word": "mas",
+      "count": 1376
+    },
+    {
+      "word": "casa",
+      "count": 1353
+    },
+    {
+      "word": "dawid",
+      "count": 1338
+    },
+    {
+      "word": "diciendo",
+      "count": 1325
+    },
+    {
+      "word": "sera",
+      "count": 1318
+    }
+  ],
+  "Upanishads": [
+    {
+      "word": "espiritu",
+      "count": 278
+    },
+    {
+      "word": "mas",
+      "count": 239
+    },
+    {
+      "word": "vida",
+      "count": 234
+    },
+    {
+      "word": "hombre",
+      "count": 162
+    },
+    {
+      "word": "brahman",
+      "count": 158
+    },
+    {
+      "word": "alma",
+      "count": 124
+    },
+    {
+      "word": "dios",
+      "count": 119
+    },
+    {
+      "word": "asi",
+      "count": 112
+    },
+    {
+      "word": "alla",
+      "count": 109
+    },
+    {
+      "word": "verdad",
+      "count": 108
+    },
+    {
+      "word": "luz",
+      "count": 103
+    },
+    {
+      "word": "cuerpo",
+      "count": 100
+    },
+    {
+      "word": "si",
+      "count": 99
+    },
+    {
+      "word": "mente",
+      "count": 95
+    },
+    {
+      "word": "entonces",
+      "count": 94
+    },
+    {
+      "word": "fuego",
+      "count": 85
+    },
+    {
+      "word": "mundo",
+      "count": 83
+    },
+    {
+      "word": "ve",
+      "count": 75
+    },
+    {
+      "word": "conoce",
+      "count": 74
+    },
+    {
+      "word": "puede",
+      "count": 70
+    },
+    {
+      "word": "todas",
+      "count": 70
+    },
+    {
+      "word": "dijo",
+      "count": 69
+    },
+    {
+      "word": "mismo",
+      "count": 68
+    },
+    {
+      "word": "atman",
+      "count": 65
+    },
+    {
+      "word": "ser",
+      "count": 63
+    }
+  ]
+}

@@ -80,3 +80,9 @@ replit.nix
 
 .vercel
 .env*.local
+
+# Local portfolio source dumps
+Proyectos para web/
+app/projects/Moratalidad Chile 1997-2019/src/animacion_mortalidad.html
+scripts/db-verify.js
+supabase/migrations/

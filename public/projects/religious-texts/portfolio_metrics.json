@@ -1,0 +1,73 @@
+{
+  "rows": 80997,
+  "vocab_size": 80997,
+  "totals": {
+    "antiguo_test": 263534,
+    "nuevo_test": 79303,
+    "coran": 63880,
+    "tora": 488073,
+    "upanishads": 13672
+  },
+  "top_global": [
+    {
+      "word": "יהוה",
+      "total": 8613
+    },
+    {
+      "word": "dios",
+      "total": 7521
+    },
+    {
+      "word": "jehova",
+      "total": 6926
+    },
+    {
+      "word": "si",
+      "total": 6166
+    },
+    {
+      "word": "tierra",
+      "total": 5489
+    },
+    {
+      "word": "dijo",
+      "total": 5338
+    },
+    {
+      "word": "yahweh",
+      "total": 4919
+    },
+    {
+      "word": "hijos",
+      "total": 4817
+    },
+    {
+      "word": "hijo",
+      "total": 4631
+    },
+    {
+      "word": "mas",
+      "total": 4554
+    },
+    {
+      "word": "asi",
+      "total": 4171
+    },
+    {
+      "word": "entonces",
+      "total": 4016
+    },
+    {
+      "word": "pueblo",
+      "total": 3601
+    },
+    {
+      "word": "casa",
+      "total": 3378
+    },
+    {
+      "word": "dia",
+      "total": 3358
+    }
+  ]
+}

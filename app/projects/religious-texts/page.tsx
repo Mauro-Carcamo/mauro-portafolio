@@ -28,6 +28,60 @@ type CorpusName = "Antiguo Test" | "Nuevo Test" | "Coran" | "Tora" | "Upanishads
 
 type CorpusKey = "antiguo_test" | "nuevo_test" | "coran" | "tora" | "upanishads";
 
+const DEFAULT_METRICS = {
+  rows: 80997,
+  vocab_size: 80997,
+} as const;
+
+const DEFAULT_FILTERED_TOTALS: Record<CorpusKey, number> = {
+  antiguo_test: 263534,
+  nuevo_test: 79303,
+  coran: 63880,
+  tora: 488073,
+  upanishads: 13672,
+};
+
+const CORPUS_SOURCES: Record<
+  CorpusName,
+  { pdf: string; textCsv: string; freqCsv: string; pages: number; rawWords: number }
+> = {
+  "Antiguo Test": {
+    pdf: "La biblia antiguo-1-1174.pdf",
+    textCsv: "La biblia antiguo-1-1174.csv",
+    freqCsv: "frec_antiguo_test.csv",
+    pages: 1174,
+    rawWords: 583803,
+  },
+  "Nuevo Test": {
+    pdf: "La biblia nuevo-1175-1520.pdf",
+    textCsv: "La biblia nuevo-1175-1520.csv",
+    freqCsv: "frec_nuevo_test.csv",
+    pages: 346,
+    rawWords: 179864,
+  },
+  Coran: {
+    pdf: "Coran.pdf",
+    textCsv: "Coran.csv",
+    freqCsv: "frec_coran.csv",
+    pages: 227,
+    rawWords: 137371,
+  },
+  Tora: {
+    pdf: "Torah.pdf",
+    textCsv: "Torah.csv",
+    freqCsv: "frec_tora.csv",
+    pages: 818,
+    rawWords: 894043,
+  },
+  Upanishads: {
+    pdf: "Upanishads.pdf",
+    textCsv: "Upanishads.csv",
+    freqCsv: "frec_upanishads.csv",
+    pages: 175,
+    rawWords: 28402,
+  },
+};
+
 type PipelineStep = {
   id:
     | "extract"
@@ -142,8 +196,8 @@ export default function ReligiousTextsProject() {
       },
       {
         src: "/projects/religious-texts/charts/comparison_heatmap.png",
-        title: "Comparación normalizada",
-        description: "Heatmap 0–1 por corpus para las palabras más frecuentes.",
+        title: "ComparaciÃ³n normalizada",
+        description: "Heatmap 0â€“1 por corpus para las palabras mÃ¡s frecuentes.",
       },
       {
         src: "/projects/religious-texts/charts/top_antiguo_test.png",
@@ -155,11 +209,11 @@ export default function ReligiousTextsProject() {
       },
       {
         src: "/projects/religious-texts/charts/top_coran.png",
-        title: "Corán",
+        title: "CorÃ¡n",
       },
       {
         src: "/projects/religious-texts/charts/top_tora.png",
-        title: "Torá",
+        title: "TorÃ¡",
       },
       {
         src: "/projects/religious-texts/charts/top_upanishads.png",
@@ -181,12 +235,12 @@ export default function ReligiousTextsProject() {
 
   const pipelineSteps: PipelineStep[] = useMemo(
     () => [
-      { id: "extract", title: "Extracción de datos", caption: "PDF → texto plano", icon: "ph:file-pdf", color: "#4f46e5" },
-      { id: "clean", title: "Preprocesamiento", caption: "limpieza + normalización", icon: "ph:sparkle", color: "#0ea5e9" },
-      { id: "tokenize", title: "Tokenización y filtrado", caption: "tokens + stopwords", icon: "ph:funnel", color: "#8b5cf6" },
-      { id: "count", title: "Análisis de frecuencia", caption: "ocurrencias + métricas", icon: "ph:hash", color: "#10b981" },
-      { id: "compare", title: "Comparación de corpus", caption: "comparativo entre corpora", icon: "ph:table", color: "#f59e0b" },
-      { id: "visualize", title: "Visualización de resultados", caption: "gráficos e insights", icon: "ph:chart-bar", color: "#f43f5e" },
+      { id: "extract", title: "ExtracciÃ³n de datos", caption: "PDF â†’ texto plano", icon: "ph:file-pdf", color: "#4f46e5" },
+      { id: "clean", title: "Preprocesamiento", caption: "limpieza + normalizaciÃ³n", icon: "ph:sparkle", color: "#0ea5e9" },
+      { id: "tokenize", title: "TokenizaciÃ³n y filtrado", caption: "tokens + stopwords", icon: "ph:funnel", color: "#8b5cf6" },
+      { id: "count", title: "AnÃ¡lisis de frecuencia", caption: "ocurrencias + mÃ©tricas", icon: "ph:hash", color: "#10b981" },
+      { id: "compare", title: "ComparaciÃ³n de corpus", caption: "comparativo entre corpora", icon: "ph:table", color: "#f59e0b" },
+      { id: "visualize", title: "VisualizaciÃ³n de resultados", caption: "grÃ¡ficos e insights", icon: "ph:chart-bar", color: "#f43f5e" },
     ],
     [],
   );
@@ -286,7 +340,7 @@ export default function ReligiousTextsProject() {
             </Link>
             <div className="hidden sm:flex items-center gap-2">
               <Badge variant="secondary">NLP</Badge>
-              <Badge variant="secondary">Análisis comparativo</Badge>
+              <Badge variant="secondary">AnÃ¡lisis comparativo</Badge>
               <Badge variant="secondary">Python</Badge>
             </div>
           </div>
@@ -298,7 +352,7 @@ export default function ReligiousTextsProject() {
                   Textos Religiosos y Machine Learning
                 </h1>
                 <p className="mt-2 text-base sm:text-lg text-muted-foreground leading-relaxed">
-                  Comparación de textos sagrados con NLP: frecuencias de palabras,
+                  ComparaciÃ³n de textos sagrados con NLP: frecuencias de palabras,
                   contraste entre corpora y visualizaciones.
                 </p>
               </div>
@@ -324,7 +378,7 @@ export default function ReligiousTextsProject() {
                     className="gap-2"
                   >
                     <Github className="h-4 w-4" />
-                    Ver Código
+                    Ver CÃ³digo
                   </a>
                 </Button>
               </div>
@@ -354,7 +408,8 @@ export default function ReligiousTextsProject() {
                       const words = topWords[name] ?? [];
                       const key = corpusKeyByName[name];
                       const meta = corpusMetaByName[name];
-                      const corpusTotal = metrics?.totals?.[key] ?? null;
+                      const corpusTotal =
+                        metrics?.totals?.[key] ?? DEFAULT_FILTERED_TOTALS[key];
 
                       return (
                         <div
@@ -388,9 +443,7 @@ export default function ReligiousTextsProject() {
                               <p className="mt-0.5">
                                 Total palabras:{" "}
                                 <span className="font-semibold text-foreground">
-                                  {corpusTotal === null
-                                    ? "..."
-                                    : formatCompactInteger(corpusTotal)}
+                                  {formatCompactInteger(corpusTotal)}
                                 </span>
                               </p>
                             </div>
@@ -450,16 +503,16 @@ export default function ReligiousTextsProject() {
             >
               <CardHeader>
                 <CardTitle className="text-xl">
-                  Pipeline de análisis de texto
+                  Pipeline de anÃ¡lisis de texto
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-muted-foreground">
-                  Estos son los pasos del análisis y cómo se conectan con los
+                  Estos son los pasos del anÃ¡lisis y cÃ³mo se conectan con los
                   resultados que ves abajo.
                 </p>
 
-                <nav aria-label="Pasos del análisis">
+                <nav aria-label="Pasos del anÃ¡lisis">
                   <ol className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
                     {pipelineSteps.map((step, idx) => (
                       <li key={step.id}>
@@ -502,7 +555,7 @@ export default function ReligiousTextsProject() {
                     className="scroll-mt-24 rounded-2xl border bg-card/70 p-5 shadow-sm backdrop-blur border-t-4 border-indigo-400/40 bg-gradient-to-b from-indigo-500/5 to-transparent"
                   >
                     <div className="flex flex-col gap-1">
-                      <p className="text-base font-semibold">1) Extracción de datos</p>
+                      <p className="text-base font-semibold">1) ExtracciÃ³n de datos</p>
                       <p className="text-sm text-muted-foreground">
                         Tomamos documentos y los convertimos a texto para poder analizarlos.
                       </p>
@@ -512,7 +565,7 @@ export default function ReligiousTextsProject() {
                       <div className="lg:col-span-2 space-y-4">
                         <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
                           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                            Qué ocurre (visual)
+                            QuÃ© ocurre (visual)
                           </p>
                           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
                             <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">
@@ -524,7 +577,7 @@ export default function ReligiousTextsProject() {
                             </span>
                           </div>
                           <p className="mt-3 text-sm text-muted-foreground">
-                            Extraemos el contenido de cada página y lo unimos en un solo texto por corpus.
+                            Extraemos el contenido de cada pÃ¡gina y lo unimos en un solo texto por corpus.
                           </p>
                         </div>
 
@@ -532,13 +585,13 @@ export default function ReligiousTextsProject() {
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
                             <p className="text-xs font-semibold text-slate-800">Entrada</p>
                             <p className="mt-1 text-xs text-muted-foreground">
-                              PDFs por corpus (Biblia, Corán, Torá, Upanishads).
+                              PDFs por corpus (Biblia, CorÃ¡n, TorÃ¡, Upanishads).
                             </p>
                           </div>
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
                             <p className="text-xs font-semibold text-slate-800">Proceso</p>
                             <p className="mt-1 text-xs text-muted-foreground">
-                              Recorre páginas y concatena el texto.
+                              Recorre pÃ¡ginas y concatena el texto.
                             </p>
                           </div>
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
@@ -550,9 +603,43 @@ export default function ReligiousTextsProject() {
                         </div>
                       </div>
 
+
+                        <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            Datos reales (fuentes)
+                          </p>
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            Trabajamos con PDFs por corpus y guardamos el texto extraído en un CSV (columna <span className="font-mono">text</span>).
+                          </p>
+                          <div className="mt-3 overflow-x-auto">
+                            <table className="w-full min-w-[520px] text-xs">
+                              <thead className="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                                <tr>
+                                  <th className="py-2 pr-3">Corpus</th>
+                                  <th className="py-2 pr-3">PDF</th>
+                                  <th className="py-2 pr-3">Páginas</th>
+                                  <th className="py-2 pr-3">Texto (CSV)</th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-border/60">
+                                {corpusOrder.map((name) => {
+                                  const src = CORPUS_SOURCES[name];
+                                  return (
+                                    <tr key={`src-${name}`} className="text-muted-foreground">
+                                      <td className="py-2 pr-3 font-semibold text-foreground">{name}</td>
+                                      <td className="py-2 pr-3 font-mono text-[11px]">{src.pdf}</td>
+                                      <td className="py-2 pr-3 tabular-nums">{formatCompactInteger(src.pages)}</td>
+                                      <td className="py-2 pr-3 font-mono text-[11px]">{src.textCsv}</td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                       <CodeCard
-                        title="Código clave (extracción)"
-                        description="Convierte un PDF en texto recorriendo sus páginas y acumulando el contenido."
+                        title="CÃ³digo clave (extracciÃ³n)"
+                        description="Convierte un PDF en texto recorriendo sus pÃ¡ginas y acumulando el contenido."
                         code={PIPELINE_CODE.extract}
                       />
                     </div>
@@ -565,7 +652,7 @@ export default function ReligiousTextsProject() {
                     <div className="flex flex-col gap-1">
                       <p className="text-base font-semibold">2) Preprocesamiento</p>
                       <p className="text-sm text-muted-foreground">
-                        Dejamos el texto “parejo”: sin mayúsculas ni signos que ensucian el conteo.
+                        Dejamos el texto â€œparejoâ€: sin mayÃºsculas ni signos que ensucian el conteo.
                       </p>
                     </div>
 
@@ -573,7 +660,7 @@ export default function ReligiousTextsProject() {
                       <div className="lg:col-span-2 space-y-4">
                         <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
                           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                            Qué ocurre (visual)
+                            QuÃ© ocurre (visual)
                           </p>
                           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
                             <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">
@@ -585,14 +672,14 @@ export default function ReligiousTextsProject() {
                             </span>
                           </div>
                           <p className="mt-3 text-sm text-muted-foreground">
-                            Evita que variaciones como “Dios”, “dios” y “dios,” se cuenten distinto.
+                            Evita que variaciones como â€œDiosâ€, â€œdiosâ€ y â€œdios,â€ se cuenten distinto.
                           </p>
                         </div>
 
                         <div className="grid gap-3 sm:grid-cols-3">
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
                             <p className="text-xs font-semibold text-slate-800">Normaliza</p>
-                            <p className="mt-1 text-xs text-muted-foreground">Minúsculas + quita puntuación.</p>
+                            <p className="mt-1 text-xs text-muted-foreground">MinÃºsculas + quita puntuaciÃ³n.</p>
                           </div>
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
                             <p className="text-xs font-semibold text-slate-800">Filtra</p>
@@ -600,14 +687,46 @@ export default function ReligiousTextsProject() {
                           </div>
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
                             <p className="text-xs font-semibold text-slate-800">Mejora</p>
-                            <p className="mt-1 text-xs text-muted-foreground">Conteo más estable y comparable.</p>
+                            <p className="mt-1 text-xs text-muted-foreground">Conteo mÃ¡s estable y comparable.</p>
                           </div>
                         </div>
                       </div>
 
+
+                        <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            Datos reales (antes de filtrar)
+                          </p>
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            Palabras aproximadas en el texto extraído (antes de stopwords).
+                          </p>
+                          <div className="mt-3 overflow-x-auto">
+                            <table className="w-full min-w-[520px] text-xs">
+                              <thead className="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                                <tr>
+                                  <th className="py-2 pr-3">Corpus</th>
+                                  <th className="py-2 pr-3">Palabras (raw)</th>
+                                  <th className="py-2 pr-3">Archivo</th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-border/60">
+                                {corpusOrder.map((name) => {
+                                  const src = CORPUS_SOURCES[name];
+                                  return (
+                                    <tr key={`raw-${name}`} className="text-muted-foreground">
+                                      <td className="py-2 pr-3 font-semibold text-foreground">{name}</td>
+                                      <td className="py-2 pr-3 tabular-nums font-semibold text-foreground">{formatCompactInteger(src.rawWords)}</td>
+                                      <td className="py-2 pr-3 font-mono text-[11px]">{src.textCsv}</td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                       <CodeCard
-                        title="Código clave (limpieza)"
-                        description="Pasa a minúsculas y elimina signos para que el conteo sea consistente."
+                        title="CÃ³digo clave (limpieza)"
+                        description="Pasa a minÃºsculas y elimina signos para que el conteo sea consistente."
                         code={PIPELINE_CODE.clean}
                       />
                     </div>
@@ -618,9 +737,9 @@ export default function ReligiousTextsProject() {
                     className="scroll-mt-24 rounded-2xl border bg-card/70 p-5 shadow-sm backdrop-blur border-t-4 border-violet-400/40 bg-gradient-to-b from-violet-500/5 to-transparent"
                   >
                     <div className="flex flex-col gap-1">
-                      <p className="text-base font-semibold">3) Tokenización y filtrado</p>
+                      <p className="text-base font-semibold">3) TokenizaciÃ³n y filtrado</p>
                       <p className="text-sm text-muted-foreground">
-                        Separamos el texto en palabras y quitamos palabras muy comunes (“de”, “la”, “y”…).
+                        Separamos el texto en palabras y quitamos palabras muy comunes (â€œdeâ€, â€œlaâ€, â€œyâ€â€¦).
                       </p>
                     </div>
 
@@ -628,7 +747,7 @@ export default function ReligiousTextsProject() {
                       <div className="lg:col-span-2 space-y-4">
                         <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
                           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                            Qué ocurre (visual)
+                            QuÃ© ocurre (visual)
                           </p>
                           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
                             <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">
@@ -644,14 +763,14 @@ export default function ReligiousTextsProject() {
                             </span>
                           </div>
                           <p className="mt-3 text-sm text-muted-foreground">
-                            Nos quedamos con palabras con más significado y evitamos conectores del idioma.
+                            Nos quedamos con palabras con mÃ¡s significado y evitamos conectores del idioma.
                           </p>
                         </div>
 
                         <div className="grid gap-3 sm:grid-cols-3">
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
                             <p className="text-xs font-semibold text-slate-800">Tokeniza</p>
-                            <p className="mt-1 text-xs text-muted-foreground">Texto → lista de palabras.</p>
+                            <p className="mt-1 text-xs text-muted-foreground">Texto â†’ lista de palabras.</p>
                           </div>
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
                             <p className="text-xs font-semibold text-slate-800">Stopwords</p>
@@ -664,9 +783,48 @@ export default function ReligiousTextsProject() {
                         </div>
                       </div>
 
+
+                        <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            Datos reales (después de stopwords)
+                          </p>
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            Tokens finales por corpus (los que alimentan el conteo y el Top 10).
+                          </p>
+                          <div className="mt-3 overflow-x-auto">
+                            <table className="w-full min-w-[620px] text-xs">
+                              <thead className="text-left text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                                <tr>
+                                  <th className="py-2 pr-3">Corpus</th>
+                                  <th className="py-2 pr-3">Raw</th>
+                                  <th className="py-2 pr-3">Post-stopwords</th>
+                                  <th className="py-2 pr-3">Reducción</th>
+                                  <th className="py-2 pr-3">CSV frecuencias</th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-border/60">
+                                {corpusOrder.map((name) => {
+                                  const key = corpusKeyByName[name];
+                                  const src = CORPUS_SOURCES[name];
+                                  const filtered = metrics?.totals?.[key] ?? DEFAULT_FILTERED_TOTALS[key];
+                                  const reduction = src.rawWords > 0 ? (1 - filtered / src.rawWords) * 100 : 0;
+                                  return (
+                                    <tr key={`post-${name}`} className="text-muted-foreground">
+                                      <td className="py-2 pr-3 font-semibold text-foreground">{name}</td>
+                                      <td className="py-2 pr-3 tabular-nums">{formatCompactInteger(src.rawWords)}</td>
+                                      <td className="py-2 pr-3 tabular-nums font-semibold text-foreground">{formatCompactInteger(filtered)}</td>
+                                      <td className="py-2 pr-3 tabular-nums">{formatPercent(reduction)}</td>
+                                      <td className="py-2 pr-3 font-mono text-[11px]">{src.freqCsv}</td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                       <CodeCard
-                        title="Código clave (tokens + stopwords)"
-                        description="Tokeniza y elimina stopwords en español para quedarnos con términos más informativos."
+                        title="CÃ³digo clave (tokens + stopwords)"
+                        description="Tokeniza y elimina stopwords en espaÃ±ol para quedarnos con tÃ©rminos mÃ¡s informativos."
                         code={PIPELINE_CODE.tokenize}
                       />
                     </div>
@@ -677,9 +835,9 @@ export default function ReligiousTextsProject() {
                     className="scroll-mt-24 rounded-2xl border bg-card/70 p-5 shadow-sm backdrop-blur border-t-4 border-emerald-400/40 bg-gradient-to-b from-emerald-500/5 to-transparent"
                   >
                     <div className="flex flex-col gap-1">
-                      <p className="text-base font-semibold">4) Análisis de frecuencia</p>
+                      <p className="text-base font-semibold">4) AnÃ¡lisis de frecuencia</p>
                       <p className="text-sm text-muted-foreground">
-                        Contamos cuántas veces aparece cada palabra y armamos rankings por corpus.
+                        Contamos cuÃ¡ntas veces aparece cada palabra y armamos rankings por corpus.
                       </p>
                     </div>
 
@@ -687,7 +845,7 @@ export default function ReligiousTextsProject() {
                       <div className="lg:col-span-2 space-y-4">
                         <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
                           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                            Qué ocurre (visual)
+                            QuÃ© ocurre (visual)
                           </p>
                           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
                             <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">
@@ -703,7 +861,7 @@ export default function ReligiousTextsProject() {
                             </span>
                           </div>
                           <p className="mt-3 text-sm text-muted-foreground">
-                            Esto alimenta el “Top por corpus” y el “Top global” (sección{" "}
+                            Esto alimenta el â€œTop por corpusâ€ y el â€œTop globalâ€ (secciÃ³n{" "}
                             <a href="#demo" className="font-semibold text-slate-800 underline underline-offset-2">
                               Demo
                             </a>
@@ -731,13 +889,13 @@ export default function ReligiousTextsProject() {
                                 ))}
                               </div>
                             ) : (
-                              <p className="mt-2 text-xs text-muted-foreground">Cargando…</p>
+                              <p className="mt-2 text-xs text-muted-foreground">Cargandoâ€¦</p>
                             )}
                           </div>
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
-                            <p className="text-xs font-semibold text-slate-800">Qué significa</p>
+                            <p className="text-xs font-semibold text-slate-800">QuÃ© significa</p>
                             <p className="mt-1 text-xs text-muted-foreground">
-                              Palabras con mayor repetición (no necesariamente “más importantes”).
+                              Palabras con mayor repeticiÃ³n (no necesariamente â€œmÃ¡s importantesâ€).
                             </p>
                           </div>
                         </div>
@@ -768,9 +926,23 @@ export default function ReligiousTextsProject() {
                         ) : null}
                       </div>
 
+
+                        <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            Datos reales (tamaño del dataset)
+                          </p>
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            El CSV combinado une los corpora por palabra (vocabulario) y guarda una columna de frecuencia por texto.
+                          </p>
+                          <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                            <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">Corpora: 5</span>
+                            <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">Vocab: {formatCompactInteger(metrics?.vocab_size ?? DEFAULT_METRICS.vocab_size)}</span>
+                            <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">Filas: {formatCompactInteger(metrics?.rows ?? DEFAULT_METRICS.rows)}</span>
+                          </div>
+                        </div>
                       <CodeCard
-                        title="Código clave (conteo)"
-                        description="Cuenta ocurrencias y ordena resultados para construir el ranking de palabras más frecuentes."
+                        title="CÃ³digo clave (conteo)"
+                        description="Cuenta ocurrencias y ordena resultados para construir el ranking de palabras mÃ¡s frecuentes."
                         code={PIPELINE_CODE.count}
                       />
                     </div>
@@ -781,9 +953,9 @@ export default function ReligiousTextsProject() {
                     className="scroll-mt-24 rounded-2xl border bg-card/70 p-5 shadow-sm backdrop-blur border-t-4 border-amber-400/40 bg-gradient-to-b from-amber-500/5 to-transparent"
                   >
                     <div className="flex flex-col gap-1">
-                      <p className="text-base font-semibold">5) Comparación de corpus</p>
+                      <p className="text-base font-semibold">5) ComparaciÃ³n de corpus</p>
                       <p className="text-sm text-muted-foreground">
-                        Comparamos textos entre sí para ver qué palabras destacan en cada uno.
+                        Comparamos textos entre sÃ­ para ver quÃ© palabras destacan en cada uno.
                       </p>
                     </div>
 
@@ -791,7 +963,7 @@ export default function ReligiousTextsProject() {
                       <div className="lg:col-span-2 space-y-4">
                         <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
                           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                            Qué ocurre (visual)
+                            QuÃ© ocurre (visual)
                           </p>
                           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
                             <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">
@@ -803,7 +975,7 @@ export default function ReligiousTextsProject() {
                             </span>
                             <ArrowRight className="h-4 w-4 text-muted-foreground" />
                             <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">
-                              Comparación
+                              ComparaciÃ³n
                             </span>
                           </div>
                           <p className="mt-3 text-sm text-muted-foreground">
@@ -819,8 +991,8 @@ export default function ReligiousTextsProject() {
                             </p>
                           </div>
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
-                            <p className="text-xs font-semibold text-slate-800">Métricas</p>
-                            <p className="mt-1 text-xs text-muted-foreground">Resumen del análisis.</p>
+                            <p className="text-xs font-semibold text-slate-800">MÃ©tricas</p>
+                            <p className="mt-1 text-xs text-muted-foreground">Resumen del anÃ¡lisis.</p>
                             <div className="mt-2 flex flex-wrap gap-2 text-xs">
                               <span className="rounded-full border bg-muted px-3 py-1 font-semibold">
                                 Vocab: {metrics ? formatCompactInteger(metrics.vocab_size) : "..."}
@@ -831,20 +1003,33 @@ export default function ReligiousTextsProject() {
                             </div>
                           </div>
                           <div className="rounded-xl border bg-background/60 p-4 shadow-sm">
-                            <p className="text-xs font-semibold text-slate-800">Ver gráfico</p>
+                            <p className="text-xs font-semibold text-slate-800">Ver grÃ¡fico</p>
                             <p className="mt-1 text-xs text-muted-foreground">
-                              Revisa la comparación en{" "}
+                              Revisa la comparaciÃ³n en{" "}
                               <a href="#charts" className="font-semibold text-slate-800 underline underline-offset-2">
-                                Gráficos
+                                GrÃ¡ficos
                               </a>.
                             </p>
                           </div>
                         </div>
                       </div>
 
+
+                        <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            Datos reales (comparación)
+                          </p>
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            La tabla combinada (<span className="font-mono">frec_textos_sagrados.csv</span>) tiene una fila por palabra y una columna por corpus.
+                          </p>
+                          <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                            <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">Columnas: 1 palabra + 5 corpora</span>
+                            <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">Filas: {formatCompactInteger(metrics?.rows ?? DEFAULT_METRICS.rows)}</span>
+                          </div>
+                        </div>
                       <CodeCard
-                        title="Código clave (comparación)"
-                        description="Guarda la tabla combinada para comparar corpora y genera métricas/JSON del portafolio."
+                        title="CÃ³digo clave (comparaciÃ³n)"
+                        description="Guarda la tabla combinada para comparar corpora y genera mÃ©tricas/JSON del portafolio."
                         code={PIPELINE_CODE.compare}
                       />
                     </div>
@@ -855,9 +1040,9 @@ export default function ReligiousTextsProject() {
                     className="scroll-mt-24 rounded-2xl border bg-card/70 p-5 shadow-sm backdrop-blur border-t-4 border-rose-400/40 bg-gradient-to-b from-rose-500/5 to-transparent"
                   >
                     <div className="flex flex-col gap-1">
-                      <p className="text-base font-semibold">6) Visualización de resultados</p>
+                      <p className="text-base font-semibold">6) VisualizaciÃ³n de resultados</p>
                       <p className="text-sm text-muted-foreground">
-                        Convertimos números en gráficos para detectar patrones rápido.
+                        Convertimos nÃºmeros en grÃ¡ficos para detectar patrones rÃ¡pido.
                       </p>
                     </div>
 
@@ -865,7 +1050,7 @@ export default function ReligiousTextsProject() {
                       <div className="lg:col-span-2 space-y-4">
                         <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
                           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                            Qué ocurre (visual)
+                            QuÃ© ocurre (visual)
                           </p>
                           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
                             <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">
@@ -873,7 +1058,7 @@ export default function ReligiousTextsProject() {
                             </span>
                             <ArrowRight className="h-4 w-4 text-muted-foreground" />
                             <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">
-                              <IconifyImg icon="ph:chart-bar" color="#f43f5e" className="h-4 w-4" /> Gráficos
+                              <IconifyImg icon="ph:chart-bar" color="#f43f5e" className="h-4 w-4" /> GrÃ¡ficos
                             </span>
                             <ArrowRight className="h-4 w-4 text-muted-foreground" />
                             <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">
@@ -881,7 +1066,7 @@ export default function ReligiousTextsProject() {
                             </span>
                           </div>
                           <p className="mt-3 text-sm text-muted-foreground">
-                            Usamos PNGs estáticos para que la página cargue rápido.
+                            Usamos PNGs estÃ¡ticos para que la pÃ¡gina cargue rÃ¡pido.
                           </p>
                         </div>
 
@@ -899,7 +1084,7 @@ export default function ReligiousTextsProject() {
                             <figcaption className="px-4 py-3">
                               <p className="text-sm font-semibold">Top global</p>
                               <p className="mt-1 text-xs text-muted-foreground">
-                                Palabras más repetidas sumando todos los textos.
+                                Palabras mÃ¡s repetidas sumando todos los textos.
                               </p>
                             </figcaption>
                           </figure>
@@ -917,23 +1102,36 @@ export default function ReligiousTextsProject() {
                             <figcaption className="px-4 py-3">
                               <p className="text-sm font-semibold">Heatmap comparativo</p>
                               <p className="mt-1 text-xs text-muted-foreground">
-                                Comparación normalizada para ver diferencias entre corpora.
+                                ComparaciÃ³n normalizada para ver diferencias entre corpora.
                               </p>
                             </figcaption>
                           </figure>
                         </div>
 
                         <p className="text-xs text-muted-foreground">
-                          Ver la galería completa en{" "}
+                          Ver la galerÃ­a completa en{" "}
                           <a href="#charts" className="font-semibold text-slate-800 underline underline-offset-2">
-                            Gráficos
+                            GrÃ¡ficos
                           </a>.
                         </p>
                       </div>
 
+
+                        <div className="rounded-2xl border bg-background/60 p-4 shadow-sm">
+                          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            Datos reales (salida visual)
+                          </p>
+                          <p className="mt-2 text-sm text-muted-foreground">
+                            Generamos imágenes PNG estáticas para que el portafolio cargue rápido.
+                          </p>
+                          <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                            <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">PNGs: {formatCompactInteger(chartItems.length)}</span>
+                            <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 font-semibold">JSON: portfolio_metrics.json + portfolio_top_words.json</span>
+                          </div>
+                        </div>
                       <CodeCard
-                        title="Código clave (gráficos)"
-                        description="Genera las imágenes del portafolio (top global y heatmap) desde la tabla combinada."
+                        title="CÃ³digo clave (grÃ¡ficos)"
+                        description="Genera las imÃ¡genes del portafolio (top global y heatmap) desde la tabla combinada."
                         code={PIPELINE_CODE.visualize}
                       />
                     </div>
@@ -959,7 +1157,7 @@ export default function ReligiousTextsProject() {
                       {metrics ? formatCompactInteger(metrics.vocab_size) : "..."}
                     </p>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      Palabras únicas en la tabla combinada.
+                      Palabras Ãºnicas en la tabla combinada.
                     </p>
                   </div>
                   <div className="rounded-xl border bg-background/60 p-4">
@@ -1005,7 +1203,7 @@ export default function ReligiousTextsProject() {
               className="scroll-mt-24 border bg-card/70 shadow-sm backdrop-blur"
             >
               <CardHeader>
-                <CardTitle className="text-xl">Gráficos</CardTitle>
+                <CardTitle className="text-xl">GrÃ¡ficos</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-2">

@@ -1,6 +1,7 @@
 "use client"
 
 import { Github, Linkedin, Mail, MessageCircle } from "lucide-react"
+import { motion, Variants } from "framer-motion"
 
 type SocialLinksProps = {
   size?: "sm" | "md"
@@ -15,9 +16,46 @@ const iconSizeByVariant = {
 export function SocialLinks({ size = "md", className }: SocialLinksProps) {
   const iconSize = iconSizeByVariant[size]
 
+  // Variantes para el contenedor (maneja la cascada)
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1, // Tiempo entre cada icono
+        delayChildren: 0.1,   // Espera inicial opcional
+      },
+    },
+  }
+
+  // Variantes para cada icono individual
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 10, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { type: "spring", stiffness: 300, damping: 20 },
+    },
+  }
+
+  const hoverAnimation = {
+    y: -5,
+    scale: 1.15,
+    transition: { type: "spring", stiffness: 400, damping: 10 },
+  }
+
   return (
-    <div className={className ?? "flex flex-wrap items-center gap-5"}>
-      <a
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      className={className ?? "flex flex-wrap items-center gap-5"}
+    >
+      <motion.a
+        variants={itemVariants}
+        whileHover={hoverAnimation}
         href="https://github.com/Mauro-Carcamo"
         target="_blank"
         rel="noopener noreferrer"
@@ -26,9 +64,11 @@ export function SocialLinks({ size = "md", className }: SocialLinksProps) {
         title="GitHub"
       >
         <Github size={iconSize} />
-      </a>
+      </motion.a>
 
-      <a
+      <motion.a
+        variants={itemVariants}
+        whileHover={hoverAnimation}
         href="https://www.linkedin.com/in/mauricio-carcamo-diaz/"
         target="_blank"
         rel="noopener noreferrer"
@@ -37,18 +77,22 @@ export function SocialLinks({ size = "md", className }: SocialLinksProps) {
         title="LinkedIn"
       >
         <Linkedin size={iconSize} />
-      </a>
+      </motion.a>
 
-      <a
+      <motion.a
+        variants={itemVariants}
+        whileHover={hoverAnimation}
         href="mailto:mauro.carcamo89@gmail.com"
         className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
         aria-label="Email"
         title="Email"
       >
         <Mail size={iconSize} />
-      </a>
+      </motion.a>
 
-      <a
+      <motion.a
+        variants={itemVariants}
+        whileHover={hoverAnimation}
         href="https://wa.me/56990381919"
         target="_blank"
         rel="noopener noreferrer"
@@ -57,8 +101,7 @@ export function SocialLinks({ size = "md", className }: SocialLinksProps) {
         title="WhatsApp"
       >
         <MessageCircle size={iconSize} />
-      </a>
-    </div>
+      </motion.a>
+    </motion.div>
   )
 }
-

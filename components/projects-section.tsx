@@ -1,4 +1,4 @@
-"use client"
+﻿﻿"use client"
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -13,30 +13,65 @@ import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { cn } from "@/lib/utils"
+import Image from "next/image"
+
+import { motion, AnimatePresence, Variants } from "framer-motion"
+
+function ProjectImage({ src, alt, className, priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
+  const [isLoading, setIsLoading] = useState(true)
+  
+  // Placeholder base64 (un color gris azulado muy ligero) para que el blur funcione con URLs externas
+  const blurDataURL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+F9PQAI8AKpT8S9WAAAAABJRU5ErkJggg=="
+
+  return (
+    <div className="relative w-full h-full overflow-hidden bg-muted">
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <motion.div
+            key="skeleton"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 z-10 bg-muted"
+          >
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: "100%" }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <motion.div
+        whileHover={{ scale: 1.08, y: -4 }}
+        transition={{ duration: 0.5 }}
+        className="relative w-full h-full"
+      >
+        <Image
+        src={src}
+        alt={alt}
+          fill
+          priority={priority}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className={cn(className, "transition-opacity duration-500", isLoading ? "opacity-0" : "opacity-100")}
+          onLoad={() => setIsLoading(false)}
+          blurDataURL={blurDataURL}
+        />
+      </motion.div>
+    </div>
+  )
+}
 
 export function ProjectsSection() {
   const router = useRouter()
-
-  const kittypawImages = [
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1.jpg-TfWbRHXGAdMVjCdnJ3UuoMPSKWYUuG.jpeg", // Logo
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2.jpg-Gi4mtVmyUmtW3r3FtcPgcBlzWKT8bi.jpeg", // Diseño 3D
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3.jpg-87kT48HZss47HeWL5EUHuICRBBPaqo.jpeg", // Piezas impresas
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4.jpg-CrV0UJpsAdqrPGt2riwt8fLhIxQR8P.jpeg", // Electrónica
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/5.jpg-BORpRmjMANvpJciyhp6EyOy9OrnFOS.jpeg", // Componentes
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6.jpg-g6YwZo4FjMZknM27rSSwn5kSDBfP5z.jpeg", // Dispensador completo
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7.jpg-iNflzeY4Y4inaUpdkXgBBdHzC0n3sV.jpeg", // Gato usando
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8.jpg-84YNS0kqfDx3zpXyGgRR1d15PtD68K.jpeg", // App funcionando
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/9.jpg-fE5i8lUMh9ovgnIlRrV3IGrIenHRSO.jpeg", // Instalación app
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/10.jpg-Nv3MtKKr9wNacPCT1wYkV4fbstK1Eh.jpeg", // Gráfico temperatura
-  ]
 
   const projects = [
     {
       title: "Kittypau",
       description:
         "Plataforma integral para gestión de mascotas que combina IoT, app/web e IA para monitorear y mejorar el bienestar.",
-      image: "/pet-adoption-app.png",
-      images: kittypawImages, // Added images array for KittyPaw project
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1.jpg-TfWbRHXGAdMVjCdnJ3UuoMPSKWYUuG.jpeg",
       technologies: ["React Native", "Node.js", "MongoDB", "Machine Learning"],
       liveUrl: "/projects/kittypau",
       appUrl: "https://kittypau-app.vercel.app",
@@ -126,6 +161,27 @@ export function ProjectsSection() {
     }
   }, [emblaApi, isHovered, isFocusWithin])
 
+  const containerVariants: Variants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  }
+
+  const itemVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 120, damping: 18 },
+    },
+  }
+
   return (
     <section id="projects" className="relative py-14 sm:py-20">
       <SectionParallax />
@@ -143,7 +199,12 @@ export function ProjectsSection() {
           />
         </ScrollReveal>
 
-        <ScrollReveal delayMs={80}>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-10%" }}
+        >
           <div
           className="relative"
           onMouseEnter={() => setIsHovered(true)}
@@ -160,66 +221,105 @@ export function ProjectsSection() {
             </Button>
           </div>
 
-          <div ref={emblaRef} className="overflow-hidden cursor-grab active:cursor-grabbing">
+          <div ref={emblaRef} className="overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y" style={{ touchAction: "pan-y" }}>
             <div className="flex touch-pan-y gap-3 sm:gap-4">
               {projects.map((project, index) => (
-                <div
+                <motion.div
                   key={index}
                   className="flex-[0_0_86%] sm:flex-[0_0_54%] md:flex-[0_0_40%] lg:flex-[0_0_30%] xl:flex-[0_0_24%]"
+                  variants={itemVariants}
                 >
-                  <Card
-                    className={[
+                  <motion.div
+                    layout // Enable layout animations
+                    whileHover={{
+                      y: -8,
+                      scale: 1.015,
+                      rotateX: -2,
+                      rotateY: 2,
+                      z: 20, // Add a slight Z-axis translation for more depth
+                    }}
+                    whileTap={{ scale: 0.98, rotateX: 0, rotateY: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 18,
+                    }}
+                    style={{
+                      transformStyle: "preserve-3d", // Enable 3D transformations
+                      perspective: "1200px", // Set perspective for 3D effect
+                    }}
+                    className={cn(
                       "group overflow-hidden p-0 py-0 gap-0 h-full rounded-2xl border border-border/60 bg-background/80 shadow-sm",
                       "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-                      "transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl",
                       project.featured ? "ring-1 ring-primary/20" : "",
-                    ].join(" ")}
-                    role="link"
-                    tabIndex={0}
-                    aria-label={`Abrir ${project.title}`}
-                    onClick={(event) => {
-                      const target = event.target as HTMLElement
-                      if (target.closest("a,button")) return
-                      router.push(project.liveUrl)
-                    }}
-                    onKeyDown={(event) => {
-                      if (event.key !== "Enter" && event.key !== " ") return
-                      event.preventDefault()
-                      router.push(project.liveUrl)
-                    }}
+                    )}
                   >
-                    <div className="relative overflow-hidden bg-muted aspect-video">
+                    <Card
+                      role="link"
+                      tabIndex={0}
+                      aria-label={`Abrir ${project.title}`}
+                      onClick={(event) => {
+                        const target = event.target as HTMLElement
+                        if (target.closest("a,button")) return
+                        router.push(project.liveUrl)
+                      }}
+                      onKeyDown={(event) => {
+                        if (event.key !== "Enter" && event.key !== " ") return
+                        event.preventDefault()
+                        router.push(project.liveUrl)
+                      }}
+                      className="h-full w-full border-none shadow-none" // Remove default card styling to let motion.div handle it
+                    >
+                    <div className="relative overflow-hidden bg-muted aspect-video" style={{ transformStyle: "preserve-3d" }}>
                       {project.images ? (
-                        <ImageCarousel
-                          images={project.images}
-                          alt={project.title}
-                          autoPlay={true}
-                          autoPlayInterval={2500}
-                        />
+                        <motion.div whileHover={{ scale: 1.08, y: -4 }} transition={{ duration: 0.5 }}>
+                          <ImageCarousel
+                            images={project.images}
+                            alt={project.title}
+                            autoPlay={true}
+                            autoPlayInterval={2500}
+                          />
+                        </motion.div>
                       ) : (
-                        <img
+                        <ProjectImage
                           src={project.image || "/placeholder.svg"}
                           alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                          loading="lazy"
+                          priority={project.featured}
+                          className={cn(
+                            "w-full h-full transition-transform duration-500 group-hover:scale-[1.03]",
+                            project.title === "Kittypau" ? "object-contain p-6 bg-white" : "object-cover"
+                          )}
+                          placeholder="blur"
                         />
                       )}
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/55 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       {project.featured && (
-                        <Badge className="absolute top-3 left-3 bg-primary z-10 shadow-sm">Destacado</Badge>
+                        <motion.div
+                          animate={{
+                            boxShadow: [
+                              "0 0 0px rgba(99,102,241,0.4)",
+                              "0 0 15px rgba(99,102,241,0.7)",
+                              "0 0 0px rgba(99,102,241,0.4)",
+                            ],
+                          }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute top-3 left-3 z-10"
+                        >
+                          <Badge className="bg-primary shadow-sm">Destacado</Badge>
+                        </motion.div>
                       )}
                     </div>
 
-                    <CardHeader className="px-4 sm:px-5 py-3">
-                      <CardTitle className="text-base sm:text-lg leading-tight tracking-tight">{project.title}</CardTitle>
+                    <CardHeader className="px-4 sm:px-5 pt-5 pb-2">
+                      <CardTitle className="text-lg sm:text-xl font-bold leading-tight tracking-tight">{project.title}</CardTitle>
                     </CardHeader>
 
-                    <CardContent className="px-4 sm:px-5 pb-4 pt-0 flex-1 space-y-3">
-                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-3">
+                    <CardContent className="px-4 sm:px-5 pb-4 pt-0 flex-1 space-y-4">
+                      <p className="text-[14px] sm:text-[15px] text-muted-foreground leading-relaxed line-clamp-3 sm:line-clamp-4">
                         {project.description}
                       </p>
 
-                      <div className="flex flex-wrap gap-2 items-center">
+                      <div className="flex flex-wrap gap-2 items-center pt-1">
                         {project.technologies.map((tech, techIndex) => (
                           <div
                             key={techIndex}
@@ -256,22 +356,14 @@ export function ProjectsSection() {
                         </a>
                       </Button>
                     </CardFooter>
-                  </Card>
-                </div>
+                    </Card>
+                  </motion.div>
+                </motion.div>
               ))}
             </div>
           </div>
-
-          <div className="mt-6 flex justify-center sm:hidden items-center gap-2">
-            <Button variant="outline" size="icon" onClick={scrollPrev} disabled={!canScrollPrev} aria-label="Anterior">
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button variant="outline" size="icon" onClick={scrollNext} disabled={!canScrollNext} aria-label="Siguiente">
-              <ChevronRight className="h-4 w-4" />
-            </Button>
           </div>
-          </div>
-        </ScrollReveal>
+        </motion.div>
 
         <ScrollReveal delayMs={120}>
           <div className="text-center mt-12">

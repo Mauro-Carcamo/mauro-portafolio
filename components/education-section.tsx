@@ -1,13 +1,23 @@
 "use client"
 
+import type React from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { PdfDialog } from "@/components/pdf-dialog"
-import { GraduationCap, Calendar, Download, Eye } from "lucide-react"
+import { GraduationCap, Calendar, Download, Eye, Award, BookOpen, Scroll } from "lucide-react"
 import { SectionHeader } from "@/components/section-header"
 import { SectionParallax } from "@/components/section-parallax"
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { motion, Variants } from "framer-motion"
+
+interface EducationItem {
+  title: string
+  institution: string
+  period: string
+  status: string
+  certificate: string | null
+}
 
 export function EducationSection() {
   const titulo = [
@@ -113,55 +123,117 @@ export function EducationSection() {
   const downloadNameForTitle = (title: string) =>
     `${title.replace(/\s+/g, "-").toLowerCase()}-certificado.pdf`
 
-  const EducationCategory = ({ title, items }: { title: string; items: any[] }) => (
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 15 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 260, damping: 25 } },
+    hover: { x: typeof window !== 'undefined' && window.innerWidth > 768 ? 6 : 0, transition: { type: "spring", stiffness: 300, damping: 20 } }
+  }
+
+  const badgeVariants: Variants = {
+    hover: { 
+      scale: 1.1, 
+      transition: { type: "spring", stiffness: 400, damping: 10 } 
+    }
+  }
+
+  const EducationCategory = ({ title, items, icon: Icon }: { title: string; items: EducationItem[]; icon: React.ElementType }) => (
     <div className="mb-8 last:mb-0">
-      <h3 className="text-2xl font-semibold mb-6 pb-2 border-b border-primary/20 text-primary/90">{title}</h3>
-      <ul className="space-y-6">
+      <h3 className="text-2xl sm:text-3xl font-bold mb-6 pb-2 border-b border-border text-foreground flex items-center gap-3 overflow-hidden">
+        <motion.div
+          initial={{ rotate: -15, opacity: 0, scale: 0.8 }}
+          animate={{ rotate: 0, opacity: 1, scale: 1 }}
+          transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
+        >
+          <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary/70 shrink-0" />
+        </motion.div>
+        {title}
+      </h3>
+      <motion.ul 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-5%" }}
+        className="space-y-6"
+      >
         {items.map((edu, index) => (
-          <li key={index} className="pb-6 border-b border-muted/50 last:border-b-0">
+          <motion.li 
+            key={index} 
+            variants={itemVariants}
+            whileHover="hover"
+            className="group px-4 -mx-4 py-4 border-b border-muted/30 last:border-b-0 transition-colors hover:bg-primary/5 rounded-xl"
+          >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
               <div className="flex-grow mb-2 sm:mb-0">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                   <h4 className="text-lg font-semibold text-primary mb-1 sm:mb-0">{edu.title}</h4>
                   <div className="flex items-center gap-2 flex-wrap sm:ml-4">
-                    <Badge variant={edu.status === "current" ? "default" : "secondary"} className="text-xs">
-                      <Calendar className="w-3 h-3 mr-1" />
-                      {edu.period}
-                    </Badge>
-                    {edu.status === "current" && (
-                      <Badge variant="outline" className="text-xs border-primary text-primary">
-                        En Curso
+                    <motion.div variants={badgeVariants} className="inline-flex">
+                      <Badge variant={edu.status === "current" ? "default" : "secondary"} className="text-xs">
+                        <Calendar className="w-3 h-3 mr-1" />
+                        {edu.period}
                       </Badge>
+                    </motion.div>
+                    {edu.status === "current" && (
+                      <motion.div variants={badgeVariants} className="inline-flex">
+                        <Badge variant="outline" className="text-xs border-primary text-primary">
+                          En Curso
+                        </Badge>
+                      </motion.div>
                     )}
                     {edu.certificate && (
-                      <>
-                        <PdfDialog
-                          title={edu.title}
-                          src={edu.certificate}
-                          downloadName={downloadNameForTitle(edu.title)}
-                          trigger={
-                            <Button variant="outline" size="sm" className="text-xs">
-                              <Eye className="w-3 h-3 mr-1" />
-                              Ver
-                            </Button>
-                          }
-                        />
-                        <Button variant="outline" size="sm" className="text-xs" asChild>
-                          <a href={edu.certificate} download={downloadNameForTitle(edu.title)}>
-                            <Download className="w-3 h-3 mr-1" />
-                            Descargar
-                          </a>
-                        </Button>
-                      </>
+                      <div className="flex items-center gap-2">
+                        <motion.div
+                          whileHover={{ 
+                            scale: [1, 1.05, 1],
+                            transition: { duration: 0.8, repeat: Infinity, ease: "easeInOut" }
+                          }}
+                        >
+                          <PdfDialog
+                            title={edu.title}
+                            src={edu.certificate}
+                            downloadName={downloadNameForTitle(edu.title)}
+                            trigger={
+                              <Button variant="outline" size="sm" className="text-xs shadow-sm">
+                                <Eye className="w-3 h-3 mr-1" />
+                                Ver
+                              </Button>
+                            }
+                          />
+                        </motion.div>
+                        <motion.div
+                          whileHover={{ 
+                            scale: [1, 1.05, 1],
+                            transition: { duration: 0.8, repeat: Infinity, ease: "easeInOut" }
+                          }}
+                        >
+                          <Button variant="outline" size="sm" className="text-xs shadow-sm" asChild>
+                            <a href={edu.certificate} download={downloadNameForTitle(edu.title)}>
+                              <Download className="w-3 h-3 mr-1" />
+                              Descargar
+                            </a>
+                          </Button>
+                        </motion.div>
+                      </div>
                     )}
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground font-medium mt-1">{edu.institution}</p>
               </div>
             </div>
-          </li>
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
     </div>
   );
 
@@ -186,15 +258,19 @@ export function EducationSection() {
                 Educación y <span className="text-primary">Certificaciones</span>
               </>
             }
-            description="Mi trayectoria académica combina ciencias sociales con tecnología, especializándome en ciencia de datos e inteligencia artificial."
+            description={
+              <span className="font-bold text-lg sm:text-xl text-foreground">
+                Mi trayectoria académica combina ciencias sociales con tecnología, especializándome en ciencia de datos e inteligencia artificial.
+              </span>
+            }
           />
         </ScrollReveal>
 
         <ScrollReveal delayMs={80}>
           <div className="max-w-6xl mx-auto rounded-2xl border border-border/60 bg-background/80 p-5 sm:p-8 shadow-sm">
-            <EducationCategory title="Título Profesional" items={titulo} />
-            <EducationCategory title="Diplomados" items={diplomados} />
-            <EducationCategory title="Cursos y Bootcamps" items={cursos} />
+            <EducationCategory title="Título Profesional" items={titulo} icon={Award} />
+            <EducationCategory title="Diplomados" items={diplomados} icon={Scroll} />
+            <EducationCategory title="Cursos y Bootcamps" items={cursos} icon={BookOpen} />
           </div>
         </ScrollReveal>
       </div>

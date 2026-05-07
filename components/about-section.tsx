@@ -75,12 +75,12 @@ export function AboutSection() {
                 key={index}
                 className="text-center p-6 rounded-2xl border border-border/60 bg-background/80 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
               >
-                <CardContent className="pt-6">
+                <CardContent className="pt-4">
                   <div className="w-12 h-12 mx-auto mb-4 bg-primary/10 rounded-lg flex items-center justify-center">
                     <highlight.icon className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold tracking-tight mb-2">{highlight.title}</h3>
-                  <p className="text-sm sm:text-base text-muted-foreground">{highlight.description}</p>
+                  <h3 className="text-lg sm:text-xl font-bold tracking-tight mb-2">{highlight.title}</h3>
+                  <p className="text-sm sm:text-[15px] text-muted-foreground leading-relaxed">{highlight.description}</p>
                 </CardContent>
               </Card>
             ))}

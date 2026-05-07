@@ -2,10 +2,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import seaborn as sns
+import os
 
 def load_and_prepare_data(enfermedad_foco):
     """Carga y prepara los datos para la animación."""
-    df = pd.read_csv("../data/raw/036ei5wg8bzm6bfnggh2.csv")
+    # Ruta robusta relativa al script
+    base_path = os.path.dirname(__file__)
+    csv_path = os.path.join(base_path, "..", "data", "raw", "036ei5wg8bzm6bfnggh2.csv")
+    
+    df = pd.read_csv(csv_path)
     df_enf = df[df["nombre_enfermedad"] == enfermedad_foco]
     df_anim = df_enf.groupby(["ano", "sexo"])["n"].sum().reset_index()
     return df_anim

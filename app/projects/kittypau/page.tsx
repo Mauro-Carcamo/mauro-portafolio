@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { ImageCarousel } from "@/components/image-carousel"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -79,7 +80,18 @@ import { Parallax } from "react-scroll-parallax"
               <div>
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>
-                    <h1 className="text-4xl font-semibold tracking-tight mb-3">Kittypau</h1>
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="relative w-14 h-14 rounded-full overflow-hidden border border-border/60 bg-white shadow-sm shrink-0">
+                        <Image
+                          src={kittypauImages[0]}
+                          alt="Kittypau Logo"
+                          fill
+                          className="object-contain p-1.5"
+                          sizes="56px"
+                        />
+                      </div>
+                      <h1 className="text-4xl font-semibold tracking-tight">Kittypau</h1>
+                    </div>
                     <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
                       Kittypau es una plataforma PetTech AIoT que conecta una app (web y APK) con dispositivos IoT para monitorear el bienestar de mascotas.
                       Integra telemetría y eventos en tiempo real, paneles de visualización e historial, y un flujo de autenticación/registro de usuarios y mascotas.

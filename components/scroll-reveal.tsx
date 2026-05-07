@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-
-import { useEffect, useId, useState } from "react"
+import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 type ScrollRevealProps = {
@@ -13,43 +12,33 @@ type ScrollRevealProps = {
 }
 
 export function ScrollReveal({ children, className, delayMs = 0, variant = "up" }: ScrollRevealProps) {
-  const id = useId()
-  const [isInView, setIsInView] = useState(false)
-
-  useEffect(() => {
-    const element = document.getElementById(id)
-    if (!element) return
-
-    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
-    if (reduceMotion) {
-      setIsInView(true)
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry) return
-        if (!entry.isIntersecting) return
-        setIsInView(true)
-        observer.disconnect()
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -10% 0px" }
-    )
-
-    observer.observe(element)
-    return () => observer.disconnect()
-  }, [id])
+  const variants = {
+    hidden: {
+      opacity: 0,
+      y: variant === "up" ? 30 : 0,
+      x: variant === "left" ? -30 : variant === "right" ? 30 : 0,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+    },
+  }
 
   return (
-    <div
-      id={id}
-      data-reveal
-      data-inview={isInView ? "true" : "false"}
-      data-variant={variant}
-      style={{ ["--reveal-delay" as any]: `${delayMs}ms` }}
-      className={cn("reveal", className)}
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{
+        duration: 0.6,
+        delay: delayMs / 1000,
+        ease: [0.21, 0.47, 0.32, 0.98],
+      }}
+      variants={variants}
+      className={cn(className)}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }

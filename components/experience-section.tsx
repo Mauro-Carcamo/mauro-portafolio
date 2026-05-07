@@ -1,9 +1,12 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, Building } from "lucide-react"
 import { SectionHeader } from "@/components/section-header"
 import { SectionParallax } from "@/components/section-parallax"
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { motion, Variants } from "framer-motion"
 
 export function ExperienceSection() {
   const experiences = [
@@ -79,11 +82,31 @@ export function ExperienceSection() {
     },
   ]
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  }
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        type: "spring", 
+        stiffness: 150, 
+        damping: 20 
+      } 
+    },
+  }
+
   return (
-    <section
-      id="experience"
-      className="relative py-14 sm:py-20"
-    >
+    <section id="experience" className="relative py-14 sm:py-20">
       <SectionParallax />
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
@@ -100,18 +123,35 @@ export function ExperienceSection() {
             />
           </ScrollReveal>
 
-          <div className="space-y-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-10%" }}
+            className="space-y-8"
+          >
             {experiences.map((exp, index) => (
-              <ScrollReveal
+              <motion.div
                 key={index}
-                delayMs={Math.min(index * 60, 240)}
-                variant={index % 2 === 0 ? "left" : "right"}
+                variants={itemVariants}
+                layout
+                whileHover={{
+                  y: -5,
+                  scale: 1.005,
+                  rotateX: -1,
+                  rotateY: 1,
+                }}
+                whileTap={{ scale: 0.99 }}
+                style={{
+                  transformStyle: "preserve-3d",
+                  perspective: "1000px",
+                }}
               >
-                <Card className="rounded-2xl border border-border/60 bg-background/80 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
-                  <CardHeader className="pb-3">
+                <Card className="rounded-2xl border border-border/60 bg-background/80 shadow-sm transition-shadow duration-300 hover:shadow-xl">
+                  <CardHeader className="px-4 sm:px-5 pt-5 pb-2">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                       <div>
-                        <CardTitle className="text-lg sm:text-xl tracking-tight mb-2">{exp.position}</CardTitle>
+                        <CardTitle className="text-lg sm:text-xl font-bold tracking-tight mb-2">{exp.position}</CardTitle>
                         <div className="flex items-center gap-2 text-muted-foreground mb-2">
                           <Building className="h-4 w-4" />
                           <span className="font-medium">{exp.company}</span>
@@ -129,7 +169,7 @@ export function ExperienceSection() {
                       </div>
                     </div>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="px-4 sm:px-5 pb-5">
                     <p className="text-muted-foreground mb-4 leading-relaxed">{exp.description}</p>
 
                     <div className="mb-4">
@@ -150,9 +190,9 @@ export function ExperienceSection() {
                     </div>
                   </CardContent>
                 </Card>
-              </ScrollReveal>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

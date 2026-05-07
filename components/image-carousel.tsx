@@ -1,8 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 interface ImageCarouselProps {
   images: string[]
@@ -13,6 +16,9 @@ interface ImageCarouselProps {
 
 export function ImageCarousel({ images, alt, autoPlay = false, autoPlayInterval = 3000 }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
+
+  const blurDataURL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/+F9PQAI8AKpT8S9WAAAAABJRU5ErkJggg=="
 
   useEffect(() => {
     if (!autoPlay || images.length <= 1) return
@@ -24,22 +30,50 @@ export function ImageCarousel({ images, alt, autoPlay = false, autoPlayInterval 
     return () => clearInterval(interval)
   }, [autoPlay, autoPlayInterval, images.length])
 
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1))
-  }
+  useEffect(() => {
+    setIsLoading(true)
+  }, [currentIndex])
 
-  const goToNext = () => {
+  const goToPrevious = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1))
+  }, [images.length])
+
+  const goToNext = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1))
-  }
+  }, [images.length])
 
   return (
     <div className="group relative w-full h-full">
-      <div className="relative h-full bg-muted">
-        <img
+      <div className="relative h-full bg-muted overflow-hidden">
+        <AnimatePresence mode="wait">
+          {isLoading && (
+            <motion.div
+              key="skeleton"
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 z-10 bg-muted"
+            >
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: "100%" }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <Image
           src={images[currentIndex] || "/placeholder.svg"}
           alt={`${alt} - Imagen ${currentIndex + 1}`}
-          className="w-full h-full object-contain"
-          loading="lazy"
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className={cn(
+            "w-full h-full object-contain transition-opacity duration-500",
+            isLoading ? "opacity-0" : "opacity-100"
+          )}
+          onLoad={() => setIsLoading(false)}
+          placeholder="blur"
+          blurDataURL={blurDataURL}
         />
 
         {images.length > 1 && (

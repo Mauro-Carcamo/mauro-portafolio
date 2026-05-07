@@ -7,6 +7,7 @@ import { SocialLinks } from "@/components/social-links"
 import { SectionHeader } from "@/components/section-header"
 import { SectionParallax } from "@/components/section-parallax"
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { motion } from "framer-motion"
 
 export function ContactSection() {
   const contactInfo = [
@@ -56,8 +57,15 @@ export function ContactSection() {
             <div className="rounded-2xl border border-border/60 bg-muted/20 p-6 sm:p-8 shadow-sm">
               <h3 className="text-xl sm:text-2xl font-semibold mb-6 tracking-tight">Información de Contacto</h3>
               <div className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex flex-col items-center space-y-2">
+                  <motion.a 
+                    key={index}
+                    href={info.href}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex flex-col items-center space-y-3 p-6 rounded-xl border border-transparent hover:border-primary/20 hover:bg-primary/5 transition-all group"
+                  >
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
                       <info.icon className="h-6 w-6 text-primary" />
                     </div>
@@ -69,8 +77,11 @@ export function ContactSection() {
                       >
                         {info.value}
                       </a>
+                      <p className="font-semibold text-foreground group-hover:text-primary transition-colors">{info.title}</p>
+                      <p className="text-sm text-muted-foreground break-all">{info.value}</p>
                     </div>
                   </div>
+                  </motion.a>
                 ))}
               </div>
             </div>

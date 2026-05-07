@@ -18,7 +18,19 @@ import Image from "next/image"
 
 import { motion, AnimatePresence, Variants } from "framer-motion"
 
-function ProjectImage({ src, alt, className, priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
+function ProjectImage({ 
+  src, 
+  alt, 
+  className, 
+  priority = false,
+  placeholder
+}: { 
+  src: string; 
+  alt: string; 
+  className?: string; 
+  priority?: boolean;
+  placeholder?: "blur" | "empty"
+}) {
   const [isLoading, setIsLoading] = useState(true)
   
   // Placeholder base64 (un color gris azulado muy ligero) para que el blur funcione con URLs externas
@@ -56,6 +68,7 @@ function ProjectImage({ src, alt, className, priority = false }: { src: string; 
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className={cn(className, "transition-opacity duration-500", isLoading ? "opacity-0" : "opacity-100")}
           onLoad={() => setIsLoading(false)}
+          placeholder={placeholder}
           blurDataURL={blurDataURL}
         />
       </motion.div>
@@ -63,10 +76,22 @@ function ProjectImage({ src, alt, className, priority = false }: { src: string; 
   )
 }
 
+interface Project {
+  title: string
+  description: string
+  image: string
+  technologies: string[]
+  liveUrl: string
+  appUrl?: string
+  githubUrl: string
+  featured: boolean
+  images?: string[]
+}
+
 export function ProjectsSection() {
   const router = useRouter()
 
-  const projects = [
+  const projects: Project[] = [
     {
       title: "Kittypau",
       description:

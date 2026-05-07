@@ -1,7 +1,7 @@
 "use client"
 
 import { Github, Linkedin, Mail, MessageCircle } from "lucide-react"
-import { motion, Variants } from "framer-motion"
+import { motion, Variants, TargetAndTransition } from "framer-motion"
 
 type SocialLinksProps = {
   size?: "sm" | "md"
@@ -39,7 +39,7 @@ export function SocialLinks({ size = "md", className }: SocialLinksProps) {
     },
   }
 
-  const hoverAnimation = {
+  const hoverAnimation: TargetAndTransition = {
     y: -5,
     scale: 1.15,
     transition: { type: "spring", stiffness: 400, damping: 10 },

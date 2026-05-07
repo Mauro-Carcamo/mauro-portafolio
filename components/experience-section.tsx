@@ -173,10 +173,13 @@ export function ExperienceSection() {
                     <p className="text-muted-foreground mb-4 leading-relaxed">{exp.description}</p>
 
                     <div className="mb-4">
-                      <h4 className="font-semibold mb-2">Logros principales:</h4>
-                      <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                      <h4 className="text-sm font-semibold mb-3 text-foreground/80">Logros principales:</h4>
+                      <ul className="space-y-2 text-sm text-muted-foreground">
                         {exp.achievements.map((achievement, i) => (
-                          <li key={i}>{achievement}</li>
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60" />
+                            <span className="leading-snug">{achievement}</span>
+                          </li>
                         ))}
                       </ul>
                     </div>

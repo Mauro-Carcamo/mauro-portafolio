@@ -56,10 +56,8 @@ export function ContactSection() {
           <div className="space-y-8 text-center">
             <div className="rounded-2xl border border-border/60 bg-muted/20 p-6 sm:p-8 shadow-sm">
               <h3 className="text-xl sm:text-2xl font-semibold mb-6 tracking-tight">Información de Contacto</h3>
-              <div className="space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 {contactInfo.map((info, index) => (
-                  <div key={index} className="flex flex-col items-center space-y-2">
                   <motion.a 
                     key={index}
                     href={info.href}
@@ -70,17 +68,9 @@ export function ContactSection() {
                       <info.icon className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <p className="font-medium">{info.title}</p>
-                      <a
-                        href={info.href}
-                        className="text-muted-foreground hover:text-primary transition-colors duration-200 underline-offset-4 hover:underline"
-                      >
-                        {info.value}
-                      </a>
                       <p className="font-semibold text-foreground group-hover:text-primary transition-colors">{info.title}</p>
                       <p className="text-sm text-muted-foreground break-all">{info.value}</p>
                     </div>
-                  </div>
                   </motion.a>
                 ))}
               </div>

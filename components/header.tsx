@@ -1,6 +1,6 @@
 ﻿﻿"use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Menu, X, Home } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion"
@@ -10,6 +10,15 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const { scrollY } = useScroll()
+
+  // Bloqueo de scroll al abrir el menú (UX de App nativa)
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+  }, [isMenuOpen])
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0
@@ -138,18 +147,28 @@ export function Header() {
 
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="md:hidden absolute left-4 right-4 top-full z-50 rounded-2xl border border-border/60 bg-background/95 p-3 shadow-xl backdrop-blur-md"
-            >
-            <nav className="grid gap-1">
-              {navItems.map((item) => (
-                <a
+            <>
+              {/* Overlay de fondo para enfocar el menú */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsMenuOpen(false)}
+                className="fixed inset-0 bg-background/60 backdrop-blur-sm z-[-1] md:hidden"
+              />
+              <motion.div
+                initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="md:hidden absolute left-4 right-4 top-full z-50 rounded-2xl border border-border/60 bg-background/95 p-3 shadow-xl backdrop-blur-md"
+              >
+                <nav className="grid gap-1">
+                  {navItems.map((item) => (
+                <motion.a
                   key={item.href}
                   href={item.href}
+                  whileTap={{ scale: 0.98 }}
                   className={cn(
                     "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
                     item.href === "#contact"
@@ -159,10 +178,11 @@ export function Header() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </motion.a>
               ))}
             </nav>
-            </motion.div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>

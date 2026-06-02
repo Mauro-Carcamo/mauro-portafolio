@@ -47,23 +47,23 @@ export function AboutSection() {
           <ScrollReveal delayMs={80}>
             <div className="max-w-4xl mx-auto space-y-6 mb-16">
             <p className="text-base sm:text-lg leading-relaxed">
-              Sociólogo con experiencia profesional especializado en Ciencia de Datos. Combino formación académica
-              sólida con habilidades técnicas en análisis de datos, machine learning y programación (R, Python, SQL).
-              Experiencia demostrada en gestión de proyectos sociales, coordinación de equipos y análisis de datos para
-              la toma de decisiones.
+              Sociólogo especializado en Ciencia de Datos con más de 7 años de experiencia profesional. Combino
+              formación académica sólida con habilidades técnicas en análisis de datos, machine learning y programación
+              (Python, R, SQL). Experiencia demostrada en análisis de datos para la toma de decisiones, gestión de
+              proyectos y automatización de procesos en sectores de salud, educación, telecomunicaciones y medios.
             </p>
 
             <p className="text-base sm:text-lg leading-relaxed">
-              He liderado iniciativas de formación y capacitación, implementado soluciones de automatización y
-              desarrollado dashboards para optimización de procesos en diversos sectores. Destaco por mi capacidad para
-              traducir datos en insights accionables y por implementar mejoras operativas que impactan positivamente en
-              los resultados organizacionales.
+              He desarrollado dashboards con Power BI y Looker Studio, implementado modelos de clustering y NLP,
+              automatizado procesos de extracción de datos mediante web scraping y liderado equipos multidisciplinarios.
+              Me destaco por traducir datos complejos en insights accionables que impactan positivamente en los
+              resultados de las organizaciones.
             </p>
 
             <p className="text-base sm:text-lg leading-relaxed">
-              Actualmente cursando un Diplomado en Inteligencia Artificial en la Universidad Autónoma, con experiencia
-              reciente como Coordinador de Proyectos en Consultora Epojé y Community Manager en Agencia I-Brain Digital,
-              siempre aplicando tecnologías modernas para resolver problemas complejos.
+              Cuento con Diplomado en Data Science (PUC, 2022) y Diplomado en Inteligencia Artificial (Universidad
+              Autónoma, 2025), además de múltiples certificaciones en análisis de datos, NLP y desarrollo de software.
+              Disponible para trabajo remoto o híbrido.
             </p>
             </div>
           </ScrollReveal>

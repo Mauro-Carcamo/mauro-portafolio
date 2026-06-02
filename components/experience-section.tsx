@@ -11,6 +11,20 @@ import { motion, Variants } from "framer-motion"
 export function ExperienceSection() {
   const experiences = [
     {
+      company: "Espacio Eme Centro Médico",
+      position: "Analista de Datos",
+      period: "Nov 2025 - Feb 2026",
+      location: "Santiago, Chile",
+      description:
+        "Desarrollo de sistema para consolidar y analizar registros de calibración y medición de termómetros clínicos. Responsable de la integración, limpieza y estandarización de datos de sensores, generación de reportes de trazabilidad y automatización de procesos de auditoría documental.",
+      achievements: [
+        "Integración y limpieza de datos de sensores clínicos",
+        "Generación de reportes y visualizaciones para auditoría",
+        "Automatización de tareas de procesamiento de datos",
+      ],
+      technologies: ["Python", "Pandas", "Data Cleaning", "Automatización", "Reportería"],
+    },
+    {
       company: "Consultora Epojé",
       position: "Coordinador de proyecto",
       period: "Sep 2024 - Dic 2024",
@@ -119,7 +133,7 @@ export function ExperienceSection() {
                   Experiencia <span className="text-primary">Profesional</span>
                 </>
               }
-              description="Más de 6 años de experiencia en análisis de datos, gestión de proyectos y liderazgo de equipos."
+              description="Más de 7 años de experiencia en análisis de datos, gestión de proyectos y automatización de procesos en múltiples sectores."
             />
           </ScrollReveal>
 

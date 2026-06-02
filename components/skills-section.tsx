@@ -9,61 +9,71 @@ import { motion, Variants } from "framer-motion"
 
 export function SkillsSection() {
   const descriptions: Record<string, string> = {
+    Python: "Lenguaje principal para análisis de datos, ML y automatización.",
+    Pandas: "Manipulación y análisis de datos tabulares.",
+    "Scikit-learn": "Machine Learning: clasificación, regresión y clustering.",
+    Matplotlib: "Visualización de datos con gráficos personalizados.",
+    R: "Análisis estadístico, NLP y visualizaciones con Shiny.",
+    SQL: "Consultas, limpieza y validación de bases de datos relacionales.",
+    "Power BI": "Dashboards interactivos para Business Intelligence.",
+    "Looker Studio": "Visualización de datos y reportes con Google Looker Studio.",
+    NLTK: "Procesamiento de lenguaje natural en Python.",
+    "Scikit-learn NLP": "Modelos de texto, TF-IDF y vectorización.",
     React: "Librería para crear interfaces con componentes.",
-    "Next.js": "Framework de React para apps rápidas con rutas y buen SEO.",
-    TypeScript: "JavaScript con tipos para evitar errores.",
-    "Tailwind CSS": "CSS por clases para diseñar rápido y consistente.",
-    "Vue.js": "Framework para interfaces web reactivas.",
+    "Next.js": "Framework de React para apps rápidas con buen SEO.",
+    TypeScript: "JavaScript con tipos estáticos para código más seguro.",
+    "Tailwind CSS": "CSS por clases utilitarias para diseño rápido.",
     "Node.js": "JavaScript en el servidor.",
-    Python: "Lenguaje versátil para datos y backend.",
     FastAPI: "Framework Python para APIs rápidas y modernas.",
     PostgreSQL: "Base de datos relacional robusta.",
     MongoDB: "Base de datos NoSQL basada en documentos.",
-    Redis: "Base en memoria para caché y colas.",
     Supabase: "Backend listo: Postgres + Auth + Storage.",
-    Git: "Control de versiones para tu código.",
-    Docker: "Contenedores para correr apps igual en cualquier entorno.",
+    Git: "Control de versiones para código.",
+    Docker: "Contenedores para entornos reproducibles.",
     AWS: "Servicios cloud para infraestructura.",
-    Vercel: "Hosting y despliegue (ideal para Next.js).",
-    Figma: "Diseño y prototipado de interfaces.",
+    Vercel: "Hosting y despliegue para aplicaciones web.",
   }
 
   const skillCategories = [
     {
-      title: "Frontend",
+      title: "Data Science & ML",
+      skills: [
+        { name: "Python" },
+        { name: "Pandas" },
+        { name: "Scikit-learn" },
+        { name: "Matplotlib" },
+        { name: "R" },
+        { name: "SQL" },
+      ],
+    },
+    {
+      title: "BI & Visualización",
+      skills: [
+        { name: "Power BI" },
+        { name: "Looker Studio" },
+      ],
+    },
+    {
+      title: "Desarrollo Web",
       skills: [
         { name: "React" },
         { name: "Next.js" },
         { name: "TypeScript" },
         { name: "Tailwind CSS" },
-        { name: "Vue.js" },
-      ],
-    },
-    {
-      title: "Backend",
-      skills: [
         { name: "Node.js" },
-        { name: "Python" },
         { name: "FastAPI" },
       ],
     },
     {
-      title: "Base de Datos",
+      title: "Infraestructura",
       skills: [
         { name: "PostgreSQL" },
         { name: "MongoDB" },
-        { name: "Redis" },
         { name: "Supabase" },
-      ],
-    },
-    {
-      title: "Herramientas",
-      skills: [
         { name: "Git" },
         { name: "Docker" },
         { name: "AWS" },
         { name: "Vercel" },
-        { name: "Figma" },
       ],
     },
   ]
@@ -115,7 +125,7 @@ export function SkillsSection() {
                   Habilidades <span className="text-primary">Técnicas</span>
                 </>
               }
-              description="Estas son las herramientas que uso para construir aplicaciones y trabajar con datos: lo que se ve (pantallas) y lo que funciona por dentro (servidor y base de datos)."
+              description="Herramientas y lenguajes que uso para analizar datos, construir modelos de Machine Learning, crear dashboards y desarrollar aplicaciones completas."
             />
           </ScrollReveal>
 

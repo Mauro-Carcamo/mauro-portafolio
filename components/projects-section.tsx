@@ -9,7 +9,7 @@ import { SectionHeader } from "@/components/section-header"
 import { SectionParallax } from "@/components/section-parallax"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import Link from "next/link"
-import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react"
+import { ChevronLeft, ChevronRight, ExternalLink, Github, ArrowRight } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
@@ -359,9 +359,16 @@ export function ProjectsSection() {
                       </div>
                     </CardContent>
 
-                    <CardFooter className="px-4 sm:px-5 pb-4 sm:pb-5 pt-0 gap-2.5 justify-between flex-wrap">
+                    <CardFooter className="px-4 sm:px-5 pb-4 sm:pb-5 pt-0 gap-2 flex-wrap">
+                      <Button size="sm" className="flex-1 rounded-full" asChild>
+                        <Link href={project.liveUrl} onClick={(e) => e.stopPropagation()}>
+                          <ArrowRight className="h-4 w-4" />
+                          Ver detalles
+                        </Link>
+                      </Button>
+
                       {project.appUrl && (
-                        <Button size="sm" className="flex-1 sm:flex-none rounded-full" asChild>
+                        <Button size="sm" variant="outline" className="rounded-full" asChild>
                           <a
                             href={project.appUrl}
                             target="_blank"
@@ -369,15 +376,14 @@ export function ProjectsSection() {
                             onClick={(e) => e.stopPropagation()}
                           >
                             <ExternalLink className="h-4 w-4" />
-                            Ir a app
+                            App
                           </a>
                         </Button>
                       )}
 
-                      <Button variant="outline" size="sm" className="flex-1 sm:flex-none rounded-full" asChild>
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" size="sm" className="rounded-full" asChild>
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                           <Github className="h-4 w-4" />
-                          Código
                         </a>
                       </Button>
                     </CardFooter>

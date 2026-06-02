@@ -9,7 +9,27 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
+  const [activeSection, setActiveSection] = useState("")
   const { scrollY } = useScroll()
+
+  useEffect(() => {
+    const sectionIds = ["about", "projects", "skills", "experience", "education", "contact"]
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection("#" + entry.target.id)
+          }
+        })
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    )
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [])
 
   // Bloqueo de scroll al abrir el menú (UX de App nativa)
   useEffect(() => {
@@ -124,7 +144,7 @@ export function Header() {
           </button>
 
           <nav className="hidden w-auto md:block">
-            <div className="flex flex-wrap items-center justify-end gap-x-10 gap-y-0 text-[15px] font-medium">
+            <div className="flex flex-wrap items-center justify-end gap-x-8 gap-y-0 text-[15px] font-medium">
               {navItems.map((item) => (
                 <motion.a
                   key={item.href}
@@ -132,13 +152,20 @@ export function Header() {
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.95 }}
                   className={cn(
-                    "px-2 py-1.5 rounded-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-                    item.href === "#contact"
+                    "relative px-2 py-1.5 rounded-md transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                    activeSection === item.href
                       ? "text-primary font-semibold"
                       : "text-foreground hover:text-primary hover:bg-muted/60"
                   )}
                 >
                   {item.label}
+                  {activeSection === item.href && (
+                    <motion.span
+                      layoutId="nav-underline"
+                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-primary rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </motion.a>
               ))}
             </div>
@@ -171,8 +198,8 @@ export function Header() {
                   whileTap={{ scale: 0.98 }}
                   className={cn(
                     "rounded-xl px-4 py-3 text-sm font-medium transition-colors",
-                    item.href === "#contact"
-                      ? "bg-primary/10 text-primary"
+                    activeSection === item.href
+                      ? "bg-primary/10 text-primary font-semibold"
                       : "text-foreground hover:bg-muted/60 hover:text-primary"
                   )}
                   onClick={() => setIsMenuOpen(false)}

@@ -7,6 +7,7 @@ import { SectionParallax } from "@/components/section-parallax"
 import { ScrollReveal } from "@/components/scroll-reveal"
 
 const clients = [
+  { title: "Espacio Eme Centro Médico", logo: "/logos/espacio-eme.png", description: "Análisis de datos clínicos, trazabilidad de calibración y automatización de reportes." },
   { title: "Consultora Epojé", logo: "/logos/epoje.png", description: "Coordinación de proyectos y análisis de datos para el sector público." },
   { title: "Agencia I-Brain Digital", logo: "/logos/ibrain.png", description: "Optimización de campañas digitales mediante análisis de datos." },
   { title: "Nadar Ediciones", logo: "/logos/nadar.png", description: "Implementación de dashboards comerciales y análisis de ventas." },

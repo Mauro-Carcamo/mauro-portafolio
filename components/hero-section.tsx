@@ -2,7 +2,7 @@
 
 import React from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowDown, Database, Brain, Code, Download, Rocket } from "lucide-react"
+import { ArrowDown, Database, Brain, Code, Rocket } from "lucide-react"
 import { SocialLinks } from "@/components/social-links"
 import { PdfDialog } from "@/components/pdf-dialog"
 import { SectionParallax } from "@/components/section-parallax"
@@ -157,8 +157,25 @@ export function HeroSection() {
                 ))}
               </div>
             </motion.div>
+          </div>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-2.5 justify-center lg:justify-start">
+          {/* Right Column - Foto, CTAs y redes sociales */}
+          <div className="flex flex-col items-center lg:items-end gap-6">
+            <motion.div variants={itemVariants} className="flex justify-center lg:justify-end">
+            <Parallax translateY={[-10, 10]}>
+            <div className="w-full max-w-[22rem] sm:max-w-sm lg:max-w-none lg:w-52 lg:h-52 aspect-square rounded-[2rem] lg:rounded-full bg-gradient-to-br from-primary to-accent p-1 shadow-xl shadow-primary/10">
+              <div className="w-full h-full rounded-[1.75rem] lg:rounded-full bg-background/70 backdrop-blur flex items-center justify-center overflow-hidden">
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1706536613867.jpg-H1gm0kFpkJrdpxuyJIShGjRoIaEBYS.jpeg"
+                  alt="Mauricio Cárcamo"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </Parallax>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-2.5 justify-center lg:justify-end">
               <Button
                 className="min-w-[150px] rounded-full shadow-sm active:scale-95 transition-transform"
                 asChild
@@ -186,30 +203,6 @@ export function HeroSection() {
                   </Button>
                 }
               />
-
-              <Button variant="outline" className="min-w-[130px] rounded-full" asChild>
-                <a href="/documents/cv-mauricio-carcamo.pdf" download="CV_Mauricio_Carcamo.pdf">
-                  <Download className="w-4 h-4 mr-2" />
-                  Descargar
-                </a>
-              </Button>
-            </motion.div>
-          </div>
-
-          {/* Right Column - Foto y redes sociales */}
-          <div className="flex flex-col items-center lg:items-end gap-6">
-            <motion.div variants={itemVariants} className="flex justify-center lg:justify-end">
-            <Parallax translateY={[-10, 10]}>
-            <div className="w-full max-w-[22rem] sm:max-w-sm lg:max-w-none lg:w-52 lg:h-52 aspect-square rounded-[2rem] lg:rounded-full bg-gradient-to-br from-primary to-accent p-1 shadow-xl shadow-primary/10">
-              <div className="w-full h-full rounded-[1.75rem] lg:rounded-full bg-background/70 backdrop-blur flex items-center justify-center overflow-hidden">
-                <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1706536613867.jpg-H1gm0kFpkJrdpxuyJIShGjRoIaEBYS.jpeg"
-                  alt="Mauricio Cárcamo"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </Parallax>
             </motion.div>
 
             <motion.div

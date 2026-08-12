@@ -2,12 +2,10 @@
 
 import React from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { ArrowDown, Database, Brain, Code, Download, Rocket } from "lucide-react"
 import { SocialLinks } from "@/components/social-links"
 import { PdfDialog } from "@/components/pdf-dialog"
 import { SectionParallax } from "@/components/section-parallax"
-import { ScrollReveal } from "@/components/scroll-reveal"
 import { Parallax } from "react-scroll-parallax"
 import { motion, Variants, useMotionValue, useSpring, useTransform } from "framer-motion"
 
@@ -184,8 +182,8 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right Column - Photo and Social Links */}
-          <div className="flex flex-col items-center lg:items-end gap-8">
+          {/* Right Column - Foto + Perfil (badge, bio, highlights, redes) */}
+          <div className="flex flex-col items-center lg:items-end gap-6">
             <motion.div variants={itemVariants} className="flex justify-center lg:justify-end">
             <Parallax translateY={[-10, 10]}>
             <div className="w-full max-w-[22rem] sm:max-w-sm lg:max-w-none lg:w-64 lg:h-64 aspect-square rounded-[2rem] lg:rounded-full bg-gradient-to-br from-primary to-accent p-1 shadow-xl shadow-primary/10">
@@ -200,58 +198,44 @@ export function HeroSection() {
           </Parallax>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="flex justify-center lg:justify-end">
-              <span className="text-xs sm:text-sm font-semibold tracking-wide uppercase text-primary bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5">
+            {/* Tarjeta de perfil — todo debajo de la foto */}
+            <motion.div
+              id="about"
+              variants={itemVariants}
+              className="scroll-mt-24 w-full rounded-2xl border border-border/50 bg-muted/20 backdrop-blur-sm shadow-sm p-5 sm:p-6 space-y-5 text-center lg:text-left"
+            >
+              <span className="inline-block text-xs sm:text-sm font-semibold tracking-wide uppercase text-primary bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5">
                 Analista de Datos · Científico de Datos
               </span>
-            </motion.div>
 
-            <motion.div
-              variants={itemVariants}
-              className="w-full max-w-[22rem] sm:max-w-sm lg:max-w-none lg:w-64 flex justify-center bg-muted/20 backdrop-blur-sm border border-border/50 rounded-2xl p-4 shadow-sm"
-            >
-              <SocialLinks className="flex flex-wrap items-center gap-4 sm:gap-6" size="md" />
+              <p className="text-sm sm:text-[15px] text-muted-foreground leading-relaxed">
+                Formación en Ciencias Sociales (Sociólogo) y diplomados en Ciencia de Datos e Inteligencia
+                Artificial, con más de 8 años de experiencia resolviendo problemas de negocio en empresas, pymes y
+                proyectos públicos. Dominio de Python, R y SQL para el ciclo completo de trabajo con datos, desde la
+                extracción hasta la visualización en Power BI y Looker Studio.
+              </p>
+
+              <div className="space-y-3">
+                {highlights.map((highlight, index) => (
+                  <div key={index} className="flex items-start gap-3 text-left">
+                    <div className="w-9 h-9 shrink-0 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <highlight.icon className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold tracking-tight leading-tight">{highlight.title}</h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{highlight.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-1 border-t border-border/50 flex justify-center lg:justify-start">
+                <SocialLinks className="flex flex-wrap items-center gap-4 sm:gap-5 pt-4" size="md" />
+              </div>
             </motion.div>
           </div>
         </motion.div>
       </Parallax>
-
-      {/* Acerca de mí — condensado, mismo bloque que el hero */}
-      <div id="about" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10 mt-12 sm:mt-16 scroll-mt-24">
-        <ScrollReveal>
-          <div className="max-w-4xl mx-auto text-center lg:text-left">
-            <span className="text-xs sm:text-sm font-semibold tracking-wide uppercase text-primary">Perfil</span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mt-1 mb-4">
-              Acerca de <span className="text-primary">mí</span>
-            </h2>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-              Analista de Datos / Científico de Datos con formación en Ciencias Sociales (Sociólogo) y diplomados en
-              Ciencia de Datos e Inteligencia Artificial, con más de 8 años de experiencia resolviendo problemas de
-              negocio en empresas, pymes y proyectos públicos. Dominio de Python, R y SQL para el ciclo completo de
-              trabajo con datos, desde la extracción hasta la visualización en Power BI y Looker Studio.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        <ScrollReveal delayMs={80}>
-          <div className="max-w-4xl mx-auto grid sm:grid-cols-3 gap-4 mt-8">
-            {highlights.map((highlight, index) => (
-              <Card
-                key={index}
-                className="text-center p-4 rounded-2xl border border-border/60 bg-background/80 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
-              >
-                <CardContent className="pt-2 pb-1 px-0">
-                  <div className="w-10 h-10 mx-auto mb-3 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <highlight.icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <h3 className="text-base font-bold tracking-tight mb-1">{highlight.title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{highlight.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </ScrollReveal>
-      </div>
 
       {/* Scroll Indicator */}
       <div className="mt-10 sm:mt-12 flex justify-center animate-bounce hidden sm:flex">

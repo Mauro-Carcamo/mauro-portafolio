@@ -231,7 +231,6 @@ export function ProjectsSection() {
                 Mis <span className="text-primary">Proyectos</span>
               </>
             }
-            description="Una selección de proyectos que combinan ciencia de datos, machine learning y desarrollo de software para resolver problemas reales."
           />
         </ScrollReveal>
 

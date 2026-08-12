@@ -48,7 +48,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="min-h-[75vh] pt-20 sm:pt-24 md:pt-20 pb-6 sm:pb-8 relative overflow-hidden flex flex-col justify-center"
+      className="min-h-[65vh] pt-20 sm:pt-24 md:pt-20 pb-4 sm:pb-6 relative overflow-hidden flex flex-col justify-center"
     >
       {/* Background Pattern */}
       <SectionParallax />
@@ -187,7 +187,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="mt-4 sm:mt-6 flex justify-center animate-bounce hidden sm:flex">
+      <div className="mt-2 sm:mt-4 flex justify-center animate-bounce hidden sm:flex">
         <ArrowDown className="h-6 w-6 text-muted-foreground" />
       </div>
     </section>

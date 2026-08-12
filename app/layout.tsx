@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes"
 import { ScrollParallaxProvider } from "@/components/scroll-parallax-provider"
 import { PostHogProvider } from "@/components/posthog-provider"
 import { AnalyticsAgent } from "@/components/analytics-agent"
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "Mauricio Cárcamo — Analista de Datos & Data Science",
@@ -46,6 +47,7 @@ export default function RootLayout({
             </ScrollParallaxProvider>
           </PostHogProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )

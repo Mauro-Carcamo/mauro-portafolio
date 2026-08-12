@@ -69,7 +69,7 @@ export function HeroSection() {
   return (
     <section
       onMouseMove={handleMouseMove}
-      className="pt-24 sm:pt-28 md:pt-24 pb-10 sm:pb-14 relative overflow-hidden"
+      className="pt-24 sm:pt-28 md:pt-24 pb-8 sm:pb-10 relative overflow-hidden"
     >
       {/* Background Pattern */}
       <SectionParallax />
@@ -86,7 +86,7 @@ export function HeroSection() {
           initial="hidden"
           animate="visible"
           style={{ x: moveX, y: moveY }}
-          className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center"
+          className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start"
         >
           {/* Left Column - Content and Actions */}
           <div className="space-y-8 text-center lg:text-left">
@@ -163,10 +163,10 @@ export function HeroSection() {
                 src="/documents/cv-mauricio-carcamo.pdf"
                 downloadName="CV_Mauricio_Carcamo.pdf"
                 trigger={
-                  <Button 
-                    variant="secondary" 
-                    size="lg" 
-                    className="min-w-[180px] rounded-full bg-primary/10 text-primary border border-primary/20 active:scale-95"
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="min-w-[180px] rounded-full text-primary border-primary/40 hover:bg-primary/10 active:scale-95"
                   >
                     Ver CV
                   </Button>
@@ -238,7 +238,7 @@ export function HeroSection() {
       </Parallax>
 
       {/* Scroll Indicator */}
-      <div className="mt-10 sm:mt-12 flex justify-center animate-bounce hidden sm:flex">
+      <div className="mt-8 sm:mt-10 flex justify-center animate-bounce hidden sm:flex">
         <ArrowDown className="h-6 w-6 text-muted-foreground" />
       </div>
     </section>

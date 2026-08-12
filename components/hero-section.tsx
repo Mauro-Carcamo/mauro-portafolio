@@ -117,7 +117,7 @@ export function HeroSection() {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 className="text-pretty text-lg sm:text-2xl text-muted-foreground leading-relaxed max-w-xl"
               >
-                Sociólogo con estudios en Ciencia de Datos, Inteligencia Artificial y Full Stack en Python.
+                Analista de Datos / Científico de Datos con formación en Ciencias Sociales, especializado en Machine Learning, Inteligencia Artificial y Full Stack en Python.
               </motion.p>
             </div>
 
@@ -180,8 +180,14 @@ export function HeroSection() {
           </Parallax>
             </motion.div>
 
-            <motion.div 
-              variants={itemVariants} 
+            <motion.div variants={itemVariants} className="flex justify-center lg:justify-end">
+              <span className="text-xs sm:text-sm font-semibold tracking-wide uppercase text-primary bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5">
+                Analista de Datos · Científico de Datos
+              </span>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
               className="w-full max-w-[22rem] sm:max-w-sm lg:max-w-none lg:w-64 flex justify-center bg-muted/20 backdrop-blur-sm border border-border/50 rounded-2xl p-4 shadow-sm"
             >
               <SocialLinks className="flex flex-wrap items-center gap-4 sm:gap-6" size="md" />

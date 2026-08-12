@@ -40,30 +40,25 @@ export function AboutSection() {
                 Acerca de <span className="text-primary">mí</span>
               </>
             }
-            description="Sociólogo especializado en Ciencia de Datos con experiencia en Machine Learning, análisis predictivo y desarrollo Full Stack."
+            description="Analista de Datos / Científico de Datos con formación en Ciencias Sociales y más de 8 años de experiencia resolviendo problemas de negocio."
           />
           </ScrollReveal>
 
           <ScrollReveal delayMs={80}>
             <div className="max-w-4xl mx-auto space-y-6 mb-16">
             <p className="text-base sm:text-lg leading-relaxed">
-              Sociólogo especializado en Ciencia de Datos con más de 8 años de experiencia profesional. Combino
-              formación académica sólida con habilidades técnicas en análisis de datos, machine learning y programación
-              (Python, R, SQL). Experiencia demostrada en análisis de datos para la toma de decisiones, gestión de
-              proyectos y automatización de procesos en sectores de salud, educación, telecomunicaciones y medios.
+              Analista de Datos / Científico de Datos con formación en Ciencias Sociales (Sociólogo) y diplomados en
+              Ciencia de Datos e Inteligencia Artificial, con más de 8 años de experiencia resolviendo problemas de
+              negocio en empresas, pymes y proyectos públicos. Dominio de Python, R y SQL para el ciclo completo de
+              trabajo con datos: extracción, limpieza, modelamiento, evaluación de algoritmos de Machine Learning y
+              visualización en Power BI y Looker Studio.
             </p>
 
             <p className="text-base sm:text-lg leading-relaxed">
-              He desarrollado dashboards con Power BI y Looker Studio, implementado modelos de clustering y NLP,
-              automatizado procesos de extracción de datos mediante web scraping y liderado equipos multidisciplinarios.
-              Me destaco por traducir datos complejos en insights accionables que impactan positivamente en los
-              resultados de las organizaciones.
-            </p>
-
-            <p className="text-base sm:text-lg leading-relaxed">
-              Cuento con Diplomado en Data Science (PUC, 2022) y Diplomado en Inteligencia Artificial (Universidad
-              Autónoma, 2025), además de múltiples certificaciones en análisis de datos, NLP y desarrollo de software.
-              Disponible para trabajo remoto o híbrido.
+              Experiencia en automatización de procesos (web scraping, Google Apps Script) orientada al
+              descubrimiento de insights y la toma de decisiones. Desarrollador de proyectos propios que integran
+              IoT, sensores e IA aplicada a grandes volúmenes de datos. Busco integrar equipos multidisciplinarios
+              orientados a resultados.
             </p>
             </div>
           </ScrollReveal>

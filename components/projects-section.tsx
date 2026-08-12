@@ -219,12 +219,12 @@ export function ProjectsSection() {
   }
 
   return (
-    <section id="projects" className="relative py-14 sm:py-20">
+    <section id="projects" className="relative pt-10 sm:pt-14 pb-12 sm:pb-16">
       <SectionParallax />
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <SectionHeader
-            className="mb-12 sm:mb-16"
+            className="mb-8 sm:mb-12"
             eyebrow="Portafolio"
             title={
               <>

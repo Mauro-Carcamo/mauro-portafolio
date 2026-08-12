@@ -1,13 +1,11 @@
 ﻿﻿"use client"
 
-import React from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowDown, Database, Brain, Code, Rocket } from "lucide-react"
 import { SocialLinks } from "@/components/social-links"
 import { PdfDialog } from "@/components/pdf-dialog"
 import { SectionParallax } from "@/components/section-parallax"
-import { Parallax } from "react-scroll-parallax"
-import { motion, Variants, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { motion, Variants } from "framer-motion"
 
 export function HeroSection() {
   const highlights = [
@@ -48,44 +46,19 @@ export function HeroSection() {
     },
   }
 
-  // Mouse Parallax Logic
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  const springX = useSpring(mouseX, { damping: 25, stiffness: 150 })
-  const springY = useSpring(mouseY, { damping: 25, stiffness: 150 })
-  
-  const moveX = useTransform(springX, [0, 1200], [-15, 15])
-  const moveY = useTransform(springY, [0, 800], [-15, 15])
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    // Evitamos cálculos si es un dispositivo táctil (simplificado)
-    if (window.matchMedia("(pointer: coarse)").matches) return
-    
-    const { clientX, clientY } = e
-    mouseX.set(clientX)
-    mouseY.set(clientY)
-  }
-
   return (
     <section
-      onMouseMove={handleMouseMove}
       className="min-h-[75vh] pt-20 sm:pt-24 md:pt-20 pb-6 sm:pb-8 relative overflow-hidden flex flex-col justify-center"
     >
       {/* Background Pattern */}
       <SectionParallax />
       <div className="absolute inset-0 bg-[url('/abstract-geometric-pattern.png')] opacity-[0.025] pointer-events-none" />
 
-      <Parallax
-        scale={[1, 1.1]}
-        opacity={[1, 0.8]}
-        easing="easeInQuad"
-        className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10"
-      >
-        <motion.div 
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          style={{ x: moveX, y: moveY }}
           className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start"
         >
           {/* Left Column - Content and Actions */}
@@ -151,7 +124,7 @@ export function HeroSection() {
                     </div>
                     <div>
                       <h3 className="text-sm font-semibold tracking-tight leading-tight">{highlight.title}</h3>
-                      <p className="text-xs text-muted-foreground leading-snug line-clamp-2">{highlight.description}</p>
+                      <p className="text-xs text-muted-foreground leading-snug">{highlight.description}</p>
                     </div>
                   </div>
                 ))}
@@ -160,9 +133,8 @@ export function HeroSection() {
           </div>
 
           {/* Right Column - Foto, CTAs y redes sociales */}
-          <div className="flex flex-col items-center lg:items-end gap-6">
-            <motion.div variants={itemVariants} className="flex justify-center lg:justify-end">
-            <Parallax translateY={[-10, 10]}>
+          <div className="flex flex-col items-center gap-6">
+            <motion.div variants={itemVariants} className="flex justify-center">
             <div className="w-full max-w-[22rem] sm:max-w-sm lg:max-w-none lg:w-52 lg:h-52 aspect-square rounded-[2rem] lg:rounded-full bg-gradient-to-br from-primary to-accent p-1 shadow-xl shadow-primary/10">
               <div className="w-full h-full rounded-[1.75rem] lg:rounded-full bg-background/70 backdrop-blur flex items-center justify-center overflow-hidden">
                 <img
@@ -172,10 +144,9 @@ export function HeroSection() {
                 />
               </div>
             </div>
-          </Parallax>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-2.5 justify-center lg:justify-end">
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-2.5 justify-center">
               <Button
                 className="min-w-[150px] rounded-full shadow-sm active:scale-95 transition-transform"
                 asChild
@@ -213,7 +184,7 @@ export function HeroSection() {
             </motion.div>
           </div>
         </motion.div>
-      </Parallax>
+      </div>
 
       {/* Scroll Indicator */}
       <div className="mt-4 sm:mt-6 flex justify-center animate-bounce hidden sm:flex">

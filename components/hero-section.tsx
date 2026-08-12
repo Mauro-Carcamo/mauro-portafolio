@@ -69,7 +69,7 @@ export function HeroSection() {
   return (
     <section
       onMouseMove={handleMouseMove}
-      className="pt-24 sm:pt-28 md:pt-24 pb-8 sm:pb-10 relative overflow-hidden"
+      className="min-h-[75vh] pt-20 sm:pt-24 md:pt-20 pb-6 sm:pb-8 relative overflow-hidden flex flex-col justify-center"
     >
       {/* Background Pattern */}
       <SectionParallax />
@@ -86,12 +86,12 @@ export function HeroSection() {
           initial="hidden"
           animate="visible"
           style={{ x: moveX, y: moveY }}
-          className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start"
+          className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start"
         >
           {/* Left Column - Content and Actions */}
-          <div className="space-y-8 text-center lg:text-left">
-            <div className="space-y-4">
-              <h1 className="text-balance text-3xl sm:text-5xl lg:text-7xl font-semibold tracking-tight">
+          <div className="space-y-5 text-center lg:text-left">
+            <div>
+              <h1 className="text-balance text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
                 {["Hola,", "soy"].map((word, i) => (
                   <motion.span
                     key={i}
@@ -131,52 +131,48 @@ export function HeroSection() {
 
             </div>
 
-            <motion.div id="about" variants={itemVariants} className="scroll-mt-24 space-y-5">
+            <motion.div id="about" variants={itemVariants} className="scroll-mt-24 space-y-3">
               <h2 className="text-lg sm:text-xl font-semibold text-foreground">
                 Analista de Datos · Científico de Datos
               </h2>
 
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
-                Formación en Ciencias Sociales (Sociólogo) y diplomados en Ciencia de Datos e Inteligencia
-                Artificial, con más de 8 años de experiencia resolviendo problemas de negocio en empresas, pymes y
-                proyectos públicos. Dominio de Python, R y SQL para el ciclo completo de trabajo con datos, desde la
-                extracción hasta la visualización en Power BI y Looker Studio.
+              <p className="text-sm text-muted-foreground leading-snug max-w-xl mx-auto lg:mx-0">
+                Formación en Ciencias Sociales (Sociólogo) y diplomados en Ciencia de Datos e IA, con más de 8 años
+                de experiencia resolviendo problemas de negocio en empresas, pymes y proyectos públicos. Dominio de
+                Python, R y SQL para el ciclo completo de datos, de la extracción a la visualización en Power BI y
+                Looker Studio.
               </p>
 
-              <div className="grid sm:grid-cols-3 gap-4 max-w-xl mx-auto lg:mx-0">
+              <div className="grid sm:grid-cols-3 gap-3 max-w-xl mx-auto lg:mx-0">
                 {highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-start gap-3 text-left">
-                    <div className="w-9 h-9 shrink-0 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <div key={index} className="flex items-start gap-2.5 text-left">
+                    <div className="w-8 h-8 shrink-0 bg-primary/10 rounded-lg flex items-center justify-center">
                       <highlight.icon className="h-4 w-4 text-primary" />
                     </div>
                     <div>
                       <h3 className="text-sm font-semibold tracking-tight leading-tight">{highlight.title}</h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{highlight.description}</p>
+                      <p className="text-xs text-muted-foreground leading-snug line-clamp-2">{highlight.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 justify-center lg:justify-start">
-              <Button 
-                size="lg" 
-                className="min-w-[160px] rounded-full shadow-sm active:scale-95 transition-transform" 
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-2.5 justify-center lg:justify-start">
+              <Button
+                className="min-w-[150px] rounded-full shadow-sm active:scale-95 transition-transform"
                 asChild
               >
                 <a href="#projects">Ver mis proyectos</a>
               </Button>
               <Button
                 variant="outline"
-                size="lg"
-                className="min-w-[160px] bg-transparent rounded-full text-primary border-primary/25 hover:bg-primary/10"
+                className="min-w-[130px] bg-transparent rounded-full text-primary border-primary/25 hover:bg-primary/10"
                 asChild
               >
                 <a href="#contact">Contáctame</a>
               </Button>
-            </motion.div>
 
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3">
               <PdfDialog
                 title="CV — Mauricio Cárcamo"
                 src="/documents/cv-mauricio-carcamo.pdf"
@@ -184,15 +180,14 @@ export function HeroSection() {
                 trigger={
                   <Button
                     variant="outline"
-                    size="lg"
-                    className="min-w-[180px] rounded-full text-primary border-primary/40 hover:bg-primary/10 active:scale-95"
+                    className="min-w-[100px] rounded-full text-primary border-primary/40 hover:bg-primary/10 active:scale-95"
                   >
                     Ver CV
                   </Button>
                 }
               />
 
-              <Button variant="outline" size="lg" className="min-w-[180px] rounded-full" asChild>
+              <Button variant="outline" className="min-w-[130px] rounded-full" asChild>
                 <a href="/documents/cv-mauricio-carcamo.pdf" download="CV_Mauricio_Carcamo.pdf">
                   <Download className="w-4 h-4 mr-2" />
                   Descargar
@@ -205,7 +200,7 @@ export function HeroSection() {
           <div className="flex flex-col items-center lg:items-end gap-6">
             <motion.div variants={itemVariants} className="flex justify-center lg:justify-end">
             <Parallax translateY={[-10, 10]}>
-            <div className="w-full max-w-[22rem] sm:max-w-sm lg:max-w-none lg:w-64 lg:h-64 aspect-square rounded-[2rem] lg:rounded-full bg-gradient-to-br from-primary to-accent p-1 shadow-xl shadow-primary/10">
+            <div className="w-full max-w-[22rem] sm:max-w-sm lg:max-w-none lg:w-52 lg:h-52 aspect-square rounded-[2rem] lg:rounded-full bg-gradient-to-br from-primary to-accent p-1 shadow-xl shadow-primary/10">
               <div className="w-full h-full rounded-[1.75rem] lg:rounded-full bg-background/70 backdrop-blur flex items-center justify-center overflow-hidden">
                 <img
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1706536613867.jpg-H1gm0kFpkJrdpxuyJIShGjRoIaEBYS.jpeg"
@@ -228,7 +223,7 @@ export function HeroSection() {
       </Parallax>
 
       {/* Scroll Indicator */}
-      <div className="mt-8 sm:mt-10 flex justify-center animate-bounce hidden sm:flex">
+      <div className="mt-4 sm:mt-6 flex justify-center animate-bounce hidden sm:flex">
         <ArrowDown className="h-6 w-6 text-muted-foreground" />
       </div>
     </section>

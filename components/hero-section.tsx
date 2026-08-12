@@ -129,15 +129,34 @@ export function HeroSection() {
                 </span>
               </h1>
 
-              <motion.p 
-                variants={itemVariants}
-                animate={{ y: [0, -3, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="text-pretty text-lg sm:text-2xl text-muted-foreground leading-relaxed max-w-xl"
-              >
-                Analista de Datos / Científico de Datos con formación en Ciencias Sociales, especializado en Machine Learning, Inteligencia Artificial y Full Stack en Python.
-              </motion.p>
             </div>
+
+            <motion.div id="about" variants={itemVariants} className="scroll-mt-24 space-y-5">
+              <h2 className="text-lg sm:text-xl font-semibold text-foreground">
+                Analista de Datos · Científico de Datos
+              </h2>
+
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
+                Formación en Ciencias Sociales (Sociólogo) y diplomados en Ciencia de Datos e Inteligencia
+                Artificial, con más de 8 años de experiencia resolviendo problemas de negocio en empresas, pymes y
+                proyectos públicos. Dominio de Python, R y SQL para el ciclo completo de trabajo con datos, desde la
+                extracción hasta la visualización en Power BI y Looker Studio.
+              </p>
+
+              <div className="grid sm:grid-cols-3 gap-4 max-w-xl mx-auto lg:mx-0">
+                {highlights.map((highlight, index) => (
+                  <div key={index} className="flex items-start gap-3 text-left">
+                    <div className="w-9 h-9 shrink-0 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <highlight.icon className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold tracking-tight leading-tight">{highlight.title}</h3>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{highlight.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
 
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 justify-center lg:justify-start">
               <Button 
@@ -182,7 +201,7 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right Column - Foto + Perfil (badge, bio, highlights, redes) */}
+          {/* Right Column - Foto y redes sociales */}
           <div className="flex flex-col items-center lg:items-end gap-6">
             <motion.div variants={itemVariants} className="flex justify-center lg:justify-end">
             <Parallax translateY={[-10, 10]}>
@@ -198,40 +217,11 @@ export function HeroSection() {
           </Parallax>
             </motion.div>
 
-            {/* Tarjeta de perfil — todo debajo de la foto */}
             <motion.div
-              id="about"
               variants={itemVariants}
-              className="scroll-mt-24 w-full rounded-2xl border border-border/50 bg-muted/20 backdrop-blur-sm shadow-sm p-5 sm:p-6 space-y-5 text-center lg:text-left"
+              className="w-full max-w-[22rem] sm:max-w-sm lg:max-w-none lg:w-64 flex justify-center bg-muted/20 backdrop-blur-sm border border-border/50 rounded-2xl p-4 shadow-sm"
             >
-              <span className="inline-block text-xs sm:text-sm font-semibold tracking-wide uppercase text-primary bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5">
-                Analista de Datos · Científico de Datos
-              </span>
-
-              <p className="text-sm sm:text-[15px] text-muted-foreground leading-relaxed">
-                Formación en Ciencias Sociales (Sociólogo) y diplomados en Ciencia de Datos e Inteligencia
-                Artificial, con más de 8 años de experiencia resolviendo problemas de negocio en empresas, pymes y
-                proyectos públicos. Dominio de Python, R y SQL para el ciclo completo de trabajo con datos, desde la
-                extracción hasta la visualización en Power BI y Looker Studio.
-              </p>
-
-              <div className="space-y-3">
-                {highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-start gap-3 text-left">
-                    <div className="w-9 h-9 shrink-0 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <highlight.icon className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-semibold tracking-tight leading-tight">{highlight.title}</h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{highlight.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-1 border-t border-border/50 flex justify-center lg:justify-start">
-                <SocialLinks className="flex flex-wrap items-center gap-4 sm:gap-5 pt-4" size="md" />
-              </div>
+              <SocialLinks className="flex flex-wrap items-center gap-4 sm:gap-6" size="md" />
             </motion.div>
           </div>
         </motion.div>

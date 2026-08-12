@@ -32,6 +32,13 @@ export function EducationSection() {
 
   const diplomados = [
     {
+      title: "Beca Google Talento Digital",
+      institution: "Google",
+      period: "2026",
+      status: "current",
+      certificate: null,
+    },
+    {
       title: "Diplomado en Inteligencia Artificial",
       institution: "Universidad Autónoma",
       period: "2025",
@@ -103,6 +110,27 @@ export function EducationSection() {
       period: "2022",
       status: "completed",
       certificate: "/documents/mineria-de-datos-coursera.pdf",
+    },
+    {
+      title: "SQL Interactivo",
+      institution: "Desafío LATAM",
+      period: "2024",
+      status: "completed",
+      certificate: null,
+    },
+    {
+      title: "El Desafío SIG desde Cero: Biodiversidad y Medio Ambiente",
+      institution: "Instituto Ambiental GIS",
+      period: "2023",
+      status: "completed",
+      certificate: null,
+    },
+    {
+      title: "ChatGPT Prompt Engineering for Developers",
+      institution: "Teleduc, Pontificia Universidad Católica de Chile",
+      period: "2022",
+      status: "completed",
+      certificate: null,
     },
     {
       title: "Curso Herramientas para la Gestión de Proyectos",

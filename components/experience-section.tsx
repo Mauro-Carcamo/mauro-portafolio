@@ -12,29 +12,29 @@ export function ExperienceSection() {
   const experiences = [
     {
       company: "Espacio Eme Centro Médico",
-      position: "Analista de Datos",
+      position: "Consultor de Datos",
       period: "Nov 2025 - Feb 2026",
       location: "Santiago, Chile",
       description:
-        "Desarrollo de sistema para consolidar y analizar registros de calibración y medición de termómetros clínicos. Responsable de la integración, limpieza y estandarización de datos de sensores, generación de reportes de trazabilidad y automatización de procesos de auditoría documental.",
+        "Consolidación y análisis de data de termómetros para certificación de refrigeradores de elementos orgánicos sensibles. Análisis de registros de temperatura de 12 termómetros en 3 pisos, con cadencia de 5 minutos durante 5 meses, detectando errores, outliers y fluctuaciones fuera de rango. Desarrollo asistido por IA (Claude Code) en VS Code.",
       achievements: [
-        "Integración y limpieza de datos de sensores clínicos",
-        "Generación de reportes y visualizaciones para auditoría",
+        "Certificación aprobada para el uso de los equipos en la conservación de elementos orgánicos sensibles",
+        "Garantía de trazabilidad y cumplimiento normativo",
         "Automatización de tareas de procesamiento de datos",
       ],
       technologies: ["Python", "Pandas", "Data Cleaning", "Automatización", "Reportería"],
     },
     {
-      company: "Consultora Epojé",
-      position: "Coordinador de proyecto",
-      period: "Sep 2024 - Dic 2024",
-      location: "Santiago, Chile",
+      company: "Consultora Epojé · Ministerio del Trabajo",
+      position: "Coordinador de Proyecto",
+      period: "Sep 2023 - Dic 2024",
+      location: "Santiago / Valparaíso, Chile",
       description:
-        "Adjudicación proyecto Escuela de formación Sindical, Departamento Diálogo Social, Ministerio del Trabajo. Responsable de la planificación, ejecución y evaluación del proyecto, incluyendo el diseño de módulos de formación para sindicatos, gestión de equipos y participantes, desarrollo de herramientas evaluativas, seguimiento de indicadores clave como asistencia y resultados de aprendizaje.",
+        "Escuela de Formación Sindical (Dpto. de Diálogo Social, 2024) y Escuela de Formación MYPES, Región de Valparaíso (2023). Responsable de la planificación, ejecución y evaluación integral de ambos proyectos adjudicados, incluyendo el diseño de módulos de formación y de evaluación por módulo (Google Forms), alcanzando una tasa de aprobación del 95%.",
       achievements: [
-        "Automatización de correos y mensajes de WhatsApp",
-        "Gestión de equipos multidisciplinarios",
-        "Desarrollo de herramientas evaluativas",
+        "Plataforma web de comunicación centralizada con automatización de WhatsApp y correo electrónico",
+        "Tasa de aprobación del 95%, cumpliendo el estándar exigido por el programa",
+        "Planificación, ejecución y evaluación integral de dos proyectos adjudicados",
       ],
       technologies: ["Automatización", "Gestión de Proyectos", "Análisis de Datos"],
     },
@@ -67,6 +67,20 @@ export function ExperienceSection() {
       technologies: ["Google Looker Studios", "Análisis de Ventas", "Data Analytics"],
     },
     {
+      company: "Universidad Diego Portales",
+      position: "Consultor de Datos",
+      period: "Sep 2022 - Ene 2023",
+      location: "Santiago, Chile",
+      description:
+        "Auditoría documental para el proceso de acreditación de postítulos de la carrera de Medicina. Auditoría y validación de estudios y certificaciones de 35 doctores, contrastando la información contra el Registro Nacional de Prestadores de Salud.",
+      achievements: [
+        "Automatización mediante web scraping dinámico de la descarga masiva de documentos",
+        "Reducción significativa del tiempo de recopilación manual",
+        "Construcción de base de datos con currículum académico, publicaciones y experiencia docente",
+      ],
+      technologies: ["Web Scraping", "Python", "Auditoría de Datos"],
+    },
+    {
       company: "Universidad de Valparaíso",
       position: "Analista de Datos",
       period: "Dic 2022",
@@ -81,16 +95,16 @@ export function ExperienceSection() {
       technologies: ["Machine Learning", "Python", "R", "Data Visualization"],
     },
     {
-      company: "Conectados S.A.",
-      position: "Análisis de Datos y Coaching de Ventas",
-      period: "Abr 2018 - Ago 2022",
+      company: "Conectados S.A. (Contact Center)",
+      position: "Analista de Datos & Coordinador de Capacitación",
+      period: "Abr 2018 - Ago 2023",
       location: "Santiago, Chile",
       description:
-        "Contact Center dedicado a la venta de servicios. Diseñé dashboards en Google Data Studio para monitorear métricas clave como ventas, dotación y rendimiento de campañas.",
+        "Campañas WOM, Virgin Mobile, UC Christus y Seguros Santander. Liderazgo de 2 personas a cargo (Capacitación y Calidad de Venta) y supervisión directa de 10 personas en la campaña Virgin Mobile (2019). Diseño de dashboard integral en Power BI con validaciones del proceso de venta.",
       achievements: [
-        "Incremento de ventas mediante estrategias basadas en datos",
-        "Optimización de gestión de equipos comerciales",
-        "Coordinación de capacitación en Latam",
+        "Sistema propio de registro de venta y lectura automática de contrato",
+        "Capacitaciones semanales (30-40 personas) para equipos de venta en Chile, Colombia y Venezuela (LATAM)",
+        "Creación y mantención de sitio web interno con tutoriales y recursos para ejecutivos",
       ],
       technologies: ["Google Data Studio", "Análisis de Ventas", "Gestión de Equipos"],
     },
@@ -133,7 +147,7 @@ export function ExperienceSection() {
                   Experiencia <span className="text-primary">Profesional</span>
                 </>
               }
-              description="Más de 7 años de experiencia en análisis de datos, gestión de proyectos y automatización de procesos en múltiples sectores."
+              description="Más de 8 años de experiencia en análisis de datos, gestión de proyectos y automatización de procesos en múltiples sectores."
             />
           </ScrollReveal>
 

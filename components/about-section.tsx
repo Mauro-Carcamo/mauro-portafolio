@@ -47,7 +47,7 @@ export function AboutSection() {
           <ScrollReveal delayMs={80}>
             <div className="max-w-4xl mx-auto space-y-6 mb-16">
             <p className="text-base sm:text-lg leading-relaxed">
-              Sociólogo especializado en Ciencia de Datos con más de 7 años de experiencia profesional. Combino
+              Sociólogo especializado en Ciencia de Datos con más de 8 años de experiencia profesional. Combino
               formación académica sólida con habilidades técnicas en análisis de datos, machine learning y programación
               (Python, R, SQL). Experiencia demostrada en análisis de datos para la toma de decisiones, gestión de
               proyectos y automatización de procesos en sectores de salud, educación, telecomunicaciones y medios.

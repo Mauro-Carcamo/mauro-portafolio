@@ -116,7 +116,7 @@ export function HeroSection() {
                 Looker Studio.
               </p>
 
-              <div className="grid sm:grid-cols-3 gap-3 max-w-xl mx-auto lg:mx-0">
+              <div className="grid sm:grid-cols-3 gap-3 max-w-xl mx-auto lg:mx-0 mt-3">
                 {highlights.map((highlight, index) => (
                   <div key={index} className="flex items-start gap-2.5 text-left">
                     <div className="w-8 h-8 shrink-0 bg-primary/10 rounded-lg flex items-center justify-center">

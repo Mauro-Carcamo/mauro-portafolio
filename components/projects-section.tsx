@@ -104,6 +104,17 @@ export function ProjectsSection() {
       featured: true,
     },
     {
+      title: "Registag",
+      description:
+        "Plataforma de trazabilidad de EPP: registro automático de entregas en terreno vía RFID, con pipeline hacia Google Sheets para control de estados, alertas y constancias legales digitales.",
+      image: "/projects/registag.jpg",
+      technologies: ["ESP8266", "IoT", "Google Apps Script"],
+      liveUrl: "/projects/registag",
+      appUrl: "https://regist4g.vercel.app",
+      githubUrl: "https://github.com/Regist4g",
+      featured: true,
+    },
+    {
       title: "Predicción de Mortalidad en Chile",
       description:
         "Análisis y predicción de mortalidad con técnicas de ciencia de datos y Machine Learning.",

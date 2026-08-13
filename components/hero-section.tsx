@@ -105,11 +105,11 @@ export function HeroSection() {
             </div>
 
             <motion.div id="about" variants={itemVariants} className="scroll-mt-24 space-y-3">
-              <h2 className="text-lg sm:text-xl font-semibold text-foreground">
+              <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
                 Analista de Datos · Científico de Datos
               </h2>
 
-              <p className="text-sm text-muted-foreground leading-snug max-w-xl mx-auto lg:mx-0">
+              <p className="text-base text-muted-foreground leading-snug max-w-xl mx-auto lg:mx-0">
                 Formación en Ciencias Sociales (Sociólogo) y diplomados en Ciencia de Datos e IA, con más de 8 años
                 de experiencia resolviendo problemas de negocio en empresas, pymes y proyectos públicos. Dominio de
                 Python, R y SQL para el ciclo completo de datos, de la extracción a la visualización en Power BI y
@@ -123,8 +123,8 @@ export function HeroSection() {
                       <highlight.icon className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold tracking-tight leading-tight">{highlight.title}</h3>
-                      <p className="text-xs text-muted-foreground leading-snug">{highlight.description}</p>
+                      <h3 className="text-base font-semibold tracking-tight leading-tight">{highlight.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-snug">{highlight.description}</p>
                     </div>
                   </div>
                 ))}

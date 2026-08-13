@@ -4,19 +4,227 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ImageCarousel } from "@/components/image-carousel"
-import { TechnologyIcon } from "@/components/technology-icon"
+import { TechnologyIcon, hasTechnologyIcon } from "@/components/technology-icon"
 import { SectionHeader } from "@/components/section-header"
 import { SectionParallax } from "@/components/section-parallax"
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { PdfDialog } from "@/components/pdf-dialog"
 import Link from "next/link"
-import { ChevronLeft, ChevronRight, ExternalLink, Github, ArrowRight } from "lucide-react"
+import {
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  Github,
+  ArrowRight,
+  GraduationCap,
+  Download,
+  Eye,
+  Award,
+  BookOpen,
+  Scroll,
+} from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+import type React from "react"
 
 import { motion, AnimatePresence, Variants } from "framer-motion"
+
+interface EducationItem {
+  title: string
+  institution: string
+  period: string
+  status: string
+  certificate: string | null
+}
+
+const educationTitulo: EducationItem[] = [
+  {
+    title: "Título de Sociólogo",
+    institution: "Universidad Central de Chile",
+    period: "2015",
+    status: "completed",
+    certificate: "/documents/titulo-sociologo.pdf",
+  },
+]
+
+const educationDiplomados: EducationItem[] = [
+  {
+    title: "Beca Google Talento Digital",
+    institution: "Google",
+    period: "2026",
+    status: "current",
+    certificate: null,
+  },
+  {
+    title: "Diplomado en Inteligencia Artificial",
+    institution: "Universidad Autónoma",
+    period: "2025",
+    status: "completed",
+    certificate: "/documents/20250923151700_abd3a728-083d-4b46-9839-a19400f319ba.pdf",
+  },
+  {
+    title: "Diplomado en Data Science",
+    institution: "Universidad Católica de Chile",
+    period: "2022",
+    status: "completed",
+    certificate: "/documents/diplomado-data-science.pdf",
+  },
+]
+
+const educationCursos: EducationItem[] = [
+  {
+    title: "Bootcamp Ciencia de Datos",
+    institution: "Corfo Talento Digital",
+    period: "2024",
+    status: "completed",
+    certificate: "/documents/bootcamp-data-science.pdf",
+  },
+  {
+    title: "Bootcamp Full Stack Python",
+    institution: "Corfo Talento Digital",
+    period: "2023",
+    status: "completed",
+    certificate: "/documents/bootcamp-full-stack-python.pdf",
+  },
+  {
+    title: "Green Digital Skills",
+    institution: "INCO Academy (LinkedIn)",
+    period: "2024",
+    status: "completed",
+    certificate: "/documents/green-digital-skills.pdf",
+  },
+  {
+    title: "Curso Introductorio Data Science",
+    institution: "Escuela Digital",
+    period: "2024",
+    status: "completed",
+    certificate: "/documents/intro-data-science.pdf",
+  },
+  {
+    title: "Procesamiento de Lenguaje Natural en R",
+    institution: "Instituto Nacional de Estadísticas (INE)",
+    period: "2023",
+    status: "completed",
+    certificate: null,
+  },
+  {
+    title: "R y Herramientas de Reproducibilidad",
+    institution: "Instituto Nacional de Estadísticas (INE)",
+    period: "2023",
+    status: "completed",
+    certificate: null,
+  },
+  {
+    title: "Introducción a Shiny",
+    institution: "Instituto Nacional de Estadísticas (INE)",
+    period: "2023",
+    status: "completed",
+    certificate: null,
+  },
+  {
+    title: "Introducción a la Minería de Datos",
+    institution: "Pontificia Universidad Católica de Chile (Coursera)",
+    period: "2022",
+    status: "completed",
+    certificate: "/documents/mineria-de-datos-coursera.pdf",
+  },
+  {
+    title: "SQL Interactivo",
+    institution: "Desafío LATAM",
+    period: "2024",
+    status: "completed",
+    certificate: null,
+  },
+  {
+    title: "El Desafío SIG desde Cero: Biodiversidad y Medio Ambiente",
+    institution: "Instituto Ambiental GIS",
+    period: "2023",
+    status: "completed",
+    certificate: null,
+  },
+  {
+    title: "ChatGPT Prompt Engineering for Developers",
+    institution: "Teleduc, Pontificia Universidad Católica de Chile",
+    period: "2022",
+    status: "completed",
+    certificate: null,
+  },
+  {
+    title: "Curso Herramientas para la Gestión de Proyectos",
+    institution: "Universidad Católica de Chile",
+    period: "2022",
+    status: "completed",
+    certificate: "/documents/gestion-proyectos-agil.pdf",
+  },
+  {
+    title: "Curso Aplicación de Técnicas para la Gestión de Capacitación",
+    institution: "Universidad Católica de Chile",
+    period: "2021",
+    status: "completed",
+    certificate: "/documents/gestion-capacitacion.pdf",
+  },
+]
+
+const educationDownloadName = (title: string) => `${title.replace(/\s+/g, "-").toLowerCase()}-certificado.pdf`
+
+function EducationCategoryCompact({
+  title,
+  items,
+  icon: Icon,
+}: {
+  title: string
+  items: EducationItem[]
+  icon: React.ElementType
+}) {
+  return (
+    <div className="mb-4 last:mb-0">
+      <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-primary mb-1.5">
+        <Icon className="h-3.5 w-3.5" />
+        {title}
+      </div>
+      <ul>
+        {items.map((edu, index) => (
+          <li
+            key={index}
+            className="flex items-start justify-between gap-2 py-2 border-b border-border/40 last:border-b-0"
+          >
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-foreground leading-snug">{edu.title}</p>
+              <p className="text-xs text-muted-foreground truncate">
+                {edu.institution} · {edu.period}
+                {edu.status === "current" && (
+                  <span className="ml-1.5 text-primary font-semibold">En curso</span>
+                )}
+              </p>
+            </div>
+            {edu.certificate && (
+              <div className="flex gap-1 shrink-0">
+                <PdfDialog
+                  title={edu.title}
+                  src={edu.certificate}
+                  downloadName={educationDownloadName(edu.title)}
+                  trigger={
+                    <Button variant="ghost" size="icon" className="h-7 w-7" aria-label={`Ver certificado: ${edu.title}`}>
+                      <Eye className="h-3.5 w-3.5" />
+                    </Button>
+                  }
+                />
+                <Button variant="ghost" size="icon" className="h-7 w-7" asChild>
+                  <a href={edu.certificate} download={educationDownloadName(edu.title)} aria-label={`Descargar certificado: ${edu.title}`}>
+                    <Download className="h-3.5 w-3.5" />
+                  </a>
+                </Button>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 function ProjectImage({ 
   src, 
@@ -222,9 +430,13 @@ export function ProjectsSection() {
     <section id="projects" className="relative pt-10 sm:pt-14 pb-12 sm:pb-16">
       <SectionParallax />
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+        {/* Columna izquierda — Proyectos (carrusel horizontal) */}
+        <div className="min-w-0">
         <ScrollReveal>
           <SectionHeader
-            className="mb-8 sm:mb-12"
+            align="left"
+            className="mb-8"
             eyebrow="Portafolio"
             title={
               <>
@@ -247,7 +459,7 @@ export function ProjectsSection() {
           onFocusCapture={() => setIsFocusWithin(true)}
           onBlurCapture={() => setIsFocusWithin(false)}
         >
-          <div className="absolute -top-14 right-0 hidden sm:flex items-center gap-2">
+          <div className="absolute -top-12 right-0 hidden sm:flex items-center gap-2">
             <Button variant="outline" size="icon" onClick={scrollPrev} disabled={!canScrollPrev} aria-label="Anterior">
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -261,7 +473,7 @@ export function ProjectsSection() {
               {projects.map((project, index) => (
                 <motion.div
                   key={index}
-                  className="flex-[0_0_86%] sm:flex-[0_0_54%] md:flex-[0_0_40%] lg:flex-[0_0_30%] xl:flex-[0_0_24%]"
+                  className="flex-[0_0_86%] sm:flex-[0_0_70%] md:flex-[0_0_55%] lg:flex-[0_0_60%] xl:flex-[0_0_48%]"
                   variants={itemVariants}
                 >
                   <motion.div
@@ -358,9 +570,9 @@ export function ProjectsSection() {
                         {project.technologies.map((tech, techIndex) => (
                           <div
                             key={techIndex}
-                            className="flex items-center gap-1.5 bg-secondary/60 text-secondary-foreground rounded-full px-2.5 py-1 text-[11px] font-semibold min-w-0 max-w-full"
+                            className="flex flex-nowrap items-center gap-1.5 bg-secondary/60 text-secondary-foreground rounded-full px-2.5 py-1 text-[11px] font-semibold min-w-0 max-w-full shrink-0"
                           >
-                            <TechnologyIcon techName={tech} size={16} />
+                            {hasTechnologyIcon(tech) && <TechnologyIcon techName={tech} size={16} />}
                             <span className="min-w-0 truncate" title={tech}>
                               {tech}
                             </span>
@@ -407,7 +619,7 @@ export function ProjectsSection() {
         </motion.div>
 
         <ScrollReveal delayMs={120}>
-          <div className="text-center mt-12">
+          <div className="mt-8">
             <Link href="https://github.com/Mauro-Carcamo" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="lg" className="rounded-full">
                 Ver todos los proyectos en GitHub
@@ -415,6 +627,37 @@ export function ProjectsSection() {
             </Link>
           </div>
         </ScrollReveal>
+        </div>
+
+        {/* Columna derecha — Educación y Certificaciones */}
+        <div id="education" className="scroll-mt-24 min-w-0">
+          <ScrollReveal>
+            <SectionHeader
+              align="left"
+              className="mb-8"
+              eyebrow={
+                <span className="inline-flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4" />
+                  Formación Académica
+                </span>
+              }
+              title={
+                <>
+                  Educación y <span className="text-primary">Certificaciones</span>
+                </>
+              }
+            />
+          </ScrollReveal>
+
+          <ScrollReveal delayMs={80}>
+            <div className="rounded-2xl border border-border/60 bg-background/80 shadow-sm p-4 sm:p-5 max-h-[560px] overflow-y-auto">
+              <EducationCategoryCompact title="Título Profesional" items={educationTitulo} icon={Award} />
+              <EducationCategoryCompact title="Diplomados" items={educationDiplomados} icon={Scroll} />
+              <EducationCategoryCompact title="Cursos y Bootcamps" items={educationCursos} icon={BookOpen} />
+            </div>
+          </ScrollReveal>
+        </div>
+        </div>
       </div>
     </section>
   )

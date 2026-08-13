@@ -57,6 +57,10 @@ const technologyMap: { [key: string]: string } = {
   "Power BI": "/icons/technologies/Microsoft-Power-BI-Symbol-2863570908.png",
 };
 
+export function hasTechnologyIcon(techName: string): boolean {
+  return techName in technologyMap;
+}
+
 export function TechnologyIcon({ techName, size = 24 }: TechnologyIconProps) {
   const iconSrc = technologyMap[techName];
 

@@ -1,6 +1,6 @@
 ﻿﻿"use client"
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ImageCarousel } from "@/components/image-carousel"
@@ -473,30 +473,23 @@ export function ProjectsSection() {
               {projects.map((project, index) => (
                 <motion.div
                   key={index}
-                  className="flex-[0_0_86%] sm:flex-[0_0_70%] md:flex-[0_0_55%] lg:flex-[0_0_60%] xl:flex-[0_0_48%]"
+                  className="flex-[0_0_100%] sm:flex-[0_0_92%]"
                   variants={itemVariants}
                 >
                   <motion.div
                     layout // Enable layout animations
                     whileHover={{
-                      y: -8,
-                      scale: 1.015,
-                      rotateX: -2,
-                      rotateY: 2,
-                      z: 20, // Add a slight Z-axis translation for more depth
+                      y: -4,
+                      scale: 1.008,
                     }}
-                    whileTap={{ scale: 0.98, rotateX: 0, rotateY: 0 }}
+                    whileTap={{ scale: 0.99 }}
                     transition={{
                       type: "spring",
                       stiffness: 260,
                       damping: 18,
                     }}
-                    style={{
-                      transformStyle: "preserve-3d", // Enable 3D transformations
-                      perspective: "1200px", // Set perspective for 3D effect
-                    }}
                     className={cn(
-                      "group overflow-hidden p-0 py-0 gap-0 h-full rounded-2xl border border-border/60 bg-background/80 shadow-sm",
+                      "group overflow-hidden p-0 py-0 gap-0 h-56 sm:h-44 rounded-2xl border border-border/60 bg-background/80 shadow-sm",
                       "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                       project.featured ? "ring-1 ring-primary/20" : "",
                     )}
@@ -515,11 +508,11 @@ export function ProjectsSection() {
                         event.preventDefault()
                         router.push(project.liveUrl)
                       }}
-                      className="h-full w-full border-none shadow-none" // Remove default card styling to let motion.div handle it
+                      className="h-full w-full flex-row border-none shadow-none gap-0 py-0" // Layout horizontal: imagen a la izquierda, contenido a la derecha
                     >
-                    <div className="relative overflow-hidden bg-muted aspect-video" style={{ transformStyle: "preserve-3d" }}>
+                    <div className="relative overflow-hidden bg-muted w-28 sm:w-36 shrink-0 h-full">
                       {project.images ? (
-                        <motion.div whileHover={{ scale: 1.08, y: -4 }} transition={{ duration: 0.5 }}>
+                        <motion.div whileHover={{ scale: 1.08 }} transition={{ duration: 0.5 }} className="h-full">
                           <ImageCarousel
                             images={project.images}
                             alt={project.title}
@@ -534,81 +527,70 @@ export function ProjectsSection() {
                           priority={project.featured}
                           className={cn(
                             "w-full h-full transition-transform duration-500 group-hover:scale-[1.03]",
-                            project.title === "Kittypau" ? "object-contain p-6 bg-white" : "object-cover"
+                            project.title === "Kittypau" ? "object-contain p-3 bg-white" : "object-cover"
                           )}
                           placeholder="blur"
                         />
                       )}
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/55 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       {project.featured && (
-                        <motion.div
-                          animate={{
-                            boxShadow: [
-                              "0 0 0px rgba(99,102,241,0.4)",
-                              "0 0 15px rgba(99,102,241,0.7)",
-                              "0 0 0px rgba(99,102,241,0.4)",
-                            ],
-                          }}
-                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                          className="absolute top-3 left-3 z-10"
-                        >
-                          <Badge className="bg-primary shadow-sm">Destacado</Badge>
-                        </motion.div>
+                        <div className="absolute top-2 left-2 z-10">
+                          <Badge className="bg-primary shadow-sm text-[10px] px-2 py-0.5">Destacado</Badge>
+                        </div>
                       )}
                     </div>
 
-                    <CardHeader className="px-4 sm:px-5 pt-5 pb-2">
-                      <CardTitle className="text-lg sm:text-xl font-bold leading-tight tracking-tight">{project.title}</CardTitle>
-                    </CardHeader>
+                    <div className="min-w-0 flex-1 flex flex-col overflow-hidden px-4 sm:px-5 py-3">
+                      <CardTitle className="text-base sm:text-lg font-bold leading-tight tracking-tight truncate">
+                        {project.title}
+                      </CardTitle>
 
-                    <CardContent className="px-4 sm:px-5 pb-4 pt-0 flex-1 space-y-4">
-                      <p className="text-[14px] sm:text-[15px] text-muted-foreground leading-relaxed line-clamp-3 sm:line-clamp-4">
+                      <p className="text-xs sm:text-[13px] text-muted-foreground leading-snug line-clamp-2 mt-1">
                         {project.description}
                       </p>
 
-                      <div className="flex flex-wrap gap-2 items-center pt-1">
+                      <div className="flex flex-wrap gap-1.5 items-center mt-2 overflow-hidden max-h-[52px] sm:max-h-[26px]">
                         {project.technologies.map((tech, techIndex) => (
                           <div
                             key={techIndex}
-                            className="flex flex-nowrap items-center gap-1.5 bg-secondary/60 text-secondary-foreground rounded-full px-2.5 py-1 text-[11px] font-semibold min-w-0 max-w-full shrink-0"
+                            className="flex flex-nowrap items-center gap-1 bg-secondary/60 text-secondary-foreground rounded-full px-2 py-0.5 text-[10px] font-semibold min-w-0 max-w-full shrink-0"
                           >
-                            {hasTechnologyIcon(tech) && <TechnologyIcon techName={tech} size={16} />}
+                            {hasTechnologyIcon(tech) && <TechnologyIcon techName={tech} size={12} />}
                             <span className="min-w-0 truncate" title={tech}>
                               {tech}
                             </span>
                           </div>
                         ))}
                       </div>
-                    </CardContent>
 
-                    <CardFooter className="px-4 sm:px-5 pb-4 sm:pb-5 pt-0 gap-2 flex-wrap">
-                      <Button size="sm" className="flex-1 rounded-full" asChild>
-                        <Link href={project.liveUrl} onClick={(e) => e.stopPropagation()}>
-                          <ArrowRight className="h-4 w-4" />
-                          Ver detalles
-                        </Link>
-                      </Button>
+                      <div className="flex items-center gap-2 flex-wrap mt-auto pt-2">
+                        <Button size="sm" className="rounded-full h-7 px-3 text-xs" asChild>
+                          <Link href={project.liveUrl} onClick={(e) => e.stopPropagation()}>
+                            <ArrowRight className="h-3.5 w-3.5" />
+                            Ver detalles
+                          </Link>
+                        </Button>
 
-                      {project.appUrl && (
-                        <Button size="sm" variant="outline" className="rounded-full" asChild>
-                          <a
-                            href={project.appUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <ExternalLink className="h-4 w-4" />
-                            App
+                        {project.appUrl && (
+                          <Button size="sm" variant="outline" className="rounded-full h-7 px-3 text-xs" asChild>
+                            <a
+                              href={project.appUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <ExternalLink className="h-3.5 w-3.5" />
+                              App
+                            </a>
+                          </Button>
+                        )}
+
+                        <Button variant="outline" size="icon" className="rounded-full h-7 w-7" asChild>
+                          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                            <Github className="h-3.5 w-3.5" />
                           </a>
                         </Button>
-                      )}
-
-                      <Button variant="outline" size="sm" className="rounded-full" asChild>
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                          <Github className="h-4 w-4" />
-                        </a>
-                      </Button>
-                    </CardFooter>
+                      </div>
+                    </div>
                     </Card>
                   </motion.div>
                 </motion.div>

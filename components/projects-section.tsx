@@ -11,8 +11,6 @@ import { ScrollReveal } from "@/components/scroll-reveal"
 import { PdfDialog } from "@/components/pdf-dialog"
 import Link from "next/link"
 import {
-  ChevronLeft,
-  ChevronRight,
   ExternalLink,
   Github,
   ArrowRight,
@@ -23,8 +21,7 @@ import {
   BookOpen,
   Scroll,
 } from "lucide-react"
-import useEmblaCarousel from "embla-carousel-react"
-import { useCallback, useEffect, useState } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
@@ -354,57 +351,6 @@ export function ProjectsSection() {
     },
   ]
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    loop: true,
-    skipSnaps: false,
-    duration: 40,
-  })
-
-  const [canScrollPrev, setCanScrollPrev] = useState(false)
-  const [canScrollNext, setCanScrollNext] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
-  const [isFocusWithin, setIsFocusWithin] = useState(false)
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return
-    setCanScrollPrev(emblaApi.canScrollPrev())
-    setCanScrollNext(emblaApi.canScrollNext())
-  }, [emblaApi])
-
-  useEffect(() => {
-    if (!emblaApi) return
-    onSelect()
-    emblaApi.on("select", onSelect)
-    emblaApi.on("reInit", onSelect)
-  }, [emblaApi, onSelect])
-
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
-
-  useEffect(() => {
-    if (!emblaApi) return
-
-    const reduceMotion =
-      typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
-
-    if (reduceMotion) return
-    if (isHovered || isFocusWithin) return
-
-    const firstId = window.setTimeout(() => {
-      emblaApi.scrollNext()
-    }, 1400)
-
-    const id = window.setInterval(() => {
-      emblaApi.scrollNext()
-    }, 3800)
-
-    return () => {
-      window.clearTimeout(firstId)
-      window.clearInterval(id)
-    }
-  }, [emblaApi, isHovered, isFocusWithin])
-
   const containerVariants: Variants = {
     hidden: {},
     show: {
@@ -452,42 +398,13 @@ export function ProjectsSection() {
           whileInView="show"
           viewport={{ once: true, margin: "-10%" }}
         >
-          <div
-          className="relative"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onFocusCapture={() => setIsFocusWithin(true)}
-          onBlurCapture={() => setIsFocusWithin(false)}
-        >
-          <div className="absolute -top-12 right-0 hidden sm:flex items-center gap-2">
-            <Button variant="outline" size="icon" onClick={scrollPrev} disabled={!canScrollPrev} aria-label="Anterior">
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button variant="outline" size="icon" onClick={scrollNext} disabled={!canScrollNext} aria-label="Siguiente">
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
-
-          <div ref={emblaRef} className="overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y" style={{ touchAction: "pan-y" }}>
-            <div className="flex touch-pan-y gap-3 sm:gap-4">
+          <div className="flex flex-col gap-3 sm:gap-4">
               {projects.map((project, index) => (
                 <motion.div
                   key={index}
-                  className="flex-[0_0_100%] sm:flex-[0_0_92%]"
                   variants={itemVariants}
                 >
-                  <motion.div
-                    layout // Enable layout animations
-                    whileHover={{
-                      y: -4,
-                      scale: 1.008,
-                    }}
-                    whileTap={{ scale: 0.99 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 18,
-                    }}
+                  <div
                     className={cn(
                       "group overflow-hidden p-0 py-0 gap-0 h-56 sm:h-44 rounded-2xl border border-border/60 bg-background/80 shadow-sm",
                       "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
@@ -512,21 +429,18 @@ export function ProjectsSection() {
                     >
                     <div className="relative overflow-hidden bg-muted w-28 sm:w-36 shrink-0 h-full">
                       {project.images ? (
-                        <motion.div whileHover={{ scale: 1.08 }} transition={{ duration: 0.5 }} className="h-full">
-                          <ImageCarousel
-                            images={project.images}
-                            alt={project.title}
-                            autoPlay={true}
-                            autoPlayInterval={2500}
-                          />
-                        </motion.div>
+                        <ImageCarousel
+                          images={project.images}
+                          alt={project.title}
+                          autoPlay={false}
+                        />
                       ) : (
                         <ProjectImage
                           src={project.image || "/placeholder.svg"}
                           alt={project.title}
                           priority={project.featured}
                           className={cn(
-                            "w-full h-full transition-transform duration-500 group-hover:scale-[1.03]",
+                            "w-full h-full",
                             project.title === "Kittypau" ? "object-contain p-3 bg-white" : "object-cover"
                           )}
                           placeholder="blur"
@@ -592,11 +506,9 @@ export function ProjectsSection() {
                       </div>
                     </div>
                     </Card>
-                  </motion.div>
+                  </div>
                 </motion.div>
               ))}
-            </div>
-          </div>
           </div>
         </motion.div>
 

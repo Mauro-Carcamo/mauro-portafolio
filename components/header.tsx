@@ -181,14 +181,14 @@ export function Header() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setIsMenuOpen(false)}
-                className="fixed inset-0 bg-background/60 backdrop-blur-sm z-[-1] md:hidden"
+                className="fixed inset-0 bg-background/60 backdrop-blur-sm z-40 md:hidden"
               />
               <motion.div
                 initial={{ opacity: 0, y: -20, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 0.95 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="md:hidden absolute left-4 right-4 top-full z-50 rounded-2xl border border-border/60 bg-background/95 p-3 shadow-xl backdrop-blur-md"
+                className="md:hidden absolute left-4 right-4 top-full z-50 rounded-2xl border border-border/60 bg-background p-3 shadow-xl"
               >
                 <nav className="grid gap-1">
                   {navItems.map((item) => (

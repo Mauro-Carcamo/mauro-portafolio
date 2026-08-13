@@ -1,19 +1,26 @@
 ﻿﻿"use client"
 
-import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { SectionHeader } from "@/components/section-header"
 import { SectionParallax } from "@/components/section-parallax"
 import { ScrollReveal } from "@/components/scroll-reveal"
 
 const clients = [
-  { title: "Espacio Eme Centro Médico", logo: "/logos/espacio-eme.png", description: "Análisis de datos clínicos, trazabilidad de calibración y automatización de reportes." },
-  { title: "Consultora Epojé", logo: "/logos/epoje.png", description: "Coordinación de proyectos y análisis de datos para el sector público." },
-  { title: "Agencia I-Brain Digital", logo: "/logos/ibrain.png", description: "Optimización de campañas digitales mediante análisis de datos." },
-  { title: "Nadar Ediciones", logo: "/logos/nadar.png", description: "Implementación de dashboards comerciales y análisis de ventas." },
-  { title: "Universidad de Valparaíso", logo: "/logos/uv.png", description: "Investigación académica y modelos de Machine Learning (Clustering)." },
-  { title: "Conectados S.A.", logo: "/logos/conectados.png", description: "Análisis de métricas de rendimiento y coaching basado en datos." },
+  { title: "Espacio Eme Centro Médico", description: "Análisis de datos clínicos, trazabilidad de calibración y automatización de reportes." },
+  { title: "Consultora Epojé", description: "Coordinación de proyectos y análisis de datos para el sector público." },
+  { title: "Agencia I-Brain Digital", description: "Optimización de campañas digitales mediante análisis de datos." },
+  { title: "Nadar Ediciones", description: "Implementación de dashboards comerciales y análisis de ventas." },
+  { title: "Universidad de Valparaíso", description: "Investigación académica y modelos de Machine Learning (Clustering)." },
+  { title: "Conectados S.A.", description: "Análisis de métricas de rendimiento y coaching basado en datos." },
 ]
+
+function initials(name: string) {
+  const words = name.replace(/S\.A\.$/, "").trim().split(/\s+/).filter(Boolean)
+  const significant = words.filter((w) => !["de", "del", "la", "los", "y"].includes(w.toLowerCase()))
+  const pick = significant.length > 0 ? significant : words
+  if (pick.length >= 2) return pick.slice(0, 2).map((w) => w[0]).join("").toUpperCase()
+  return (pick[0] ?? "").slice(0, 2).toUpperCase()
+}
 
 export function ClientsSection() {
   return (
@@ -34,32 +41,18 @@ export function ClientsSection() {
         </ScrollReveal>
 
         <ScrollReveal delayMs={80}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {clients.map((client) => (
               <Card
                 key={client.title}
-                className="group relative overflow-hidden rounded-2xl border border-border/60 bg-background/80 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                className="flex flex-row items-start gap-4 rounded-2xl border border-border/60 bg-background/80 p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
               >
-                <div className="relative aspect-[4/3] bg-muted/30">
-                  <div className="absolute inset-0 flex items-center justify-center p-8 transition-opacity duration-300 group-hover:opacity-0">
-                    <Image
-                      src={client.logo}
-                      alt={client.title}
-                      fill
-                      className="object-contain p-8 transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    />
-                  </div>
-
-                  <div className="absolute inset-0 flex flex-col justify-end bg-black/0 p-5 opacity-0 transition-all duration-300 group-hover:bg-black/80 group-hover:opacity-100">
-                    <div className="space-y-2">
-                      <p className="text-sm uppercase tracking-[0.25em] text-primary">Colaboración</p>
-                      <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">{client.title}</h3>
-                      <p className="text-sm leading-relaxed text-white/80">
-                        {client.description}
-                      </p>
-                    </div>
-                  </div>
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-base font-bold text-primary">
+                  {initials(client.title)}
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-base font-semibold tracking-tight text-foreground">{client.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{client.description}</p>
                 </div>
               </Card>
             ))}

@@ -19,6 +19,7 @@ import {
   Award,
   BookOpen,
   Scroll,
+  X,
 } from "lucide-react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
@@ -290,10 +291,12 @@ interface Project {
   githubUrl: string
   featured: boolean
   images?: string[]
+  videoId?: string
 }
 
 export function ProjectsSection() {
   const router = useRouter()
+  const [hoverVideoId, setHoverVideoId] = useState<string | null>(null)
 
   const projects: Project[] = [
     {
@@ -306,6 +309,7 @@ export function ProjectsSection() {
       appUrl: "https://kittypau-app.vercel.app",
       githubUrl: "https://github.com/Mauro-Carcamo",
       featured: true,
+      videoId: "5BM2d6lbOYA",
     },
     {
       title: "Registag",
@@ -403,8 +407,10 @@ export function ProjectsSection() {
                   variants={itemVariants}
                 >
                   <div
+                    onMouseEnter={() => project.videoId && setHoverVideoId(project.videoId)}
+                    onMouseLeave={() => project.videoId && setHoverVideoId((current) => (current === project.videoId ? null : current))}
                     className={cn(
-                      "group overflow-hidden p-0 py-0 gap-0 h-56 sm:h-44 rounded-2xl border border-border/60 bg-background/80 shadow-sm",
+                      "relative group overflow-hidden p-0 py-0 gap-0 h-56 sm:h-44 rounded-2xl border border-border/60 bg-background/80 shadow-sm",
                       "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                       project.featured ? "ring-1 ring-primary/20" : "",
                     )}
@@ -504,6 +510,35 @@ export function ProjectsSection() {
                       </div>
                     </div>
                     </Card>
+
+                    {/* Popup con el video en autoplay al posar el mouse — sin overlay de pantalla
+                        completa para que no le robe el hover a la tarjeta (pointer-events-none
+                        en el contenedor fijo, solo la caja del video es interactiva). */}
+                    {project.videoId && hoverVideoId === project.videoId && (
+                      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 pointer-events-none">
+                        <div className="pointer-events-auto relative w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl bg-black">
+                          <button
+                            type="button"
+                            aria-label="Cerrar video"
+                            onClick={() => setHoverVideoId(null)}
+                            className="absolute right-2 top-2 z-10 rounded-full bg-black/60 p-1.5 text-white hover:bg-black/80"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                          <div className="relative w-full pt-[56.25%]">
+                            <iframe
+                              key={hoverVideoId}
+                              src={`https://www.youtube.com/embed/${hoverVideoId}?autoplay=1&mute=1`}
+                              title={`${project.title} - Video demo`}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowFullScreen
+                              className="absolute top-0 left-0 h-full w-full"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ))}

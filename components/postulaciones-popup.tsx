@@ -58,8 +58,11 @@ interface PostulacionesPopupProps {
   onOpenChange: (open: boolean) => void
 }
 
+type RespuestaEspecial = "no-aparece" | "no-informar" | null
+
 export function PostulacionesPopup({ open, onOpenChange }: PostulacionesPopupProps) {
   const [empresa, setEmpresa] = useState("")
+  const [respuestaEspecial, setRespuestaEspecial] = useState<RespuestaEspecial>(null)
 
   const postulaciones = empresa ? DATA.empresas[empresa] ?? [] : []
   const maxPortal = Math.max(...DATA.porPortal.map((p) => p.cantidad))
@@ -96,7 +99,10 @@ export function PostulacionesPopup({ open, onOpenChange }: PostulacionesPopupPro
           <h3 className="mb-2 text-sm font-semibold text-foreground">¿De qué empresa vienes? 👀</h3>
           <select
             value={empresa}
-            onChange={(e) => setEmpresa(e.target.value)}
+            onChange={(e) => {
+              setEmpresa(e.target.value)
+              setRespuestaEspecial(null)
+            }}
             className="w-full rounded-xl border border-border/60 bg-background px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <option value="">
@@ -108,6 +114,39 @@ export function PostulacionesPopup({ open, onOpenChange }: PostulacionesPopupPro
               </option>
             ))}
           </select>
+
+          <div className="mt-2 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setEmpresa("")
+                setRespuestaEspecial("no-aparece")
+              }}
+              className="rounded-full border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-foreground hover:bg-muted"
+            >
+              No aparece la empresa
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setEmpresa("")
+                setRespuestaEspecial("no-informar")
+              }}
+              className="rounded-full border border-border/60 bg-background px-3 py-1.5 text-xs font-medium text-foreground hover:bg-muted"
+            >
+              Prefiero no informar
+            </button>
+          </div>
+
+          {respuestaEspecial === "no-aparece" && (
+            <p className="mt-2 text-xs text-muted-foreground">
+              ¡Gracias por avisar! Probablemente aún no he postulado ahí — buena excusa para revisar sus
+              vacantes 👀.
+            </p>
+          )}
+          {respuestaEspecial === "no-informar" && (
+            <p className="mt-2 text-xs text-muted-foreground">Sin problema, sigamos 🙂.</p>
+          )}
 
           {postulaciones.length > 0 && (
             <div className="mt-3 space-y-2">
@@ -280,13 +319,6 @@ export function PostulacionesPopup({ open, onOpenChange }: PostulacionesPopupPro
           </div>
         </div>
 
-        <p className="mt-5 text-right text-[11px] text-muted-foreground">
-          Generado automáticamente por{" "}
-          <a href="/projects/busqueda-ia" className="underline hover:text-primary">
-            Búsqueda IA
-          </a>{" "}
-          — {DATA.generadoEl}.
-        </p>
       </DialogContent>
     </Dialog>
   )

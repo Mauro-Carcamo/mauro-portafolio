@@ -1,0 +1,516 @@
+{
+  "totalOfertas": 1447,
+  "totalPlataformas": 11,
+  "totalPostulaciones": 42,
+  "porPortal": [
+    {
+      "portal": "Computrabajo.cl",
+      "cantidad": 264
+    },
+    {
+      "portal": "GetOnBrd.cl",
+      "cantidad": 250
+    },
+    {
+      "portal": "Chiletrabajos.cl",
+      "cantidad": 244
+    },
+    {
+      "portal": "Trabajando.cl",
+      "cantidad": 232
+    },
+    {
+      "portal": "Indeed.cl",
+      "cantidad": 156
+    },
+    {
+      "portal": "EmpleosPublicos.cl",
+      "cantidad": 122
+    },
+    {
+      "portal": "Laborum",
+      "cantidad": 60
+    },
+    {
+      "portal": "BNE.cl",
+      "cantidad": 41
+    },
+    {
+      "portal": "Workremoto",
+      "cantidad": 41
+    },
+    {
+      "portal": "Randstad",
+      "cantidad": 30
+    },
+    {
+      "portal": "Adecco",
+      "cantidad": 7
+    }
+  ],
+  "porKeyword": [
+    {
+      "keyword": "Analista de Datos",
+      "cantidad": 374
+    },
+    {
+      "keyword": "Visualización de Datos",
+      "cantidad": 84
+    },
+    {
+      "keyword": "Power BI",
+      "cantidad": 78
+    },
+    {
+      "keyword": "Business Intelligence",
+      "cantidad": 76
+    },
+    {
+      "keyword": "Data Engineer",
+      "cantidad": 68
+    },
+    {
+      "keyword": "Análisis Estadístico",
+      "cantidad": 68
+    },
+    {
+      "keyword": "Data Analyst",
+      "cantidad": 67
+    },
+    {
+      "keyword": "Machine Learning",
+      "cantidad": 66
+    },
+    {
+      "keyword": "Python Developer",
+      "cantidad": 62
+    },
+    {
+      "keyword": "Data Scientist",
+      "cantidad": 61
+    },
+    {
+      "keyword": "Analista BI",
+      "cantidad": 54
+    },
+    {
+      "keyword": "Ingeniero de Datos",
+      "cantidad": 49
+    }
+  ],
+  "empresas": {
+    "ADA 4…": [
+      {
+        "empresa": "ADA 4…",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Ingeniero de datos Senior",
+        "estado": "CV aún no visualizado",
+        "fecha": "20-08-2026",
+        "dias": 0
+      }
+    ],
+    "AFP": [
+      {
+        "empresa": "AFP",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de AFP",
+        "estado": "CV aún no visualizado",
+        "fecha": "10-06-2026",
+        "dias": 71
+      }
+    ],
+    "Aliservice": [
+      {
+        "empresa": "Aliservice",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de datos - Part time",
+        "estado": "CV aún no visualizado",
+        "fecha": "28-07-2026",
+        "dias": 23
+      }
+    ],
+    "Automotores Gildemeister SPA.": [
+      {
+        "empresa": "Automotores Gildemeister SPA.",
+        "portal": "Trabajando.cl",
+        "titulo": "Analista de Data Formación",
+        "estado": "Proceso finalizado",
+        "fecha": "15-07-2026",
+        "dias": 36
+      }
+    ],
+    "Banigualdad": [
+      {
+        "empresa": "Banigualdad",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de Control de Gestión",
+        "estado": "CV visualizado",
+        "fecha": "10-06-2026",
+        "dias": 71
+      }
+    ],
+    "Bci Seguros": [
+      {
+        "empresa": "Bci Seguros",
+        "portal": "Trabajando.cl",
+        "titulo": "Analista Datos de Negocio",
+        "estado": "En proceso",
+        "fecha": "18-07-2026",
+        "dias": 33
+      }
+    ],
+    "BUTIK CONSULTORES": [
+      {
+        "empresa": "BUTIK CONSULTORES",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "ANALISTA DE DATOS FINANCIEROS JUNIOR",
+        "estado": "CV visualizado",
+        "fecha": "28-07-2026",
+        "dias": 23
+      }
+    ],
+    "Comercial Las…": [
+      {
+        "empresa": "Comercial Las…",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analísta Desarrollador",
+        "estado": "CV aún no visualizado",
+        "fecha": "20-08-2026",
+        "dias": 0
+      }
+    ],
+    "Confidencial": [
+      {
+        "empresa": "Confidencial",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista Control Datos Maestros",
+        "estado": "CV visualizado",
+        "fecha": "10-06-2026",
+        "dias": 71
+      },
+      {
+        "empresa": "Confidencial",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de Datos y Experiencia",
+        "estado": "CV aún no visualizado",
+        "fecha": "28-07-2026",
+        "dias": 23
+      },
+      {
+        "empresa": "Confidencial",
+        "portal": "Laborum.cl",
+        "titulo": "Ingeniero de Control de Gestión",
+        "estado": "Aviso finalizado",
+        "fecha": "22-06-2026",
+        "dias": 59
+      }
+    ],
+    "Deeplearn Academy": [
+      {
+        "empresa": "Deeplearn Academy",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Docente ML / Ciencia de Datos",
+        "estado": "CV aún no visualizado",
+        "fecha": "20-08-2026",
+        "dias": 0
+      }
+    ],
+    "Enjoy": [
+      {
+        "empresa": "Enjoy",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "ANALISTA DE DATOS",
+        "estado": "CV aún no visualizado",
+        "fecha": "10-06-2026",
+        "dias": 71
+      }
+    ],
+    "Fashion's Park": [
+      {
+        "empresa": "Fashion's Park",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista Data Science Senior",
+        "estado": "CV aún no visualizado",
+        "fecha": "28-07-2026",
+        "dias": 23
+      }
+    ],
+    "GEPEREX": [
+      {
+        "empresa": "GEPEREX",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Sociólogo/a — Consultor/a en Estudios e",
+        "estado": "CV visualizado",
+        "fecha": "04-08-2026",
+        "dias": 16
+      }
+    ],
+    "Gotalent": [
+      {
+        "empresa": "Gotalent",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Líder de Desarrollo Tecnológico",
+        "estado": "CV aún no visualizado",
+        "fecha": "20-08-2026",
+        "dias": 0
+      }
+    ],
+    "GRUPO AMERICA…": [
+      {
+        "empresa": "GRUPO AMERICA…",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de datos",
+        "estado": "CV aún no visualizado",
+        "fecha": "11-08-2026",
+        "dias": 9
+      }
+    ],
+    "HumanCapital.work": [
+      {
+        "empresa": "HumanCapital.work",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de Datos",
+        "estado": "CV visualizado",
+        "fecha": "28-07-2026",
+        "dias": 23
+      }
+    ],
+    "ICB Food…": [
+      {
+        "empresa": "ICB Food…",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de Datos y Control de",
+        "estado": "CV aún no visualizado",
+        "fecha": "28-07-2026",
+        "dias": 23
+      }
+    ],
+    "Importante empresa…": [
+      {
+        "empresa": "Importante empresa…",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Data Scientist Senior disponibilidad inmediata",
+        "estado": "CV aún no visualizado",
+        "fecha": "20-08-2026",
+        "dias": 0
+      },
+      {
+        "empresa": "Importante empresa…",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Ingeniero de IA y Datos",
+        "estado": "CV aún no visualizado",
+        "fecha": "20-08-2026",
+        "dias": 0
+      }
+    ],
+    "Kibernum": [
+      {
+        "empresa": "Kibernum",
+        "portal": "GetOnBrd.cl",
+        "titulo": "Analista de Datos Junior",
+        "estado": "Enviada",
+        "fecha": "19-06-2026",
+        "dias": 62
+      },
+      {
+        "empresa": "Kibernum",
+        "portal": "GetOnBrd.cl",
+        "titulo": "Data Analyst Junior",
+        "estado": "Incompleta",
+        "fecha": "19-06-2026",
+        "dias": 62
+      }
+    ],
+    "Lipigas": [
+      {
+        "empresa": "Lipigas",
+        "portal": "Trabajando.cl",
+        "titulo": "Data Scientist  - Casa Matriz (Contrato por Proyecto)",
+        "estado": "Currículum Visto",
+        "fecha": "14-07-2026",
+        "dias": 37
+      }
+    ],
+    "MASTERASESORIAS": [
+      {
+        "empresa": "MASTERASESORIAS",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Data Analyst",
+        "estado": "CV aún no visualizado",
+        "fecha": "20-08-2026",
+        "dias": 0
+      }
+    ],
+    "Multicob Chile…": [
+      {
+        "empresa": "Multicob Chile…",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de base de datos",
+        "estado": "CV visualizado",
+        "fecha": "28-07-2026",
+        "dias": 23
+      }
+    ],
+    "NeuralWorks": [
+      {
+        "empresa": "NeuralWorks",
+        "portal": "GetOnBrd.cl",
+        "titulo": "Data Scientist",
+        "estado": "Enviada",
+        "fecha": "20-08-2026",
+        "dias": 0
+      }
+    ],
+    "Perceptual Consultores": [
+      {
+        "empresa": "Perceptual Consultores",
+        "portal": "Trabajando.cl",
+        "titulo": "Data Analyst BI   Contrato Indefinido -  Hibrido *",
+        "estado": "Proceso finalizado",
+        "fecha": "18-07-2026",
+        "dias": 33
+      }
+    ],
+    "Proforma": [
+      {
+        "empresa": "Proforma",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de datos para capacitación",
+        "estado": "CV aún no visualizado",
+        "fecha": "20-08-2026",
+        "dias": 0
+      }
+    ],
+    "PS Grupo…": [
+      {
+        "empresa": "PS Grupo…",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Ps Grupo Hunting -Data Scientist &",
+        "estado": "CV aún no visualizado",
+        "fecha": "08-06-2026",
+        "dias": 73
+      }
+    ],
+    "RyC Consultores": [
+      {
+        "empresa": "RyC Consultores",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista Junior – Datos y Automatización",
+        "estado": "CV aún no visualizado",
+        "fecha": "10-06-2026",
+        "dias": 71
+      }
+    ],
+    "Servicios de…": [
+      {
+        "empresa": "Servicios de…",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Cientista de Datos",
+        "estado": "CV aún no visualizado",
+        "fecha": "20-08-2026",
+        "dias": 0
+      }
+    ],
+    "Silvery": [
+      {
+        "empresa": "Silvery",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Data Scientist",
+        "estado": "CV aún no visualizado",
+        "fecha": "20-08-2026",
+        "dias": 0
+      }
+    ],
+    "Smartjob": [
+      {
+        "empresa": "Smartjob",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Data Science Junior",
+        "estado": "CV aún no visualizado",
+        "fecha": "11-08-2026",
+        "dias": 9
+      }
+    ],
+    "Smartycar": [
+      {
+        "empresa": "Smartycar",
+        "portal": "Trabajando.cl",
+        "titulo": "Data & Operations Analyst - Smartycar - Vitacura",
+        "estado": "Currículum Visto",
+        "fecha": "18-07-2026",
+        "dias": 33
+      }
+    ],
+    "SMU": [
+      {
+        "empresa": "SMU",
+        "portal": "GetOnBrd.cl",
+        "titulo": "Data Scientist (Reemplazo Licencia Maternal)",
+        "estado": "Vista",
+        "fecha": "19-06-2026",
+        "dias": 62
+      }
+    ],
+    "Sociedad Chilena de Autores Intérpretes Musicales": [
+      {
+        "empresa": "Sociedad Chilena de Autores Intérpretes Musicales",
+        "portal": "Trabajando.cl",
+        "titulo": "Analista de documentación. ",
+        "estado": "Proceso finalizado",
+        "fecha": "14-07-2026",
+        "dias": 37
+      }
+    ],
+    "Step Therapy": [
+      {
+        "empresa": "Step Therapy",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de Datos BI",
+        "estado": "CV aún no visualizado",
+        "fecha": "10-06-2026",
+        "dias": 71
+      }
+    ],
+    "SuperZoo": [
+      {
+        "empresa": "SuperZoo",
+        "portal": "Trabajando.cl",
+        "titulo": "Analista de Datos",
+        "estado": "Proceso finalizado",
+        "fecha": "15-07-2026",
+        "dias": 36
+      }
+    ],
+    "Universidad Finis Terrae": [
+      {
+        "empresa": "Universidad Finis Terrae",
+        "portal": "Trabajando.cl",
+        "titulo": "Analista de Indicadores y Gestión de Proyectos de Investigación",
+        "estado": "Recibido",
+        "fecha": "15-07-2026",
+        "dias": 36
+      }
+    ],
+    "Uno Salud…": [
+      {
+        "empresa": "Uno Salud…",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "Analista de Datos - Providencia",
+        "estado": "CV aún no visualizado",
+        "fecha": "10-06-2026",
+        "dias": 71
+      }
+    ],
+    "XINERLINK": [
+      {
+        "empresa": "XINERLINK",
+        "portal": "Chiletrabajos.cl",
+        "titulo": "ANALISTA PARA SERVICIOS GENERALES - RM",
+        "estado": "CV aún no visualizado",
+        "fecha": "10-06-2026",
+        "dias": 71
+      }
+    ]
+  },
+  "generadoEl": "20-08-2026 13:47"
+}

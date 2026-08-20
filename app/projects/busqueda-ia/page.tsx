@@ -1,208 +1,19 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import {
-  Github,
-  ArrowLeft,
-  Search,
-  Brain,
-  ClipboardCheck,
-  BarChart3,
-  X,
-} from "lucide-react"
+import { Github, ArrowLeft, Search, Brain, ClipboardCheck, BarChart3, LineChart } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { SectionParallax } from "@/components/section-parallax"
 import { Header } from "@/components/header"
-
-// Datos de ejemplo (empresas, cifras y fechas ficticias) — solo para
-// demostrar cómo funciona el popup de seguimiento. No corresponden a
-// postulaciones reales.
-const RESUMEN_EJEMPLO = {
-  totalOfertas: 612,
-  totalPlataformas: 13,
-  totalPostulaciones: 6,
-  porPortal: [
-    { portal: "Chiletrabajos.cl", cantidad: 180 },
-    { portal: "Computrabajo.cl", cantidad: 150 },
-    { portal: "GetOnBrd.cl", cantidad: 120 },
-    { portal: "Trabajando.cl", cantidad: 90 },
-    { portal: "Laborum.cl", cantidad: 72 },
-  ],
-  porKeyword: [
-    { keyword: "Analista de Datos", cantidad: 140 },
-    { keyword: "Data Scientist", cantidad: 95 },
-    { keyword: "Power BI", cantidad: 80 },
-    { keyword: "Machine Learning", cantidad: 70 },
-    { keyword: "SQL", cantidad: 60 },
-    { keyword: "Business Intelligence", cantidad: 55 },
-  ],
-}
-
-const EMPRESAS_EJEMPLO: Record<
-  string,
-  { titulo: string; portal: string; fecha: string; estado: string; dias: number }[]
-> = {
-  "Andes Analytics": [
-    { titulo: "Analista de Datos Senior", portal: "Chiletrabajos.cl", fecha: "15-07-2026", estado: "CV visualizado", dias: 12 },
-  ],
-  "NovaTech Solutions": [
-    { titulo: "Data Scientist", portal: "GetOnBrd.cl", fecha: "02-07-2026", estado: "En proceso", dias: 25 },
-  ],
-  "Grupo Media Sur": [
-    { titulo: "Analista BI", portal: "Trabajando.cl", fecha: "18-06-2026", estado: "Aviso finalizado", dias: 40 },
-  ],
-  "DataBridge Consulting": [
-    { titulo: "Ingeniero de Datos", portal: "Computrabajo.cl", fecha: "20-07-2026", estado: "Enviada", dias: 7 },
-  ],
-  "Cordillera Software": [
-    { titulo: "Analista de Datos Junior", portal: "Laborum.cl", fecha: "10-06-2026", estado: "CV no visualizado", dias: 48 },
-  ],
-  "Bienestar Digital": [
-    { titulo: "Data Analyst", portal: "Chiletrabajos.cl", fecha: "24-07-2026", estado: "CV visualizado", dias: 3 },
-  ],
-}
-
-function ResumenPostulacionesPopup() {
-  const [open, setOpen] = useState(false)
-  const [empresa, setEmpresa] = useState("")
-
-  useEffect(() => {
-    const t = setTimeout(() => setOpen(true), 4500)
-    return () => clearTimeout(t)
-  }, [])
-
-  const postulaciones = empresa ? EMPRESAS_EJEMPLO[empresa] ?? [] : []
-  const maxPortal = Math.max(...RESUMEN_EJEMPLO.porPortal.map((p) => p.cantidad))
-  const maxKeyword = Math.max(...RESUMEN_EJEMPLO.porKeyword.map((p) => p.cantidad))
-
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent
-        showCloseButton={false}
-        className="max-w-[calc(100%-1rem)] sm:max-w-lg max-h-[85vh] overflow-y-auto rounded-2xl p-5 sm:p-6"
-      >
-        <button
-          type="button"
-          onClick={() => setOpen(false)}
-          aria-label="Cerrar"
-          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-muted/60 text-foreground hover:bg-muted"
-        >
-          <X className="h-4 w-4" />
-        </button>
-
-        <DialogTitle className="pr-8 text-lg font-bold tracking-tight">
-          Resumen de la búsqueda laboral
-        </DialogTitle>
-        <p className="mb-4 text-xs text-muted-foreground">
-          Datos de ejemplo — así se ve el seguimiento generado por el scraper.
-        </p>
-
-        <div className="grid grid-cols-3 gap-2.5">
-          <div className="rounded-xl border border-border/60 bg-primary/5 p-3 text-center">
-            <div className="text-xl font-bold text-primary">{RESUMEN_EJEMPLO.totalOfertas}</div>
-            <div className="text-[11px] text-muted-foreground">Ofertas extraídas</div>
-          </div>
-          <div className="rounded-xl border border-border/60 bg-primary/5 p-3 text-center">
-            <div className="text-xl font-bold text-primary">{RESUMEN_EJEMPLO.totalPlataformas}</div>
-            <div className="text-[11px] text-muted-foreground">Plataformas</div>
-          </div>
-          <div className="rounded-xl border border-border/60 bg-primary/5 p-3 text-center">
-            <div className="text-xl font-bold text-primary">{RESUMEN_EJEMPLO.totalPostulaciones}</div>
-            <div className="text-[11px] text-muted-foreground">Postulaciones</div>
-          </div>
-        </div>
-
-        <h3 className="mb-2 mt-5 text-xs font-semibold uppercase tracking-wide text-primary">
-          Ofertas por plataforma
-        </h3>
-        <div className="space-y-1.5">
-          {RESUMEN_EJEMPLO.porPortal.map((p) => (
-            <div key={p.portal} className="flex items-center gap-2 text-xs">
-              <span className="w-28 shrink-0 truncate">{p.portal}</span>
-              <span className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
-                <span
-                  className="block h-full rounded-full bg-primary"
-                  style={{ width: `${(p.cantidad / maxPortal) * 100}%` }}
-                />
-              </span>
-              <span className="w-8 shrink-0 text-right text-muted-foreground">{p.cantidad}</span>
-            </div>
-          ))}
-        </div>
-
-        <h3 className="mb-2 mt-5 text-xs font-semibold uppercase tracking-wide text-primary">
-          Ofertas por palabra clave
-        </h3>
-        <div className="space-y-1.5">
-          {RESUMEN_EJEMPLO.porKeyword.map((p) => (
-            <div key={p.keyword} className="flex items-center gap-2 text-xs">
-              <span className="w-28 shrink-0 truncate">{p.keyword}</span>
-              <span className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
-                <span
-                  className="block h-full rounded-full bg-accent"
-                  style={{ width: `${(p.cantidad / maxKeyword) * 100}%` }}
-                />
-              </span>
-              <span className="w-8 shrink-0 text-right text-muted-foreground">{p.cantidad}</span>
-            </div>
-          ))}
-        </div>
-
-        <hr className="my-5 border-border/60" />
-
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-primary">
-          Verificar una postulación
-        </h3>
-        <select
-          value={empresa}
-          onChange={(e) => setEmpresa(e.target.value)}
-          className="w-full rounded-xl border border-border/60 bg-background px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        >
-          <option value="">— Selecciona una empresa —</option>
-          {Object.keys(EMPRESAS_EJEMPLO).map((nombre) => (
-            <option key={nombre} value={nombre}>
-              {nombre}
-            </option>
-          ))}
-        </select>
-
-        {postulaciones.length > 0 && (
-          <div className="mt-3 space-y-2">
-            {postulaciones.map((p, i) => (
-              <div key={i} className="rounded-xl border border-border/60 bg-muted/40 p-3">
-                <div className="text-sm font-semibold">{p.titulo}</div>
-                <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
-                  <span>🌐 {p.portal}</span>
-                  <span>📅 {p.fecha}</span>
-                  <span>📌 {p.estado}</span>
-                </div>
-                <span
-                  className={`mt-2 inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                    p.dias > 30 ? "bg-destructive/10 text-destructive" : "bg-primary/10 text-primary"
-                  }`}
-                >
-                  {p.dias} día{p.dias === 1 ? "" : "s"} desde la postulación
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <p className="mt-5 text-right text-[11px] text-muted-foreground">
-          Datos de ejemplo — no corresponden a postulaciones reales.
-        </p>
-      </DialogContent>
-    </Dialog>
-  )
-}
+import { PostulacionesPopup } from "@/components/postulaciones-popup"
 
 export default function BusquedaIAProject() {
+  const [popupOpen, setPopupOpen] = useState(false)
   const technologies = ["Python", "Playwright", "Pandas", "Machine Learning", "Ollama"]
 
   const features = [
@@ -219,7 +30,7 @@ export default function BusquedaIAProject() {
     {
       icon: ClipboardCheck,
       title: "Seguimiento de postulaciones",
-      description: "Detecta el estado de cada postulación por portal (CV visualizado, en proceso, aviso finalizado) y hace un dashboard consultable por empresa.",
+      description: "Detecta el estado de cada postulación por portal (CV visualizado, en proceso, aviso finalizado) y arma un historial consultable por empresa.",
     },
     {
       icon: BarChart3,
@@ -255,6 +66,10 @@ export default function BusquedaIAProject() {
                 </p>
 
                 <div className="flex flex-wrap gap-3 mb-8">
+                  <Button className="rounded-full" onClick={() => setPopupOpen(true)}>
+                    <LineChart className="h-4 w-4 mr-2" />
+                    Ver historial de postulaciones
+                  </Button>
                   <Button variant="outline" className="rounded-full" asChild>
                     <a href="https://github.com/Mauro-Carcamo" target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4 mr-2" />
@@ -340,7 +155,7 @@ export default function BusquedaIAProject() {
         </div>
       </div>
 
-      <ResumenPostulacionesPopup />
+      <PostulacionesPopup open={popupOpen} onOpenChange={setPopupOpen} />
     </div>
   )
 }

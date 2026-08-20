@@ -352,6 +352,16 @@ export function ProjectsSection() {
       githubUrl: "https://github.com/Mauro-Carcamo",
       featured: false,
     },
+    {
+      title: "Búsqueda IA",
+      description:
+        "Scraper de 13 portales laborales que enriquece ofertas, las compara contra el CV con IA (embeddings + LLM local) y hace seguimiento de cada postulación.",
+      image: "/task-management-dashboard.png",
+      technologies: ["Python", "Playwright", "Pandas", "Machine Learning"],
+      liveUrl: "/projects/busqueda-ia",
+      githubUrl: "https://github.com/Mauro-Carcamo",
+      featured: false,
+    },
   ]
 
   const containerVariants: Variants = {

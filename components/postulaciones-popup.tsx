@@ -18,10 +18,19 @@ const DATA = postulacionesData as {
   totalOfertas: number
   totalPlataformas: number
   totalPostulaciones: number
+  totalAnalizadasCV: number
   porPortal: { portal: string; cantidad: number }[]
   porKeyword: { keyword: string; cantidad: number }[]
+  porRelevancia: { nivel: string; cantidad: number }[]
   empresas: Record<string, Postulacion[]>
   generadoEl: string
+}
+
+const COLOR_RELEVANCIA: Record<string, string> = {
+  Alta: "bg-primary",
+  Media: "bg-accent",
+  Baja: "bg-amber-500",
+  "No Relevante (Keyword)": "bg-muted-foreground/40",
 }
 
 interface PostulacionesPopupProps {
@@ -35,6 +44,7 @@ export function PostulacionesPopup({ open, onOpenChange }: PostulacionesPopupPro
   const postulaciones = empresa ? DATA.empresas[empresa] ?? [] : []
   const maxPortal = Math.max(...DATA.porPortal.map((p) => p.cantidad))
   const maxKeyword = Math.max(...DATA.porKeyword.map((p) => p.cantidad))
+  const maxRelevancia = Math.max(...DATA.porRelevancia.map((p) => p.cantidad))
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -108,6 +118,27 @@ export function PostulacionesPopup({ open, onOpenChange }: PostulacionesPopupPro
             </div>
           ))}
         </div>
+
+        <h3 className="mb-2 mt-5 text-xs font-semibold uppercase tracking-wide text-primary">
+          Ofertas según relevancia con el CV
+        </h3>
+        <div className="space-y-1.5">
+          {DATA.porRelevancia.map((p) => (
+            <div key={p.nivel} className="flex items-center gap-2 text-xs">
+              <span className="w-28 shrink-0 truncate">{p.nivel}</span>
+              <span className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
+                <span
+                  className={`block h-full rounded-full ${COLOR_RELEVANCIA[p.nivel] ?? "bg-primary"}`}
+                  style={{ width: `${(p.cantidad / maxRelevancia) * 100}%` }}
+                />
+              </span>
+              <span className="w-8 shrink-0 text-right text-muted-foreground">{p.cantidad}</span>
+            </div>
+          ))}
+        </div>
+        <p className="mt-1.5 text-[11px] text-muted-foreground">
+          Sobre {DATA.totalAnalizadasCV} ofertas comparadas contra mi CV con embeddings semánticos.
+        </p>
 
         <hr className="my-5 border-border/60" />
 

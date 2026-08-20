@@ -512,5 +512,24 @@
       }
     ]
   },
-  "generadoEl": "20-08-2026 13:47"
+  "generadoEl": "20-08-2026 13:47",
+  "porRelevancia": [
+    {
+      "nivel": "Alta",
+      "cantidad": 848
+    },
+    {
+      "nivel": "Media",
+      "cantidad": 473
+    },
+    {
+      "nivel": "Baja",
+      "cantidad": 93
+    },
+    {
+      "nivel": "No Relevante (Keyword)",
+      "cantidad": 33
+    }
+  ],
+  "totalAnalizadasCV": 1447
 }

@@ -531,5 +531,58 @@
       "cantidad": 33
     }
   ],
-  "totalAnalizadasCV": 1447
+  "totalAnalizadasCV": 1447,
+  "porBigrama": [
+    {
+      "frase": "Toma Decisiones",
+      "cantidad": 142
+    },
+    {
+      "frase": "Ingeniería Civil",
+      "cantidad": 134
+    },
+    {
+      "frase": "Análisis Datos",
+      "cantidad": 133
+    },
+    {
+      "frase": "Bases Datos",
+      "cantidad": 123
+    },
+    {
+      "frase": "Inteligencia Artificial",
+      "cantidad": 120
+    },
+    {
+      "frase": "Carrera Afín",
+      "cantidad": 120
+    },
+    {
+      "frase": "Analista Datos",
+      "cantidad": 120
+    },
+    {
+      "frase": "Mejora Continua",
+      "cantidad": 112
+    },
+    {
+      "frase": "Machine Learning",
+      "cantidad": 100
+    },
+    {
+      "frase": "Business Intelligence",
+      "cantidad": 88
+    }
+  ],
+  "sueldos": {
+    "Total ofertas analizadas": "1141",
+    "Con sueldo informado": "104",
+    "% con sueldo": "9.1%",
+    "P25 sueldo mínimo": "$659.072",
+    "Mediana sueldo mínimo": "$1.200.000",
+    "P75 sueldo mínimo": "$2.144.971",
+    "Sueldo máximo encontrado": "$7.600.000",
+    "Portal más transparente": "EmpleosPublicos.cl",
+    "Fecha análisis": "2026-08-20 09:48"
+  }
 }

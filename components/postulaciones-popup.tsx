@@ -22,6 +22,8 @@ const DATA = postulacionesData as {
   porPortal: { portal: string; cantidad: number }[]
   porKeyword: { keyword: string; cantidad: number }[]
   porRelevancia: { nivel: string; cantidad: number }[]
+  porBigrama: { frase: string; cantidad: number }[]
+  sueldos: Record<string, string>
   empresas: Record<string, Postulacion[]>
   generadoEl: string
 }
@@ -63,6 +65,7 @@ export function PostulacionesPopup({ open, onOpenChange }: PostulacionesPopupPro
   const maxPortal = Math.max(...DATA.porPortal.map((p) => p.cantidad))
   const maxKeyword = Math.max(...DATA.porKeyword.map((p) => p.cantidad))
   const maxRelevancia = Math.max(...DATA.porRelevancia.map((p) => p.cantidad))
+  const maxBigrama = Math.max(...DATA.porBigrama.map((p) => p.cantidad))
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -229,6 +232,53 @@ export function PostulacionesPopup({ open, onOpenChange }: PostulacionesPopupPro
         <p className="mt-1.5 text-[11px] text-muted-foreground">
           Sobre {DATA.totalAnalizadasCV} ofertas comparadas contra mi CV con embeddings semánticos.
         </p>
+
+        <h4 className="mb-2 mt-5 text-xs font-semibold uppercase tracking-wide text-primary">
+          Frases que más se repiten en las ofertas
+        </h4>
+        <div className="space-y-1.5">
+          {DATA.porBigrama.map((p) => (
+            <div key={p.frase} className="flex items-center gap-2 text-xs">
+              <span className="w-28 shrink-0 truncate">{p.frase}</span>
+              <span className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
+                <span
+                  className="block h-full rounded-full bg-primary"
+                  style={{ width: `${(p.cantidad / maxBigrama) * 100}%` }}
+                />
+              </span>
+              <span className="w-8 shrink-0 text-right text-muted-foreground">{p.cantidad}</span>
+            </div>
+          ))}
+        </div>
+
+        <h4 className="mb-2 mt-5 text-xs font-semibold uppercase tracking-wide text-primary">
+          Sueldos del mercado
+        </h4>
+        <div className="rounded-xl border border-border/60 bg-muted/40 p-3 text-xs">
+          <p className="mb-2 text-muted-foreground">
+            Solo {DATA.sueldos["% con sueldo"]} de las ofertas informa sueldo — con eso:
+          </p>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <div className="text-muted-foreground">Mediana</div>
+              <div className="font-semibold">{DATA.sueldos["Mediana sueldo mínimo"]}</div>
+            </div>
+            <div>
+              <div className="text-muted-foreground">Máximo encontrado</div>
+              <div className="font-semibold">{DATA.sueldos["Sueldo máximo encontrado"]}</div>
+            </div>
+            <div>
+              <div className="text-muted-foreground">Rango típico (P25–P75)</div>
+              <div className="font-semibold">
+                {DATA.sueldos["P25 sueldo mínimo"]} – {DATA.sueldos["P75 sueldo mínimo"]}
+              </div>
+            </div>
+            <div>
+              <div className="text-muted-foreground">Portal más transparente</div>
+              <div className="font-semibold">{DATA.sueldos["Portal más transparente"]}</div>
+            </div>
+          </div>
+        </div>
 
         <p className="mt-5 text-right text-[11px] text-muted-foreground">
           Generado automáticamente por{" "}

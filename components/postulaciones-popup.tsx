@@ -54,8 +54,8 @@ const PASOS = [
   },
   {
     icon: MessageCircleQuestion,
-    titulo: "4. Banco de preguntas",
-    descripcion: `Detecté ${DATA.totalPreguntas} preguntas de postulación repetidas entre portales (renta esperada, disponibilidad, herramientas...) y trato sus respuestas con ayuda de un LLM local.`,
+    titulo: "4. Postulación automática (pendiente)",
+    descripcion: `Aún en trabajo, pero ya extraje ${DATA.totalPreguntas} preguntas de postulación repetidas entre portales (renta esperada, disponibilidad, herramientas...) — la idea es responderlas solas con ayuda de un LLM local.`,
   },
 ]
 

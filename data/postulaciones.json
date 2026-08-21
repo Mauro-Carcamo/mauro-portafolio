@@ -3,6 +3,7 @@
   "totalPlataformas": 12,
   "totalPostulaciones": 54,
   "totalAnalizadasCV": 2182,
+  "totalPreguntas": 101,
   "porPortal": [
     {
       "portal": "Chiletrabajos.cl",
@@ -702,5 +703,5 @@
       }
     ]
   },
-  "generadoEl": "21-08-2026 13:25"
+  "generadoEl": "21-08-2026 13:42"
 }

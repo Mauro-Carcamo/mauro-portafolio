@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import { X, Search, Sparkles, Brain } from "lucide-react"
+import { X, Search, Sparkles, Brain, MessageCircleQuestion } from "lucide-react"
 import postulacionesData from "@/data/postulaciones.json"
 
 type Postulacion = {
@@ -19,6 +19,7 @@ const DATA = postulacionesData as {
   totalPlataformas: number
   totalPostulaciones: number
   totalAnalizadasCV: number
+  totalPreguntas: number
   porPortal: { portal: string; cantidad: number }[]
   porKeyword: { keyword: string; cantidad: number }[]
   porRelevancia: { nivel: string; cantidad: number }[]
@@ -50,6 +51,11 @@ const PASOS = [
     icon: Brain,
     titulo: "3. Vinculación con mi CV",
     descripcion: "Compara cada oferta contra mi CV con embeddings semánticos (y opcionalmente un LLM local) para priorizar dónde postular.",
+  },
+  {
+    icon: MessageCircleQuestion,
+    titulo: "4. Banco de preguntas",
+    descripcion: `Detecté ${DATA.totalPreguntas} preguntas de postulación repetidas entre portales (renta esperada, disponibilidad, herramientas...) y trato sus respuestas con ayuda de un LLM local.`,
   },
 ]
 
